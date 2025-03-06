@@ -38,15 +38,13 @@
     <meta property="og:type" content="website" />
     <meta property="og:url" content="/vidhyardhi-geethavali/audios/telugu/camps/smtc" />
     <meta property="og:image" content="/vidhyardhi-geethavali/Icon192.jpg" />
-    <meta property="og:description"
-        content="Play all SMTC Songs Audio & Tracks at Advanced Music Player.UESI AP" />
+    <meta property="og:description" content="Play all SMTC Songs Audio & Tracks at Advanced Music Player.UESI AP" />
     <meta property="og:site_name" content="UESI AP" />
 
     <!-- Twitter Meta Tags -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="SMTC Songs | Advanced Music Prayer | UESI AP" />
-    <meta name="twitter:description"
-        content="Play all SMTC Songs Audio & Tracks at Advanced Music Player.UESI AP" />
+    <meta name="twitter:description" content="Play all SMTC Songs Audio & Tracks at Advanced Music Player.UESI AP" />
     <meta name="twitter:image" content="/vidhyardhi-geethavali/Icon192.jpg" />
     <meta name="twitter:url" content="/vidhyardhi-geethavali/audios/telugu/camps/smtc" />
 
@@ -795,49 +793,51 @@
 
         // Define separate queues for tracks and songs
         const songsQueue = [
-            { name: '1. అర్పింతు దేవా (10)', url: 'https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/songs%2FArpinthu%20Deva.mp3?alt=media&token=0d55162a-f8b2-4756-8cd6-3d52537ee525' },
-            { name: '2. ఇది కోతకు సమయం (24)', url: 'https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/songs%2FEdhi%20Kothaku%20Samayam.mp3?alt=media&token=eee5191a-d53b-4e89-a865-1e365dd99954' },
-            { name: '3. ఇదిగో దేవా నా జీవితం (25)', url: 'https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/songs%2FIdigo%20Deva%20Na%20jeevitham.mp3?alt=media&token=05dcc146-2b5a-492d-8a4a-af540e57119b' },
-            { name: '4. ఉన్నతమైన స్థలములలో (32)', url: 'https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/songs%2FVunnathamaina%20Stalamulalo.mp3?alt=media&token=659a75c8-5d34-4814-b420-0666faff3244' },
-            { name: '5. కదలిరమ్ము క్రైస్తవ యువకా (56)', url: 'https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/songs%2FKadali%20Rammu%20Christava.mp3?alt=media&token=a5ffd78a-8daf-4bc7-95f6-159a2a748d67' },
-            { name: '6. కన్నులెత్తి పైరుల చూడు (57)', url: 'https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/songs%2FKannula%20Netthi.mp3?alt=media&token=2a150d81-e428-46bd-b6fa-a8473dc51792' },
+            { name: '1. అర్పింతు దేవా (10)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Songs/Arpinthu%20Deva.mp3' },
+            { name: '2. ఇది కోతకు సమయం (24)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Songs/Edhi%20Kothaku%20Samayam.mp3' },
+            { name: '3. ఇదిగో దేవా నా జీవితం (25)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Songs/Idigo%20Deva%20Na%20jeevitham.mp3' },
+            { name: '4. ఉన్నతమైన స్థలములలో (32)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Songs/Vunnathamaina%20Stalamulalo.mp3' },
+            { name: '5. కదలిరమ్ము క్రైస్తవ యువకా (56)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Songs/Kadali%20Rammu%20Christava.mp3' },
+            { name: '6. కన్నులెత్తి పైరుల చూడు (57)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Songs/Kannula%20Netthi.mp3' },
             { name: '7. చాటించుడి (80)', url: 'https://ia601305.us.archive.org/6/items/uesiap/15vgSongs2-08ChaatinchudiManushya.mp3' },
-            { name: '8. తండ్రికి ప్రియమైన పిల్లలం (98)', url: 'https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/songs%2FThandriki%20Priyamaina.mp3?alt=media&token=e652cdff-a930-47cb-b689-3421b2e41c6c' },
-            { name: '9. దేవునితో జతపనివారము (117)', url: 'https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/songs%2FDevunitho%20Jatha%20Pani.mp3?alt=media&token=c282a8ff-a859-45e2-bf20-9dee98a17b79' },
-            { name: '10. దేవుని పిలుపును వినుము (118)', url: 'https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/songs%2FDevuni%20Pilupunu.mp3?alt=media&token=d7e57006-8e41-446d-b0f7-50bd7f40755d' },
-            { name: '11. నశించు ఆత్మలెన్నో (132)', url: 'https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/songs%2Fnasinchu%20atmalenno.mp3?alt=media&token=5628be1d-c744-429d-afda-aa0ac6180862' },
-            { name: '12. నా పేరే తెలియని ప్రజలు (144)', url: 'https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/songs%2FNaa%20Pere%20Teliyani.mp3?alt=media&token=91c2a8c8-807e-48ab-b974-76886a2c6b45' },
-            { name: '13. ని చిత్తమే నీ చిత్తమే (159)', url: 'https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/songs%2FNee%20Chithame.mp3?alt=media&token=75b89868-7ca8-44f7-9966-a4eed554c6c4' },
-            { name: '14. ప్రభువా పంపుము (210)', url: 'https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/songs%2FPrabhuva%20Pampumu.mp3?alt=media&token=2e2ba3f3-fde2-43b5-8222-b713238cd64c' },
-            { name: '15. సువార్త గూర్చి సిగ్గుపడను (294)', url: 'https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/songs%2FA_Suvarthagurchi%5B1%5D.mp3?alt=media&token=7f421d52-e5e0-42cf-a8f7-c0c943b177bf' },
-            { name: '16. హృదయం వెలిగించు దేవా (313)', url: 'https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/songs%2FHrudhyam%20Veliginchu.mp3?alt=media&token=1f872cfb-52e5-4c28-a8c9-71e47e5a56e4' },
-            { name: '17. దేవుని రాజ్యముకై (నీతో 9)', url: 'https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/songs%2FDhevuni%20Rajyamu.mp3?alt=media&token=e1d50132-7564-4661-831e-917b984bf995' },
-            { name: '18. లోకములో తెల్పెదము (నీతో 10)', url: 'https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/songs%2FLokamulo%20Thelpedhamu.mp3?alt=media&token=d44c4aa4-bf60-4a3c-a289-9d5b40fe209c' },
-            { name: '19. ఎవరెళతారూ (new 2)', url: 'https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/songs%2FYevarelatharo%20Yevarelatharo.mp3?alt=media&token=cf61ca74-78d5-4b6d-8f59-c9f0ccdbfc73' }
+            { name: '8. తండ్రికి ప్రియమైన పిల్లలం (98)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Songs/Thandriki%20Priyamaina.mp3' },
+            { name: '9. దేవునితో జతపనివారము (117)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Songs/Devunitho%20Jatha%20Pani.mp3' },
+            { name: '10. దేవుని పిలుపును వినుము (118)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Songs/Devuni%20Pilupunu.mp3' },
+            { name: '11. నశించు ఆత్మలెన్నో (132)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Songs/nasinchu%20atmalenno.mp3' },
+            { name: '12. నా పేరే తెలియని ప్రజలు (144)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Songs/Naa%20Pere%20Teliyani.mp3' },
+            { name: '13. ని చిత్తమే నీ చిత్తమే (159)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Songs/Nee%20Chithame.mp3' },
+            { name: '14. ప్రభువా పంపుము (210)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Songs/Prabhuva%20Pampumu.mp3' },
+            { name: '15. సువార్త గూర్చి సిగ్గుపడను (294)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Songs/Suvarthagurchi.mp3' },
+            { name: '16. హృదయం వెలిగించు దేవా (313)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Songs/Hrudhyam%20Veliginchu.mp3' },
+            { name: '17. దేవుని రాజ్యముకై (నీతో 9)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Songs/Dhevuni%20Rajyamu.mp3' },
+            { name: '18. లోకములో తెల్పెదము (నీతో 10)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Songs/Lokamulo%20Thelpedhamu.mp3' },
+            { name: '19. ఎవరెళతారూ (new 2)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Songs/Yevarelatharo%20Yevarelatharo.mp3' }
         ];
+
 
 
         const tracksQueue = [
-            { name: '1. అర్పింతు దేవా (10)', url: 'https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/tracks%2FArpinthu%20dhevaa%20Track.mp3?alt=media&token=059de831-d777-441f-ba41-011ce1274237' },
-            { name: '2. ఇది కోతకు సమయం (24)', url: 'https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/tracks%2FEdhi%20Kothaku%20Samayam%20Track.mp3?alt=media&token=23b3890f-58af-4922-ae6e-c996bf0578bb' },
-            { name: '3. ఇదిగో దేవా నా జీవితం (25)', url: 'https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/tracks%2FIdigo%20Deva%20Na%20jeevitham%20Track.mp3?alt=media&token=40689cbc-f127-4227-b228-b145963c9020' },
-            { name: '4. ఉన్నతమైన స్థలములలో (32)', url: 'https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/tracks%2FVunnathamaina%20Stalamulalo%20Track.mp3?alt=media&token=2b1f20ea-e946-4c6e-91f7-df97956fc0ab' },
-            { name: '5. కదలిరమ్ము క్రైస్తవ యువకా (56)', url: 'https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/tracks%2FKadali%20Rammu%20Christava%20Track.mp3?alt=media&token=1af31498-40cd-45f2-8734-2d2dbf724b1c' },
-            { name: '6. కన్నులెత్తి పైరుల చూడు (57)', url: 'https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/tracks%2FKannula%20Netti%20Track.mp3?alt=media&token=3487d7b3-0f7a-4e85-a4e3-a95f2b38afc9' },
-            { name: '7. చాటించుడి (80)', url: 'https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/tracks%2Fchatinchudi%20manushya%20track.mp3?alt=media&token=0663da7b-5e8a-4f8b-bd0c-872b034d47f6' },
-            { name: '8. తండ్రికి ప్రియమైన పిల్లలం (98)', url: 'https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/tracks%2FThandriki%20Priyamaina%20Track.mp3?alt=media&token=9ed2a929-11f3-44fc-a6db-c710e9eb2377' },
-            { name: '9. దేవునితో జతపనివారము (117)', url: 'https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/tracks%2FDhevunitho%20Jatha%20Pani%20Track.mp3?alt=media&token=92b1a129-5ab8-4d81-b207-1d8f1befe99a' },
-            { name: '10. దేవుని పిలుపును వినుము (118)', url: 'https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/tracks%2FDhevuni%20Pulupunu%20Track.mp3?alt=media&token=570b3d26-7000-461f-91e2-7eaee947282f' },
-            { name: '11. నశించు ఆత్మలెన్నో (132)', url: 'https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/tracks%2FDhevuni%20Pulupunu%20Track.mp3?alt=media&token=570b3d26-7000-461f-91e2-7eaee947282f' },
-            { name: '12. నా పేరే తెలియని ప్రజలు (144)', url: 'https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/tracks%2FNaa%20Pere%20Teliyani%20Track.mp3?alt=media&token=3c1a9b3d-1647-4308-b712-818a4c8ce30f' },
-            { name: '13. ని చిత్తమే నీ చిత్తమే (159)', url: 'https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/tracks%2FNee%20Chithame%20Nee%20Track.mp3?alt=media&token=00fabff8-a8c8-4427-9233-9a7ae7aabad0' },
-            { name: '14. ప్రభువా పంపుము (210)', url: 'https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/tracks%2FPrabhuva%20Pampumu%20Track.mp3?alt=media&token=eb4882df-1f6d-42c5-82d6-8deb6662f4b8' },
-            { name: '15. సువార్త గూర్చి సిగ్గుపడను (294)', url: 'https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/tracks%2Fsuvarthagurchi%20track.mp3?alt=media&token=268e6391-5cd7-4cdb-9eac-1882f797233e' },
-            { name: '16. హృదయం వెలిగించు దేవా (313)', url: 'https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/tracks%2Fhrudhyam%20veligichu%20track.mp3?alt=media&token=9fdca6e1-a4e6-4b07-a505-7681fb6365cc' },
-            { name: '17. దేవుని రాజ్యముకై (నీతో 9)', url: 'https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/tracks%2FDevuni%20Rajyamu%20Track.mp3?alt=media&token=f7da8ab2-e7df-4b09-93e4-6b80a1eaadcc' },
-            { name: '18. లోకములో తెల్పెదము (నీతో 10)', url: 'https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/tracks%2FLokamulo%20Thelpedhamu%20Track.mp3?alt=media&token=66ca91b6-b2df-4379-acff-cf9eeb8d491f' },
-            { name: '19. ఎవరెళతారూ (new 2)', url: 'https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/tracks%2FYevarelatharo%20Yevarelatharo%20Track.mp3?alt=media&token=538bee6e-11db-41a6-886b-fe37b10cb057' }
+            { name: '1. అర్పింతు దేవా (10)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Tracks/Arpinthu%20dhevaa%20Track.mp3' },
+            { name: '2. ఇది కోతకు సమయం (24)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Tracks/Edhi%20Kothaku%20Samayam%20Track.mp3' },
+            { name: '3. ఇదిగో దేవా నా జీవితం (25)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Tracks/Idigo%20Deva%20Na%20jeevitham%20Track.mp3' },
+            { name: '4. ఉన్నతమైన స్థలములలో (32)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Tracks/Vunnathamaina%20Stalamulalo%20Track.mp3' },
+            { name: '5. కదలిరమ్ము క్రైస్తవ యువకా (56)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Tracks/Kadali%20Rammu%20Christava%20Track.mp3' },
+            { name: '6. కన్నులెత్తి పైరుల చూడు (57)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Tracks/Kannula%20Netti%20Track.mp3' },
+            { name: '7. చాటించుడి (80)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Tracks/chatinchudi%20manushya%20track.mp3' },
+            { name: '8. తండ్రికి ప్రియమైన పిల్లలం (98)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Tracks/Thandriki%20Priyamaina%20Track.mp3' },
+            { name: '9. దేవునితో జతపనివారము (117)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Tracks/Dhevunitho%20Jatha%20Pani%20Track.mp3' },
+            { name: '10. దేవుని పిలుపును వినుము (118)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Tracks/Dhevuni%20Pulupunu%20Track.mp3' },
+            { name: '11. నశించు ఆత్మలెన్నో (132)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Tracks/nasinchu_atmalenno%20track.mp3' },
+            { name: '12. నా పేరే తెలియని ప్రజలు (144)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Tracks/Naa%20Pere%20Teliyani%20Track.mp3' },
+            { name: '13. ని చిత్తమే నీ చిత్తమే (159)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Tracks/Nee%20Chithame%20Nee%20Track.mp3' },
+            { name: '14. ప్రభువా పంపుము (210)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Tracks/Prabhuva%20Pampumu%20Track.mp3' },
+            { name: '15. సువార్త గూర్చి సిగ్గుపడను (294)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Tracks/suvarthagurchi%20track.mp3' },
+            { name: '16. హృదయం వెలిగించు దేవా (313)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Tracks/hrudhyam%20veligichu%20track.mp3' },
+            { name: '17. దేవుని రాజ్యముకై (నీతో 9)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Tracks/Devuni%20Rajyamu%20Track.mp3' },
+            { name: '18. లోకములో తెల్పెదము (నీతో 10)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Tracks/Lokamulo%20Thelpedhamu%20Track.mp3' },
+            { name: '19. ఎవరెళతారూ (new 2)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Tracks/Yevarelatharo%20Yevarelatharo%20Track.mp3' }
         ];
+
 
 
 
