@@ -598,6 +598,18 @@
             color: #197afe;
             border-bottom: 1px solid #197afe;
         }
+
+        .time-display {
+            display: flex;
+            justify-content: center;
+            margin-top: 5px;
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .slider-container {
+            padding-bottom: 10px;
+        }
     </style>
 </head>
 
@@ -694,338 +706,380 @@
     </footer>
     <script>
         const searchInput = document.getElementById('search_input_js');
-        const searchButton = document.getElementById('search_icon_js');
-        const searchContainer = document.getElementById('search_container_js');
-        const menuButton = document.getElementById('menu_icon_js');
-        const menuContainer = document.getElementById('menu_container_js');
-        const campButton = document.getElementById('menu_camp_js');
-        const specialButton = document.getElementById('menu_special_js');
-        const aimsButton = document.getElementById('menu_aims_js');
-        const audioButton = document.getElementById('menu_audio_js');
-        const campContainer = document.getElementById('menu_sub_camp_js');
-        const specialContainer = document.getElementById('menu_sub_special_js');
-        const aimsContainer = document.getElementById('menu_sub_aims_js');
-        const audioContainer = document.getElementById('menu_sub_audio_js');
-        const overlay = document.getElementById('overlay');
+const searchButton = document.getElementById('search_icon_js');
+const searchContainer = document.getElementById('search_container_js');
+const menuButton = document.getElementById('menu_icon_js');
+const menuContainer = document.getElementById('menu_container_js');
+const campButton = document.getElementById('menu_camp_js');
+const specialButton = document.getElementById('menu_special_js');
+const aimsButton = document.getElementById('menu_aims_js');
+const audioButton = document.getElementById('menu_audio_js');
+const campContainer = document.getElementById('menu_sub_camp_js');
+const specialContainer = document.getElementById('menu_sub_special_js');
+const aimsContainer = document.getElementById('menu_sub_aims_js');
+const audioContainer = document.getElementById('menu_sub_audio_js');
+const overlay = document.getElementById('overlay');
 
-        //Search Box Visibility
-        searchButton.addEventListener('click', function () {
-            const isSearchVisible = searchContainer.style.display === "block";
+//Search Box Visibility
+searchButton.addEventListener('click', function () {
+    const isSearchVisible = searchContainer.style.display === "block";
 
-            if (isSearchVisible) {
-                // Hide the search container and remove the box shadow
-                searchContainer.style.display = "none";
-                searchButton.classList.remove('fa-times');
-                searchButton.classList.add('fa-search');
-                searchContainer.style.boxShadow = 'none'; // Remove box shadow from the container
-                searchInput.removeEventListener('focus', addBoxShadow); // Remove focus event listener
-                searchInput.removeEventListener('blur', removeBoxShadow); // Remove blur event listener
-                searchInput.value = '';
-            } else {
-                // Show the search container
-                searchContainer.style.display = "block";
-                searchButton.classList.remove('fa-search');
-                searchButton.classList.add('fa-times');
-                // Add event listeners for focus and blur
-                searchInput.addEventListener('focus', addBoxShadow);
-                searchInput.addEventListener('blur', removeBoxShadow);
-            }
+    if (isSearchVisible) {
+        // Hide the search container and remove the box shadow
+        searchContainer.style.display = "none";
+        searchButton.classList.remove('fa-times');
+        searchButton.classList.add('fa-search');
+        searchContainer.style.boxShadow = 'none'; // Remove box shadow from the container
+        searchInput.removeEventListener('focus', addBoxShadow); // Remove focus event listener
+        searchInput.removeEventListener('blur', removeBoxShadow); // Remove blur event listener
+        searchInput.value = '';
+    } else {
+        // Show the search container
+        searchContainer.style.display = "block";
+        searchButton.classList.remove('fa-search');
+        searchButton.classList.add('fa-times');
+        // Add event listeners for focus and blur
+        searchInput.addEventListener('focus', addBoxShadow);
+        searchInput.addEventListener('blur', removeBoxShadow);
+    }
+});
+
+document.getElementById('search_input_js').addEventListener('input', function (e) {
+    const filter = e.target.value.toLowerCase();
+    const lists = [songsList, tracksList];
+
+    lists.forEach(list => {
+        Array.from(list.getElementsByTagName('li')).forEach(item => {
+            const text = item.textContent || item.innerText;
+            item.style.display = text.toLowerCase().indexOf(filter) > -1 ? "" : "none";
         });
+    });
+});
 
-        document.getElementById('search_input_js').addEventListener('input', function (e) {
-            const filter = e.target.value.toLowerCase();
-            const lists = [songsList, tracksList];
+// Function to add box shadow to the search container when input is focused
+function addBoxShadow() {
+    searchContainer.style.boxShadow = '0 0 2px 2px #197afe'; // Adjust shadow as needed
+}
 
-            lists.forEach(list => {
-                Array.from(list.getElementsByTagName('li')).forEach(item => {
-                    const text = item.textContent || item.innerText;
-                    item.style.display = text.toLowerCase().indexOf(filter) > -1 ? "" : "none";
-                });
-            });
-        });
+// Function to remove box shadow from the search container when input loses focus
+function removeBoxShadow() {
+    searchContainer.style.boxShadow = 'none'; // Remove box shadow
+}
 
-        // Function to add box shadow to the search container when input is focused
-        function addBoxShadow() {
-            searchContainer.style.boxShadow = '0 0 2px 2px #197afe'; // Adjust shadow as needed
+//Menu Box Visibility
+menuButton.addEventListener('click', function () {
+    const isMenuVisible = menuContainer.style.display === "block";
+    menuContainer.style.display = isMenuVisible ? "none" : "block";
+    overlay.style.display = isMenuVisible ? "none" : "block";
+    if (menuButton.classList.contains('fa-bars')) {
+        menuButton.classList.remove('fa-bars');
+        menuButton.classList.add('fa-times');
+    } else {
+        menuButton.classList.remove('fa-times');
+        menuButton.classList.add('fa-bars');
+    }
+});
+overlay.addEventListener('click', function () {
+    menuContainer.style.display = "none";
+    overlay.style.display = "none";
+    menuButton.classList.remove('fa-times');
+    menuButton.classList.add('fa-bars');
+});
+
+//Camp Sub Item Visibility
+campButton.addEventListener('click', function () {
+    campContainer.style.display = campContainer.style.display === "none" ? "block" : "none";
+});
+//Camp Sub Item Visibility
+specialButton.addEventListener('click', function () {
+    specialContainer.style.display = specialContainer.style.display === "none" ? "block" : "none";
+});
+//Camp Sub Item Visibility
+aimsButton.addEventListener('click', function () {
+    aimsContainer.style.display = aimsContainer.style.display === "none" ? "block" : "none";
+});
+//Camp Sub Item Visibility
+audioButton.addEventListener('click', function () {
+    audioContainer.style.display = audioContainer.style.display === "none" ? "block" : "none";
+});
+
+// Define separate queues for tracks and songs
+const songsQueue = [
+    { name: '1. అర్పింతు దేవా (10)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Songs/Arpinthu%20Deva.mp3' },
+    { name: '2. ఇది కోతకు సమయం (24)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Songs/Edhi%20Kothaku%20Samayam.mp3' },
+    { name: '3. ఇదిగో దేవా నా జీవితం (25)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Songs/Idigo%20Deva%20Na%20jeevitham.mp3' },
+    { name: '4. ఉన్నతమైన స్థలములలో (32)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Songs/Vunnathamaina%20Stalamulalo.mp3' },
+    { name: '5. కదలిరమ్ము క్రైస్తవ యువకా (56)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Songs/Kadali%20Rammu%20Christava.mp3' },
+    { name: '6. కన్నులెత్తి పైరుల చూడు (57)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Songs/Kannula%20Netthi.mp3' },
+    { name: '7. చాటించుడి (80)', url: 'https://ia601305.us.archive.org/6/items/uesiap/15vgSongs2-08ChaatinchudiManushya.mp3' },
+    { name: '8. తండ్రికి ప్రియమైన పిల్లలం (98)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Songs/Thandriki%20Priyamaina.mp3' },
+    { name: '9. దేవునితో జతపనివారము (117)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Songs/Devunitho%20Jatha%20Pani.mp3' },
+    { name: '10. దేవుని పిలుపును వినుము (118)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Songs/Devuni%20Pilupunu.mp3' },
+    { name: '11. నశించు ఆత్మలెన్నో (132)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Songs/nasinchu%20atmalenno.mp3' },
+    { name: '12. నా పేరే తెలియని ప్రజలు (144)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Songs/Naa%20Pere%20Teliyani.mp3' },
+    { name: '13. ని చిత్తమే నీ చిత్తమే (159)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Songs/Nee%20Chithame.mp3' },
+    { name: '14. ప్రభువా పంపుము (210)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Songs/Prabhuva%20Pampumu.mp3' },
+    { name: '15. సువార్త గూర్చి సిగ్గుపడను (294)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Songs/Suvarthagurchi.mp3' },
+    { name: '16. హృదయం వెలిగించు దేవా (313)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Songs/Hrudhyam%20Veliginchu.mp3' },
+    { name: '17. దేవుని రాజ్యముకై (నీతో 9)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Songs/Dhevuni%20Rajyamu.mp3' },
+    { name: '18. లోకములో తెల్పెదము (నీతో 10)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Songs/Lokamulo%20Thelpedhamu.mp3' },
+    { name: '19. ఎవరెళతారూ (new 2)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Songs/Yevarelatharo%20Yevarelatharo.mp3' }
+];
+
+const tracksQueue = [
+    { name: '1. అర్పింతు దేవా (10)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Tracks/Arpinthu%20dhevaa%20Track.mp3' },
+    { name: '2. ఇది కోతకు సమయం (24)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Tracks/Edhi%20Kothaku%20Samayam%20Track.mp3' },
+    { name: '3. ఇదిగో దేవా నా జీవితం (25)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Tracks/Idigo%20Deva%20Na%20jeevitham%20Track.mp3' },
+    { name: '4. ఉన్నతమైన స్థలములలో (32)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Tracks/Vunnathamaina%20Stalamulalo%20Track.mp3' },
+    { name: '5. కదలిరమ్ము క్రైస్తవ యువకా (56)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Tracks/Kadali%20Rammu%20Christava%20Track.mp3' },
+    { name: '6. కన్నులెత్తి పైరుల చూడు (57)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Tracks/Kannula%20Netti%20Track.mp3' },
+    { name: '7. చాటించుడి (80)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Tracks/chatinchudi%20manushya%20track.mp3' },
+    { name: '8. తండ్రికి ప్రియమైన పిల్లలం (98)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Tracks/Thandriki%20Priyamaina%20Track.mp3' },
+    { name: '9. దేవునితో జతపనివారము (117)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Tracks/Dhevunitho%20Jatha%20Pani%20Track.mp3' },
+    { name: '10. దేవుని పిలుపును వినుము (118)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Tracks/Dhevuni%20Pulupunu%20Track.mp3' },
+    { name: '11. నశించు ఆత్మలెన్నో (132)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Tracks/nasinchu_atmalenno%20track.mp3' },
+    { name: '12. నా పేరే తెలియని ప్రజలు (144)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Tracks/Naa%20Pere%20Teliyani%20Track.mp3' },
+    { name: '13. ని చిత్తమే నీ చిత్తమే (159)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Tracks/Nee%20Chithame%20Nee%20Track.mp3' },
+    { name: '14. ప్రభువా పంపుము (210)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Tracks/Prabhuva%20Pampumu%20Track.mp3' },
+    { name: '15. సువార్త గూర్చి సిగ్గుపడను (294)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Tracks/suvarthagurchi%20track.mp3' },
+    { name: '16. హృదయం వెలిగించు దేవా (313)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Tracks/hrudhyam%20veligichu%20track.mp3' },
+    { name: '17. దేవుని రాజ్యముకై (నీతో 9)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Tracks/Devuni%20Rajyamu%20Track.mp3' },
+    { name: '18. లోకములో తెల్పెదము (నీతో 10)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Tracks/Lokamulo%20Thelpedhamu%20Track.mp3' },
+    { name: '19. ఎవరెళతారూ (new 2)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Tracks/Yevarelatharo%20Yevarelatharo%20Track.mp3' }
+];
+
+const tracksList = document.getElementById('tracksList');
+const songsList = document.getElementById('songsList');
+const audio = new Audio();
+let currentPlayingIndex = null;
+let currentQueue = null; // Track which queue is currently playing
+let currentProgressBar = null;
+let currentTimeDisplay = null;
+let totalDurationDisplay = null;
+
+// Function to format time in minutes:seconds format
+function formatTime(seconds) {
+    if (isNaN(seconds)) return "0:00";
+    
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = Math.floor(seconds % 60);
+    return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+}
+
+function displaySongs() {
+    // Clear previous lists
+    songsList.innerHTML = '';
+    tracksList.innerHTML = '';
+
+    // Display songs
+    songsQueue.forEach((song, index) => {
+        const li = document.createElement('li');
+        li.innerHTML = `
+            <div class="song-details">
+                <div class="song-name">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcSxSNUXpJ8n2YkTuBEeO84gb1dH6NRhvQNg&s" width="50px" height="50px" style="border-radius: 10px" alt="UESI Vidhyardhi Geethavali">
+                    ${song.name}
+                </div>
+                <div class="controls">
+                    <button class="play" onclick="togglePlayPause(${index}, this, 'songs')"><i class="fa fa-play"></i></button>
+                </div>
+            </div>
+            <div class="slider-container">
+                <div class="time-display">
+                    <span class="current-time">0:00</span>
+                </div>&ensp;
+                <input type="range" min="0" value="0" oninput="seekSong(this)">&ensp;
+                <div class="time-display">
+                    <span class="total-duration">0:00</span>
+                </div>
+            </div>
+        `;
+        songsList.appendChild(li);
+    });
+
+    // Display tracks
+    tracksQueue.forEach((song, index) => {
+        const li = document.createElement('li');
+        li.innerHTML = `
+            <div class="song-details">
+                <div class="song-name">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcSxSNUXpJ8n2YkTuBEeO84gb1dH6NRhvQNg&s" width="50px" height="50px" style="border-radius: 10px" alt="UESI Vidhyardhi Geethavali">
+                    ${song.name}
+                </div>
+                <div class="controls">
+                    <button class="play" onclick="togglePlayPause(${index}, this, 'tracks')"><i class="fa fa-play"></i></button>
+                </div>
+            </div>
+            <div class="slider-container">
+                <div class="time-display">
+                    <span class="current-time">0:00</span>
+                </div>&ensp;
+                <input type="range" min="0" value="0" oninput="seekSong(this)">&ensp;
+                <div class="time-display">
+                    <span class="total-duration">0:00</span>
+                </div>
+            </div>
+        `;
+        tracksList.appendChild(li);
+    });
+}
+
+function showSection(sectionId) {
+    document.querySelectorAll('.section').forEach(section => {
+        section.classList.remove('active');
+    });
+
+    document.querySelectorAll('.tab').forEach(tab => {
+        tab.classList.remove('active');
+    });
+
+    document.getElementById(sectionId).classList.add('active');
+    document.querySelector(`.tab[onclick="showSection('${sectionId}')"]`).classList.add('active');
+}
+
+function togglePlayPause(index, button, type) {
+    const queue = type === 'tracks' ? tracksQueue : songsQueue;
+    const isCurrentlyPlaying = currentPlayingIndex === index && currentQueue === type;
+
+    if (isCurrentlyPlaying) {
+        if (audio.paused) {
+            audio.play();
+            button.innerHTML = '<i class="fa fa-pause"></i>'; // Font Awesome pause icon
+            button.classList.remove('play');
+            button.classList.add('pause');
+        } else {
+            audio.pause();
+            button.innerHTML = '<i class="fa fa-play"></i>'; // Font Awesome play icon
+            button.classList.remove('pause');
+            button.classList.add('play');
         }
-
-        // Function to remove box shadow from the search container when input loses focus
-        function removeBoxShadow() {
-            searchContainer.style.boxShadow = 'none'; // Remove box shadow
-        }
-
-        //Menu Box Visibility
-        menuButton.addEventListener('click', function () {
-            const isMenuVisible = menuContainer.style.display === "block";
-            menuContainer.style.display = isMenuVisible ? "none" : "block";
-            overlay.style.display = isMenuVisible ? "none" : "block";
-            if (menuButton.classList.contains('fa-bars')) {
-                menuButton.classList.remove('fa-bars');
-                menuButton.classList.add('fa-times');
-            } else {
-                menuButton.classList.remove('fa-times');
-                menuButton.classList.add('fa-bars');
-            }
-        });
-        overlay.addEventListener('click', function () {
-            menuContainer.style.display = "none";
-            overlay.style.display = "none";
-            menuButton.classList.remove('fa-times');
-            menuButton.classList.add('fa-bars');
-        });
-
-        //Camp Sub Item Visibility
-        campButton.addEventListener('click', function () {
-            campContainer.style.display = campContainer.style.display === "none" ? "block" : "none";
-        });
-        //Camp Sub Item Visibility
-        specialButton.addEventListener('click', function () {
-            specialContainer.style.display = specialContainer.style.display === "none" ? "block" : "none";
-        });
-        //Camp Sub Item Visibility
-        aimsButton.addEventListener('click', function () {
-            aimsContainer.style.display = aimsContainer.style.display === "none" ? "block" : "none";
-        });
-        //Camp Sub Item Visibility
-        audioButton.addEventListener('click', function () {
-            audioContainer.style.display = audioContainer.style.display === "none" ? "block" : "none";
-        });
-
-        // Define separate queues for tracks and songs
-        const songsQueue = [
-            { name: '1. అర్పింతు దేవా (10)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Songs/Arpinthu%20Deva.mp3' },
-            { name: '2. ఇది కోతకు సమయం (24)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Songs/Edhi%20Kothaku%20Samayam.mp3' },
-            { name: '3. ఇదిగో దేవా నా జీవితం (25)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Songs/Idigo%20Deva%20Na%20jeevitham.mp3' },
-            { name: '4. ఉన్నతమైన స్థలములలో (32)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Songs/Vunnathamaina%20Stalamulalo.mp3' },
-            { name: '5. కదలిరమ్ము క్రైస్తవ యువకా (56)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Songs/Kadali%20Rammu%20Christava.mp3' },
-            { name: '6. కన్నులెత్తి పైరుల చూడు (57)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Songs/Kannula%20Netthi.mp3' },
-            { name: '7. చాటించుడి (80)', url: 'https://ia601305.us.archive.org/6/items/uesiap/15vgSongs2-08ChaatinchudiManushya.mp3' },
-            { name: '8. తండ్రికి ప్రియమైన పిల్లలం (98)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Songs/Thandriki%20Priyamaina.mp3' },
-            { name: '9. దేవునితో జతపనివారము (117)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Songs/Devunitho%20Jatha%20Pani.mp3' },
-            { name: '10. దేవుని పిలుపును వినుము (118)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Songs/Devuni%20Pilupunu.mp3' },
-            { name: '11. నశించు ఆత్మలెన్నో (132)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Songs/nasinchu%20atmalenno.mp3' },
-            { name: '12. నా పేరే తెలియని ప్రజలు (144)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Songs/Naa%20Pere%20Teliyani.mp3' },
-            { name: '13. ని చిత్తమే నీ చిత్తమే (159)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Songs/Nee%20Chithame.mp3' },
-            { name: '14. ప్రభువా పంపుము (210)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Songs/Prabhuva%20Pampumu.mp3' },
-            { name: '15. సువార్త గూర్చి సిగ్గుపడను (294)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Songs/Suvarthagurchi.mp3' },
-            { name: '16. హృదయం వెలిగించు దేవా (313)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Songs/Hrudhyam%20Veliginchu.mp3' },
-            { name: '17. దేవుని రాజ్యముకై (నీతో 9)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Songs/Dhevuni%20Rajyamu.mp3' },
-            { name: '18. లోకములో తెల్పెదము (నీతో 10)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Songs/Lokamulo%20Thelpedhamu.mp3' },
-            { name: '19. ఎవరెళతారూ (new 2)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Songs/Yevarelatharo%20Yevarelatharo.mp3' }
-        ];
-
-
-
-        const tracksQueue = [
-            { name: '1. అర్పింతు దేవా (10)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Tracks/Arpinthu%20dhevaa%20Track.mp3' },
-            { name: '2. ఇది కోతకు సమయం (24)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Tracks/Edhi%20Kothaku%20Samayam%20Track.mp3' },
-            { name: '3. ఇదిగో దేవా నా జీవితం (25)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Tracks/Idigo%20Deva%20Na%20jeevitham%20Track.mp3' },
-            { name: '4. ఉన్నతమైన స్థలములలో (32)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Tracks/Vunnathamaina%20Stalamulalo%20Track.mp3' },
-            { name: '5. కదలిరమ్ము క్రైస్తవ యువకా (56)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Tracks/Kadali%20Rammu%20Christava%20Track.mp3' },
-            { name: '6. కన్నులెత్తి పైరుల చూడు (57)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Tracks/Kannula%20Netti%20Track.mp3' },
-            { name: '7. చాటించుడి (80)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Tracks/chatinchudi%20manushya%20track.mp3' },
-            { name: '8. తండ్రికి ప్రియమైన పిల్లలం (98)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Tracks/Thandriki%20Priyamaina%20Track.mp3' },
-            { name: '9. దేవునితో జతపనివారము (117)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Tracks/Dhevunitho%20Jatha%20Pani%20Track.mp3' },
-            { name: '10. దేవుని పిలుపును వినుము (118)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Tracks/Dhevuni%20Pulupunu%20Track.mp3' },
-            { name: '11. నశించు ఆత్మలెన్నో (132)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Tracks/nasinchu_atmalenno%20track.mp3' },
-            { name: '12. నా పేరే తెలియని ప్రజలు (144)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Tracks/Naa%20Pere%20Teliyani%20Track.mp3' },
-            { name: '13. ని చిత్తమే నీ చిత్తమే (159)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Tracks/Nee%20Chithame%20Nee%20Track.mp3' },
-            { name: '14. ప్రభువా పంపుము (210)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Tracks/Prabhuva%20Pampumu%20Track.mp3' },
-            { name: '15. సువార్త గూర్చి సిగ్గుపడను (294)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Tracks/suvarthagurchi%20track.mp3' },
-            { name: '16. హృదయం వెలిగించు దేవా (313)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Tracks/hrudhyam%20veligichu%20track.mp3' },
-            { name: '17. దేవుని రాజ్యముకై (నీతో 9)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Tracks/Devuni%20Rajyamu%20Track.mp3' },
-            { name: '18. లోకములో తెల్పెదము (నీతో 10)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Tracks/Lokamulo%20Thelpedhamu%20Track.mp3' },
-            { name: '19. ఎవరెళతారూ (new 2)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Tracks/Yevarelatharo%20Yevarelatharo%20Track.mp3' }
-        ];
-
-
-
-
-        const tracksList = document.getElementById('tracksList');
-        const songsList = document.getElementById('songsList');
-        const audio = new Audio();
-        let currentPlayingIndex = null;
-        let currentQueue = null; // Track which queue is currently playing
-        let currentProgressBar = null;
-
-        function displaySongs() {
-            // Clear previous lists
-            songsList.innerHTML = '';
-            tracksList.innerHTML = '';
-
-            // Display songs
-            songsQueue.forEach((song, index) => {
-                const li = document.createElement('li');
-                li.innerHTML = `
-                    <div class="song-details">
-                        <div class="song-name">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcSxSNUXpJ8n2YkTuBEeO84gb1dH6NRhvQNg&s" width="50px" height="50px" style="border-radius: 10px" alt="UESI Vidhyardhi Geethavali">
-
-                            ${song.name}
-                        </div>
-                        <div class="controls">
-                            <button class="play" onclick="togglePlayPause(${index}, this, 'songs')"><i class="fa fa-play"></i></button>
-                        </div>
-                    </div>
-                    <div class="slider-container">
-                        <input type="range" min="0" value="0" oninput="seekSong(this)">
-                    </div>
-                `;
-                songsList.appendChild(li);
-            });
-
-            // Display tracks
-            tracksQueue.forEach((song, index) => {
-                const li = document.createElement('li');
-                li.innerHTML = `
-                    <div class="song-details">
-                        <div class="song-name">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcSxSNUXpJ8n2YkTuBEeO84gb1dH6NRhvQNg&s" width="50px" height="50px" style="border-radius: 10px" alt="UESI Vidhyardhi Geethavali">
-                            ${song.name}
-                        </div>
-                        <div class="controls">
-                            <button class="play" onclick="togglePlayPause(${index}, this, 'tracks')"><i class="fa fa-play"></i></button>
-                        </div>
-                    </div>
-                    <div class="slider-container">
-                        <input type="range" min="0" value="0" oninput="seekSong(this)">
-                    </div>
-                `;
-                tracksList.appendChild(li);
-            });
-        }
-
-        function showSection(sectionId) {
-            document.querySelectorAll('.section').forEach(section => {
-                section.classList.remove('active');
-            });
-
-            document.querySelectorAll('.tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-
-            document.getElementById(sectionId).classList.add('active');
-            document.querySelector(`.tab[onclick="showSection('${sectionId}')"]`).classList.add('active');
-        }
-
-        function togglePlayPause(index, button, type) {
-            const queue = type === 'tracks' ? tracksQueue : songsQueue;
-            const isCurrentlyPlaying = currentPlayingIndex === index && currentQueue === type;
-
-            if (isCurrentlyPlaying) {
-                if (audio.paused) {
-                    audio.play();
-                    button.innerHTML = '<i class="fa fa-pause"></i>'; // Font Awesome pause icon
-                    button.classList.remove('play');
-                    button.classList.add('pause');
-                } else {
-                    audio.pause();
-                    button.innerHTML = '<i class="fa fa-play"></i>'; // Font Awesome play icon
-                    button.classList.remove('pause');
-                    button.classList.add('play');
-                }
-            } else {
-                if (currentPlayingIndex !== null && currentQueue) {
-                    const prevButton = document.querySelector(`ul#${currentQueue}List li:nth-child(${currentPlayingIndex + 1}) .controls button`);
-                    if (prevButton) {
-                        prevButton.innerHTML = '<i class="fa fa-play"></i>'; // Font Awesome play icon
-                        prevButton.classList.remove('pause');
-                        prevButton.classList.add('play');
-                    }
-                }
-
-                currentQueue = type;
-                currentPlayingIndex = index;
-                audio.src = queue[index].url;
-                audio.play();
-                button.innerHTML = '<i class="fa fa-pause"></i>'; // Font Awesome pause icon
-                button.classList.remove('play');
-                button.classList.add('pause');
-
-
-
-                const prevSlider = document.querySelector('.slider-container.active');
-                if (prevSlider) prevSlider.classList.remove('active');
-
-                const listItem = button.closest('li');
-                const sliderContainer = listItem.querySelector('.slider-container');
-                sliderContainer.classList.add('active');
-
-                currentProgressBar = sliderContainer.querySelector('input[type="range"]');
+    } else {
+        if (currentPlayingIndex !== null && currentQueue) {
+            const prevButton = document.querySelector(`ul#${currentQueue}List li:nth-child(${currentPlayingIndex + 1}) .controls button`);
+            if (prevButton) {
+                prevButton.innerHTML = '<i class="fa fa-play"></i>'; // Font Awesome play icon
+                prevButton.classList.remove('pause');
+                prevButton.classList.add('play');
             }
         }
 
-        function seekSong(range) {
-            audio.currentTime = range.value;
+        currentQueue = type;
+        currentPlayingIndex = index;
+        audio.src = queue[index].url;
+        audio.play();
+        button.innerHTML = '<i class="fa fa-pause"></i>'; // Font Awesome pause icon
+        button.classList.remove('play');
+        button.classList.add('pause');
+
+        const prevSlider = document.querySelector('.slider-container.active');
+        if (prevSlider) prevSlider.classList.remove('active');
+
+        const listItem = button.closest('li');
+        const sliderContainer = listItem.querySelector('.slider-container');
+        sliderContainer.classList.add('active');
+
+        currentProgressBar = sliderContainer.querySelector('input[type="range"]');
+        
+        // Set up time display elements
+        currentTimeDisplay = sliderContainer.querySelector('.current-time');
+        totalDurationDisplay = sliderContainer.querySelector('.total-duration');
+    }
+}
+
+function seekSong(range) {
+    audio.currentTime = range.value;
+}
+
+audio.addEventListener('timeupdate', () => {
+    if (currentProgressBar) {
+        currentProgressBar.max = audio.duration;
+        currentProgressBar.value = audio.currentTime;
+        
+        if (currentTimeDisplay) {
+            currentTimeDisplay.textContent = formatTime(audio.currentTime);
         }
+    }
+});
 
-        audio.addEventListener('timeupdate', () => {
-            if (currentProgressBar) {
-                currentProgressBar.max = audio.duration;
-                currentProgressBar.value = audio.currentTime;
-            }
-        });
+audio.addEventListener('loadedmetadata', () => {
+    if (totalDurationDisplay) {
+        totalDurationDisplay.textContent = formatTime(audio.duration);
+    }
+});
 
-        audio.addEventListener('ended', () => {
-            const queue = currentQueue === 'tracks' ? tracksQueue : songsQueue;
-            const nextIndex = currentPlayingIndex + 1;
-            if (nextIndex < queue.length) {
-                togglePlayPause(nextIndex, document.querySelector(`ul#${currentQueue}List li:nth-child(${nextIndex + 1}) .controls button`), currentQueue);
-            } else {
-                currentPlayingIndex = null;
-                currentQueue = null;
-            }
-        });
+audio.addEventListener('ended', () => {
+    const queue = currentQueue === 'tracks' ? tracksQueue : songsQueue;
+    const nextIndex = currentPlayingIndex + 1;
+    if (nextIndex < queue.length) {
+        togglePlayPause(nextIndex, document.querySelector(`ul#${currentQueue}List li:nth-child(${nextIndex + 1}) .controls button`), currentQueue);
+    } else {
+        currentPlayingIndex = null;
+        currentQueue = null;
+    }
+});
 
-        // Initialize the song list display
-        displaySongs();
+// Initialize the song list display
+displaySongs();
 
-        // Swipe functionality
+// Swipe functionality
+let touchStartX = 0;
+let touchEndX = 0;
+const swipeThreshold = 70; // Minimum distance in pixels for a valid swipe
 
-        let touchStartX = 0;
-        let touchEndX = 0;
-        const swipeThreshold = 70; // Minimum distance in pixels for a valid swipe
+function handleGesture() {
+    if (touchEndX < touchStartX - swipeThreshold) {
+        showSection('tracks-section');
+    } else if (touchEndX > touchStartX + swipeThreshold) {
+        showSection('songs-section');
+    }
+}
 
-        function handleGesture() {
-            if (touchEndX < touchStartX - swipeThreshold) {
-                showSection('tracks-section');
-            } else if (touchEndX > touchStartX + swipeThreshold) {
-                showSection('songs-section');
-            }
-        }
+document.addEventListener('touchstart', e => {
+    touchStartX = e.changedTouches[0].screenX;
+});
 
-        document.addEventListener('touchstart', e => {
-            touchStartX = e.changedTouches[0].screenX;
-        });
+document.addEventListener('touchend', e => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleGesture();
+});
 
-        document.addEventListener('touchend', e => {
-            touchEndX = e.changedTouches[0].screenX;
-            handleGesture();
-        });
+// Preloader
+window.addEventListener('load', function () {
+    // Set a timeout to remove the preloader after 2 seconds
+    setTimeout(function () {
+        var preloader = document.getElementById('preloader');
+        if (preloader) {
+            preloader.style.opacity = '0';
+            preloader.style.transition = 'opacity 1s ease';
 
-
-        // Preloader
-
-        window.addEventListener('load', function () {
-            // Set a timeout to remove the preloader after 2 seconds
+            // Wait for the transition to complete before removing the element
             setTimeout(function () {
-                var preloader = document.getElementById('preloader');
-                if (preloader) {
-                    preloader.style.opacity = '0';
-                    preloader.style.transition = 'opacity 1s ease';
-
-                    // Wait for the transition to complete before removing the element
-                    setTimeout(function () {
-                        var preloaderImage = preloader.querySelector('img');
-                        if (preloaderImage) {
-                            preloaderImage.remove(); // This removes the image from the preloader
-                        }
-                        preloader.parentNode.removeChild(preloader); // This removes the preloader itself
-                    }, 500); // 500ms matches the CSS transition duration
+                var preloaderImage = preloader.querySelector('img');
+                if (preloaderImage) {
+                    preloaderImage.remove(); // This removes the image from the preloader
                 }
-            }, 1000); // 2 seconds delay
-        });
+                preloader.parentNode.removeChild(preloader); // This removes the preloader itself
+            }, 500); // 500ms matches the CSS transition duration
+        }
+    }, 1000); // 1 second delay
+});
 
+// Add this CSS to your stylesheet
+const style = document.createElement('style');
+style.textContent = `
+.time-display {
+    display: flex;
+    justify-content: center;
+    margin-top: 5px;
+    font-size: 0.9rem;
+    color: #333;
+}
+
+.slider-container {
+    padding-bottom: 10px;
+}
+`;
+document.head.appendChild(style);
     </script>
 
     <script>
