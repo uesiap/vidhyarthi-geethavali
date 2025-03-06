@@ -16,8 +16,7 @@
     <link rel="apple-touch-icon" href="/vidhyardhi-geethavali/Icon192.jpg"> <!-- iOS splash icon -->
     <!-- Title and Meta Description -->
     <title>Missions Songs | Advanced Music Prayer | UESI AP</title>
-    <meta name="description"
-        content="Play all Missons Retreat Songs Audio & Tracks at Advanced Music Player.UESI AP">
+    <meta name="description" content="Play all Missons Retreat Songs Audio & Tracks at Advanced Music Player.UESI AP">
     <meta name="keywords"
         content="audio, tracks, track, audios, lyrics, vidhyardhi, geethavali,Advanced, advance, music, player, songs, audio player, advanced music player, UESI, AP, uesi, ap, e, camp, camps, songs, vidhyarthi, e camp, evangelistic, evangelistic camp songs, camps,  uesi songs, uesi ap songs, vidhyardhi geethavali songs, ap Vidhyardhi Geethavali Uesi songs, uesi songs, VJ Songs, Uesi Vj songs, Telugu Vidhyardhi Gethavali songs, english songs, telugu songs, audio songs, Vidhyardhi Geethavali Track songs, Vidhyardhi Geethavali Audio songs, Uesi ap songs, audio, track, Search songs">
 
@@ -189,6 +188,7 @@
             margin-left: -8px;
             margin-bottom: 20px;
         }
+
         .head_icon_search,
         .head_icon_bars {
             color: #197afe;
@@ -203,6 +203,7 @@
             align-items: center;
             justify-content: center;
         }
+
         .head_icon_search {
             margin-left: -5px;
         }
@@ -572,14 +573,14 @@
             /* Adjust the size as needed */
             height: auto;
         }
-        
+
         .ecamp_songs_container {
             margin-top: -20px;
             display: flex;
             justify-content: center;
             align-items: center;
         }
-        
+
         footer {
             margin: 30px 0px;
             padding-top: 15px;
@@ -590,6 +591,7 @@
             background-color: transparent;
             height: 30px;
         }
+
         .my_name {
             background-color: white;
             border: none;
@@ -673,21 +675,22 @@
         </div>
     </div>
     <div class="ecamp_songs_container" style="margin-top: 0px;">
-        <div class="tab-container" style="margin-top: 20px; border: 1px solid black;border-radius: 20px; max-width: 340px;">
+        <div class="tab-container"
+            style="margin-top: 20px; border: 1px solid black;border-radius: 20px; max-width: 340px;">
             <button class="tab active" onclick="showSection('songs-section')"
                 style="border-right: 1px solid black; margin-right: -0.5px; margin-bottom: 0px; display: inline-flex; border-radius: 50px 0 0 50px;">Songs</button>
             <button class="tab" onclick="showSection('tracks-section')"
                 style="border-left: 1px solid black; margin-left: -0.5px;margin-bottom: 0px; display: inline-flex; border-radius: 0 50px 50px 0;">Tracks</button>
         </div>
+    </div>
+    <div class="container-tab" style="margin-top: 0px;" id="sections">
+        <div class="section active" id="songs-section">
+            <ul id="songsList"></ul>
         </div>
-        <div class="container-tab" style="margin-top: 0px;" id="sections">
-            <div class="section active" id="songs-section">
-                <ul id="songsList"></ul>
-            </div>
-            <div class="section" id="tracks-section">
-                <ul id="tracksList"></ul>
-            </div>
+        <div class="section" id="tracks-section">
+            <ul id="tracksList"></ul>
         </div>
+    </div>
     <footer>©2025 Designed & Maintaining by <button class="my_name"
             onclick="window.location.href='https://melamrahul.github.io/home'">M.Rahul</button>
     </footer>
@@ -732,7 +735,7 @@
         });
 
         document.getElementById('search_input_js').addEventListener('input', function (e) {
-           const filter = e.target.value.toLowerCase();
+            const filter = e.target.value.toLowerCase();
             const lists = [songsList, tracksList];
 
             lists.forEach(list => {
@@ -741,7 +744,7 @@
                     item.style.display = text.toLowerCase().indexOf(filter) > -1 ? "" : "none";
                 });
             });
-        }); 
+        });
 
         // Function to add box shadow to the search container when input is focused
         function addBoxShadow() {
@@ -752,7 +755,7 @@
         function removeBoxShadow() {
             searchContainer.style.boxShadow = 'none'; // Remove box shadow
         }
-       
+
         //Menu Box Visibility
         menuButton.addEventListener('click', function () {
             const isMenuVisible = menuContainer.style.display === "block";
@@ -789,35 +792,37 @@
         audioButton.addEventListener('click', function () {
             audioContainer.style.display = audioContainer.style.display === "none" ? "block" : "none";
         });
-        
+
         // Define separate queues for tracks and songs
         const songsQueue = [
-            { name: '1. ఇది కోతకు సమయం (24)', url: 'https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/songs%2FEdhi%20Kothaku%20Samayam.mp3?alt=media&token=eee5191a-d53b-4e89-a865-1e365dd99954' },
-            { name: '2. క్రైస్తవమా యువతరమా (73)', url: 'https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/songs%2FKristhavama%20Yuva.mp3?alt=media&token=1bf8b87d-a871-479c-b737-5aa0ba14d235' },
-            { name: '3. దేవునితో జతపనివారము (117)', url: 'https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/songs%2FDevunitho%20Jatha%20Pani.mp3?alt=media&token=c282a8ff-a859-45e2-bf20-9dee98a17b79' },
-            { name: '4. నశించు ఆత్మలెన్నో (132)', url: 'https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/songs%2Fnasinchu%20atmalenno.mp3?alt=media&token=5628be1d-c744-429d-afda-aa0ac6180862' },
-            { name: '5. ప్రభువా పంపుము (210)', url: 'https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/songs%2FPrabhuva%20Pampumu.mp3?alt=media&token=2e2ba3f3-fde2-43b5-8222-b713238cd64c' },
-            { name: '6. ప్రియ యేసు నాథ (214)', url: 'https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/songs%2FPriyayesu%20Naadha.mp3?alt=media&token=7f79020d-b4d6-449f-8b80-091336ac079b' },
-            { name: '7. యేసుని ప్రేమ యేసు వార్త (254)', url: 'https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/songs%2FYesuni%20Prema%20Yesu%20Vartha.mp3?alt=media&token=9d23c8c6-bc2b-47c3-851e-468d68ecad96' },
-            { name: '8. విద్యార్థి నాయకుడా (277)', url: 'https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/songs%2FVidhyardhi%20Nayakuda.mp3?alt=media&token=45f45a6b-6e19-46b9-a660-01dad334ef99' },
-            { name: '9. సువార్త గూర్చి సిగ్గుపడను (294)', url: 'https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/songs%2FA_Suvarthagurchi%5B1%5D.mp3?alt=media&token=7f421d52-e5e0-42cf-a8f7-c0c943b177bf' },
-            { name: '10. దీవించావే సమృద్ధిగా (new 1)', url: 'https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/songs%2FDeevinchave.mp3?alt=media&token=8e9118d2-836b-4486-8ff9-9392c90bf5b5' },
+            { name: '1. ఇది కోతకు సమయం (24)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Songs/Edhi%20Kothaku%20Samayam.mp3' },
+            { name: '2. క్రైస్తవమా యువతరమా (73)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Songs/Kristhavama%20Yuva.mp3' },
+            { name: '3. దేవునితో జతపనివారము (117)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Songs/Devunitho%20Jatha%20Pani.mp3' },
+            { name: '4. నశించు ఆత్మలెన్నో (132)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Songs/nasinchu%20atmalenno.mp3' },
+            { name: '5. ప్రభువా పంపుము (210)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Songs/Prabhuva%20Pampumu.mp3' },
+            { name: '6. ప్రియ యేసు నాథ (214)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Songs/Priyayesu%20Naadha.mp3' },
+            { name: '7. యేసుని ప్రేమ యేసు వార్త (254)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Songs/Yesuni%20Prema%20Yesu%20Vartha.mp3' },
+            { name: '8. విద్యార్థి నాయకుడా (277)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Songs/Vidhyardhi%20Nayakuda.mp3' },
+            { name: '9. సువార్త గూర్చి సిగ్గుపడను (294)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Songs/Suvarthagurchi.mp3' },
+            { name: '10. దీవించావే సమృద్ధిగా (new 1)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Songs/Deevinchave.mp3' },
             // Add more songs here
         ];
 
+
         const tracksQueue = [
-            { name: '1. ఇది కోతకు సమయం (24)', url: 'https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/tracks%2FEdhi%20Kothaku%20Samayam%20Track.mp3?alt=media&token=23b3890f-58af-4922-ae6e-c996bf0578bb' },
-            { name: '2. క్రైస్తవమా యువతరమా (73)', url: 'https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/tracks%2FKristhavama_Yuva%20Track.mp3?alt=media&token=7f3b94ee-2cf8-4397-9d14-5de1628680f4' },
-            { name: '3. దేవునితో జతపనివారము (117)', url: 'https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/tracks%2FDhevunitho%20Jatha%20Pani%20Track.mp3?alt=media&token=92b1a129-5ab8-4d81-b207-1d8f1befe99a' },
-            { name: '4. నశించు ఆత్మలెన్నో (132)', url: 'https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/tracks%2Fnasinchu_atmalenno%20track.mp3?alt=media&token=ef08cfb3-6367-4460-8b1b-d28947d83bd1' },
-            { name: '5. ప్రభువా పంపుము (210)', url: 'https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/tracks%2FPrabhuva%20Pampumu%20Track.mp3?alt=media&token=eb4882df-1f6d-42c5-82d6-8deb6662f4b8' },
-            { name: '6. ప్రియ యేసు నాథ (214)', url: 'https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/tracks%2FPriyayesu_Naadha%20Track.mp3?alt=media&token=f6bb6520-3940-4345-b6a0-711a0c05fceb' },
-            { name: '7. యేసుని ప్రేమ యేసు వార్త (254)', url: 'https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/tracks%2FYesuni%20Prema%20Yesu%20Vartha%20Track.mp3?alt=media&token=91e42ff9-8e45-4aae-ac42-13773ecbeec3' },
-            { name: '8. విద్యార్థి నాయకుడా (277)', url: 'https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/tracks%2FVidhyardhi%20Nayakuda%20Track.mp3?alt=media&token=a130dfff-7b8d-4761-9bb2-47f314707a9d' },
-            { name: '9. సువార్త గూర్చి సిగ్గుపడను (294)', url: 'https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/tracks%2Fsuvarthagurchi%20track.mp3?alt=media&token=268e6391-5cd7-4cdb-9eac-1882f797233e' },
-            { name: '10. దీవించావే సమృద్ధిగా (new 1)', url: 'https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/tracks%2FDheevinchave%20Track.mp3?alt=media&token=685fcbe0-e09d-4cdf-81f9-409fda36f40e' },
-    // Add more tracks here
-         ];
+            { name: '1. ఇది కోతకు సమయం (24)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Tracks/Edhi%20Kothaku%20Samayam%20Track.mp3' },
+            { name: '2. క్రైస్తవమా యువతరమా (73)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Tracks/Kristhavama_Yuva%20Track.mp3' },
+            { name: '3. దేవునితో జతపనివారము (117)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Tracks/Dhevunitho%20Jatha%20Pani%20Track.mp3' },
+            { name: '4. నశించు ఆత్మలెన్నో (132)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Tracks/nasinchu_atmalenno%20track.mp3' },
+            { name: '5. ప్రభువా పంపుము (210)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Tracks/Prabhuva%20Pampumu%20Track.mp3' },
+            { name: '6. ప్రియ యేసు నాథ (214)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Tracks/Priyayesu_Naadha%20Track.mp3' },
+            { name: '7. యేసుని ప్రేమ యేసు వార్త (254)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Tracks/Yesuni%20Prema%20Yesu%20Vartha%20Track.mp3' },
+            { name: '8. విద్యార్థి నాయకుడా (277)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Tracks/Vidhyardhi%20Nayakuda%20Track.mp3' },
+            { name: '9. సువార్త గూర్చి సిగ్గుపడను (294)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Tracks/suvarthagurchi%20track.mp3' },
+            { name: '10. దీవించావే సమృద్ధిగా (new 1)', url: 'https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/Tracks/Dheevinchave%20Track.mp3' },
+            // Add more tracks here
+        ];
+
 
 
         const tracksList = document.getElementById('tracksList');
@@ -1006,7 +1011,7 @@
         });
 
     </script>
-    
+
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', function () {
