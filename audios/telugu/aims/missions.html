@@ -823,14 +823,23 @@
             // Add more tracks here
         ];
 
-
-
         const tracksList = document.getElementById('tracksList');
         const songsList = document.getElementById('songsList');
         const audio = new Audio();
         let currentPlayingIndex = null;
         let currentQueue = null; // Track which queue is currently playing
         let currentProgressBar = null;
+        let currentTimeDisplay = null;
+        let totalDurationDisplay = null;
+
+        // Function to format time in minutes:seconds format
+        function formatTime(seconds) {
+            if (isNaN(seconds)) return "0:00";
+
+            const minutes = Math.floor(seconds / 60);
+            const remainingSeconds = Math.floor(seconds % 60);
+            return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+        }
 
         function displaySongs() {
             // Clear previous lists
@@ -841,20 +850,25 @@
             songsQueue.forEach((song, index) => {
                 const li = document.createElement('li');
                 li.innerHTML = `
-                    <div class="song-details">
-                        <div class="song-name">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcSxSNUXpJ8n2YkTuBEeO84gb1dH6NRhvQNg&s" width="50px" height="50px" style="border-radius: 10px" alt="UESI Vidhyardhi Geethavali">
-
-                            ${song.name}
-                        </div>
-                        <div class="controls">
-                            <button class="play" onclick="togglePlayPause(${index}, this, 'songs')"><i class="fa fa-play"></i></button>
-                        </div>
-                    </div>
-                    <div class="slider-container">
-                        <input type="range" min="0" value="0" oninput="seekSong(this)">
-                    </div>
-                `;
+            <div class="song-details">
+                <div class="song-name">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcSxSNUXpJ8n2YkTuBEeO84gb1dH6NRhvQNg&s" width="50px" height="50px" style="border-radius: 10px" alt="UESI Vidhyardhi Geethavali">
+                    ${song.name}
+                </div>
+                <div class="controls">
+                    <button class="play" onclick="togglePlayPause(${index}, this, 'songs')"><i class="fa fa-play"></i></button>
+                </div>
+            </div>
+            <div class="slider-container">
+                <div class="time-display">
+                    <span class="current-time">0:00</span>
+                </div>&ensp;
+                <input type="range" min="0" value="0" oninput="seekSong(this)">&ensp;
+                <div class="time-display">
+                    <span class="total-duration">0:00</span>
+                </div>
+            </div>
+        `;
                 songsList.appendChild(li);
             });
 
@@ -862,19 +876,25 @@
             tracksQueue.forEach((song, index) => {
                 const li = document.createElement('li');
                 li.innerHTML = `
-                    <div class="song-details">
-                        <div class="song-name">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcSxSNUXpJ8n2YkTuBEeO84gb1dH6NRhvQNg&s" width="50px" height="50px" style="border-radius: 10px" alt="UESI Vidhyardhi Geethavali">
-                            ${song.name}
-                        </div>
-                        <div class="controls">
-                            <button class="play" onclick="togglePlayPause(${index}, this, 'tracks')"><i class="fa fa-play"></i></button>
-                        </div>
-                    </div>
-                    <div class="slider-container">
-                        <input type="range" min="0" value="0" oninput="seekSong(this)">
-                    </div>
-                `;
+            <div class="song-details">
+                <div class="song-name">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcSxSNUXpJ8n2YkTuBEeO84gb1dH6NRhvQNg&s" width="50px" height="50px" style="border-radius: 10px" alt="UESI Vidhyardhi Geethavali">
+                    ${song.name}
+                </div>
+                <div class="controls">
+                    <button class="play" onclick="togglePlayPause(${index}, this, 'tracks')"><i class="fa fa-play"></i></button>
+                </div>
+            </div>
+            <div class="slider-container">
+                <div class="time-display">
+                    <span class="current-time">0:00</span>
+                </div>&ensp;
+                <input type="range" min="0" value="0" oninput="seekSong(this)">&ensp;
+                <div class="time-display">
+                    <span class="total-duration">0:00</span>
+                </div>
+            </div>
+        `;
                 tracksList.appendChild(li);
             });
         }
@@ -926,8 +946,6 @@
                 button.classList.remove('play');
                 button.classList.add('pause');
 
-
-
                 const prevSlider = document.querySelector('.slider-container.active');
                 if (prevSlider) prevSlider.classList.remove('active');
 
@@ -936,6 +954,10 @@
                 sliderContainer.classList.add('active');
 
                 currentProgressBar = sliderContainer.querySelector('input[type="range"]');
+
+                // Set up time display elements
+                currentTimeDisplay = sliderContainer.querySelector('.current-time');
+                totalDurationDisplay = sliderContainer.querySelector('.total-duration');
             }
         }
 
@@ -947,6 +969,16 @@
             if (currentProgressBar) {
                 currentProgressBar.max = audio.duration;
                 currentProgressBar.value = audio.currentTime;
+
+                if (currentTimeDisplay) {
+                    currentTimeDisplay.textContent = formatTime(audio.currentTime);
+                }
+            }
+        });
+
+        audio.addEventListener('loadedmetadata', () => {
+            if (totalDurationDisplay) {
+                totalDurationDisplay.textContent = formatTime(audio.duration);
             }
         });
 
@@ -965,7 +997,6 @@
         displaySongs();
 
         // Swipe functionality
-
         let touchStartX = 0;
         let touchEndX = 0;
         const swipeThreshold = 70; // Minimum distance in pixels for a valid swipe
@@ -987,9 +1018,7 @@
             handleGesture();
         });
 
-
         // Preloader
-
         window.addEventListener('load', function () {
             // Set a timeout to remove the preloader after 2 seconds
             setTimeout(function () {
@@ -1007,9 +1036,25 @@
                         preloader.parentNode.removeChild(preloader); // This removes the preloader itself
                     }, 500); // 500ms matches the CSS transition duration
                 }
-            }, 1000); // 2 seconds delay
+            }, 1000); // 1 second delay
         });
 
+        // Add this CSS to your stylesheet
+        const style = document.createElement('style');
+        style.textContent = `
+.time-display {
+    display: flex;
+    justify-content: center;
+    margin-top: 5px;
+    font-size: 0.9rem;
+    color: #333;
+}
+
+.slider-container {
+    padding-bottom: 10px;
+}
+`;
+        document.head.appendChild(style);
     </script>
 
     <script>
