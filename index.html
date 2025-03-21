@@ -7,7 +7,8 @@
     <title>AMS Portal | AU ZONE BBS</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -27,93 +28,98 @@
         .action-bar {
             background: #FFFFFF;
             color: #1d1d1d;
-            border-bottom: 1.5px solid #6750A4;            
+            border-bottom: 1.5px solid #6750A4;
             padding: 0.75rem 1.5rem;
             display: flex;
             align-items: center;
+            justify-content: space-between;
+            /* Changed to space-between */
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             z-index: 1000;
-            height: 5rem; /* Increased height */
+            height: 5rem;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        .app-title {
+            font-size: 1.75rem;
+            font-weight: 600;
+            letter-spacing: 0.025rem;
         }
 
         .menu-button {
             background: none;
             border: none;
             color: #1d1d1d;
-            font-size: 2.25rem; /* Increased font size */
+            font-size: 2.25rem;
             cursor: pointer;
-            margin-right: 1.5rem;
-            width: 3rem; /* Increased width */
-            height: 3rem; /* Increased height */
+            width: 3rem;
+            height: 3rem;
             display: flex;
             align-items: center;
             justify-content: center;
             border-radius: 50%;
             transition: background-color 0.2s;
+            /* Removed margin-right since it's now on the right */
         }
 
         .menu-button:hover {
             background-color: rgba(0, 0, 0, 0.05);
         }
 
-        .app-title {
-            font-size: 1.75rem; /* Increased font size */
-            font-weight: 600;
-            letter-spacing: 0.025rem;
-        }
-
-        /* Navigation Drawer */
+        /* Navigation Drawer - Now on the right */
         .nav-drawer {
             position: fixed;
-            top: 5rem; /* Adjusted for increased app bar height */
-            left: -320px; /* Increased width */
-            width: 320px; /* Increased width */
+            top: 5rem;
+            right: -320px;
+            /* Changed from left to right */
+            width: 320px;
             height: calc(100vh - 5rem);
             background: #FFFFFF;
-            box-shadow: 2px 0 12px rgba(0, 0, 0, 0.08);
+            box-shadow: -2px 0 12px rgba(0, 0, 0, 0.08);
+            /* Changed shadow direction */
             transition: transform 0.3s ease-in-out;
             z-index: 1000;
             overflow-y: auto;
         }
 
         .nav-drawer.open {
-            transform: translateX(320px); /* Adjusted for increased width */
+            transform: translateX(-320px);
+            /* Changed direction */
         }
 
         .nav-header {
-            padding: 2rem; /* Increased padding */
+            padding: 2rem;
             background: #6750A4;
             color: #FFFFFF;
         }
 
         .nav-title {
-            font-size: 1.5rem; /* Increased font size */
+            font-size: 1.5rem;
             font-weight: 600;
             margin-bottom: 0.375rem;
         }
 
         .nav-subtitle {
-            font-size: 1.1rem; /* Increased font size */
+            font-size: 1.1rem;
             opacity: 0.9;
             font-weight: 300;
         }
 
         .nav-items {
-            padding: 1.25rem 1rem; /* Increased padding */
+            padding: 1.25rem 1rem;
         }
 
         .nav-item {
             display: flex;
             align-items: center;
-            padding: 1.125rem 1.25rem; /* Increased padding */
+            padding: 1.125rem 1.25rem;
             cursor: pointer;
             border-radius: 0.5rem;
             transition: all 0.2s;
-            margin-bottom: 0.75rem; /* Increased margin */
+            margin-bottom: 0.75rem;
         }
 
         .nav-item:hover {
@@ -121,15 +127,15 @@
         }
 
         .nav-item i {
-            margin-right: 1.25rem; /* Increased margin */
-            font-size: 1.5rem; /* Increased font size */
-            width: 1.75rem; /* Increased width */
+            margin-right: 1.25rem;
+            font-size: 1.5rem;
+            width: 1.75rem;
             text-align: center;
             color: #6750A4;
         }
 
         .nav-item span {
-            font-size: 1.2rem; /* Increased font size */
+            font-size: 1.2rem;
             font-weight: 500;
             color: #333;
         }
@@ -137,7 +143,34 @@
         .nav-divider {
             height: 1px;
             background: #e0e0e0;
-            margin: 1.25rem 0; /* Increased margin */
+            margin: 1.25rem 0;
+        }
+
+        /* User Info Container - New */
+        .user-info-container {
+            padding: 1.25rem;
+            background: #F3EDF7;
+            border-radius: 0.5rem;
+            margin: 0 1rem 1.25rem 1rem;
+        }
+
+        .user-info-title {
+            color: #6750A4;
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .user-info-value {
+            font-size: 1.1rem;
+            color: #333;
+            font-weight: 500;
+            margin-bottom: 0.75rem;
+            word-break: break-word;
+        }
+
+        .user-info-value:last-child {
+            margin-bottom: 0;
         }
 
         /* Overlay */
@@ -162,7 +195,7 @@
         /* Iframe Container */
         .iframe-container {
             position: fixed;
-            top: 5rem; /* Adjusted for increased app bar height */
+            top: 5rem;
             left: 0;
             width: 100%;
             height: calc(100vh - 5rem);
@@ -179,7 +212,7 @@
         /* Loader */
         .loader-container {
             position: fixed;
-            top: 5rem; /* Adjusted for increased app bar height */
+            top: 5rem;
             left: 0;
             width: 100%;
             height: calc(100vh - 5rem);
@@ -200,26 +233,31 @@
         }
 
         .loader {
-            border: 5px solid rgba(103, 80, 164, 0.1); /* Increased thickness */
-            border-top: 5px solid #6750A4; /* Increased thickness */
+            border: 5px solid rgba(103, 80, 164, 0.1);
+            border-top: 5px solid #6750A4;
             border-radius: 50%;
-            width: 50px; /* Increased size */
-            height: 50px; /* Increased size */
+            width: 50px;
+            height: 50px;
             animation: spin 1s linear infinite;
-            margin-bottom: 1.25rem; /* Increased margin */
+            margin-bottom: 1.25rem;
         }
 
         .loader-text {
-            font-size: 1.1rem; /* Increased font size */
+            font-size: 1.1rem;
             color: #6750A4;
             font-weight: 500;
         }
 
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
-      
+
         /* Dialog Box */
         .dialog-box {
             position: fixed;
@@ -227,11 +265,11 @@
             left: 50%;
             transform: translate(-50%, -50%) scale(0.95);
             background: #FFFFFF;
-            padding: 2rem; /* Increased padding */
+            padding: 2rem;
             border-radius: 0.75rem;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
             z-index: 1001;
-            width: 360px; /* Increased width */
+            width: 360px;
             max-width: 90%;
             opacity: 0;
             visibility: hidden;
@@ -245,43 +283,99 @@
         }
 
         .dialog-title {
-            font-size: 1.35rem; /* Increased font size */
+            font-size: 1.35rem;
             font-weight: 600;
             color: #333;
-            margin-bottom: 1.25rem; /* Increased margin */
+            margin-bottom: 1.25rem;
         }
 
-        .dialog-box select {
+        .dialog-box select,
+        .dialog-box input {
             width: 100%;
-            padding: 0.95rem; /* Increased padding */
-            margin-bottom: 1.5rem; /* Increased margin */
+            padding: 0.95rem;
+            margin-bottom: 1.5rem;
             border: 1px solid #ddd;
             border-radius: 0.5rem;
-            font-size: 1.1rem; /* Increased font size */
+            font-size: 1.1rem;
             color: #333;
             background-color: #f9f9f9;
             transition: border-color 0.2s;
         }
 
-        .dialog-box select:focus {
+        .dialog-box select:focus,
+        .dialog-box input:focus {
             border-color: #6750A4;
             outline: none;
         }
 
         .dialog-box button {
             width: 100%;
-            padding: 0.95rem; /* Increased padding */
+            padding: 0.95rem;
             background: #6750A4;
             color: #FFFFFF;
             border: none;
             border-radius: 0.5rem;
             cursor: pointer;
             font-weight: 500;
-            font-size: 1.1rem; /* Increased font size */
+            font-size: 1.1rem;
             transition: background 0.2s;
         }
 
         .dialog-box button:hover {
+            background: #5a46a1;
+        }
+
+        /* Confirmation Dialog - New */
+        .confirmation-dialog {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.95);
+            background: #FFFFFF;
+            padding: 2rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            z-index: 1002;
+            width: 360px;
+            max-width: 90%;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .confirmation-dialog.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .confirmation-icon {
+            font-size: 3rem;
+            color: #4CAF50;
+            margin-bottom: 1rem;
+        }
+
+        .confirmation-message {
+            font-size: 1.2rem;
+            color: #333;
+            margin-bottom: 1.5rem;
+        }
+
+        .confirmation-dialog button {
+            width: 100%;
+            padding: 0.95rem;
+            background: #6750A4;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: background 0.2s;
+        }
+
+        .confirmation-dialog button:hover {
             background: #5a46a1;
         }
     </style>
@@ -296,10 +390,10 @@
 
     <!-- App Bar -->
     <div class="action-bar">
+        <span class="app-title">AU ZONE BBS I/C</span>
         <button class="menu-button" id="menuButton">
             <i class="fas fa-bars"></i>
         </button>
-        <span class="app-title">AU ZONE BBS I/C</span>
     </div>
 
     <!-- Navigation Drawer -->
@@ -308,6 +402,11 @@
             <div class="nav-title">Welcome Back</div>
             <div class="nav-subtitle">BBS Incharge Portal</div>
         </div>
+
+        <!-- User Info Container - New -->
+
+
+
         <div class="nav-items">
             <div class="nav-item" id="submitDataBtn">
                 <i class="fas fa-upload"></i>
@@ -321,32 +420,65 @@
                 <i class="fas fa-file-alt"></i>
                 <span>Generate Report</span>
             </div>
-            
+
             <div class="nav-divider"></div>
-            
+
             <div class="nav-item" id="chooseBBSRoleBtn">
                 <i class="fas fa-users-cog"></i>
                 <span>Choose BBS Role</span>
+            </div>
+
+            <div class="user-info-container" id="userInfoContainer">
+                <div class="user-info-title">Selected Role:</div>
+                <div class="user-info-value" id="selectedRoleDisplay">Not selected</div>
+            </div>
+
+            <!-- Added new item for BBS I/C Name -->
+            <div class="nav-item" id="setBBSNameBtn">
+                <i class="fas fa-user-edit"></i>
+                <span>BBS I/C Name</span>
+            </div>
+            <div class="user-info-container" id="userInfoContainer">
+                <div class="user-info-title">BBS I/C Name:</div>
+                <div class="user-info-value" id="selectedNameDisplay">Not entered</div>
             </div>
         </div>
     </div>
 
     <!-- Overlay -->
     <div class="overlay" id="overlay"></div>
-  
-    <!-- Dialog Box -->
-    <div class="dialog-box" id="dialogBox">
+
+    <!-- Role Dialog Box -->
+    <div class="dialog-box" id="roleDialogBox">
         <div class="dialog-title">Select BBS Role</div>
         <select id="roleDropdown">
             <option value="">-- Select Role --</option>
-            <option value="Role 1">Zone Incharge</option>
-            <option value="Role 2">Regional Coordinator</option>
-            <option value="Role 3">District Coordinator</option>
-            <option value="Role 4">Mandal Coordinator</option>
-            <option value="Role 5">Village Coordinator</option>
-            <option value="Role 6">Admin</option>
+            <option value="North Boys BBS I/C">North Boys BBS I/C</option>
+            <option value="North Girls BBS I/C">North Girls BBS I/C</option>
+            <option value="North Women BBS I/C">North Women BBS I/C</option>
+            <option value="South Boys BBS I/C">South Boys BBS I/C</option>
+            <option value="South Girls BBS I/C">South Girls BBS I/C</option>
+            <option value="Maharanipet BBS I/C">Maharanipet BBS I/C</option>
         </select>
         <button id="confirmRoleBtn">Confirm Selection</button>
+    </div>
+
+    <!-- Name Dialog Box - New -->
+    <div class="dialog-box" id="nameDialogBox">
+        <div class="dialog-title">Enter BBS I/C Name</div>
+        <input type="text" id="nameInput" placeholder="Enter your name">
+        <button id="confirmNameBtn">Confirm Name</button>
+    </div>
+
+    <!-- Confirmation Dialog - New -->
+    <div class="confirmation-dialog" id="confirmationDialog">
+        <div class="confirmation-icon">
+            <i class="fas fa-check-circle"></i>
+        </div>
+        <div class="confirmation-message" id="confirmationMessage">
+            Your selection has been confirmed!
+        </div>
+        <button id="okButton">OK</button>
     </div>
 
     <!-- Iframe Container -->
@@ -361,15 +493,32 @@
         const overlay = document.getElementById('overlay');
         const loader = document.getElementById('loader');
         const contentFrame = document.getElementById('contentFrame');
-        const dialogBox = document.getElementById('dialogBox');
+
+        // Dialog boxes
+        const roleDialogBox = document.getElementById('roleDialogBox');
+        const nameDialogBox = document.getElementById('nameDialogBox');
+        const confirmationDialog = document.getElementById('confirmationDialog');
+
+        // Buttons
         const confirmRoleBtn = document.getElementById('confirmRoleBtn');
+        const confirmNameBtn = document.getElementById('confirmNameBtn');
+        const okButton = document.getElementById('okButton');
+
+        // Form elements
         const roleDropdown = document.getElementById('roleDropdown');
-        
+        const nameInput = document.getElementById('nameInput');
+
+        // Display elements
+        const confirmationMessage = document.getElementById('confirmationMessage');
+        const selectedRoleDisplay = document.getElementById('selectedRoleDisplay');
+        const selectedNameDisplay = document.getElementById('selectedNameDisplay');
+
         // Navigation buttons
         const submitDataBtn = document.getElementById('submitDataBtn');
         const editReviewBtn = document.getElementById('editReviewBtn');
         const genReportBtn = document.getElementById('genReportBtn');
         const chooseBBSRoleBtn = document.getElementById('chooseBBSRoleBtn');
+        const setBBSNameBtn = document.getElementById('setBBSNameBtn');
 
         // URLs for navigation
         const URLS = {
@@ -402,35 +551,53 @@
             if (navDrawer.classList.contains('open')) {
                 toggleDrawer();
             }
-            
+
             // Set a timeout to ensure the loader is displayed for at least 1.5 seconds
             const startTime = new Date().getTime();
-            
-            contentFrame.onload = function() {
+
+            contentFrame.onload = function () {
                 const loadTime = new Date().getTime() - startTime;
                 const remainingTime = Math.max(0, 1500 - loadTime);
-                
+
                 // Ensure loader shows for at least 1.5 seconds
                 setTimeout(() => {
                     hideLoader();
                 }, remainingTime);
             };
-            
+
             contentFrame.src = url;
         }
 
-        // Show Dialog Box for BBS Role
+        // Show Role Dialog Box
         function showRoleDialog() {
-            dialogBox.classList.add('active');
+            roleDialogBox.classList.add('active');
             overlay.classList.add('active');
             if (navDrawer.classList.contains('open')) {
                 navDrawer.classList.remove('open');
             }
         }
 
-        // Hide Dialog Box
-        function hideRoleDialog() {
-            dialogBox.classList.remove('active');
+        // Show Name Dialog Box
+        function showNameDialog() {
+            nameDialogBox.classList.add('active');
+            overlay.classList.add('active');
+            if (navDrawer.classList.contains('open')) {
+                navDrawer.classList.remove('open');
+            }
+        }
+
+        // Show Confirmation Dialog
+        function showConfirmationDialog(message) {
+            confirmationMessage.textContent = message;
+            confirmationDialog.classList.add('active');
+        }
+
+        // Hide Dialogs
+        function hideDialogs() {
+            roleDialogBox.classList.remove('active');
+            nameDialogBox.classList.remove('active');
+            confirmationDialog.classList.remove('active');
+
             if (!navDrawer.classList.contains('open')) {
                 overlay.classList.remove('active');
             }
@@ -440,43 +607,70 @@
         function confirmRole() {
             const selectedRole = roleDropdown.value;
             if (selectedRole) {
-                localStorage.setItem('incharge', selectedRole);
-                alert(`Role selected: ${roleDropdown.options[roleDropdown.selectedIndex].text}`);
-                hideRoleDialog();
+                localStorage.setItem('bbsRole', selectedRole);
+                updateUserInfoDisplay();
+                hideDialogs();
+                showConfirmationDialog(`Role selected: ${roleDropdown.options[roleDropdown.selectedIndex].text}`);
             } else {
                 alert("Please select a role");
             }
         }
 
+        // Confirm Name Entry
+        function confirmName() {
+            const enteredName = nameInput.value.trim();
+            if (enteredName) {
+                localStorage.setItem('bbsName', enteredName);
+                updateUserInfoDisplay();
+                hideDialogs();
+                showConfirmationDialog(`Name set: ${enteredName}`);
+            } else {
+                alert("Please enter your name");
+            }
+        }
+
+        // Update User Info Display
+        function updateUserInfoDisplay() {
+            const savedRole = localStorage.getItem('bbsRole');
+            const savedName = localStorage.getItem('bbsName');
+
+            selectedRoleDisplay.textContent = savedRole || "Not selected";
+            selectedNameDisplay.textContent = savedName || "Not entered";
+        }
+
         // Event Listeners
         menuButton.addEventListener('click', toggleDrawer);
-        overlay.addEventListener('click', function() {
+
+        overlay.addEventListener('click', function () {
             if (navDrawer.classList.contains('open')) {
                 toggleDrawer();
             }
-            if (dialogBox.classList.contains('active')) {
-                hideRoleDialog();
-            }
+            hideDialogs();
         });
 
-        submitDataBtn.addEventListener('click', function() {
+        submitDataBtn.addEventListener('click', function () {
             loadURL(URLS.submitData);
         });
 
-        editReviewBtn.addEventListener('click', function() {
+        editReviewBtn.addEventListener('click', function () {
             loadURL(URLS.editReview);
         });
 
-        genReportBtn.addEventListener('click', function() {
+        genReportBtn.addEventListener('click', function () {
             loadURL(URLS.genReport);
         });
 
         chooseBBSRoleBtn.addEventListener('click', showRoleDialog);
-        confirmRoleBtn.addEventListener('click', confirmRole);
+        setBBSNameBtn.addEventListener('click', showNameDialog);
 
-        // Initialize page - load default content
-        document.addEventListener('DOMContentLoaded', function() {
+        confirmRoleBtn.addEventListener('click', confirmRole);
+        confirmNameBtn.addEventListener('click', confirmName);
+        okButton.addEventListener('click', hideDialogs);
+
+        // Initialize page - load default content and update user info display
+        document.addEventListener('DOMContentLoaded', function () {
             loadURL(URLS.submitData);
+            updateUserInfoDisplay();
         });
     </script>
 </body>
