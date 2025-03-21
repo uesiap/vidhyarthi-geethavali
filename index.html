@@ -33,7 +33,6 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            /* Changed to space-between */
             position: fixed;
             top: 0;
             left: 0;
@@ -62,32 +61,35 @@
             justify-content: center;
             border-radius: 50%;
             transition: background-color 0.2s;
-            /* Removed margin-right since it's now on the right */
+            margin-right: -0.9rem; /* Added margin-right */
         }
 
         .menu-button:hover {
             background-color: rgba(0, 0, 0, 0.05);
         }
 
-        /* Navigation Drawer - Now on the right */
+        /* Navigation Drawer - Now on the left */
         .nav-drawer {
             position: fixed;
             top: 5rem;
-            right: -320px;
-            /* Changed from left to right */
+            left: -320px; /* Changed to left */
             width: 320px;
             height: calc(100vh - 5rem);
             background: #FFFFFF;
-            box-shadow: -2px 0 12px rgba(0, 0, 0, 0.08);
-            /* Changed shadow direction */
+            box-shadow: 2px 0 12px rgba(0, 0, 0, 0.08); /* Changed shadow direction */
             transition: transform 0.3s ease-in-out;
             z-index: 1000;
             overflow-y: auto;
+            scrollbar-width: none; /* For Firefox */
+            -ms-overflow-style: none;
+        }
+      
+         .nav-drawer::-webkit-scrollbar {
+            display: none;
         }
 
         .nav-drawer.open {
-            transform: translateX(-320px);
-            /* Changed direction */
+            transform: translateX(320px); /* Changed direction */
         }
 
         .nav-header {
@@ -146,7 +148,7 @@
             margin: 1.25rem 0;
         }
 
-        /* User Info Container - New */
+        /* User Info Container */
         .user-info-container {
             padding: 1.25rem;
             background: #F3EDF7;
@@ -325,7 +327,7 @@
             background: #5a46a1;
         }
 
-        /* Confirmation Dialog - New */
+        /* Confirmation Dialog */
         .confirmation-dialog {
             position: fixed;
             top: 50%;
@@ -378,6 +380,18 @@
         .confirmation-dialog button:hover {
             background: #5a46a1;
         }
+
+        /* Navbar layout adjustment */
+        .navbar-layout {
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+
+        .title-container {
+            flex-grow: 1;
+            text-align: center;
+        }
     </style>
 </head>
 
@@ -385,15 +399,19 @@
     <!-- Loader -->
     <div class="loader-container" id="loader">
         <div class="loader"></div>
-        <div class="loader-text">Loading content...</div>
+        <div class="loader-text">Loading...</div>
     </div>
 
     <!-- App Bar -->
     <div class="action-bar">
-        <span class="app-title">AU ZONE BBS I/C</span>
-        <button class="menu-button" id="menuButton">
-            <i class="fas fa-bars"></i>
-        </button>
+        <div class="navbar-layout">
+            <button class="menu-button" id="menuButton">
+                <i class="fas fa-bars" id="menuIcon"></i>
+            </button>
+            <div class="title-container">
+                <span class="app-title" id="appTitle">AU ZONE BBS I/C</span>
+            </div>
+        </div>
     </div>
 
     <!-- Navigation Drawer -->
@@ -403,20 +421,16 @@
             <div class="nav-subtitle">BBS Incharge Portal</div>
         </div>
 
-        <!-- User Info Container - New -->
-
-
-
         <div class="nav-items">
-            <div class="nav-item" id="submitDataBtn">
+            <div class="nav-item" id="submitDataBtn" data-title="Submit Data">
                 <i class="fas fa-upload"></i>
                 <span>Submit Data</span>
             </div>
-            <div class="nav-item" id="editReviewBtn">
+            <div class="nav-item" id="editReviewBtn" data-title="Edit/Review">
                 <i class="fas fa-edit"></i>
                 <span>Edit/Review</span>
             </div>
-            <div class="nav-item" id="genReportBtn">
+            <div class="nav-item" id="genReportBtn" data-title="Generate Report">
                 <i class="fas fa-file-alt"></i>
                 <span>Generate Report</span>
             </div>
@@ -433,7 +447,6 @@
                 <div class="user-info-value" id="selectedRoleDisplay">Not selected</div>
             </div>
 
-            <!-- Added new item for BBS I/C Name -->
             <div class="nav-item" id="setBBSNameBtn">
                 <i class="fas fa-user-edit"></i>
                 <span>BBS I/C Name</span>
@@ -441,7 +454,7 @@
             <div class="user-info-container" id="userInfoContainer">
                 <div class="user-info-title">BBS I/C Name:</div>
                 <div class="user-info-value" id="selectedNameDisplay">Not entered</div>
-            </div>
+            </div><br><br><br>
         </div>
     </div>
 
@@ -463,14 +476,14 @@
         <button id="confirmRoleBtn">Confirm Selection</button>
     </div>
 
-    <!-- Name Dialog Box - New -->
+    <!-- Name Dialog Box -->
     <div class="dialog-box" id="nameDialogBox">
         <div class="dialog-title">Enter BBS I/C Name</div>
         <input type="text" id="nameInput" placeholder="Enter your name">
         <button id="confirmNameBtn">Confirm Name</button>
     </div>
 
-    <!-- Confirmation Dialog - New -->
+    <!-- Confirmation Dialog -->
     <div class="confirmation-dialog" id="confirmationDialog">
         <div class="confirmation-icon">
             <i class="fas fa-check-circle"></i>
@@ -489,10 +502,12 @@
     <script>
         // DOM Elements
         const menuButton = document.getElementById('menuButton');
+        const menuIcon = document.getElementById('menuIcon');
         const navDrawer = document.getElementById('navDrawer');
         const overlay = document.getElementById('overlay');
         const loader = document.getElementById('loader');
         const contentFrame = document.getElementById('contentFrame');
+        const appTitle = document.getElementById('appTitle');
 
         // Dialog boxes
         const roleDialogBox = document.getElementById('roleDialogBox');
@@ -522,15 +537,27 @@
 
         // URLs for navigation
         const URLS = {
+            home: "https://uesiap.github.io/vidhyardhi-geethavali/camps/ecamp",
             submitData: "https://uesiap.github.io/vidhyardhi-geethavali/camps/ecamp",
             editReview: "https://uesiap.github.io/vidhyardhi-geethavali/camps/smtc",
             genReport: "https://uesiap.github.io/vidhyardhi-geethavali/aims/missions"
         };
 
+        // Navigation state
+        let navigationHistory = [];
+        let isInSubPage = false;
+        let currentPageTitle = "AU ZONE BBS I/C";
+        
         // Toggle Navigation Drawer
         function toggleDrawer() {
-            navDrawer.classList.toggle('open');
-            overlay.classList.toggle('active');
+            if (isInSubPage) {
+                // If we're in a sub-page, go back instead of opening drawer
+                goBack();
+            } else {
+                // Otherwise, toggle the drawer
+                navDrawer.classList.toggle('open');
+                overlay.classList.toggle('active');
+            }
         }
 
         // Show loader
@@ -545,11 +572,36 @@
             }, 1500); // Show loader for at least 1.5 seconds
         }
 
+        // Update UI for navigation state
+        function updateNavigationUI(isSubPage, pageName) {
+            isInSubPage = isSubPage;
+            
+            if (isSubPage) {
+                // Change to back arrow and set page title
+                menuIcon.className = 'fas fa-arrow-left';
+                appTitle.textContent = pageName;
+                currentPageTitle = pageName;
+            } else {
+                // Return to menu icon and home title
+                menuIcon.className = 'fas fa-bars';
+                appTitle.textContent = "AU ZONE BBS I/C";
+                currentPageTitle = "AU ZONE BBS I/C";
+            }
+        }
+
         // Load URL with loader
-        function loadURL(url) {
+        function loadURL(url, pageName) {
             showLoader();
             if (navDrawer.classList.contains('open')) {
                 toggleDrawer();
+            }
+
+            // Add current page to history before navigating
+            if (contentFrame.src && contentFrame.src !== "about:blank") {
+                navigationHistory.push({
+                    url: contentFrame.src,
+                    title: currentPageTitle
+                });
             }
 
             // Set a timeout to ensure the loader is displayed for at least 1.5 seconds
@@ -565,7 +617,51 @@
                 }, remainingTime);
             };
 
+            // Update UI for navigation
+            if (url !== URLS.home) {
+                updateNavigationUI(true, pageName);
+            } else {
+                updateNavigationUI(false);
+                // Clear navigation history when going home
+                navigationHistory = [];
+            }
+
             contentFrame.src = url;
+        }
+
+        // Go back function
+        function goBack() {
+            if (navigationHistory.length > 0) {
+                // Pop the last page from history
+                const prevPage = navigationHistory.pop();
+                
+                showLoader();
+                
+                // Set a timeout to ensure the loader is displayed
+                const startTime = new Date().getTime();
+                
+                contentFrame.onload = function () {
+                    const loadTime = new Date().getTime() - startTime;
+                    const remainingTime = Math.max(0, 1500 - loadTime);
+                    
+                    setTimeout(() => {
+                        hideLoader();
+                    }, remainingTime);
+                };
+                
+                // If we're going back to home
+                if (navigationHistory.length === 0) {
+                    updateNavigationUI(false);
+                } else {
+                    // Going back to another sub-page
+                    updateNavigationUI(true, prevPage.title);
+                }
+                
+                contentFrame.src = prevPage.url;
+            } else {
+                // If no history, go to home
+                loadURL(URLS.home);
+            }
         }
 
         // Show Role Dialog Box
@@ -638,6 +734,22 @@
             selectedNameDisplay.textContent = savedName || "Not entered";
         }
 
+        // Handle browser back button for PWA
+        window.addEventListener('popstate', function(event) {
+            if (isInSubPage) {
+                // Prevent default browser back behavior
+                event.preventDefault();
+                // Use our custom back navigation
+                goBack();
+                // Push a new state to maintain history control
+                history.pushState(null, null, window.location.href);
+                return false;
+            }
+        });
+
+        // Push a state to start history tracking
+        history.pushState(null, null, window.location.href);
+
         // Event Listeners
         menuButton.addEventListener('click', toggleDrawer);
 
@@ -649,15 +761,18 @@
         });
 
         submitDataBtn.addEventListener('click', function () {
-            loadURL(URLS.submitData);
+            const title = this.getAttribute('data-title');
+            loadURL(URLS.submitData, title);
         });
 
         editReviewBtn.addEventListener('click', function () {
-            loadURL(URLS.editReview);
+            const title = this.getAttribute('data-title');
+            loadURL(URLS.editReview, title);
         });
 
         genReportBtn.addEventListener('click', function () {
-            loadURL(URLS.genReport);
+            const title = this.getAttribute('data-title');
+            loadURL(URLS.genReport, title);
         });
 
         chooseBBSRoleBtn.addEventListener('click', showRoleDialog);
@@ -669,7 +784,7 @@
 
         // Initialize page - load default content and update user info display
         document.addEventListener('DOMContentLoaded', function () {
-            loadURL(URLS.submitData);
+            loadURL(URLS.home);
             updateUserInfoDisplay();
         });
     </script>
