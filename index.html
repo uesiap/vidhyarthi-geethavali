@@ -61,7 +61,8 @@
             justify-content: center;
             border-radius: 50%;
             transition: background-color 0.2s;
-            margin-right: 1rem; /* Added margin-right */
+            margin-right: 1rem;
+            /* Added margin-right */
         }
 
         .menu-button:hover {
@@ -72,15 +73,18 @@
         .nav-drawer {
             position: fixed;
             top: 5rem;
-            left: -320px; /* Changed from right to left */
+            left: -320px;
+            /* Changed from right to left */
             width: 320px;
             height: calc(100vh - 5rem);
             background: #FFFFFF;
-            box-shadow: 2px 0 12px rgba(0, 0, 0, 0.08); /* Changed shadow direction */
+            box-shadow: 2px 0 12px rgba(0, 0, 0, 0.08);
+            /* Changed shadow direction */
             transition: transform 0.3s ease-in-out;
             z-index: 1000;
             overflow-y: auto;
-            scrollbar-width: none; /* For Firefox */
+            scrollbar-width: none;
+            /* For Firefox */
             -ms-overflow-style: none;
         }
 
@@ -89,7 +93,8 @@
         }
 
         .nav-drawer.open {
-            transform: translateX(320px); /* Changed direction */
+            transform: translateX(320px);
+            /* Changed direction */
         }
 
         .nav-header {
@@ -445,11 +450,11 @@
             </div>
             <hr style="margin-top: 10px; margin-bottom: 10px;">
             <div class="nav-section-heading">Contact Admin</div>
-            <div class="nav-item" data-link="mailto:mrahul.eu@gmail.com" style="background: transparent; color: var(--on-primary-container);">
+            <div class="nav-item" id="mail" onclick="openMail()">
                 <i class="fa-regular fa-envelope"></i>
                 <span>mrahul.eu@gmail.com</span>
             </div>
-            <div class="nav-item" data-link="https://wa.me/9347450441?text=Hello%20Rahul,%20I%20need%20some%20assistance%20Regarding%20BBS%20Portal." target="_blank" style="background: transparent; color: var(--on-primary-container);">
+            <div class="nav-item" id="wa" onclick="openWhatsApp()">
                 <i class="fa-brands fa-whatsapp"></i>
                 <span>9347450441</span>
             </div>
@@ -535,13 +540,29 @@
         const genReportBtn = document.getElementById('genReportBtn');
         const chooseBBSRoleBtn = document.getElementById('chooseBBSRoleBtn');
         const setBBSNameBtn = document.getElementById('setBBSNameBtn');
+        const mailNameBtn = document.getElementById('mail');
+        const waNameBtn = document.getElementById('wa');
 
         // URLs for navigation
         const URLS = {
             submitData: "https://uesiap.github.io/au-zone/bbs/south/boys/submit_report",
             editReview: "https://uesiap.github.io/vidhyardhi-geethavali/camps/smtc",
-            genReport: "https://uesiap.github.io/vidhyardhi-geethavali/aims/missions"
+            genReport: "https://uesiap.github.io/vidhyardhi-geethavali/aims/missions",
         };
+
+        function openMail() {
+            const email = 'mrahul.eu@gmail.com';
+            window.location.href = `mailto:${email}`;
+        }
+
+        // Function to open WhatsApp chat in a new tab
+        function openWhatsApp() {
+            const phoneNumber = '9347450441';
+            const message = encodeURIComponent("Hello!"); // Optional initial message
+            const url = `https://wa.me/9347450441?text=Hello%20Rahul,%20I%20need%20some%20assistance%20Regarding%20BBS%20Portal.`;
+            window.open(url, '_blank');
+        }
+
 
         // Toggle Navigation Drawer
         function toggleDrawer() {
