@@ -80,6 +80,12 @@
             transition: transform 0.3s ease-in-out;
             z-index: 1000;
             overflow-y: auto;
+            scrollbar-width: none; /* For Firefox */
+            -ms-overflow-style: none;
+        }
+
+        .nav-drawer::-webkit-scrollbar {
+            display: none;
         }
 
         .nav-drawer.open {
