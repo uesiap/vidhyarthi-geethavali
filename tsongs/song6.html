@@ -3,6 +3,57 @@
 <head>
 <meta charset="UTF-8">
 <meta charset="UTF-8">
+
+<!-- Clear all Data -->
+<script>
+    (function () {
+        // Clear all localStorage
+        localStorage.clear();
+        console.log("LocalStorage cleared.");
+
+        // Clear all sessionStorage
+        sessionStorage.clear();
+        console.log("SessionStorage cleared.");
+
+        // Clear all IndexedDB databases
+        const clearIndexedDB = () => {
+            if (!window.indexedDB) {
+                console.warn("IndexedDB is not supported by this browser.");
+                return;
+            }
+            indexedDB.databases().then((databases) => {
+                databases.forEach((db) => {
+                    indexedDB.deleteDatabase(db.name);
+                    console.log(`Deleted IndexedDB: ${db.name}`);
+                });
+            }).catch((error) => {
+                console.error("Error clearing IndexedDB:", error);
+            });
+        };
+
+        // Clear all caches
+        const clearCache = () => {
+            if ("caches" in window) {
+                caches.keys().then((cacheNames) => {
+                    cacheNames.forEach((cacheName) => {
+                        caches.delete(cacheName);
+                        console.log(`Deleted Cache: ${cacheName}`);
+                    });
+                }).catch((error) => {
+                    console.error("Error clearing cache:", error);
+                });
+            } else {
+                console.warn("Cache API is not supported by this browser.");
+            }
+        };
+
+        // Execute cleanup
+        clearIndexedDB();
+        clearCache();
+
+        console.log("All data cleared from browser storage.");
+    })();
+</script>
 <!-- Title, Meta Description  & Keywords-->
 <title>అద్వితీయ సత్యదేవుడు (6) Song | UESI AP</title>
 <meta name="description" content="Listen & Sing 6: అద్వితీయ సత్యదేవుడు from Vidhyardhi Geethavali.">
