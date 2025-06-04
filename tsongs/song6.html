@@ -981,9 +981,7 @@
         </div>
         <audio id="trackPlayer" src="https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/tracks%2FAdvithiya%20Satya%20Dhevudu.mp3?alt=media&amp;token=376d65f8-422a-46e9-88fd-bc27d45e8718"></audio>
     </div>
-
-                        <script>
-                            const menuBtn = document.getElementById('menuBtn');
+        const menuBtn = document.getElementById('menuBtn');
         const drawer = document.getElementById('drawer');
         const overlay = document.getElementById('overlay');
         const audioPlayer = document.getElementById('audioPlayer');
@@ -1014,11 +1012,11 @@
         });
 
         function shareSong() {
-            const songTitleWithNumber = "${songTitleWithNumber}";
+            const songTitleWithNumber = "అద్వితీయ సత్యదేవుడు (6)";
             const lyricsContent = document.querySelector(".lyrics-text span")?.innerHTML || "";
             const songNumber = "${songNumber}"; // Assumes songNumber is available from context
             const filename = `song${songNumber}`;
-            const canonicalUrl = `https://uesiap.github.io/vidhyardhi-geethavali/tsongs/${filename}`;
+            const canonicalUrl = `https://uesiap.github.io/vidhyardhi-geethavali/tsongs/${song}`;
 
             // Clean lyrics: remove tags, handle <br> tags, and normalize spacing
             const cleanLyrics = lyricsContent
@@ -1028,7 +1026,7 @@
                 .replace(/<br>/g, "\n") // Single <br> tag -> newline
                 .replace(/^\d+\.\s*/gm, ""); // Remove leading numbers (e.g., "1. ", "2. ") to prevent indentation
 
-            const shareText = `${canonicalUrl}\n\n${songTitleWithNumber}\n\n${cleanLyrics.trim()}`;
+            const shareText = `${canonicalUrl}\n\nఅద్వితీయ సత్యదేవుడు (6)\n\n${cleanLyrics.trim()}`;
 
             // Use Web Share API to pop up share options
             if (navigator.share) {
@@ -1068,8 +1066,8 @@
 
         function downloadAudio() {
             const link = document.createElement("a");
-            link.href = "${audioLink}";
-            link.download = "${songTitleWithNumber}_audio.mp3";
+            link.href = "https://archive.org/download/uesiap/12crib2Cross-1-09Advitiya-demo.mp3";
+            link.download = "అద్వితీయ సత్యదేవుడు (6)_audio.mp3";
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
@@ -1078,8 +1076,8 @@
 
         function downloadTrack() {
             const link = document.createElement("a");
-            link.href = "${trackLink}";
-            link.download = "${songTitleWithNumber}.mp3";
+            link.href = "https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/tracks%2FAdvithiya%20Satya%20Dhevudu.mp3?alt=media&amp;token=376d65f8-422a-46e9-88fd-bc27d45e8718";
+            link.download = "అద్వితీయ సత్యదేవుడు (6).mp3";
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
@@ -1248,6 +1246,5 @@
                     });
             });
         }
-                            </script>
                     </body>
                 </html>
