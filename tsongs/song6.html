@@ -1023,8 +1023,8 @@
             let cleanLyrics = lyricsContent
                 .replace(/<span>/g, "")
                 .replace(/<\/span>/g, "")
-                .replace(/<br><br>/g, "\n\n")
-                .replace(/<br>/g, "\n");
+                .replace(/<br><br>/g, "\n")
+                .replace(/<br>/g, "");
 
             // Add indentation for lines following numbered verses
             const lines = cleanLyrics.split("\n");
@@ -1047,7 +1047,7 @@
                 }
             }
 
-            const shareText = `*అద్వితీయ సత్యదేవుడు (6)*\n\n${formattedLyrics.trim()}`;
+            const shareText = `*అద్వితీయ సత్యదేవుడు (6)*\n\n${formattedLyrics.trim()}\n\n`;
 
             // Use Web Share API to pop up share options
             if (navigator.share) {
