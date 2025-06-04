@@ -1019,15 +1019,35 @@
             const songNumber = match ? parseInt(match[1], 10) : null;
             const canonicalUrl = `https://uesiap.github.io/vidhyardhi-geethavali/tsongs/song${songNumber}`;
 
-            // Clean lyrics: remove tags, handle <br> tags, and normalize spacing
-            const cleanLyrics = lyricsContent
+            // Clean lyrics: remove tags, handle <br> tags
+            let cleanLyrics = lyricsContent
                 .replace(/<span>/g, "")
                 .replace(/<\/span>/g, "")
-                .replace(/<br><br>/g, "\n\n") // Two <br> tags -> newline + blank line
-                .replace(/<br>/g, "\n") // Single <br> tag -> newline
-                .replace(/^\d+\.\s*/gm, ""); // Remove leading numbers (e.g., "1. ", "2. ") to prevent indentation
+                .replace(/<br><br>/g, "\n\n")
+                .replace(/<br>/g, "\n");
 
-            const shareText = `${canonicalUrl}\n\nఅద్వితీయ సత్యదేవుడు (6)\n\n${cleanLyrics.trim()}`;
+            // Add indentation for lines following numbered verses
+            const lines = cleanLyrics.split("\n");
+            let formattedLyrics = "";
+            let isVerse = false;
+            for (let line of lines) {
+                line = line.trim();
+                if (!line) {
+                    formattedLyrics += "\n";
+                    isVerse = false;
+                    continue;
+                }
+                if (/^\d+\./.test(line)) {
+                    formattedLyrics += `${line}\n`;
+                    isVerse = true;
+                } else if (isVerse) {
+                    formattedLyrics += `    ${line}\n`;
+                } else {
+                    formattedLyrics += `${line}\n`;
+                }
+            }
+
+            const shareText = `${canonicalUrl}\n\n*అద్వితీయ సత్యదేవుడు (6)*\n\n${formattedLyrics.trim()}`;
 
             // Use Web Share API to pop up share options
             if (navigator.share) {
@@ -1066,74 +1086,84 @@
         }
 
         async function downloadAudio() {
-    const url = "https://archive.org/download/uesiap/12crib2Cross-1-09Advitiya-demo.mp3";
-    const filename = "అద్వితీయ సత్యదేవుడు (6)_audio.mp3";
-    
-    try {
-        // Try fetching the file as a blob
-        const response = await fetch(url, { mode: 'cors' });
-        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-        
-        const blob = await response.blob();
-        const blobUrl = window.URL.createObjectURL(blob);
-        
-        const link = document.createElement("a");
-        link.href = blobUrl;
-        link.download = filename;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        window.URL.revokeObjectURL(blobUrl);
-    } catch (err) {
-        console.error("Download failed:", err);
-        // Fallback to direct link
-        const link = document.createElement("a");
-        link.href = url;
-        link.download = filename;
-        link.target = "_blank"; // In case download attribute fails
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        alert("Download may have opened in a new tab due to server restrictions. Please save the file manually if needed.");
-    }
-    
-    document.getElementById("customMenu").style.display = "none";
-}
+            const url = "https://archive.org/download/uesiap/12crib2Cross-1-09Advitiya-demo.mp3";
+            const filename = "అద్వితీయ సత్యదేవుడు (6)_audio.mp3";
 
-async function downloadTrack() {
-    const url = "https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/tracks%2FAdvithiya%20Satya%20Dhevudu.mp3?alt=media&token=376d65f8-422a-46e9-88fd-bc27d45e8718";
-    const filename = "అద్వితీయ సత్యదేవుడు (6).mp3";
-    
-    try {
-        // Try fetching the file as a blob
-        const response = await fetch(url, { mode: 'cors' });
-        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-        
-        const blob = await response.blob();
-        const blobUrl = window.URL.createObjectURL(blob);
-        
-        const link = document.createElement("a");
-        link.href = blobUrl;
-        link.download = filename;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        window.URL.revokeObjectURL(blobUrl);
-    } catch (err) {
-        console.error("Download failed:", err);
-        // Fallback to direct link
-        const link = document.createElement("a");
-        link.href = url;
-        link.download = filename;
-        link.target = "_blank"; // In case download attribute fails
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        alert("Download may have opened in a new tab due to server restrictions. Please save the file manually if needed.");
-    }
-    
-    document.getElementById("customMenu").style.display = "none";
-}
+            if (!url) {
+                alert("Audio link is not available.");
+                document.getElementById("customMenu").style.display = "none";
+                return;
+            }
+
+            try {
+                // Try fetching the file as a blob
+                const response = await fetch(url, { mode: 'cors' });
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+
+                const blob = await response.blob();
+                const blobUrl = window.URL.createObjectURL(blob);
+
+                const link = document.createElement("a");
+                link.href = blobUrl;
+                link.download = filename;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                window.URL.revokeObjectURL(blobUrl);
+            } catch (err) {
+                console.error("Download failed:", err);
+                // Fallback to direct link
+                const link = document.createElement("a");
+                link.href = url;
+                link.download = filename;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                alert("Download may have opened in a new tab due to server restrictions. Please right-click the link and choose 'Save As' if needed.");
+            }
+
+            document.getElementById("customMenu").style.display = "none";
+        }
+
+        async function downloadTrack() {
+            const url = "https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/tracks%2FAdvithiya%20Satya%20Dhevudu.mp3?alt=media&amp;token=376d65f8-422a-46e9-88fd-bc27d45e8718";
+            const filename = "అద్వితీయ సత్యదేవుడు (6)_track.mp3";
+
+            if (!url) {
+                alert("Track link is not available.");
+                document.getElementById("customMenu").style.display = "none";
+                return;
+            }
+
+            try {
+                // Try fetching the file as a blob
+                const response = await fetch(url, { mode: 'cors' });
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+
+                const blob = await response.blob();
+                const blobUrl = window.URL.createObjectURL(blob);
+
+                const link = document.createElement("a");
+                link.href = blobUrl;
+                link.download = filename;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                window.URL.revokeObjectURL(blobUrl);
+            } catch (err) {
+                console.error("Download failed:", err);
+                // Fallback to direct link
+                const link = document.createElement("a");
+                link.href = url;
+                link.download = filename;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                alert("Download may have opened in a new tab due to server restrictions. Please right-click the link and choose 'Save As' if needed.");
+            }
+
+            document.getElementById("customMenu").style.display = "none";
+        }
 
         // Get all items with submenus
         const submenuItems = document.querySelectorAll('.drawer-item.has-submenu');
@@ -1284,7 +1314,7 @@ async function downloadTrack() {
         // Initialize Players
         updatePlayer(audioPlayer, audioSeekSlider, audioCurrentTimeIndicator, audioDurationTimeIndicator);
         updatePlayer(trackPlayer, trackSeekSlider, trackCurrentTimeIndicator, trackDurationTimeIndicator);
-        
+
         // Register Service Worker
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', function () {
@@ -1297,7 +1327,7 @@ async function downloadTrack() {
                     });
             });
         }
-        </script>
+    </script>
         
                     </body>
                 </html>
