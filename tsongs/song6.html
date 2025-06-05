@@ -912,7 +912,7 @@
             <br>
             <hr>
             <br>
-            <div class="drawer-item has-submenu" id="audioItem" tabindex="0" style="border-top: 1.5px solid #ddd;">
+            <div class="drawer-item has-submenu" id="thoughtsSubmenu" tabindex="0" style="border-top: 1.5px solid #ddd;">
                 <div class="item-content">
                     <span class="icon"><span class="material-symbols-outlined">
                             forum
@@ -940,7 +940,7 @@
                     <span class="mnu-tit">Feedback</span>
                 </a>
             </div>
-            <div class="drawer-item has-submenu" id="audioItem" tabindex="0">
+            <div class="drawer-item has-submenu" id="shareSubmenu" tabindex="0">
                 <div class="item-content">
                     <span class="icon"><span class="material-symbols-outlined">
                             sync_arrow_down
@@ -967,7 +967,8 @@
                         </span></span>
                     <span class="mnu-tit">Download Track</span>
                 </a>
-                <a href="https://play.google.com/store/apps/details?id=com.uesiap.geethavali" class="submenu-item" tabindex="0">
+                <a href="https://play.google.com/store/apps/details?id=com.uesiap.geethavali" class="submenu-item"
+                    tabindex="0">
                     <span class="icon"><span class="material-symbols-outlined">
                             phone_android
                         </span></span>
@@ -981,7 +982,8 @@
 
     <div class="overlay" id="overlay"></div>
     <div class="lyrics">
-            <div class="lyricsHead"">
+        <span style="display: flex;">
+            <div class="lyricsHead" style="position: relative; width: 100%; display: flex; align-items: center;">
                 <!-- Left Arrow -->
                 <a class="back-button" onclick="history.back(); return false;" style="position: absolute; left: 10px;">
                     <span class="arrow" style="margin-top: 5px;"><i class="fas fa-arrow-left"></i></span>
@@ -990,7 +992,30 @@
                 <!-- Center Title -->
                 <p class="head-text" style="margin: 0 auto; text-align: center;">అద్వితీయ సత్యదేవుడు (6)</p>
             </div>
-    
+              
+            <!-- Right Menu -->
+            <a class="menu-button" href="javascript:void(0)" onclick="toggleMenu()"
+                style="position: absolute; right: 10px; border: 2px dotted var(--primary-color); border-radius: 30%; padding-top: 4px;">
+                <span class="icon" style="color:#128C7E; margin-top: 5px;">
+                    <span class="material-symbols-outlined">more_vert</span>
+                </span>
+            </a>
+        </span>
+        <!-- Custom Menu -->
+        <div id="customMenu" class="custom-menu"
+            style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #fff; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); z-index: 1000; padding: 12px; min-width: 160px;">
+            <ul style="list-style: none; margin: 0; padding: 0;">
+                <li style="padding: 10px 14px; cursor: pointer; color: #333; font-family: 'Segoe UI', sans-serif; font-size: 14px; border-bottom: 1px solid #eee; transition: background 0.2s;"
+                    onmouseover="this.style.background='#f5f5f5'" onmouseout="this.style.background='none'"
+                    onclick="shareSong()">Share</li>
+                <li style="padding: 10px 14px; cursor: pointer; color: #333; font-family: 'Segoe UI', sans-serif; font-size: 14px; border-bottom: 1px solid #eee; transition: background 0.2s;"
+                    onmouseover="this.style.background='#f5f5f5'" onmouseout="this.style.background='none'"
+                    onclick="downloadAudio()">Download Audio</li>
+                <li style="padding: 10px 14px; cursor: pointer; color: #333; font-family: 'Segoe UI', sans-serif; font-size: 14px; transition: background 0.2s;"
+                    onmouseover="this.style.background='#f5f5f5'" onmouseout="this.style.background='none'"
+                    onclick="downloadTrack()">Download Track</li>
+            </ul>
+        </div>
         <div class="lyrics-text" style="text-align: left; margin-bottom: 120px;">
             <span>అద్వితీయ సత్యదేవుడు - క్రీస్తేసె నిత్యజీవము<br>
                 వెలుగైన జీవము - వెలిగించుచున్నాడు<br><br>
@@ -1058,6 +1083,9 @@
         });
 
         function shareSong() {
+            drawer.classList.remove('open');
+            overlay.classList.remove('show');
+            menuBtn.setAttribute('aria-expanded', 'false');
             const songTitleWithNumber = "అద్వితీయ సత్యదేవుడు (6)";
             const lyricsContent = document.querySelector(".lyrics-text span")?.innerHTML || "";
             const match = songTitleWithNumber.match(/\((\d+)\)/);
@@ -1116,6 +1144,9 @@
         }
 
         async function downloadAudio() {
+            drawer.classList.remove('open');
+            overlay.classList.remove('show');
+            menuBtn.setAttribute('aria-expanded', 'false');
             const url = "https://archive.org/download/uesiap/12crib2Cross-1-09Advitiya-demo.mp3";
             const filename = "అద్వితీయ సత్యదేవుడు (6)_audio.mp3";
 
@@ -1156,6 +1187,9 @@
         }
 
         async function downloadTrack() {
+            drawer.classList.remove('open');
+            overlay.classList.remove('show');
+            menuBtn.setAttribute('aria-expanded', 'false');
             const url = "https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/tracks%2FAdvithiya%20Satya%20Dhevudu.mp3?alt=media&amp;token=376d65f8-422a-46e9-88fd-bc27d45e8718";
             const filename = "అద్వితీయ సత్యదేవుడు (6)_track.mp3";
 
@@ -1223,6 +1257,31 @@
             });
         });
 
+        // Close drawer and submenus when any submenu item is clicked
+        const submenuLinks = document.querySelectorAll('.submenu-item');
+
+        submenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                // Close drawer
+                drawer.classList.remove('open');
+                overlay.classList.remove('show');
+                menuBtn.setAttribute('aria-expanded', 'false');
+                menuBtn.querySelector('i').className = 'fa-solid fa-bars';
+
+                // Close all open submenus
+                submenuItems.forEach(item => {
+                    item.classList.remove('open');
+                });
+
+                // Explicitly close all submenu containers
+                document.querySelectorAll('.submenu').forEach(submenu => {
+                    submenu.classList.remove('open');
+                });
+            });
+        });
+
+
+
         // Handle submenu toggle
         submenuItems.forEach(item => {
             item.addEventListener('click', (e) => {
@@ -1259,7 +1318,7 @@
                 drawer.classList.remove('open');
                 overlay.classList.remove('show');
                 menuBtn.setAttribute('aria-expanded', 'false');
-                menuBtn.querySelector('i').className = 'fas fa-bars';
+                menuBtn.querySelector('i').className = 'fa-solid fa-bars';
             }
 
             // Ctrl+M shortcut to toggle menu
