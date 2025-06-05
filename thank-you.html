@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        (function () {
+            // Clear all localStorage
+            localStorage.clear();
+            console.log("LocalStorage cleared.");
+
+            // Clear all sessionStorage
+            sessionStorage.clear();
+            console.log("SessionStorage cleared.");
+
+            // Clear all IndexedDB databases
+            const clearIndexedDB = () => {
+                if (!window.indexedDB) {
+                    console.warn("IndexedDB is not supported by this browser.");
+                    return;
+                }
+                indexedDB.databases().then((databases) => {
+                    databases.forEach((db) => {
+                        indexedDB.deleteDatabase(db.name);
+                        console.log(`Deleted IndexedDB: ${db.name}`);
+                    });
+                }).catch((error) => {
+                    console.error("Error clearing IndexedDB:", error);
+                });
+            };
+
+            // Clear all caches
+            const clearCache = () => {
+                if ("caches" in window) {
+                    caches.keys().then((cacheNames) => {
+                        cacheNames.forEach((cacheName) => {
+                            caches.delete(cacheName);
+                            console.log(`Deleted Cache: ${cacheName}`);
+                        });
+                    }).catch((error) => {
+                        console.error("Error clearing cache:", error);
+                    });
+                } else {
+                    console.warn("Cache API is not supported by this browser.");
+                }
+            };
+
+            // Execute cleanup
+            clearIndexedDB();
+            clearCache();
+
+            console.log("All data cleared from browser storage.");
+        })();
+    </script>
+    <title>Thanks to User | Vidhyardhi Geethavali | UESI AP</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <style>
+        :root {
+            --primary-color: #128C7E;
+            --primary-dark: #075E54;
+            --text-light: #ffffff;
+            --text-dark: #333333;
+            --text-gray: #666666;
+            --bg-light: #f5f5f5;
+            --bg-white: #ffffff;
+            --border-light: #eeeeee;
+            --shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-white);
+            min-height: 100vh;
+            line-height: 1.6;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 5%;
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            box-shadow: var(--shadow);
+            position: fixed;
+            border-bottom: 3px dotted rgb(160, 225, 161);
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .logo-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .title {
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .menu-btn {
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 1.8rem;
+            cursor: pointer;
+            padding: 8px;
+            transition: var(--transition);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .menu-btn:focus {
+            outline: 2px solid rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .menu-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: scale(1.05);
+        }
+
+        /* Drawer Styles */
+        .drawer {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 320px;
+            max-width: 90%;
+            height: 100vh;
+            background-color: var(--bg-white);
+            box-shadow: -2px 0 15px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+            z-index: 999;
+            padding-top: 70px;
+            overflow-y: auto;
+            will-change: transform;
+        }
+
+        .drawer.open {
+            right: 0;
+        }
+
+        .drawer-content {
+            padding: 0;
+        }
+
+        /* Main Menu Items */
+        .drawer-item {
+            padding: 16px 25px;
+            color: var(--text-dark);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: var(--transition);
+            border-left: 4px solid transparent;
+            font-weight: 500;
+            border-bottom: 1.5px solid #ddd;
+        }
+
+        .drawer-item:hover,
+        .drawer-item:focus {
+            background-color: rgba(0, 0, 0, 0.03);
+            border-left-color: var(--primary-color);
+            outline: none;
+        }
+
+        .drawer-item .item-content {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .drawer-item .icon {
+            width: 30px;
+            text-align: center;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .mnu-tit {
+            font-size: 1.3rem;
+            font-weight: 400;
+        }
+
+        .drawer-item.has-submenu::after {
+            content: "\f078";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            font-size: 0.8rem;
+            color: var(--text-gray);
+            transition: var(--transition);
+        }
+
+        .drawer-item.has-submenu.open::after {
+            transform: rotate(180deg);
+            color: var(--primary-color);
+        }
+
+        .drawer a,
+        .drawer a:visited,
+        .drawer a:hover,
+        .drawer a:active {
+            text-decoration: none;
+            color: inherit;
+            /* Optional: keeps the same color as parent */
+        }
+
+
+        /* Submenu Items */
+        .submenu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out;
+            background-color: rgba(0, 0, 0, 0.02);
+        }
+
+        .submenu.open {
+            max-height: 500px;
+            border-bottom: 1.5px solid #ddd;
+        }
+
+        .submenu-item {
+            padding: 14px 25px 14px 60px;
+            color: var(--text-gray);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 400;
+            font-size: 0.95rem;
+        }
+
+        .submenu-item .icon {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+            width: 20px;
+            text-align: center;
+        }
+
+        .submenu-item:hover,
+        .submenu-item:focus {
+            background-color: rgba(0, 0, 0, 0.05);
+            color: var(--primary-dark);
+            outline: none;
+        }
+
+        .submenu-item:hover .icon,
+        .submenu-item:focus .icon {
+            color: var(--primary-dark);
+        }
+
+        /* Overlay */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 998;
+        }
+
+        .overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .page-title {
+            margin-bottom: 25px;
+            color: var(--text-dark);
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+
+        .card {
+            background: var(--bg-white);
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+        }
+
+        .card h2 {
+            color: var(--primary-dark);
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+
+        .card p {
+            color: var(--text-gray);
+            margin-bottom: 10px;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 12px 20px;
+            }
+
+            .main-content {
+                padding: 85px 20px 25px;
+            }
+
+            .page-title {
+                font-size: 1.5rem;
+            }
+
+            .card {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .title {
+                font-size: 1.1rem;
+            }
+
+            .drawer {
+                width: 85%;
+            }
+
+            .drawer-item {
+                padding: 14px 20px;
+            }
+
+            .submenu-item {
+                padding: 12px 20px 12px 55px;
+            }
+        }
+
+        /* songs grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            max-width: 600px;
+            margin: 20px auto;
+        }
+
+        @media (min-width: 1024px) {
+            .grid {
+                grid-template-columns: repeat(7, 1fr);
+                max-width: 900px;
+                /* Optional: adjust max-width for wider grid */
+            }
+        }
+
+        .box {
+            background-color: #e0e0e0;
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+            font-size: 20px;
+            cursor: pointer;
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        .box:hover {
+            background-color: #e0e0e0;
+        }
+
+        .box.active {
+            background-color: #128C7E;
+            color: white;
+        }
+
+        #songs {
+            max-width: 600px;
+            margin: 20px auto;
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #songs li {
+            background-color: white;
+            margin-bottom: 10px;
+            padding: 12px;
+            border-radius: 6px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        label[for="langSelect"] {
+            display: inline-block;
+            margin-bottom: 8px;
+            font-size: 16px;
+            color: #333;
+        }
+
+        #langSelect {
+            display: inline-block;
+            padding: 6px 10px;
+            font-size: 16px;
+            border: 1px solid #128C7E;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            color: #333;
+            margin-left: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: border-color 0.3s, background-color 0.3s;
+        }
+
+        #langSelect:hover {
+            border-color: #128C7E;
+            background-color: #f0f0f0;
+        }
+
+        #langSelect:focus {
+            outline: none;
+            border-color: #128C7E;
+        }
+
+        #songs {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #songs li {
+            margin-bottom: px;
+            border-radius: 8px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .song-link {
+            display: block;
+            padding: 10px 8px;
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            font-size: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: #fafafa;
+            transition: all 0.3s ease;
+        }
+
+        .song-link:hover {
+            background-color: #f0f8ff;
+            color: #128C7E;
+            transform: scale(1.02);
+        }
+
+        .main-content {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            height: 100vh;
+            padding: 0;
+            background-color: white;
+        }
+
+        .iframe-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            margin-top: 5rem;
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            overflow: visible;
+            z-index: 1;
+        }
+
+        iframe {
+            position: absolute;
+            inset: 0;
+            background-color: white;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .mask-bottom {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 5rem;
+            background: white;
+            z-index: 10;
+        }
+
+        .container {
+            background: #fff;
+            padding: 50px 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            max-width: 420px;
+            text-align: center;
+        }
+
+        .tick-icon {
+            width: 52px;
+            height: 72px;
+            margin: 0 auto 0px;
+            display: block;
+            stroke: #27ae60;
+            stroke-width: 4;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            animation: draw 0.5s ease forwards;
+        }
+
+        @keyframes draw {
+            from {
+                stroke-dashoffset: 48;
+            }
+
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        h1 {
+            font-weight: 700;
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1.1rem;
+            margin-bottom: 35px;
+            color: #555;
+        }
+
+        a.button {
+            display: inline-block;
+            border: 2px dotted var(--primary-color);
+            color: var(--primary-color);
+            text-decoration: none;
+            padding: 14px 32px;
+            border-radius: 5px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        a.button:hover,
+        a.button:focus {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            outline: none;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar" aria-label="Main navigation">
+        <div class="logo-title">
+            <img src="https://uesiap.github.io/vidhyardhi-geethavali/Icon192.jpg" alt="App Logo" class="logo">
+            <span class="title" style="font-size: 1rem;">UESI-AP Audio & Visuals Dept</span>
+        </div>
+        <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">
+            <span class="material-symbols-outlined" style="font-size: 2rem;">
+                dehaze
+            </span>
+        </button>
+    </nav>
+
+    <div class="drawer" id="drawer" role="navigation" aria-label="Side menu">
+        <div class="drawer-content">
+
+            <a href="/vidhyardhi-geethavali/" class="drawer-item" tabindex="0">
+                <div class="item-content">
+                    <span class="icon"><span class="material-symbols-outlined">
+                            home
+                        </span></span>
+                    <span class="mnu-tit">Home</span>
+                </div>
+            </a>
+
+            <!-- Camp Songs -->
+            <div class="drawer-item has-submenu" id="chatsItem" tabindex="0">
+                <div class="item-content">
+                    <span class="icon"><span class="material-symbols-outlined">
+                            camping
+                        </span></span>
+                    <span class="mnu-tit">Camp Songs</span>
+                </div>
+            </div>
+            <div class="submenu" id="chatsSubmenu">
+                <a href="/vidhyardhi-geethavali/e-camp-songs" class="submenu-item" tabindex="0">
+                    <span class="icon"><i class="fas fa-users"></i></span>
+                    <span class="mnu-tit">E Camp Songs</span>
+                </a>
+                <a href="/vidhyardhi-geethavali/dt-camp-songs" class="submenu-item" tabindex="0">
+                    <span class="icon"><i class="fas fa-users"></i></span>
+                    <span class="mnu-tit">DT Camp Songs</span>
+                </a>
+                <a href="/vidhyardhi-geethavali/lt-camp-songs" class="submenu-item" tabindex="0">
+                    <span class="icon"><i class="fas fa-users"></i></span>
+                    <span class="mnu-tit">LT Camp Songs</span>
+                </a>
+                <a href="/vidhyardhi-geethavali/cmtc-songs" class="submenu-item" tabindex="0">
+                    <span class="icon"><i class="fas fa-users"></i></span>
+                    <span class="mnu-tit">CMTC Songs</span>
+                </a>
+                <a href="/vidhyardhi-geethavali/smtc-songs" class="submenu-item" tabindex="0">
+                    <span class="icon"><i class="fas fa-users"></i></span>
+                    <span class="mnu-tit">SMTC Songs</span>
+                </a>
+            </div>
+
+            <!-- Special Songs -->
+            <div class="drawer-item has-submenu" id="callsItem" tabindex="0">
+                <div class="item-content">
+                    <span class="icon"><span class="material-symbols-outlined">
+                            stars_2
+                        </span></span>
+                    <span class="mnu-tit">Special Songs</span>
+                </div>
+            </div>
+            <div class="submenu" id="callsSubmenu">
+                <a href="/vidhyardhi-geethavali/praise-worship" class="submenu-item" tabindex="0">
+                    <span class="icon"><span class="material-symbols-outlined">
+                            cheer
+                        </span></span>
+                    <span class="mnu-tit">Praise & Worship</span>
+                </a>
+                <a href="/vidhyardhi-geethavali/prayer" class="submenu-item" tabindex="0">
+                    <span class="icon"><span class="material-symbols-outlined">
+                            folded_hands
+                        </span></span>
+                    <span class="mnu-tit">Prayer</span>
+                </a>
+                <a href="/vidhyardhi-geethavali/thanks-giving" class="submenu-item" tabindex="0">
+                    <span class="icon"><span class="material-symbols-outlined">
+                            handshake
+                        </span></span>
+                    <span class="mnu-tit">Thanks Giving</span>
+                </a>
+            </div>
+
+            <!-- Aims Songs -->
+            <div class="drawer-item has-submenu" id="aimsItem" tabindex="0">
+                <div class="item-content">
+                    <span class="icon"><span class="material-symbols-outlined">
+                            my_location
+                        </span></span>
+                    <span class="mnu-tit">Aims Songs</span>
+                </div>
+            </div>
+            <div class="submenu" id="aimsSubmenu">
+                <a href="/vidhyardhi-geethavali/evangelism" class="submenu-item" tabindex="0">
+                    <span class="icon"><i class="fa-solid fa-arrow-right-long"></i></span>
+                    <span class="mnu-tit">Evangelism</span>
+                </a>
+                <a href="/vidhyardhi-geethavali/fellowship" class="submenu-item" tabindex="0">
+                    <span class="icon"><i class="fa-solid fa-arrow-right-long"></i></span>
+                    <span class="mnu-tit">Fellowship</span>
+                </a>
+                <a href="/vidhyardhi-geethavali/testimony" class="submenu-item" tabindex="0">
+                    <span class="icon"><i class="fa-solid fa-arrow-right-long"></i></span>
+                    <span class="mnu-tit">Testimony</span>
+                </a>
+                <a href="/vidhyardhi-geethavali/missions" class="submenu-item" tabindex="0">
+                    <span class="icon"><i class="fa-solid fa-arrow-right-long"></i></span>
+                    <span class="mnu-tit">Missions</span>
+                </a>
+            </div>
+
+            <!-- Audio Songs -->
+            <div class="drawer-item has-submenu" id="audioItem" tabindex="0">
+                <div class="item-content">
+                    <span class="icon"><span class="material-symbols-outlined">
+                            graphic_eq
+                        </span></span>
+                    <span class="mnu-tit">Audio Songs</span>
+                </div>
+            </div>
+            <div class="submenu" id="audioSubmenu">
+                <a href="/vidhyardhi-geethavali/telugu-audio-songs" class="submenu-item" tabindex="0">
+                    <span class="icon"><i class="fa-solid fa-music"></i></span>
+                    <span class="mnu-tit">Telugu Songs</span>
+                </a>
+                <a href="/vidhyardhi-geethavali/english-audio-songs" class="submenu-item" tabindex="0">
+                    <span class="icon"><i class="fa-solid fa-music"></i></span>
+                    <span class="mnu-tit">English Songs</span>
+                </a>
+                <a href="/vidhyardhi-geethavali/hindi-audio-songs" class="submenu-item" tabindex="0">
+                    <span class="icon"><i class="fa-solid fa-music"></i></span>
+                    <span class="mnu-tit">Hindi Songs</span>
+                </a>
+            </div>
+            <br>
+            <hr>
+            <br>
+            <div class="drawer-item has-submenu" id="audioItem" tabindex="0" style="border-top: 1.5px solid #ddd;">
+                <div class="item-content">
+                    <span class="icon"><span class="material-symbols-outlined">
+                            forum
+                        </span></span>
+                    <span class="mnu-tit">Share Thoughts</span>
+                </div>
+            </div>
+            <div class="submenu" id="audioSubmenu">
+                <a href="/vidhyardhi-geethavali/write-review" class="submenu-item" tabindex="0">
+                    <span class="icon"><span class="material-symbols-outlined">
+                            edit_square
+                        </span></span>
+                    <span class="mnu-tit">Write a Review</span>
+                </a>
+                <a href="/vidhyardhi-geethavali/give-correction" class="submenu-item" tabindex="0">
+                    <span class="icon"><span class="material-symbols-outlined">
+                            lyrics
+                        </span></span>
+                    <span class="mnu-tit">Give Correction</span>
+                </a>
+                <a href="/vidhyardhi-geethavali/user-feedback" class="submenu-item" tabindex="0">
+                    <span class="icon"><span class="material-symbols-outlined">
+                            thumbs_up_down
+                        </span></span>
+                    <span class="mnu-tit">Feedback</span>
+                </a>
+            </div><br><br><br><br>
+        </div>
+    </div>
+
+    <div class="overlay" id="overlay"></div>
+
+    <main class="main-content"><br><br><br><br><br><br>
+        <div class="container" role="main" aria-labelledby="thankYouTitle" aria-describedby="thankYouDesc">
+            <svg class="tick-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M20 6L9 17l-5-5" />
+            </svg>
+            <h1 id="thankYouTitle">Thank You!</h1>
+            <p id="thankYouDesc">Successfully Submitted. <br>We appreciate your time in improving Vidhyardhi Geethavali
+                Online Site.</p>
+            <a href="#" class="button" role="button"
+                onclick="event.preventDefault(); window.history.back(); setTimeout(() => { window.location.replace('/'); }, 500);">
+                <i class="fa-solid fa-arrow-left"></i>&nbsp; back to Home
+            </a>
+        </div>
+    </main>
+
+    <script>
+        const menuBtn = document.getElementById('menuBtn');
+        const drawer = document.getElementById('drawer');
+        const overlay = document.getElementById('overlay');
+
+        // Get all items with submenus
+        const submenuItems = document.querySelectorAll('.drawer-item.has-submenu');
+
+        // Toggle drawer
+        const toggleDrawer = () => {
+            const isOpen = drawer.classList.toggle('open');
+            overlay.classList.toggle('show');
+            menuBtn.setAttribute('aria-expanded', isOpen);
+            menuBtn.querySelector('i').className = isOpen ? 'fas fa-times' : 'fas fa-bars';
+        };
+
+        menuBtn.addEventListener('click', toggleDrawer);
+
+        // Close drawer when clicking overlay
+        overlay.addEventListener('click', () => {
+            drawer.classList.remove('open');
+            overlay.classList.remove('show');
+            menuBtn.setAttribute('aria-expanded', 'false');
+            menuBtn.querySelector('i').className = 'fas fa-bars';
+
+            // Close all submenus when closing drawer
+            submenuItems.forEach(item => {
+                item.classList.remove('open');
+                const submenu = item.nextElementSibling;
+                submenu.classList.remove('open');
+            });
+        });
+
+        // Handle submenu toggle
+        submenuItems.forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.stopPropagation();
+
+                // Close all other submenus
+                submenuItems.forEach(otherItem => {
+                    if (otherItem !== item) {
+                        otherItem.classList.remove('open');
+                        const otherSubmenu = otherItem.nextElementSibling;
+                        if (otherSubmenu) otherSubmenu.classList.remove('open');
+                    }
+                });
+
+                // Toggle clicked submenu
+                item.classList.toggle('open');
+                const submenu = item.nextElementSibling;
+                if (submenu) submenu.classList.toggle('open');
+            });
+
+
+            // Keyboard accessibility
+            item.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    item.click();
+                }
+            });
+        });
+
+        // Close drawer when pressing Escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && drawer.classList.contains('open')) {
+                drawer.classList.remove('open');
+                overlay.classList.remove('show');
+                menuBtn.setAttribute('aria-expanded', 'false');
+                menuBtn.querySelector('i').className = 'fas fa-bars';
+            }
+
+            // Ctrl+M shortcut to toggle menu
+            if (e.ctrlKey && e.key === 'm') {
+                e.preventDefault();
+                toggleDrawer();
+            }
+        });
+
+        // Improve touch experience on mobile
+        let startX = 0;
+        let currentX = 0;
+
+        drawer.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            currentX = startX;
+        }, { passive: true });
+
+        drawer.addEventListener('touchmove', (e) => {
+            currentX = e.touches[0].clientX;
+        }, { passive: true });
+
+        drawer.addEventListener('touchend', () => {
+            if (startX - currentX > 50) {
+                drawer.classList.remove('open');
+                overlay.classList.remove('show');
+                menuBtn.setAttribute('aria-expanded', 'false');
+                menuBtn.querySelector('i').className = 'fas fa-bars';
+            }
+        }, { passive: true });
+
+    </script>
+</body>
+
+</html>
