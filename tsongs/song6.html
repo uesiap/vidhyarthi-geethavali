@@ -756,7 +756,6 @@
             color: black;
             margin-right: 10px;
             padding-right: 6px;
-            padding-left: 8px;
         }
 
         .menu-button:hover {
@@ -1048,20 +1047,20 @@
         </div>
     </div>
     <div class="audio-player">
-        <span id="audioCurrentTime" class="time-indicator">0:00</span>
+        <span id="audioCurrentTime" class="time-indicator" style="padding-left: 8px;">0:00</span>
         <input type="range" id="audioSeekSlider" class="seek-slider" value="0" max="244.039125">
         <div class="audio-controls">
-            <span id="audioDurationTime" class="time-indicator">4:04</span>
+            <span id="audioDurationTime" class="time-indicator">0:00</span>
             <button id="audioPlayPauseBtn" class="play-pause-btn"><i class="fas fa-play"></i></button>
             <p class="slider-text">Audio</p>
         </div>
         <audio id="audioPlayer" src="https://archive.org/download/uesiap/12crib2Cross-1-09Advitiya-demo.mp3"></audio>
     </div>
     <div class="track-player">
-        <span id="trackCurrentTime" class="time-indicator">0:00</span>
+        <span id="trackCurrentTime" class="time-indicator" style="padding-left: 8px;">0:00</span>
         <input type="range" id="trackSeekSlider" class="seek-slider" value="0" max="244.039125">
         <div class="audio-controls">
-            <span id="trackDurationTime" class="time-indicator">4:04</span>
+            <span id="trackDurationTime" class="time-indicator">0:00</span>
             <button id="trackPlayPauseBtn" class="play-pause-btn"><i class="fas fa-play"></i></button>
             <p class="slider-text">Track</p>
         </div>
