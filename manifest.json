@@ -8,12 +8,12 @@
   "theme_color": "#fff",
   "icons": [
     {
-      "src": "/vidhyardhi-geethavali/Icon192.jpg",
+      "src": "/vidhyardhi-geethavali/Icon192.png",
       "sizes": "192x192",
       "type": "image/jpeg"
     },
     {
-      "src": "/vidhyardhi-geethavali/Icon521.jpg",
+      "src": "/vidhyardhi-geethavali/Icon521.png",
       "sizes": "512x512",
       "type": "image/jpeg"
     }
