@@ -6,15 +6,26 @@
     <!-- Clear all Data -->
     <script>
         (function () {
-            // Clear all localStorage
-            localStorage.clear();
-            console.log("LocalStorage cleared.");
+            // Keys to retain in localStorage
+            const keysToRetain = ["bbsRole", "bbsName"];
 
-            // Clear all sessionStorage
+            // Store the values of the keys that actually exist
+            const existingKeys = new Set(keysToRetain.filter(key => localStorage.getItem(key) !== null));
+
+            // Remove all keys not in the existingKeys set
+            Object.keys(localStorage).forEach((key) => {
+                if (!existingKeys.has(key)) {
+                    localStorage.removeItem(key);
+                }
+            });
+
+            console.log("LocalStorage cleared except for:", [...existingKeys]);
+
+            // Clear sessionStorage
             sessionStorage.clear();
             console.log("SessionStorage cleared.");
 
-            // Clear all IndexedDB databases
+            // Clear IndexedDB data
             const clearIndexedDB = () => {
                 if (!window.indexedDB) {
                     console.warn("IndexedDB is not supported by this browser.");
@@ -30,7 +41,7 @@
                 });
             };
 
-            // Clear all caches
+            // Clear browser cache
             const clearCache = () => {
                 if ("caches" in window) {
                     caches.keys().then((cacheNames) => {
@@ -46,13 +57,14 @@
                 }
             };
 
-            // Execute cleanup
+            // Execute cleanup functions
             clearIndexedDB();
             clearCache();
 
-            console.log("All data cleared from browser storage.");
+            console.log(`All data cleared except for ${[...existingKeys].join(", ")} in localStorage.`);
         })();
     </script>
+
     <!-- Title, Meta Description  & Keywords-->
     <title>ఓరన్నా - ఓరన్నా (52) Song | UESI AP</title>
     <meta name="description" content="Listen & Sing 52: ఓరన్నా - ఓరన్నా song from Vidhyardhi Geethavali.">
@@ -871,6 +883,22 @@
             top: 0;
         }
 
+        .loader {
+            border: 4px solid #ccc;
+            border-top: 4px solid #075E54;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 0.5s linear infinite;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
                                     </style>
                             </head>
                             <body>
@@ -1134,7 +1162,8 @@
                             download
                         </span></span>
                     <span class="mnu-tit"
-                        style="font-size: 1.3rem; margin-bottom: 10px; margin-bottom: 5px;">Audio</span>
+                        style="font-size: 1.3rem; margin-bottom: 10px; margin-bottom: 5px;" id="audioText">Audio</span>
+                    <span id="audioLoader" class="loader" style="display: none; margin-left: 10px;"></span>
                 </li>
                 <li style="padding: 10px 14px; cursor: pointer; color: #333; font-family: 'Segoe UI', sans-serif; font-size: 14px; border: 1px solid var(--primary-dark); transition: background 0.2s; margin-bottom: px; border-radius: 8px;"
                     onmouseover="this.style.background='#f5f5f5'" onmouseout="this.style.background='none'"
@@ -1142,7 +1171,8 @@
                             download
                         </span></span>
                     <span class="mnu-tit"
-                        style="font-size: 1.3rem; margin-bottom: 10px; margin-bottom: 5px;">Track</span>
+                        style="font-size: 1.3rem; margin-bottom: 10px; margin-bottom: 5px;" id="trackText">Track</span>
+                    <span id="trackLoader" class="loader" style="display: none; margin-left: 10px;"></span>
                 </li>
             </ul>
         </div>
@@ -1173,7 +1203,7 @@
             <button id="audioPlayPauseBtn" class="play-pause-btn"><i class="fas fa-play"></i></button>
             <p class="slider-text">Audio</p>
         </div>
-        <audio id="audioPlayer" src="https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/songs%2FO_ORANNA_ORANNA_NEW_DEMO%5B1%5D.mp3?alt=media&amp;token=df3b0e03-6a9e-4899-990b-7a7238267eaa"></audio>
+        <audio id="audioPlayer" src="https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/ecamp-audios/%E0%B0%92%E0%B0%95%E0%B1%87%20%E0%B0%92%E0%B0%95%20%E0%B0%AE%E0%B0%BE%E0%B0%B0%E0%B1%8D%E0%B0%97%E0%B0%82%20(43)_Audio.mp3"></audio>
     </div>
     <div class="track-player">
         <span id="trackCurrentTime" class="time-indicator" style="padding-left: 8px;">0:00</span>
@@ -1183,7 +1213,7 @@
             <button id="trackPlayPauseBtn" class="play-pause-btn"><i class="fas fa-play"></i></button>
             <p class="slider-text">Track</p>
         </div>
-        <audio id="trackPlayer" src="https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/tracks%2FOranna%20Oranna%20Track.mp3?alt=media&amp;token=045cb72a-023a-4515-8c94-3cec6ae7258c"></audio>
+        <audio id="trackPlayer" src="https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/ecamp-tracks/%E0%B0%93%E0%B0%B0%E0%B0%A8%E0%B1%8D%E0%B0%A8%E0%B0%BE%20-%20%E0%B0%93%E0%B0%B0%E0%B0%A8%E0%B1%8D%E0%B0%A8%E0%B0%BE%20(52)_Track.mp3"></audio>
     </div>
     <script>
         const menuBtn = document.getElementById('menuBtn');
@@ -1286,20 +1316,31 @@
         }
 
         async function downloadAudio() {
+            const audioText = document.getElementById("audioText");
+            const audioLoader = document.getElementById("audioLoader");
+
+            // Show loader immediately on click
+            audioText.style.display = "none";
+            audioLoader.style.display = "inline-block";
+
             drawer.classList.remove('open');
             overlay.classList.remove('show');
             menuBtn.setAttribute('aria-expanded', 'false');
-            const url = "https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/songs%2FO_ORANNA_ORANNA_NEW_DEMO%5B1%5D.mp3?alt=media&amp;token=df3b0e03-6a9e-4899-990b-7a7238267eaa";
+
+            const url = "https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/ecamp-audios/%E0%B0%92%E0%B0%95%E0%B1%87%20%E0%B0%92%E0%B0%95%20%E0%B0%AE%E0%B0%BE%E0%B0%B0%E0%B1%8D%E0%B0%97%E0%B0%82%20(43)_Audio.mp3";
             const filename = "ఓరన్నా - ఓరన్నా (52)_audio.mp3";
 
             if (!url) {
                 alert("Audio link is not available.");
                 document.getElementById("customMenu").style.display = "none";
+
+                // Restore UI
+                audioLoader.style.display = "none";
+                audioText.style.display = "inline";
                 return;
             }
 
             try {
-                // Try fetching the file as a blob
                 const response = await fetch(url, { mode: 'cors' });
                 if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
 
@@ -1315,34 +1356,48 @@
                 window.URL.revokeObjectURL(blobUrl);
             } catch (err) {
                 console.error("Download failed:", err);
-                // Fallback to direct link
                 const link = document.createElement("a");
                 link.href = url;
                 link.download = filename;
                 document.body.appendChild(link);
                 link.click();
                 document.body.removeChild(link);
-                alert("Download may have opened in a new tab due to server restrictions. Please right-click the link and choose 'Save As' if needed.");
+                alert("Download this Audio from this new Tab.");
             }
 
             document.getElementById("customMenu").style.display = "none";
+
+            // Restore original text and hide loader
+            audioLoader.style.display = "none";
+            audioText.style.display = "inline";
         }
 
         async function downloadTrack() {
+            const trackText = document.getElementById("trackText");
+            const trackLoader = document.getElementById("trackLoader");
+
+            // Show loader immediately
+            trackText.style.display = "none";
+            trackLoader.style.display = "inline-block";
+
             drawer.classList.remove('open');
             overlay.classList.remove('show');
             menuBtn.setAttribute('aria-expanded', 'false');
-            const url = "https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/tracks%2FOranna%20Oranna%20Track.mp3?alt=media&amp;token=045cb72a-023a-4515-8c94-3cec6ae7258c";
+
+            const url = "https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/ecamp-tracks/%E0%B0%93%E0%B0%B0%E0%B0%A8%E0%B1%8D%E0%B0%A8%E0%B0%BE%20-%20%E0%B0%93%E0%B0%B0%E0%B0%A8%E0%B1%8D%E0%B0%A8%E0%B0%BE%20(52)_Track.mp3";
             const filename = "ఓరన్నా - ఓరన్నా (52)_track.mp3";
 
             if (!url) {
                 alert("Track link is not available.");
                 document.getElementById("customMenu").style.display = "none";
+
+                // Hide loader, show text again
+                trackLoader.style.display = "none";
+                trackText.style.display = "inline";
                 return;
             }
 
             try {
-                // Try fetching the file as a blob
                 const response = await fetch(url, { mode: 'cors' });
                 if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
 
@@ -1358,18 +1413,23 @@
                 window.URL.revokeObjectURL(blobUrl);
             } catch (err) {
                 console.error("Download failed:", err);
-                // Fallback to direct link
                 const link = document.createElement("a");
                 link.href = url;
                 link.download = filename;
                 document.body.appendChild(link);
                 link.click();
                 document.body.removeChild(link);
-                alert("Download may have opened in a new tab due to server restrictions. Please right-click the link and choose 'Save As' if needed.");
+                alert("Download this Track from this new Tab.");
             }
 
             document.getElementById("customMenu").style.display = "none";
+
+            // Always restore after dialog/menu disappears
+            trackLoader.style.display = "none";
+            trackText.style.display = "inline";
         }
+
+
 
 
         // Get all items with submenus
@@ -1556,6 +1616,65 @@
                     });
             });
         }
+
+        (function () {
+            // Keys to retain in localStorage
+            const keysToRetain = ["bbsRole", "bbsName"];
+
+            // Store the values of the keys that actually exist
+            const existingKeys = new Set(keysToRetain.filter(key => localStorage.getItem(key) !== null));
+
+            // Remove all keys not in the existingKeys set
+            Object.keys(localStorage).forEach((key) => {
+                if (!existingKeys.has(key)) {
+                    localStorage.removeItem(key);
+                }
+            });
+
+            console.log("LocalStorage cleared except for:", [...existingKeys]);
+
+            // Clear sessionStorage
+            sessionStorage.clear();
+            console.log("SessionStorage cleared.");
+
+            // Clear IndexedDB data
+            const clearIndexedDB = () => {
+                if (!window.indexedDB) {
+                    console.warn("IndexedDB is not supported by this browser.");
+                    return;
+                }
+                indexedDB.databases().then((databases) => {
+                    databases.forEach((db) => {
+                        indexedDB.deleteDatabase(db.name);
+                        console.log(`Deleted IndexedDB: ${db.name}`);
+                    });
+                }).catch((error) => {
+                    console.error("Error clearing IndexedDB:", error);
+                });
+            };
+
+            // Clear browser cache
+            const clearCache = () => {
+                if ("caches" in window) {
+                    caches.keys().then((cacheNames) => {
+                        cacheNames.forEach((cacheName) => {
+                            caches.delete(cacheName);
+                            console.log(`Deleted Cache: ${cacheName}`);
+                        });
+                    }).catch((error) => {
+                        console.error("Error clearing cache:", error);
+                    });
+                } else {
+                    console.warn("Cache API is not supported by this browser.");
+                }
+            };
+
+            // Execute cleanup functions
+            clearIndexedDB();
+            clearCache();
+
+            console.log(`All data cleared except for ${[...existingKeys].join(", ")} in localStorage.`);
+        })();
     </script>
         
                             </body>
