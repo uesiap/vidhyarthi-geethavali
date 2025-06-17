@@ -883,6 +883,22 @@
             top: 0;
         }
 
+        .loader {
+            border: 4px solid #ccc;
+            border-top: 4px solid #075E54;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 0.5s linear infinite;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
                                     </style>
                             </head>
                             <body>
@@ -1146,7 +1162,8 @@
                             download
                         </span></span>
                     <span class="mnu-tit"
-                        style="font-size: 1.3rem; margin-bottom: 10px; margin-bottom: 5px;">Audio</span>
+                        style="font-size: 1.3rem; margin-bottom: 10px; margin-bottom: 5px;" id="audioText">Audio</span>
+                    <span id="audioLoader" class="loader" style="display: none; margin-left: 10px;"></span>
                 </li>
                 <li style="padding: 10px 14px; cursor: pointer; color: #333; font-family: 'Segoe UI', sans-serif; font-size: 14px; border: 1px solid var(--primary-dark); transition: background 0.2s; margin-bottom: px; border-radius: 8px;"
                     onmouseover="this.style.background='#f5f5f5'" onmouseout="this.style.background='none'"
@@ -1154,7 +1171,8 @@
                             download
                         </span></span>
                     <span class="mnu-tit"
-                        style="font-size: 1.3rem; margin-bottom: 10px; margin-bottom: 5px;">Track</span>
+                        style="font-size: 1.3rem; margin-bottom: 10px; margin-bottom: 5px;" id="trackText">Track</span>
+                    <span id="trackLoader" class="loader" style="display: none; margin-left: 10px;"></span>
                 </li>
             </ul>
         </div>
@@ -1293,20 +1311,31 @@
         }
 
         async function downloadAudio() {
+            const audioText = document.getElementById("audioText");
+            const audioLoader = document.getElementById("audioLoader");
+
+            // Show loader immediately on click
+            audioText.style.display = "none";
+            audioLoader.style.display = "inline-block";
+
             drawer.classList.remove('open');
             overlay.classList.remove('show');
             menuBtn.setAttribute('aria-expanded', 'false');
+
             const url = "https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/ecamp-audios/%E0%B0%85%E0%B0%A6%E0%B1%8D%E0%B0%B5%E0%B0%BF%E0%B0%A4%E0%B1%80%E0%B0%AF%20%E0%B0%B8%E0%B0%A4%E0%B1%8D%E0%B0%AF%E0%B0%A6%E0%B1%87%E0%B0%B5%E0%B1%81%E0%B0%A1%E0%B1%81%20(6)_Audio.mp3";
             const filename = "అద్వితీయ సత్యదేవుడు (6)_audio.mp3";
 
             if (!url) {
                 alert("Audio link is not available.");
                 document.getElementById("customMenu").style.display = "none";
+
+                // Restore UI
+                audioLoader.style.display = "none";
+                audioText.style.display = "inline";
                 return;
             }
 
             try {
-                // Try fetching the file as a blob
                 const response = await fetch(url, { mode: 'cors' });
                 if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
 
@@ -1322,7 +1351,6 @@
                 window.URL.revokeObjectURL(blobUrl);
             } catch (err) {
                 console.error("Download failed:", err);
-                // Fallback to direct link
                 const link = document.createElement("a");
                 link.href = url;
                 link.download = filename;
@@ -1333,23 +1361,38 @@
             }
 
             document.getElementById("customMenu").style.display = "none";
+
+            // Restore original text and hide loader
+            audioLoader.style.display = "none";
+            audioText.style.display = "inline";
         }
 
         async function downloadTrack() {
+            const trackText = document.getElementById("trackText");
+            const trackLoader = document.getElementById("trackLoader");
+
+            // Show loader immediately
+            trackText.style.display = "none";
+            trackLoader.style.display = "inline-block";
+
             drawer.classList.remove('open');
             overlay.classList.remove('show');
             menuBtn.setAttribute('aria-expanded', 'false');
+
             const url = "https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/ecamp-tracks/%E0%B0%85%E0%B0%A6%E0%B1%8D%E0%B0%B5%E0%B0%BF%E0%B0%A4%E0%B1%80%E0%B0%AF%20%E0%B0%B8%E0%B0%A4%E0%B1%8D%E0%B0%AF%E0%B0%A6%E0%B1%87%E0%B0%B5%E0%B1%81%E0%B0%A1%E0%B1%81%20(6)_Track.mp3";
             const filename = "అద్వితీయ సత్యదేవుడు (6)_track.mp3";
 
             if (!url) {
                 alert("Track link is not available.");
                 document.getElementById("customMenu").style.display = "none";
+
+                // Hide loader, show text again
+                trackLoader.style.display = "none";
+                trackText.style.display = "inline";
                 return;
             }
 
             try {
-                // Try fetching the file as a blob
                 const response = await fetch(url, { mode: 'cors' });
                 if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
 
@@ -1365,7 +1408,6 @@
                 window.URL.revokeObjectURL(blobUrl);
             } catch (err) {
                 console.error("Download failed:", err);
-                // Fallback to direct link
                 const link = document.createElement("a");
                 link.href = url;
                 link.download = filename;
@@ -1376,7 +1418,13 @@
             }
 
             document.getElementById("customMenu").style.display = "none";
+
+            // Always restore after dialog/menu disappears
+            trackLoader.style.display = "none";
+            trackText.style.display = "inline";
         }
+
+
 
 
         // Get all items with submenus
