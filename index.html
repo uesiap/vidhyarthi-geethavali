@@ -3,62 +3,132 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script>
-        (function () {
-            // Clear all localStorage
-            localStorage.clear();
-            console.log("LocalStorage cleared.");
+    <meta charset="UTF-8">
+    <!-- Clear all Data -->
 
-            // Clear all sessionStorage
-            sessionStorage.clear();
-            console.log("SessionStorage cleared.");
 
-            // Clear all IndexedDB databases
-            const clearIndexedDB = () => {
-                if (!window.indexedDB) {
-                    console.warn("IndexedDB is not supported by this browser.");
-                    return;
-                }
-                indexedDB.databases().then((databases) => {
-                    databases.forEach((db) => {
-                        indexedDB.deleteDatabase(db.name);
-                        console.log(`Deleted IndexedDB: ${db.name}`);
-                    });
-                }).catch((error) => {
-                    console.error("Error clearing IndexedDB:", error);
-                });
-            };
-
-            // Clear all caches
-            const clearCache = () => {
-                if ("caches" in window) {
-                    caches.keys().then((cacheNames) => {
-                        cacheNames.forEach((cacheName) => {
-                            caches.delete(cacheName);
-                            console.log(`Deleted Cache: ${cacheName}`);
-                        });
-                    }).catch((error) => {
-                        console.error("Error clearing cache:", error);
-                    });
-                } else {
-                    console.warn("Cache API is not supported by this browser.");
-                }
-            };
-
-            // Execute cleanup
-            clearIndexedDB();
-            clearCache();
-
-            console.log("All data cleared from browser storage.");
-        })();
-    </script>
+    <!-- Title, Meta Description  & Keywords-->
     <title>Vidhyardhi Geethavali | UESI AP</title>
-    <!-- Font Awesome -->
+    <meta name="description"
+        content="Vidhyardhi Geethavali songs">
+    <meta name="keywords"
+        content="uesi, ap, uesi ap, uesi ap songs, vg, geethavali songs,vidhyardhi geethavali, camp, songs, vidhyarthi, geethavali, song, lyrics, audio, track, ">
+
+    <!-- Verification Tag -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="eZcr6WyistE7nCSaUoUkf9tpK_SmeG5caEM-x3nEWb4">
+    <meta name="msvalidate.01" content="28F3BC7AAD0F4B06B4517F2211A7D366">
+
+    <!-- Your theme color -->
+    <meta name="theme-color" content="#128C7E">
+
+    <!-- Meta Tags for Web Application-->
+    <link rel="manifest" href="https://uesiap.github.io/vidhyardhi-geethavali/manifest.json"
+        crossorigin="use-credentials">
+    <link rel="apple-touch-icon" href="https://uesiap.github.io/vidhyardhi-geethavali/Icon192.png">
+    <!-- iOS splash icon -->
+
+    <!-- Author and Robots -->
+    <meta name="author" content="M.Rahul">
+    <meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow">
+    <meta name="googlebot-news" content="index, follow">
+
+    <!-- Canonical Link -->
+    <link rel="canonical" href="https://uesiap.github.io/vidhyardhi-geethavali/">
+
+    <!-- Favicon Links -->
+    <link rel="shortcut icon" type="image/x-icon"
+        href="https://www.uesitn.org/wp-content/uploads/2020/08/uesi-favicon.png">
+    <link rel="apple-touch-icon" href="/vidhyardhi-geethavali/favicon.png">
+    <link rel="icon" sizes="192x192" href="/vidhyardhi-geethavali/Icon192.png">
+    <link rel="icon" sizes="512x512" href="/vidhyardhi-geethavali/Icon512.png">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Vidhyardhi Geethavali | UESI AP">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://uesiap.github.io/vidhyardhi-geethavali/">
+    <meta property="og:image" content="/vidhyardhi-geethavali/Icon192.png">
+    <meta property="og:description"
+        content="Vidhyardhi Geethavali Songs.">
+    <meta property="og:site_name" content="UESI AP">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image:alt" content="Vidhyardhi Geethavali">
+
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Vidhyardhi Geethavali Songs | UESI AP">
+    <meta name="twitter:description"
+        content="Vidhyardhi Geethavali Songs.">
+    <meta name="twitter:image" content="/vidhyardhi-geethavali/Icon192.png">
+    <meta name="twitter:url" content="https://uesiap.github.io/vidhyardhi-geethavali/">
+    <meta name="twitter:site" content="@uesiap">
+    <meta name="twitter:creator" content="@uesiap">
+    <meta name="twitter:image:alt" content="Vidhyardhi Geethavali">
+    <meta name="twitter:label1" content="Published by">
+    <meta name="twitter:data1" content="UESI AP">
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://uesiap.github.io/vidhyardhi-geethavali/"
+      },
+      "keywords": "lyrics, vidhyardhi, geethavali, UESI, AP, uesi, ap, camps, songs, vidhyarthi,camp songs, camps,  uesi songs, uesi ap songs, vidhyardhi geethavali songs, ap Vidhyardhi Geethavali Uesi songs, uesi songs, VJ Songs, Uesi Vj songs, Telugu Vidhyardhi Gethavali songs, english songs, telugu songs, audio songs, Vidhyardhi Geethavali Track songs, Vidhyardhi Geethavali Audio songs",
+      "inLanguage": "telugu",
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "UESI AP",
+        "url": "https://uesiap.github.io/vidhyardhi-geethavali/"
+      },
+      "image": {
+        "@type": "ImageObject",
+        "url": "/vidhyardhi-geethavali/Icon192.png",
+        "width": 192,
+        "height": 192
+      },
+      "author": {
+        "@type": "Person",
+        "name": "M.Rahul"
+      },
+      "url": "https://uesiap.github.io/vidhyardhi-geethavali/",
+      "image": "/vidhyardhi-geethavali/Icon192.png",
+      "sameAs": [
+        "https://www.youtube.com/@UESIOfficial"
+      ],
+      "publisher": {
+        "@type": "Organization",
+        "name": "UESI AP",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://uesiap.github.io/vidhyardhi-geethavali/"
+        }
+      }
+    }
+    </script>
+
+    <!-- Site Name Markup -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "UESI AP",
+      "url": "https://uesiap.github.io/vidhyardhi-geethavali/"
+    }
+    </script>
+
+    <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500&display=swap');
+        @import url('https://fonts.googleapis.com/css?family=Noto+Sans+Telugu:wght@400;500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Sree+Krushnadevaraya&display=swap');
+
         :root {
             --primary-color: #128C7E;
             --primary-dark: #075E54;
@@ -76,13 +146,16 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-weight: 500;
+            font-style: normal;
         }
 
         body {
-            background-color: var(--bg-light);
-            min-height: 100vh;
-            line-height: 1.6;
+            font-family: 'Google Sans', sans-serif;
+            background: white;
+            margin: 0;
+            margin-top: 80px;
+            padding: 0;
             user-select: none;
             -webkit-user-select: none;
             -moz-user-select: none;
@@ -168,6 +241,12 @@
             will-change: transform;
         }
 
+        @media (min-width: 768px) {
+            .drawer {
+                width: 400px;
+            }
+        }
+
         .drawer.open {
             right: 0;
         }
@@ -176,7 +255,6 @@
             padding: 0;
         }
 
-        /* Main Menu Items */
         .drawer-item {
             padding: 16px 25px;
             color: var(--text-dark);
@@ -304,16 +382,14 @@
 
         /* Main Content */
         .main-content {
-            padding: 90px 5% 30px;
-            max-width: 1200px;
-            margin: 0 auto;
+            background-color: f5f5f5;
         }
 
         .page-title {
             margin-bottom: 25px;
             color: var(--text-dark);
             font-size: 1.8rem;
-            font-weight: 600;
+            font-weight: 500;
         }
 
         .card {
@@ -342,7 +418,7 @@
             }
 
             .main-content {
-                padding: 85px 20px 25px;
+                padding: 0px 20px 0px;
             }
 
             .page-title {
@@ -387,12 +463,16 @@
                 max-width: 900px;
                 /* Optional: adjust max-width for wider grid */
             }
+
+            .title {
+                font-size: 1.3rem;
+            }
         }
 
         .box {
             background-color: #e0e0e0;
             border-radius: 8px;
-            padding: 12px;
+            padding: 7px;
             text-align: center;
             font-size: 20px;
             cursor: pointer;
@@ -484,18 +564,82 @@
             color: #128C7E;
             transform: scale(1.02);
         }
+
+
+        .menu-button:hover {
+            background-color: #f0f0f0;
+            cursor: pointer;
+        }
+
+        .menu-toggle {
+            cursor: pointer;
+            width: 24px;
+            height: 24px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .menu-bars {
+            width: 24px;
+            height: 2.4px;
+            background: white;
+            position: relative;
+            transition: background 0.3s ease;
+        }
+
+        .menu-bars::before,
+        .menu-bars::after {
+            content: '';
+            position: absolute;
+            width: 24px;
+            height: 2.4px;
+            background: white;
+            transition: transform 0.3s ease, top 0.3s ease, opacity 0.3s ease;
+            left: 0;
+        }
+
+        .menu-bars::before {
+            top: -8px;
+        }
+
+        .menu-bars::after {
+            top: 8px;
+        }
+
+        .menu-toggle.open .menu-bars {
+            background: transparent;
+        }
+
+        .menu-toggle.open .menu-bars::before {
+            transform: rotate(45deg);
+            top: 0;
+        }
+
+        .menu-toggle.open .menu-bars::after {
+            transform: rotate(-45deg);
+            top: 0;
+        }
     </style>
 </head>
 
 <body>
+
     <nav class="navbar" aria-label="Main navigation">
         <div class="logo-title">
             <img src="https://uesiap.github.io/vidhyardhi-geethavali/Icon192.jpg" alt="App Logo" class="logo">
-            <span class="title" style="font-size: 1rem;">UESI-AP Audio & Visuals Dept</span>
+            <span class="title">UESI-AP Audio & Visuals Dept</span>
         </div>
         <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">
-            <span class="material-symbols-outlined" style="font-size: 2rem;">
+            <!--<span class="material-symbols-outlined" style="font-size: 2rem;">
                 dehaze
+            </span>-->
+            <!--<i class="fas fa-bars" style="font-size: 1.5rem; transform: scaleX(1.3);"></i>-->
+            <span id="menuBtn" aria-expanded="false">
+                <div class="menu-toggle">
+                    <div class="menu-bars"></div>
+                </div>
             </span>
         </button>
     </nav>
@@ -522,23 +666,23 @@
                 </div>
             </div>
             <div class="submenu" id="chatsSubmenu">
-                <a href="/vidhyardhi-geethavali/e-camp-songs" class="submenu-item" tabindex="0">
+                <a href="/vidhyardhi-geethavali/camps/ecamp" class="submenu-item" tabindex="0">
                     <span class="icon"><i class="fas fa-users"></i></span>
                     <span class="mnu-tit">E Camp Songs</span>
                 </a>
-                <a href="/vidhyardhi-geethavali/dt-camp-songs" class="submenu-item" tabindex="0">
+                <a href="/vidhyardhi-geethavali/camps/dtcamp" class="submenu-item" tabindex="0">
                     <span class="icon"><i class="fas fa-users"></i></span>
                     <span class="mnu-tit">DT Camp Songs</span>
                 </a>
-                <a href="/vidhyardhi-geethavali/lt-camp-songs" class="submenu-item" tabindex="0">
+                <a href="/vidhyardhi-geethavali/camps/ltcamp" class="submenu-item" tabindex="0">
                     <span class="icon"><i class="fas fa-users"></i></span>
                     <span class="mnu-tit">LT Camp Songs</span>
                 </a>
-                <a href="/vidhyardhi-geethavali/cmtc-songs" class="submenu-item" tabindex="0">
+                <a href="/vidhyardhi-geethavali/camps/cmtc" class="submenu-item" tabindex="0">
                     <span class="icon"><i class="fas fa-users"></i></span>
                     <span class="mnu-tit">CMTC Songs</span>
                 </a>
-                <a href="/vidhyardhi-geethavali/smtc-songs" class="submenu-item" tabindex="0">
+                <a href="/vidhyardhi-geethavali/camps/smtc" class="submenu-item" tabindex="0">
                     <span class="icon"><i class="fas fa-users"></i></span>
                     <span class="mnu-tit">SMTC Songs</span>
                 </a>
@@ -554,23 +698,29 @@
                 </div>
             </div>
             <div class="submenu" id="callsSubmenu">
-                <a href="/vidhyardhi-geethavali/praise-worship" class="submenu-item" tabindex="0">
+                <a href="/vidhyardhi-geethavali/special/praise" class="submenu-item" tabindex="0">
                     <span class="icon"><span class="material-symbols-outlined">
                             cheer
                         </span></span>
                     <span class="mnu-tit">Praise & Worship</span>
                 </a>
-                <a href="/vidhyardhi-geethavali/prayer" class="submenu-item" tabindex="0">
+                <a href="/vidhyardhi-geethavali/special/prayer" class="submenu-item" tabindex="0">
                     <span class="icon"><span class="material-symbols-outlined">
                             folded_hands
                         </span></span>
                     <span class="mnu-tit">Prayer</span>
                 </a>
-                <a href="/vidhyardhi-geethavali/thanks-giving" class="submenu-item" tabindex="0">
+                <a href="/vidhyardhi-geethavali/special/thanks" class="submenu-item" tabindex="0">
                     <span class="icon"><span class="material-symbols-outlined">
                             handshake
                         </span></span>
                     <span class="mnu-tit">Thanks Giving</span>
+                </a>
+                <a href="/vidhyardhi-geethavali/special/christmas" class="submenu-item" tabindex="0">
+                    <span class="icon"><span class="material-symbols-outlined">
+                            Forest
+                        </span></span>
+                    <span class="mnu-tit">Christmas</span>
                 </a>
             </div>
 
@@ -584,19 +734,19 @@
                 </div>
             </div>
             <div class="submenu" id="aimsSubmenu">
-                <a href="/vidhyardhi-geethavali/evangelism" class="submenu-item" tabindex="0">
+                <a href="/vidhyardhi-geethavali/aims/evangelism" class="submenu-item" tabindex="0">
                     <span class="icon"><i class="fa-solid fa-arrow-right-long"></i></span>
                     <span class="mnu-tit">Evangelism</span>
                 </a>
-                <a href="/vidhyardhi-geethavali/fellowship" class="submenu-item" tabindex="0">
+                <a href="/vidhyardhi-geethavali/aims/fellowship" class="submenu-item" tabindex="0">
                     <span class="icon"><i class="fa-solid fa-arrow-right-long"></i></span>
                     <span class="mnu-tit">Fellowship</span>
                 </a>
-                <a href="/vidhyardhi-geethavali/testimony" class="submenu-item" tabindex="0">
+                <a href="/vidhyardhi-geethavali/aims/testimony" class="submenu-item" tabindex="0">
                     <span class="icon"><i class="fa-solid fa-arrow-right-long"></i></span>
                     <span class="mnu-tit">Testimony</span>
                 </a>
-                <a href="/vidhyardhi-geethavali/missions" class="submenu-item" tabindex="0">
+                <a href="/vidhyardhi-geethavali/aims/missions" class="submenu-item" tabindex="0">
                     <span class="icon"><i class="fa-solid fa-arrow-right-long"></i></span>
                     <span class="mnu-tit">Missions</span>
                 </a>
@@ -612,20 +762,24 @@
                 </div>
             </div>
             <div class="submenu" id="audioSubmenu">
-                <a href="/vidhyardhi-geethavali/telugu-audio-songs" class="submenu-item" tabindex="0">
+                <a href="/vidhyardhi-geethavali/audios/telugu" class="submenu-item" tabindex="0">
                     <span class="icon"><i class="fa-solid fa-music"></i></span>
                     <span class="mnu-tit">Telugu Songs</span>
                 </a>
-                <a href="/vidhyardhi-geethavali/english-audio-songs" class="submenu-item" tabindex="0">
+                <a href="/vidhyardhi-geethavali/audios/english" class="submenu-item" tabindex="0">
                     <span class="icon"><i class="fa-solid fa-music"></i></span>
                     <span class="mnu-tit">English Songs</span>
                 </a>
-                <a href="/vidhyardhi-geethavali/hindi-audio-songs" class="submenu-item" tabindex="0">
+                <a href="/vidhyardhi-geethavali/audios/hindi" class="submenu-item" tabindex="0">
                     <span class="icon"><i class="fa-solid fa-music"></i></span>
                     <span class="mnu-tit">Hindi Songs</span>
                 </a>
-            </div><br><hr><br>
-            <div class="drawer-item has-submenu" id="audioItem" tabindex="0" style="border-top: 1.5px solid #ddd;">
+            </div>
+            <br>
+            <hr style="border: 1.5px dotted var(--primary-color);">
+            <br>
+            <div class="drawer-item has-submenu" id="thoughtsSubmenu" tabindex="0"
+                style="border-top: 1.5px solid #ddd;">
                 <div class="item-content">
                     <span class="icon"><span class="material-symbols-outlined">
                             forum
@@ -640,11 +794,11 @@
                         </span></span>
                     <span class="mnu-tit">Write a Review</span>
                 </a>
-                <a href="/vidhyardhi-geethavali/correct-lyrics" class="submenu-item" tabindex="0">
+                <a href="/vidhyardhi-geethavali/give-correction" class="submenu-item" tabindex="0">
                     <span class="icon"><span class="material-symbols-outlined">
                             lyrics
                         </span></span>
-                    <span class="mnu-tit">Correct Lyrics</span>
+                    <span class="mnu-tit">Give Correction</span>
                 </a>
                 <a href="/vidhyardhi-geethavali/user-feedback" class="submenu-item" tabindex="0">
                     <span class="icon"><span class="material-symbols-outlined">
@@ -652,25 +806,25 @@
                         </span></span>
                     <span class="mnu-tit">Feedback</span>
                 </a>
-            </div><br><br><br><br>
+            </div>
+            <br><br><br><br>
+
         </div>
     </div>
 
-
     <div class="overlay" id="overlay"></div>
-
     <main class="main-content">
-        <h1 class="page-title">Vidhyardhi Geethavali Songs</h1>
+        <h1 class="page-title" style="margin-top: 1rem;">Vidhyardhi Geethavali Songs</h1>
 
         <div class="card">
-            <h2><i class="fa-solid fa-music" style="margin-right: 10px;"></i><span id="sel-lis"></span> Songs</h2>
+            <h2><i class="fa-solid fa-music" style="margin-right: 10px;"></i><span id="sel-lis">Telugu</span> Songs</h2>
 
             <!-- Language Selector -->
             <div class="lang-select">
                 <label for="langSelect"><strong>Select <i class="fa-solid fa-language"
                             style="font-size: 1.5rem; color: #128C7E;"></i>:</strong></label>
                 <select id="langSelect">
-                    <option value="telugu" selected>Telugu</option>
+                    <option value="telugu" selected="">Telugu</option>
                     <option value="english">English</option>
                     <option value="hindi">Hindi</option>
                 </select>
@@ -678,24 +832,79 @@
 
 
             <!-- Letter Grid (for Telugu & English) -->
-            <div class="grid" id="letters"></div>
+            <div class="grid" id="letters">
+                <div class="box active">అ</div>
+                <div class="box">ఆ</div>
+                <div class="box">ఇ</div>
+                <div class="box">ఉ</div>
+                <div class="box">ఊ</div>
+                <div class="box">ఎ</div>
+                <div class="box">ఏ</div>
+                <div class="box">ఐ</div>
+                <div class="box">ఒ</div>
+                <div class="box">ఓ</div>
+                <div class="box">క</div>
+                <div class="box">గ</div>
+                <div class="box">ఘ</div>
+                <div class="box">చ</div>
+                <div class="box">జ</div>
+                <div class="box">త</div>
+                <div class="box">ద</div>
+                <div class="box">న</div>
+                <div class="box">ప</div>
+                <div class="box">బ</div>
+                <div class="box">మ</div>
+                <div class="box">య</div>
+                <div class="box">ర</div>
+                <div class="box">ల</div>
+                <div class="box">వ</div>
+                <div class="box">శ</div>
+                <div class="box">ష</div>
+                <div class="box">స</div>
+                <div class="box">హ</div>
+            </div>
         </div>
 
         <!-- Song Display Section -->
         <section class="card" id="ssl">
             <h2><i class="fa-solid fa-music" style="margin-right: 10px;"></i>All Songs of <span id="title">"అ"</span>
             </h2>
-            <ul id="songs"></ul>
+            <ul id="songs">
+                <li><a href="/vidhyardhi-geethavali/tsongs/song1" class="song-link">అయ్యయో యేసయ్యా</a></li>
+                <li><a href="/vidhyardhi-geethavali/tsongs/song2" class="song-link">అనుగ్రహమే నా జీవితం</a></li>
+            </ul>
         </section>
 
 
 
     </main>
-
     <script>
         const menuBtn = document.getElementById('menuBtn');
         const drawer = document.getElementById('drawer');
         const overlay = document.getElementById('overlay');
+
+        function toggleMenu() {
+            const menu = document.getElementById("customMenu");
+            const overlay = document.getElementById("menuOverlay");
+            const closeBtn = document.getElementById("cls-btn");
+
+            const isVisible = menu.style.display === "block";
+
+            menu.style.display = isVisible ? "none" : "block";
+            overlay.style.display = isVisible ? "none" : "block";
+            closeBtn.style.display = isVisible ? "none" : "block";
+        }
+
+
+
+        // Close menu when clicking outside
+        document.addEventListener("click", function (event) {
+            const menu = document.getElementById("customMenu");
+            const button = document.querySelector(".menu-button");
+            if (!button.contains(event.target) && !menu.contains(event.target)) {
+                menu.style.display = "none";
+            }
+        });
 
         // Get all items with submenus
         const submenuItems = document.querySelectorAll('.drawer-item.has-submenu');
@@ -705,8 +914,11 @@
             const isOpen = drawer.classList.toggle('open');
             overlay.classList.toggle('show');
             menuBtn.setAttribute('aria-expanded', isOpen);
-            menuBtn.querySelector('i').className = isOpen ? 'fas fa-times' : 'fas fa-bars';
+
+            const icon = menuBtn.querySelector('.menu-toggle');
+            icon.classList.toggle('open', isOpen);
         };
+
 
         menuBtn.addEventListener('click', toggleDrawer);
 
@@ -715,15 +927,33 @@
             drawer.classList.remove('open');
             overlay.classList.remove('show');
             menuBtn.setAttribute('aria-expanded', 'false');
-            menuBtn.querySelector('i').className = 'fas fa-bars';
+            menuBtn.querySelector('.menu-toggle').classList.remove('open');
 
-            // Close all submenus when closing drawer
             submenuItems.forEach(item => {
                 item.classList.remove('open');
                 const submenu = item.nextElementSibling;
                 submenu.classList.remove('open');
             });
         });
+
+
+        // Close drawer and submenus when any submenu item is clicked
+        const submenuLinks = document.querySelectorAll('.submenu-item');
+
+        submenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                drawer.classList.remove('open');
+                overlay.classList.remove('show');
+                menuBtn.setAttribute('aria-expanded', 'false');
+                menuBtn.querySelector('.menu-toggle').classList.remove('open');
+
+                submenuItems.forEach(item => item.classList.remove('open'));
+                document.querySelectorAll('.submenu').forEach(submenu => submenu.classList.remove('open'));
+            });
+        });
+
+
+
 
         // Handle submenu toggle
         submenuItems.forEach(item => {
@@ -761,15 +991,15 @@
                 drawer.classList.remove('open');
                 overlay.classList.remove('show');
                 menuBtn.setAttribute('aria-expanded', 'false');
-                menuBtn.querySelector('i').className = 'fas fa-bars';
+                menuBtn.querySelector('.menu-toggle').classList.remove('open');
             }
 
-            // Ctrl+M shortcut to toggle menu
             if (e.ctrlKey && e.key === 'm') {
                 e.preventDefault();
                 toggleDrawer();
             }
         });
+
 
         // Improve touch experience on mobile
         let startX = 0;
@@ -789,168 +1019,138 @@
                 drawer.classList.remove('open');
                 overlay.classList.remove('show');
                 menuBtn.setAttribute('aria-expanded', 'false');
-                menuBtn.querySelector('i').className = 'fas fa-bars';
+                menuBtn.querySelector('.menu-toggle').classList.remove('open');
             }
         }, { passive: true });
 
-        // Telugu letters from "అ" to "హ"
-        const teluguLetters = [
-            "అ", "ఆ", "ఇ", "ఉ", "ఊ",
-            "ఎ", "ఏ", "ఐ", "ఒ", "ఓ",
-            "క", "గ", "ఘ", "చ", "జ",
-            "త", "ద", "న", "ప", "బ",
-            "మ", "య", "ర", "ల",
-            "వ", "శ", "ష", "స", "హ"
-        ];
 
-        const englishLetters = Array.from({ length: 26 }, (_, i) => String.fromCharCode(65 + i))
-            .filter(letter => letter !== 'V' && letter !== 'Z');
-
-
-        const teluguSongs = {
-            "అ": [
-                { id: "song1", name: "అయ్యయో యేసయ్యా" },
-                { id: "song2", name: "అనుగ్రహమే నా జీవితం" }
-            ],
-            "క": [
-                { id: "song3", name: "కీర్తించుదాం నీ మహిమ" }
-            ],
-            "ద": [
-                { id: "song4", name: "దయగల యేసయ్యా" }
-            ]
-        };
-
-        const englishSongs = {
-            "A": [
-                { id: "song1", name: "Amazing Grace" },
-                { id: "song2", name: "All to Jesus I Surrender" }
-            ],
-            "J": [
-                { id: "song3", name: "Jesus Loves Me" }
-            ],
-            "G": [
-                { id: "song4", name: "Great Is Thy Faithfulness" }
-            ]
-        };
-
-        const hindiSongs = [
-            { id: "song1", name: "यीशु मसीह का नाम महान है" },
-            { id: "song2", name: "तेरी महिमा से भर दे" },
-            { id: "song3", name: "यीशु है जीवन का रास्ता" },
-            { id: "song4", name: "प्रभु यीशु का धन्यवाद" }
-        ];
-
-
-        const letterDiv = document.getElementById("letters");
-        const songList = document.getElementById("songs");
-        const title = document.getElementById("title");
-        const langSelect = document.getElementById("langSelect");
-        const ssl = document.getElementById("ssl");
-        const selLis = document.getElementById("sel-lis");
-        selLis.textContent = "Telugu";
-        renderLetters(teluguLetters, "telugu", false);
-
-        function slugify(text) {
-            return text
-                .toLowerCase()
-                .replace(/[^a-zA-Z0-9\u0C00-\u0C7F\u0900-\u097F]+/g, '-')
-                .replace(/^-+|-+$/g, '');
-        }
-
-        function showSongs(letter, lang) {
-            title.textContent = `"${letter}"`;
-            songList.innerHTML = "";
-
-            const list = (lang === "telugu" ? teluguSongs : englishSongs)[letter] || [];
-
-            if (list.length === 0) {
-                const li = document.createElement("li");
-                li.textContent = "No songs found";
-                songList.appendChild(li);
+        // Event Listener for Audio Play/Pause Button
+        audioPlayPauseBtn.addEventListener('click', () => {
+            if (audioPlayer.paused) {
+                audioPlayer.play();
+                audioPlayPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                trackPlayer.pause();
+                trackPlayPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
             } else {
-                list.forEach(song => {
-                    const li = document.createElement("li");
-                    const a = document.createElement("a");
-                    a.textContent = song.name;
-                    a.href = `/vidhyardhi-geethavali/${lang === "telugu" ? "tsongs" : "esongs"}/${song.id}`;
-                    a.className = "song-link";
-                    li.appendChild(a);
-                    songList.appendChild(li);
-                });
-            }
-        }
-
-
-        function renderLetters(letters, lang, scroll = true) {
-            letterDiv.innerHTML = "";
-            songList.innerHTML = "";
-            title.textContent = "";
-            selLis.textContent = lang.charAt(0).toUpperCase() + lang.slice(1);
-
-            letters.forEach(letter => {
-                const box = document.createElement("div");
-                box.className = "box";
-                box.textContent = letter;
-                box.onclick = () => {
-                    document.querySelectorAll('.box').forEach(b => b.classList.remove('active'));
-                    box.classList.add('active');
-                    showSongs(letter, lang);
-                    if (scroll) {
-                        ssl.scrollIntoView({ behavior: "smooth" });
-                    }
-                };
-                letterDiv.appendChild(box);
-            });
-
-            if (letters.length > 0) {
-                const firstBox = document.querySelectorAll('.box')[0];
-                if (firstBox) {
-                    firstBox.classList.add('active');
-                    showSongs(letters[0], lang);
-                    // Do NOT scroll here on initial load
-                }
-            }
-        }
-
-
-        langSelect.addEventListener("change", () => {
-            const lang = langSelect.value;
-            selLis.textContent = lang.charAt(0).toUpperCase() + lang.slice(1);
-
-            if (lang === "telugu") {
-                ssl.style.display = "block";
-                renderLetters(teluguLetters, "telugu");
-            } else if (lang === "english") {
-                ssl.style.display = "block";
-                renderLetters(englishLetters, "english");
-            } else if (lang === "hindi") {
-                letterDiv.innerHTML = "";
-                songList.innerHTML = "";
-                title.textContent = `"Hindi Songs"`;
-                hindiSongs.forEach(song => {
-                    const li = document.createElement("li");
-                    const a = document.createElement("a");
-                    a.textContent = song.name;
-                    a.href = `/vidhyardhi-geethavali/hsongs/${song.id}`;
-                    a.className = "song-link";
-                    li.appendChild(a);
-                    songList.appendChild(li);
-                });
-                ssl.style.display = "block";
-                ssl.scrollIntoView({ behavior: "smooth" });
+                audioPlayer.pause();
+                audioPlayPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
             }
         });
 
-        // Initial Load
-        selLis.textContent = "Telugu";
-        renderLetters(teluguLetters, "telugu");
+        // Event Listener for Track Play/Pause Button
+        trackPlayPauseBtn.addEventListener('click', () => {
+            if (trackPlayer.paused) {
+                trackPlayer.play();
+                trackPlayPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                audioPlayer.pause();
+                audioPlayPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+            } else {
+                trackPlayer.pause();
+                trackPlayPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+            }
+        });
 
-        document.addEventListener('cut', e => e.preventDefault());
-        document.addEventListener('copy', e => e.preventDefault());
-        document.addEventListener('paste', e => e.preventDefault());
-        document.addEventListener('contextmenu', e => e.preventDefault());
+        // Update Seek Sliders and Time Indicators
+        function updatePlayer(player, seekSlider, currentTimeIndicator, durationTimeIndicator) {
+            player.addEventListener('loadedmetadata', () => {
+                seekSlider.max = player.duration;
+                durationTimeIndicator.textContent = formatTime(player.duration);
+            });
 
+            player.addEventListener('timeupdate', () => {
+                seekSlider.value = player.currentTime;
+                currentTimeIndicator.textContent = formatTime(player.currentTime);
+            });
+
+            seekSlider.addEventListener('input', () => {
+                player.currentTime = seekSlider.value;
+            });
+        }
+
+        // Format time in minutes and seconds
+        function formatTime(timeInSeconds) {
+            const minutes = Math.floor(timeInSeconds / 60);
+            const seconds = Math.floor(timeInSeconds % 60);
+            return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+        }
+
+        // Initialize Players
+        updatePlayer(audioPlayer, audioSeekSlider, audioCurrentTimeIndicator, audioDurationTimeIndicator);
+        updatePlayer(trackPlayer, trackSeekSlider, trackCurrentTimeIndicator, trackDurationTimeIndicator);
+
+        // Register Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function () {
+                navigator.serviceWorker.register('/vidhyardhi-geethavali/service-worker.js')
+                    .then(function (registration) {
+                        console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                    })
+                    .catch(function (error) {
+                        console.log('ServiceWorker registration failed: ', error);
+                    });
+            });
+        }
+
+        (function () {
+            // Keys to retain in localStorage
+            const keysToRetain = ["bbsRole", "bbsName"];
+
+            // Store the values of the keys that actually exist
+            const existingKeys = new Set(keysToRetain.filter(key => localStorage.getItem(key) !== null));
+
+            // Remove all keys not in the existingKeys set
+            Object.keys(localStorage).forEach((key) => {
+                if (!existingKeys.has(key)) {
+                    localStorage.removeItem(key);
+                }
+            });
+
+            console.log("LocalStorage cleared except for:", [...existingKeys]);
+
+            // Clear sessionStorage
+            sessionStorage.clear();
+            console.log("SessionStorage cleared.");
+
+            // Clear IndexedDB data
+            const clearIndexedDB = () => {
+                if (!window.indexedDB) {
+                    console.warn("IndexedDB is not supported by this browser.");
+                    return;
+                }
+                indexedDB.databases().then((databases) => {
+                    databases.forEach((db) => {
+                        indexedDB.deleteDatabase(db.name);
+                        console.log(`Deleted IndexedDB: ${db.name}`);
+                    });
+                }).catch((error) => {
+                    console.error("Error clearing IndexedDB:", error);
+                });
+            };
+
+            // Clear browser cache
+            const clearCache = () => {
+                if ("caches" in window) {
+                    caches.keys().then((cacheNames) => {
+                        cacheNames.forEach((cacheName) => {
+                            caches.delete(cacheName);
+                            console.log(`Deleted Cache: ${cacheName}`);
+                        });
+                    }).catch((error) => {
+                        console.error("Error clearing cache:", error);
+                    });
+                } else {
+                    console.warn("Cache API is not supported by this browser.");
+                }
+            };
+
+            // Execute cleanup functions
+            clearIndexedDB();
+            clearCache();
+
+            console.log(`All data cleared except for ${[...existingKeys].join(", ")} in localStorage.`);
+        })();
     </script>
+
 </body>
 
 </html>
