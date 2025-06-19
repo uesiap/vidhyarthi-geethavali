@@ -591,7 +591,7 @@
             cursor: pointer;
             text-decoration: none;
             outline: none;
-            max-width: 500px;
+            max-width: 350px;
             margin: 1.4rem auto;
             padding: 1rem 0;
             font-size: 1rem;
@@ -638,7 +638,7 @@
             font-size: 1rem;
             transition: var(--transition);
             font-weight: 500;
-            border: 1.5px solid #aaa;
+            border: 1.5px solid #666;
             border-left: 2.5px solid var(--primary-color);
             border-right: 2.5px solid var(--primary-color);
             background-color: #fff;
@@ -676,11 +676,18 @@
             gap: 1rem;
         }
 
-        @media (min-width: 768px) {
+        @media (min-width: 660px) {
+            .songs-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (min-width: 928px) {
             .songs-grid {
                 grid-template-columns: 1fr 1fr 1fr;
             }
         }
+
 
 
         .tab-btn {
@@ -709,6 +716,16 @@
         #englishSongs {
             text-align: center;
         }
+
+        .hidden {
+            visibility: hidden;
+            opacity: 0;
+            height: 0;
+            overflow: hidden;
+            pointer-events: none;
+            position: absolute;
+        }
+
 
         .my_name {
             background-color: white;
@@ -938,7 +955,7 @@
             </div>
             <span id="teluguSongs" class="songs-grid">
                 <h3 class="go-to ao">
-                    <a href="/vidhyardhi-geethavali/tsongs/song6" style=" color: var(--text-dark);">
+                    <a href="/vidhyardhi-geethavali/tsongs/song6">
                         1. అద్వితీయ సత్యదేవుడు (6)
                     </a>
                 </h3>
@@ -1070,9 +1087,9 @@
                     </a>
                 </h3>
             </span>
-            <span style="display: none;" id="englishSongs" class="songs-grid">
+            <span id="englishSongs" class="songs-grid hidden">
                 <h3 class="go-to ao">
-                    <a href="/vidhyardhi-geethavali/esongs/song17" style=" color: var(--text-dark);">
+                    <a href="/vidhyardhi-geethavali/esongs/song17">
                         1. Bags of Gold can never Buy (17)
                     </a>
                 </h3>
@@ -1110,13 +1127,13 @@
             const telugu = document.getElementById("teluguSongs");
             const english = document.getElementById("englishSongs");
 
-            // Toggle visibility
+            // Toggle visibility using class
             if (language === 'telugu') {
-                telugu.style.display = "block";
-                english.style.display = "none";
+                telugu.classList.remove("hidden");
+                english.classList.add("hidden");
             } else {
-                telugu.style.display = "none";
-                english.style.display = "block";
+                telugu.classList.add("hidden");
+                english.classList.remove("hidden");
             }
 
             // Update tab button states
@@ -1124,6 +1141,7 @@
             buttons.forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
         }
+
 
 
 
@@ -1305,5 +1323,4 @@
         })();
     </script>
 </body>
-
 </html>
