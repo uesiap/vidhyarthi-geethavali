@@ -1258,19 +1258,20 @@
         });
 
         function shareSongNav() {
-            shareSong();
             toggleMenu();
+            shareSong();
         }
 
         function downloadAudioNav() {
-            downloadAudio();
             toggleMenu();
+            downloadAudio();
         }
 
         function downloadTrackNav() {
-            downloadTrack();
             toggleMenu();
+            downloadTrack();
         }
+
 
         function shareSong() {
             drawer.classList.remove('open');
@@ -1333,124 +1334,210 @@
             document.getElementById("customMenu").style.display = "none";
         }
 
-        async function downloadAudio() {
-            const audioText = document.getElementById("audioText");
-            const audioLoader = document.getElementById("audioLoader");
+        // async function downloadAudio() {
+        //     const audioText = document.getElementById("audioText");
+        //     const audioLoader = document.getElementById("audioLoader");
 
-            // Show loader immediately on click
-            audioText.style.display = "none";
-            audioLoader.style.display = "inline-block";
+        //     // Show loader immediately on click
+        //     audioText.style.display = "none";
+        //     audioLoader.style.display = "inline-block";
 
-            drawer.classList.remove('open');
-            overlay.classList.remove('show');
-            menuBtn.setAttribute('aria-expanded', 'false');
+        //     drawer.classList.remove('open');
+        //     overlay.classList.remove('show');
+        //     menuBtn.setAttribute('aria-expanded', 'false');
 
-            const url = "https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/worship-audios/%E0%B0%89%E0%B0%A8%E0%B1%8D%E0%B0%A8%E0%B0%A4%E0%B0%AE%E0%B1%88%E0%B0%A8%20%E0%B0%B8%E0%B1%8D%E0%B0%A5%E0%B0%B2%E0%B0%AE%E0%B1%81%E0%B0%B2%E0%B0%B2%E0%B1%8B%20(32)_Audio.mp3";
-            const filename = "ఉన్నతమైన స్థలములలో (32)_Audio.mp3";
+        //     const url = "https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/worship-audios/%E0%B0%89%E0%B0%A8%E0%B1%8D%E0%B0%A8%E0%B0%A4%E0%B0%AE%E0%B1%88%E0%B0%A8%20%E0%B0%B8%E0%B1%8D%E0%B0%A5%E0%B0%B2%E0%B0%AE%E0%B1%81%E0%B0%B2%E0%B0%B2%E0%B1%8B%20(32)_Audio.mp3";
+        //     const filename = "ఉన్నతమైన స్థలములలో (32)_Audio.mp3";
 
-            if (!url) {
-                alert("Audio link is not available.");
-                document.getElementById("customMenu").style.display = "none";
+        //     if (!url) {
+        //         alert("Audio link is not available.");
+        //         document.getElementById("customMenu").style.display = "none";
 
-                // Restore UI
-                audioLoader.style.display = "none";
-                audioText.style.display = "inline";
-                return;
-            }
+        //         // Restore UI
+        //         audioLoader.style.display = "none";
+        //         audioText.style.display = "inline";
+        //         return;
+        //     }
 
-            try {
-                const response = await fetch(url, { mode: 'cors' });
-                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        //     try {
+        //         const response = await fetch(url, { mode: 'cors' });
+        //         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
 
-                const blob = await response.blob();
-                const blobUrl = window.URL.createObjectURL(blob);
+        //         const blob = await response.blob();
+        //         const blobUrl = window.URL.createObjectURL(blob);
 
-                const link = document.createElement("a");
-                link.href = blobUrl;
-                link.download = filename;
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-                window.URL.revokeObjectURL(blobUrl);
-            } catch (err) {
-                console.error("Download failed:", err);
-                const link = document.createElement("a");
-                link.href = url;
-                link.download = filename;
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-                alert("Download this Audio from this new Tab.");
-            }
+        //         const link = document.createElement("a");
+        //         link.href = blobUrl;
+        //         link.download = filename;
+        //         document.body.appendChild(link);
+        //         link.click();
+        //         document.body.removeChild(link);
+        //         window.URL.revokeObjectURL(blobUrl);
+        //     } catch (err) {
+        //         console.error("Download failed:", err);
+        //         const link = document.createElement("a");
+        //         link.href = url;
+        //         link.download = filename;
+        //         document.body.appendChild(link);
+        //         link.click();
+        //         document.body.removeChild(link);
+        //         alert("Download this Audio from this new Tab.");
+        //     }
 
-            document.getElementById("customMenu").style.display = "none";
+        //     document.getElementById("customMenu").style.display = "none";
 
-            // Restore original text and hide loader
-            audioLoader.style.display = "none";
-            audioText.style.display = "inline";
-        }
+        //     // Restore original text and hide loader
+        //     audioLoader.style.display = "none";
+        //     audioText.style.display = "inline";
+        // }
 
-        async function downloadTrack() {
-            const trackText = document.getElementById("trackText");
-            const trackLoader = document.getElementById("trackLoader");
+        // async function downloadTrack() {
+        //     const trackText = document.getElementById("trackText");
+        //     const trackLoader = document.getElementById("trackLoader");
 
-            // Show loader immediately
-            trackText.style.display = "none";
-            trackLoader.style.display = "inline-block";
+        //     // Show loader immediately
+        //     trackText.style.display = "none";
+        //     trackLoader.style.display = "inline-block";
 
-            drawer.classList.remove('open');
-            overlay.classList.remove('show');
-            menuBtn.setAttribute('aria-expanded', 'false');
+        //     drawer.classList.remove('open');
+        //     overlay.classList.remove('show');
+        //     menuBtn.setAttribute('aria-expanded', 'false');
 
-            const url = "https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/worship-tracks/%E0%B0%89%E0%B0%A8%E0%B1%8D%E0%B0%A8%E0%B0%A4%E0%B0%AE%E0%B1%88%E0%B0%A8%20%E0%B0%B8%E0%B1%8D%E0%B0%A5%E0%B0%B2%E0%B0%AE%E0%B1%81%E0%B0%B2%E0%B0%B2%E0%B1%8B%20(32)_Track.mp3";
-            const filename = "ఉన్నతమైన స్థలములలో (32)_Track.mp3";
+        //     const url = "https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/worship-tracks/%E0%B0%89%E0%B0%A8%E0%B1%8D%E0%B0%A8%E0%B0%A4%E0%B0%AE%E0%B1%88%E0%B0%A8%20%E0%B0%B8%E0%B1%8D%E0%B0%A5%E0%B0%B2%E0%B0%AE%E0%B1%81%E0%B0%B2%E0%B0%B2%E0%B1%8B%20(32)_Track.mp3";
+        //     const filename = "ఉన్నతమైన స్థలములలో (32)_Track.mp3";
 
-            if (!url) {
-                alert("Track link is not available.");
-                document.getElementById("customMenu").style.display = "none";
+        //     if (!url) {
+        //         alert("Track link is not available.");
+        //         document.getElementById("customMenu").style.display = "none";
 
-                // Hide loader, show text again
-                trackLoader.style.display = "none";
-                trackText.style.display = "inline";
-                return;
-            }
+        //         // Hide loader, show text again
+        //         trackLoader.style.display = "none";
+        //         trackText.style.display = "inline";
+        //         return;
+        //     }
 
-            try {
-                const response = await fetch(url, { mode: 'cors' });
-                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        //     try {
+        //         const response = await fetch(url, { mode: 'cors' });
+        //         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
 
-                const blob = await response.blob();
-                const blobUrl = window.URL.createObjectURL(blob);
+        //         const blob = await response.blob();
+        //         const blobUrl = window.URL.createObjectURL(blob);
 
-                const link = document.createElement("a");
-                link.href = blobUrl;
-                link.download = filename;
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-                window.URL.revokeObjectURL(blobUrl);
-            } catch (err) {
-                console.error("Download failed:", err);
-                const link = document.createElement("a");
-                link.href = url;
-                link.download = filename;
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-                alert("Download this Track from this new Tab.");
-            }
+        //         const link = document.createElement("a");
+        //         link.href = blobUrl;
+        //         link.download = filename;
+        //         document.body.appendChild(link);
+        //         link.click();
+        //         document.body.removeChild(link);
+        //         window.URL.revokeObjectURL(blobUrl);
+        //     } catch (err) {
+        //         console.error("Download failed:", err);
+        //         const link = document.createElement("a");
+        //         link.href = url;
+        //         link.download = filename;
+        //         document.body.appendChild(link);
+        //         link.click();
+        //         document.body.removeChild(link);
+        //         alert("Download this Track from this new Tab.");
+        //     }
 
-            document.getElementById("customMenu").style.display = "none";
+        //     document.getElementById("customMenu").style.display = "none";
 
-            // Always restore after dialog/menu disappears
-            trackLoader.style.display = "none";
-            trackText.style.display = "inline";
-        }
+        //     // Always restore after dialog/menu disappears
+        //     trackLoader.style.display = "none";
+        //     trackText.style.display = "inline";
+        // }
 
 
 
 
         // Get all items with submenus
+
+        async function downloadFile(url, filename, loaderId, textId, menuId = "customMenu") {
+            const textElement = document.getElementById(textId);
+            const loaderElement = document.getElementById(loaderId);
+
+            // Show loader immediately
+            textElement.style.display = "none";
+            loaderElement.style.display = "inline-block";
+
+            // Close drawer and overlay
+            const drawer = document.getElementById("drawer");
+            const overlay = document.getElementById("overlay");
+            const menuBtn = document.getElementById("menuBtn");
+            drawer.classList.remove('open');
+            overlay.classList.remove('show');
+            menuBtn.setAttribute('aria-expanded', 'false');
+
+            if (!url) {
+                alert(`${filename.split('_').pop().replace('.mp3', '')} link is not available.`);
+                document.getElementById(menuId).style.display = "none";
+                loaderElement.style.display = "none";
+                textElement.style.display = "inline";
+                return;
+            }
+
+            try {
+                const response = await fetch(url, {
+                    mode: 'cors',
+                    cache: 'no-store' // Prevent HTTP cache
+                });
+                if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+
+                const blob = await response.blob();
+                const blobUrl = window.URL.createObjectURL(blob);
+
+                const link = document.createElement("a");
+                link.href = blobUrl;
+                link.download = filename;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                window.URL.revokeObjectURL(blobUrl);
+
+                // Clear Cache API
+                if ('caches' in window) {
+                    caches.keys().then((cacheNames) => {
+                        cacheNames.forEach((cacheName) => {
+                            caches.delete(cacheName);
+                            console.log(`Deleted Cache: ${cacheName}`);
+                        });
+                    }).catch((error) => {
+                        console.error("Error clearing cache:", error);
+                    });
+                }
+            } catch (err) {
+                console.error(`Download failed for ${filename}:`, err);
+                // Fallback with cache-busting query parameter
+                const cacheBustUrl = `${url}?nocache=${Date.now()}`;
+                const link = document.createElement("a");
+                link.href = cacheBustUrl;
+                link.download = filename;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                alert(`Please download ${filename.split('_').pop().replace('.mp3', '')} from the new tab.`);
+            }
+
+            document.getElementById(menuId).style.display = "none";
+            loaderElement.style.display = "none";
+            textElement.style.display = "inline";
+        }
+
+        async function downloadAudio() {
+            const songTitleWithNumber = document.querySelector(".head-text")?.textContent.trim() || "Song";
+            const audioLink = document.getElementById("audioPlayer")?.src;
+            const filename = `ఉన్నతమైన స్థలములలో (32)_Audio.mp3`;
+            await downloadFile(audioLink, filename, "audioLoader", "audioText");
+        }
+
+        async function downloadTrack() {
+            const songTitleWithNumber = document.querySelector(".head-text")?.textContent.trim() || "Song";
+            const trackLink = document.getElementById("trackPlayer")?.src;
+            const filename = `ఉన్నతమైన స్థలములలో (32)_Track.mp3`;
+            await downloadFile(trackLink, filename, "trackLoader", "trackText");
+        }
+
         const submenuItems = document.querySelectorAll('.drawer-item.has-submenu');
 
         // Toggle drawer
@@ -1638,8 +1725,6 @@
         (function () {
             // Keys to retain in localStorage
             const keysToRetain = ["bbsRole", "bbsName"];
-
-            // Store the values of the keys that actually exist
             const existingKeys = new Set(keysToRetain.filter(key => localStorage.getItem(key) !== null));
 
             // Remove all keys not in the existingKeys set
@@ -1648,7 +1733,6 @@
                     localStorage.removeItem(key);
                 }
             });
-
             console.log("LocalStorage cleared except for:", [...existingKeys]);
 
             // Clear sessionStorage
@@ -1687,11 +1771,24 @@
                 }
             };
 
-            // Execute cleanup functions
+            // Execute cleanup functions before service worker registration
             clearIndexedDB();
             clearCache();
 
             console.log(`All data cleared except for ${[...existingKeys].join(", ")} in localStorage.`);
+
+            // Register Service Worker
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', function () {
+                    navigator.serviceWorker.register('/vidhyardhi-geethavali/service-worker.js')
+                        .then(function (registration) {
+                            console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                        })
+                        .catch(function (error) {
+                            console.log('ServiceWorker registration failed: ', error);
+                        });
+                });
+            }
         })();
     </script>
         
