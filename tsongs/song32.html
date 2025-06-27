@@ -1093,19 +1093,19 @@
                 </div>
             </div>
             <div class="submenu" id="audioSubmenu">
-                <a onclick="shareSong()" class="submenu-item" tabindex="0">
+                <a onclick="shareSongNav()" class="submenu-item" tabindex="0">
                     <span class="icon"><span class="material-symbols-outlined">
                             share
                         </span></span>
                     <span class="mnu-tit">Share this Song</span>
                 </a>
-                <a onclick="downloadAudio()" class="submenu-item" tabindex="0">
+                <a onclick="downloadAudioNav()" class="submenu-item" tabindex="0">
                     <span class="icon"><span class="material-symbols-outlined">
                             download
                         </span></span>
                     <span class="mnu-tit">Download Audio</span>
                 </a>
-                <a onclick="downloadTrack()" class="submenu-item" tabindex="0">
+                <a onclick="downloadTrackNav()" class="submenu-item" tabindex="0">
                     <span class="icon"><span class="material-symbols-outlined">
                             download
                         </span></span>
@@ -1256,6 +1256,21 @@
                 menu.style.display = "none";
             }
         });
+
+        function shareSongNav() {
+            shareSong();
+            toggleMenu();
+        }
+
+        function downloadAudioNav() {
+            downloadAudio();
+            toggleMenu();
+        }
+
+        function downloadTrackNav() {
+            downloadTrack();
+            toggleMenu();
+        }
 
         function shareSong() {
             drawer.classList.remove('open');
