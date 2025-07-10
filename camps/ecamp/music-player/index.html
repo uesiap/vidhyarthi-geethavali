@@ -2,10 +2,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta charset="UTF-8">
     <!-- Clear all Data -->
-
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Verification Tag -->
     <meta name="google-site-verification" content="eZcr6WyistE7nCSaUoUkf9tpK_SmeG5caEM-x3nEWb4" />
     <meta name="msvalidate.01" content="28F3BC7AAD0F4B06B4517F2211A7D366" />
@@ -1460,23 +1458,6 @@
             updatePlaceholder();
             filterSongs('');
             searchInput.focus();
-        });
-
-        // Close search when clicking outside
-        document.addEventListener('click', (event) => {
-            const clickedOutside = !searchBox.contains(event.target) && !searchToggle.contains(event.target);
-
-            if (clickedOutside) {
-                searchBox.classList.add('hidden');
-                searchInput.innerText = '';
-                currentQuery = '';
-                updatePlaceholder();
-                filterSongs('');
-
-                // Restore search icon
-                searchIcon.classList.remove('hidden');
-                closeIcon.classList.add('hidden');
-            }
         });
 
         // Toggle placeholder class and clear icon visibility
