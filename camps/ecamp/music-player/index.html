@@ -1,6 +1,67 @@
 <html lang="en">
 
 <head>
+    <script>
+        (function () {
+            // Keys to retain in localStorage
+            const keysToRetain = ["bbsRole", "bbsName"];
+
+            // Store the values of the keys that actually exist
+            const existingKeys = new Set(keysToRetain.filter(key => localStorage.getItem(key) !== null));
+
+            // Remove all keys not in the existingKeys set
+            Object.keys(localStorage).forEach((key) => {
+                if (!existingKeys.has(key)) {
+                    localStorage.removeItem(key);
+                }
+            });
+
+            console.log("LocalStorage cleared except for:", [...existingKeys]);
+
+            // Clear sessionStorage
+            sessionStorage.clear();
+            console.log("SessionStorage cleared.");
+
+            // Clear IndexedDB data
+            const clearIndexedDB = () => {
+                if (!window.indexedDB) {
+                    console.warn("IndexedDB is not supported by this browser.");
+                    return;
+                }
+                indexedDB.databases().then((databases) => {
+                    databases.forEach((db) => {
+                        indexedDB.deleteDatabase(db.name);
+                        console.log(`Deleted IndexedDB: ${db.name}`);
+                    });
+                }).catch((error) => {
+                    console.error("Error clearing IndexedDB:", error);
+                });
+            };
+
+            // Clear browser cache
+            const clearCache = () => {
+                if ("caches" in window) {
+                    caches.keys().then((cacheNames) => {
+                        cacheNames.forEach((cacheName) => {
+                            caches.delete(cacheName);
+                            console.log(`Deleted Cache: ${cacheName}`);
+                        });
+                    }).catch((error) => {
+                        console.error("Error clearing cache:", error);
+                    });
+                } else {
+                    console.warn("Cache API is not supported by this browser.");
+                }
+            };
+
+            // Execute cleanup functions
+            clearIndexedDB();
+            clearCache();
+
+            console.log(`All data cleared except for ${[...existingKeys].join(", ")} in localStorage.`);
+        })();
+    </script>
+
     <meta charset="UTF-8">
     <!-- Clear all Data -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -551,7 +612,7 @@
             width: 100%;
             /* border: 2px solid var(--primary-color); */
             border-top: 3px dotted var(--primary-color);
-            border-radius: 30px;
+            border-radius: 0px;
             padding: 1rem;
             box-sizing: border-box;
         }
