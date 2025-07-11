@@ -187,9 +187,8 @@
 
   <!-- Font Awesome for Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp" rel="stylesheet" media="print"
+    onload="this.media='all'">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500&display=swap');
 
@@ -224,6 +223,7 @@
       -webkit-user-select: none;
       -moz-user-select: none;
       -ms-user-select: none;
+      -webkit-tap-highlight-color: transparent;
     }
 
     /* Navbar Styles */
@@ -451,7 +451,7 @@
     .page-title {
       margin-bottom: 25px;
       color: var(--text-dark);
-      font-size: 1.8rem;
+      font-size: 2rem;
       font-weight: 500;
     }
 
@@ -491,7 +491,7 @@
             } */
 
       .page-title {
-        font-size: 1rem;
+        font-size: 1.4rem;
       }
     }
 
@@ -609,7 +609,7 @@
       /* border: 2px solid var(--primary-color); */
       border-top: 3px dotted var(--primary-color);
       border-radius: 0px;
-      padding: 1rem;
+      padding: 0rem;
       box-sizing: border-box;
     }
 
@@ -1162,7 +1162,7 @@
     }
 
     .music-player.collapsed {
-      height: 100px;
+      height: 120px;
     }
 
     .music-player.expanded {
@@ -1174,7 +1174,8 @@
 
     .drag-handle {
       width: 100%;
-      text-align: center;
+      text-align: right;
+      padding-right: 10px;
       padding: 4px;
       cursor: pointer;
     }
@@ -1182,7 +1183,7 @@
     .drag-handle .material-symbols-sharp {
       font-size: 24px;
       color: #666;
-      transition: transform 0.2s ease;
+      transition: transform 2s ease;
     }
 
     .music-player.expanded .drag-handle .material-symbols-sharp {
@@ -1224,8 +1225,9 @@
     .scroll-text {
       white-space: nowrap;
       display: inline-block;
+      height: 25px;
       font-size: 1.1rem;
-      animation: scroll-left 12s linear infinite;
+      animation: scroll-left 5s linear infinite;
     }
 
     .scroll-wrapper {
@@ -1238,7 +1240,7 @@
       }
 
       100% {
-        transform: translateX(-100%);
+        transform: translateX(-50%);
       }
     }
 
@@ -1352,8 +1354,16 @@
     #repeatIcon {
       border-radius: 50%;
       padding: 4px;
-      margin-left: -10px;
-      font-size: 1.6rem;
+      margin-left: -20px;
+      font-size: 2rem;
+    }
+
+    #nextIcon {
+      margin-right: -10px;
+    }
+
+    #prevIcon {
+      margin-left: 10px;
     }
 
     #prevIcon:hover,
@@ -1408,19 +1418,43 @@
     }
 
     #songsList {
-      font-size: 0.8rem;
+      font-size: 1.1rem;
     }
 
     #tracksList {
-      font-size: 0.8rem;
+      font-size: 1.1rem;
     }
 
     @media (min-width: 1024px) {
-      .music-player {
+      /* .music-player {
         max-width: 700px;
         margin-right: 30px;
         margin-bottom: 60px;
         box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.2);
+      } */
+
+      .music-player {
+        max-width: 700px;
+        margin-right: 30px;
+        margin-bottom: 70px;
+        box-shadow:
+          0 0 4px violet,
+          0 0 6px orange,
+          0 0 8px yellow,
+          0 0 10px lightgreen,
+          0 0 16px lightsalmon;
+        animation: hueShift 15s linear infinite;
+        filter: hue-rotate(0deg);
+      }
+
+      @keyframes hueShift {
+        from {
+          filter: hue-rotate(0deg);
+        }
+
+        to {
+          filter: hue-rotate(360deg);
+        }
       }
 
       .music-player.expanded {
@@ -1428,7 +1462,7 @@
       }
 
       .card {
-        max-width: 700px;
+        max-width: 650px;
         margin-left: 30px;
       }
 
@@ -1444,10 +1478,12 @@
 
       #songsList {
         font-size: 1.2rem;
+        margin-bottom: 180px;
       }
 
       #tracksList {
         font-size: 1.2rem;
+        margin-bottom: 180px;
       }
 
       #expandIcon {
@@ -1633,11 +1669,11 @@
       <div class="songs-wrapper">
         <span class="songs-container">
           <section id="Audios" class="songs-grid">
-            <ul id="songsList" style="list-style: none; padding: 0; margin: 0;"></ul>
+            <ul id="songsList" style="list-style: none; padding: 0; margin: 0; margin-bottom: 130px;"></ul>
             <div id="noSongsMessage" class="no-songs-message hidden">No Audios matched your search.</div>
           </section>
           <section id="Tracks" class="songs-grid hidden">
-            <ul id="tracksList" style="list-style: none; padding: 0; margin: 0;"></ul>
+            <ul id="tracksList" style="list-style: none; padding: 0; margin: 0; margin-bottom: 130px;"></ul>
             <div id="noTracksMessage" class="no-songs-message hidden">No Tracks matched your search.</div>
           </section>
         </span>
@@ -1938,9 +1974,25 @@
       filterSongs(currentQuery);
     }
 
+    // document.addEventListener('DOMContentLoaded', () => {
+    //   const hash = window.location.hash;
+    //   history.replaceState(null, '', window.location.pathname + window.location.search);
+    //   if (hash === '#Tracks') {
+    //     showSongs('english');
+    //     selectFirstSong(0, 'tracks');
+    //   } else {
+    //     showSongs('telugu');
+    //     selectFirstSong(0, 'songs');
+    //   }
+    //   history.replaceState(null, '', window.location.pathname + window.location.search + hash);
+    //   player.classList.remove('collapsed');
+    //   player.classList.add('expanded');
+    // });
+
     document.addEventListener('DOMContentLoaded', () => {
       const hash = window.location.hash;
       history.replaceState(null, '', window.location.pathname + window.location.search);
+
       if (hash === '#Tracks') {
         showSongs('english');
         selectFirstSong(0, 'tracks');
@@ -1948,10 +2000,18 @@
         showSongs('telugu');
         selectFirstSong(0, 'songs');
       }
+
       history.replaceState(null, '', window.location.pathname + window.location.search + hash);
-      player.classList.remove('collapsed');
-      player.classList.add('expanded');
+
+      if (window.innerWidth >= 1024) {
+        player.classList.remove('collapsed');
+        player.classList.add('expanded');
+      } else {
+        player.classList.add('collapsed');
+        player.classList.remove('expanded');
+      }
     });
+
 
     function selectFirstSong(index, type) {
       const queue = type === 'tracks' ? tracksQueue : songsQueue;
@@ -1967,6 +2027,8 @@
         currentPlayingIndex = index;
         audio.src = queue[index].url;
         element.classList.add('playing');
+        const songTitle = `${queue[index].name} - ${type === 'tracks' ? 'Track' : 'Audio'}`;
+        document.title = `${songTitle} | Music Player`;
         trackTitle.textContent = minimizedTrackTitle.textContent = `${queue[index].name} - ${type === 'tracks' ? 'Track' : 'Audio'}`;
         player.style.borderColor = type === 'tracks' ? '#DA70D6' : 'var(--primary-color)';
         seekSlider.style.background = type === 'tracks' ? 'linear-gradient(to right, #DA70D6 0%, #DA70D6 calc(var(--progress)), #ccc calc(var(--progress)), #ccc 100%)' : 'linear-gradient(to right, var(--primary-color) 0%, var(--primary-color) calc(var(--progress)), #ccc calc(var(--progress)), #ccc 100%)';
@@ -2033,6 +2095,8 @@
         audio.play();
         element.classList.add('playing');
         mainIcon.textContent = minIcon.textContent = 'pause';
+        const songTitle = `${queue[index].name} - ${type === 'tracks' ? 'Track' : 'Audio'}`;
+        document.title = `${songTitle} | Music Player`;
         trackTitle.textContent = minimizedTrackTitle.textContent = `${queue[index].name} - ${type === 'tracks' ? 'Track' : 'Audio'}`;
         player.style.borderColor = type === 'tracks' ? '#DA70D6' : 'var(--primary-color)';
         seekSlider.style.background = type === 'tracks' ? 'linear-gradient(to right, #DA70D6 0%, #DA70D6 calc(var(--progress)), #ccc calc(var(--progress)), #ccc 100%)' : 'linear-gradient(to right, var(--primary-color) 0%, var(--primary-color) calc(var(--progress)), #ccc calc(var(--progress)), #ccc 100%)';
@@ -2040,30 +2104,58 @@
       }
     }
 
+    // function togglePlayer() {
+    //   player.classList.toggle('expanded');
+    //   player.classList.toggle('collapsed');
+    //   console.log(player.classList.contains('expanded') ? 'Bottom sheet expanded' : 'Bottom sheet collapsed');
+    // }
+
     function togglePlayer() {
       player.classList.toggle('expanded');
       player.classList.toggle('collapsed');
+
+      const isExpanded = player.classList.contains('expanded');
+      console.log(isExpanded ? 'Bottom sheet expanded' : 'Bottom sheet collapsed');
+
+      // Adjust margin-bottom based on state
+      const songsList = document.getElementById('songsList');
+      const tracksList = document.getElementById('tracksList');
+
+      const marginValue = isExpanded ? '500px' : '130px'; // Adjust values as needed
+
+      songsList.style.marginBottom = marginValue;
+      tracksList.style.marginBottom = marginValue;
     }
+
 
     function updateRepeatIcon(icon) {
       icon.classList.remove('active');
       if (repeatState === 'order') {
         icon.textContent = 'text_rotation_none';
-      } else if (repeatState === 'repeat') {
-        icon.textContent = 'repeat';
-        icon.classList.add('active');
-      } else if (repeatState === 'repeat_one') {
+      }
+      // } else if (repeatState === 'repeat') {
+      //   icon.textContent = 'repeat';
+      //   icon.classList.add('active');
+      // } 
+      else if (repeatState === 'repeat_one') {
         icon.textContent = 'repeat_one';
         icon.classList.add('active');
       }
     }
 
+    // function cycleRepeatState() {
+    //   repeatState = repeatState === 'order' ? 'repeat' :
+    //     repeatState === 'repeat' ? 'repeat_one' : 'order';
+    //   audio.loop = (repeatState === 'repeat_one');
+    //   updateRepeatIcon(repeatIcon);
+    // }
+
     function cycleRepeatState() {
-      repeatState = repeatState === 'order' ? 'repeat' :
-        repeatState === 'repeat' ? 'repeat_one' : 'order';
+      repeatState = repeatState === 'order' ? 'repeat_one' : 'order';
       audio.loop = (repeatState === 'repeat_one');
       updateRepeatIcon(repeatIcon);
     }
+
 
     function toggleShuffle() {
       isShuffling = !isShuffling;
