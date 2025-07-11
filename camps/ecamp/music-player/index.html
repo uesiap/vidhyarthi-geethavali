@@ -185,10 +185,17 @@
     }
     </script>
 
+  <!-- 1. Preconnect to reduce DNS/TLS/handshake delay -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
   <!-- Font Awesome for Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp" rel="stylesheet" media="print"
     onload="this.media='all'">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500&display=swap');
 
@@ -2347,7 +2354,9 @@
       console.log(`All data cleared except for ${[...existingKeys].join(', ')} in localStorage.`);
     })();
 
+    // Initialize
     displaySongs();
   </script>
 </body>
+
 </html>
