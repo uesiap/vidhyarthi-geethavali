@@ -2088,6 +2088,18 @@
             prevElement.classList.remove('playing');
           }
         }
+        if (currentPlayingIndex !== null && currentQueue && audio.src !== queue[index].url) {
+          audio.pause();
+        }
+        if (currentPlayingIndex !== null && currentQueue && audio.src === queue[index].url) {
+          audio.play();
+          element.classList.add('playing');
+          mainIcon.textContent = minIcon.textContent = 'pause';
+          return;
+        }
+        if (audio.src !== queue[index].url) {
+          audio.src = queue[index].url;
+        }
 
         currentQueue = type;
         currentPlayingIndex = index;
@@ -2126,6 +2138,14 @@
       songsList.style.marginBottom = marginValue;
       tracksList.style.marginBottom = marginValue;
     }
+
+    audio.addEventListener('play', () => {
+      mainIcon.textContent = minIcon.textContent = 'pause';
+    });
+
+    audio.addEventListener('pause', () => {
+      mainIcon.textContent = minIcon.textContent = 'play_arrow';
+    });
 
 
     function updateRepeatIcon(icon) {
@@ -2327,11 +2347,7 @@
       console.log(`All data cleared except for ${[...existingKeys].join(', ')} in localStorage.`);
     })();
 
-    // Initialize
     displaySongs();
   </script>
-
-
 </body>
-
 </html>
