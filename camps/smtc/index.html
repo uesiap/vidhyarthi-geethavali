@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -62,37 +63,27 @@
         })();
     </script>
     <meta charset="UTF-8">
-    <!-- Clear all Data -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Verification Tag -->
     <meta name="google-site-verification" content="eZcr6WyistE7nCSaUoUkf9tpK_SmeG5caEM-x3nEWb4" />
     <meta name="msvalidate.01" content="28F3BC7AAD0F4B06B4517F2211A7D366" />
-    <!-- Meta Tags for Web Application-->
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="theme-color" content="#128C7E">
-    <!-- Your theme color -->
     <link rel="manifest" href="/vidhyardhi-geethavali/manifest.json" crossorigin="use-credentials">
-    <link rel="apple-touch-icon" href="/vidhyardhi-geethavali/Icon192.png"> <!-- iOS splash icon -->
-    <!-- Title and Meta Description -->
-    <title>SMTC Songs | UESI AP</title>
+    <link rel="apple-touch-icon" href="/vidhyardhi-geethavali/Icon192.png"> <title>SMTC Songs | UESI AP</title>
     <meta name="description"
         content="State Missions Training Camp Songs. Listen all Audios & Sing with Tracks that are related to Missions.UESI AP">
     <meta name="keywords"
-        content="vidhyardhi, geethavali, UESI, AP, uesi, ap, smtc, camp, camps, songs, vidhyarthi, smtc, missions, smtc camp songs, camps,  uesi songs, uesi ap songs, vidhyardhi geethavali songs, ap Vidhyardhi Geethavali Uesi songs, uesi songs, VJ Songs, Uesi Vj songs, Telugu Vidhyardhi Gethavali songs, english songs, telugu songs, audio songs, Vidhyardhi Geethavali Track songs, Vidhyardhi Geethavali Audio songs, Uesi ap songs, audio, track, Search songs">
+        content="vidhyardhi, geethavali, UESI, AP, uesi, ap, smtc, camp, camps, songs, vidhyarthi, smtc, missions, smtc camp songs, camps, uesi songs, uesi ap songs, vidhyardhi geethavali songs, ap Vidhyardhi Geethavali Uesi songs, uesi songs, VJ Songs, Uesi Vj songs, Telugu Vidhyardhi Gethavali songs, english songs, telugu songs, audio songs, Vidhyardhi Geethavali Track songs, Vidhyardhi Geethavali Audio songs, Uesi ap songs, audio, track, Search songs">
 
-    <!-- Author and Robots -->
     <meta name="author" content="M.Rahul">
     <meta name="robots" content="index, follow">
 
-    <!-- Canonical Link -->
     <link rel="canonical" href="/vidhyardhi-geethavali/camps/smtc/">
 
-    <!-- Favicon Links -->
     <link rel="shortcut icon" type="image/x-icon" href="https://uesiap.github.io/vidhyardhi-geethavali/Icon192.png">
     <link rel="apple-touch-icon" href="https://uesiap.github.io/vidhyardhi-geethavali/Icon192.png" />
     <link rel="icon" sizes="192x192" href="https://uesiap.github.io/vidhyardhi-geethavali/Icon192.png">
 
-    <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="SMTC Songs | UESI AP" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="/vidhyardhi-geethavali/camps/smtc/" />
@@ -101,7 +92,6 @@
         content="State Missions Training Camp Songs. Listen all Audios & Sing with Tracks that are related to Missions.UESI AP" />
     <meta property="og:site_name" content="UESI AP" />
 
-    <!-- Twitter Meta Tags -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="SMTC Songs | UESI AP" />
     <meta name="twitter:description"
@@ -109,10 +99,8 @@
     <meta name="twitter:image" content="https://uesiap.github.io/vidhyardhi-geethavali/Icon192.png" />
     <meta name="twitter:url" content="/vidhyardhi-geethavali/camps/smtc/" />
 
-    <!-- Article Modification Date -->
     <meta property="article:modified_time" content="2024-08-14T14:10:00+00:00" />
 
-    <!-- Structured Data (JSON-LD) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -155,7 +143,7 @@
         "track",
         "search songs"
         ],
-        "author": {
+      "author": {
             "@type": "Person",
             "name": "M.Rahul"
         },
@@ -175,7 +163,6 @@
     }
     </script>
 
-    <!-- Site Name Markup -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -185,11 +172,9 @@
     }
     </script>
 
-    <!-- 1. Preconnect to reduce DNS/TLS/handshake delay -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp" rel="stylesheet" media="print"
         onload="this.media='all'">
@@ -222,11 +207,17 @@
             font-style: normal;
         }
 
+        html, body {
+            height: 100%; /* Important for sticky footer */
+            display: flex; /* Use flexbox on the body */
+            flex-direction: column; /* Stack children vertically */
+        }
+
         body {
             font-family: 'Google Sans', sans-serif;
             background: white;
             margin: 0;
-            margin-top: 80px;
+            margin-top: 80px; /* Space for fixed navbar */
             padding: 0;
             user-select: none;
             -webkit-user-select: none;
@@ -268,6 +259,12 @@
         .title {
             font-size: 1rem;
             font-weight: 500;
+        }
+
+        .nav-actions { /* Added for search/menu buttons */
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
 
         .menu-btn {
@@ -480,9 +477,11 @@
 
         /* Main Content */
         .main-content {
+            flex-grow: 1; /* Allows main content to expand and push footer down */
             background-color: f5f5f5;
             align-items: center;
             justify-content: center;
+            padding-bottom: 30px; /* Space for the footer */
         }
 
         .page-title {
@@ -610,6 +609,159 @@
             transform: rotate(-45deg);
             top: 0;
         }
+
+        /* Search Styles - START */
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .search-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s ease;
+        }
+
+        .search-toggle:focus-visible {
+            outline: 2px solid rgba(255, 255, 255, 0.5);
+            outline-offset: 2px;
+        }
+
+        .search-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .custom-search-icon {
+            width: 18px;
+            height: 18px;
+            border: 2px solid #fff;
+            border-radius: 50%;
+            position: relative;
+            box-sizing: border-box;
+        }
+
+        .custom-search-icon::after {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 2px;
+            background-color: white;
+            bottom: -3px;
+            right: -4px;
+            transform: rotate(45deg);
+        }
+
+        .custom-close-icon {
+            font-size: 1.3rem;
+            color: white;
+            cursor: pointer;
+            transition: opacity 0.2s ease;
+        }
+
+        .search-box {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin: 1.2rem auto;
+            transition: opacity 0.3s ease;
+        }
+
+        .go-to-too-search {
+            width: 100%;
+            padding: 12px 40px 12px 14px;
+            font-size: 1rem;
+            border-left: 5px solid var(--primary-color);
+            border-right: 5px solid var(--primary-color);
+            border-top: 2px solid var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+            color: black;
+            cursor: text;
+            outline: none;
+            min-height: 44px;
+            box-sizing: border-box;
+            position: relative;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .go-to-too-search.placeholder::before {
+            content: attr(data-placeholder);
+            color: #aaa;
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0.8;
+            pointer-events: none;
+        }
+
+        .clear-search {
+            position: absolute;
+            top: 50%;
+            right: 12px;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: black;
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: none;
+            z-index: 2;
+            padding: 4px;
+            line-height: 1;
+        }
+
+        .clear-search:hover {
+            color: #555;
+        }
+
+        .go-to-too-search:not(.placeholder)~.clear-search {
+            display: block;
+        }
+
+        @media (max-width: 480px) {
+            .search-box {
+                max-width: 94vw;
+            }
+
+            .go-to-too-search {
+                font-size: 0.95rem;
+                padding: 10px 36px 10px 12px;
+                max-width: 100%;
+            }
+
+            .clear-search {
+                font-size: 1rem;
+                right: 10px;
+            }
+        }
+
+        @media (max-width: 777px) {
+            .search-box {
+                max-width: 90vw;
+            }
+        }
+
+        @media (min-width: 928px) {
+            .search-box {
+                max-width: 600px;
+            }
+        }
+
+        .no-songs-message {
+            text-align: center;
+            color: #777;
+            font-size: 1.1rem;
+            margin: 1rem 0;
+            font-style: italic;
+        }
+
+        /* Search Styles - END */
 
         .go-to-too {
             color: var(--text-dark);
@@ -743,6 +895,7 @@
         }
 
         .hidden {
+            display: none !important; /* Use !important to override other display properties */
             visibility: hidden;
             opacity: 0;
             height: 0;
@@ -762,15 +915,14 @@
         }
 
         footer {
-            margin: 30px 0px;
-            padding-top: 1.3rem;
+            padding-top: 15px;
+            padding-bottom: 15px;
             text-align: center;
             color: black;
             font-size: 1rem;
             font-weight: 400;
             border-top: 1px solid #ccc;
             background-color: transparent;
-            height: 30px;
         }
     </style>
 </head>
@@ -782,18 +934,27 @@
             <img src="https://uesiap.github.io/vidhyardhi-geethavali/Icon192.jpg" alt="App Logo" class="logo">
             <span class="title">UESI-AP Audio & Visuals Dept</span>
         </div>
-        <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">
-            <!--<span class="material-symbols-outlined" style="font-size: 2rem;">
-                dehaze
-            </span>-->
-            <!--<i class="fas fa-bars" style="font-size: 1.5rem; transform: scaleX(1.3);"></i>-->
-            <span id="menuBtn" aria-expanded="false">
-                <div class="menu-toggle">
-                    <div class="menu-bars"></div>
-                </div>
-            </span>
-        </button>
+        <div class="nav-actions">
+            <button id="searchToggle" class="search-toggle" aria-label="Toggle Search">
+                <span id="searchIcon" class="custom-search-icon"></span>
+                <span id="closeIcon" class="custom-close-icon hidden">✕</span>
+            </button>
+            <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">
+                <span>
+                    <div class="menu-toggle">
+                        <div class="menu-bars"></div>
+                    </div>
+                </span>
+            </button>
+        </div>
     </nav>
+
+    <div id="searchBox" class="search-box hidden">
+        <div id="songSearchInput" class="go-to-too-search placeholder" contenteditable="true"
+            data-placeholder="Type the song number or name..." role="textbox" aria-label="Search songs" spellcheck="false">
+        </div>
+        <button id="clearSearch" class="clear-search" aria-label="Clear search">✕</button>
+    </div>
 
     <div class="drawer" id="drawer" role="navigation" aria-label="Side menu">
         <div class="drawer-content">
@@ -801,18 +962,17 @@
             <a href="/vidhyardhi-geethavali/" class="drawer-item" tabindex="0">
                 <div class="item-content">
                     <span class="icon"><span class="material-symbols-outlined">
-                            home
-                        </span></span>
+                                home
+                            </span></span>
                     <span class="mnu-tit">Home</span>
                 </div>
             </a>
 
-            <!-- Camp Songs -->
             <div class="drawer-item has-submenu" id="chatsItem" tabindex="0">
                 <div class="item-content">
                     <span class="icon"><span class="material-symbols-outlined">
-                            camping
-                        </span></span>
+                                camping
+                            </span></span>
                     <span class="mnu-tit">Camp Songs</span>
                 </div>
             </div>
@@ -839,48 +999,46 @@
                 </a>
             </div>
 
-            <!-- Special Songs -->
             <div class="drawer-item has-submenu" id="callsItem" tabindex="0">
                 <div class="item-content">
                     <span class="icon"><span class="material-symbols-outlined">
-                            stars_2
-                        </span></span>
+                                stars_2
+                            </span></span>
                     <span class="mnu-tit">Special Songs</span>
                 </div>
             </div>
             <div class="submenu" id="callsSubmenu">
                 <a href="/vidhyardhi-geethavali/special/praise" class="submenu-item" tabindex="0">
                     <span class="icon"><span class="material-symbols-outlined">
-                            cheer
-                        </span></span>
+                                cheer
+                            </span></span>
                     <span class="mnu-tit">Praise & Worship</span>
                 </a>
                 <a href="/vidhyardhi-geethavali/special/prayer" class="submenu-item" tabindex="0">
                     <span class="icon"><span class="material-symbols-outlined">
-                            folded_hands
-                        </span></span>
+                                folded_hands
+                            </span></span>
                     <span class="mnu-tit">Prayer</span>
                 </a>
                 <a href="/vidhyardhi-geethavali/special/thanks" class="submenu-item" tabindex="0">
                     <span class="icon"><span class="material-symbols-outlined">
-                            handshake
-                        </span></span>
+                                handshake
+                            </span></span>
                     <span class="mnu-tit">Thanks Giving</span>
                 </a>
                 <a href="/vidhyardhi-geethavali/special/christmas" class="submenu-item" tabindex="0">
                     <span class="icon"><span class="material-symbols-outlined">
-                            Forest
-                        </span></span>
+                                Forest
+                            </span></span>
                     <span class="mnu-tit">Christmas</span>
                 </a>
             </div>
 
-            <!-- Aims Songs -->
             <div class="drawer-item has-submenu" id="aimsItem" tabindex="0">
                 <div class="item-content">
                     <span class="icon"><span class="material-symbols-outlined">
-                            my_location
-                        </span></span>
+                                my_location
+                            </span></span>
                     <span class="mnu-tit">Aims Songs</span>
                 </div>
             </div>
@@ -903,12 +1061,11 @@
                 </a>
             </div>
 
-            <!-- Audio Songs -->
             <div class="drawer-item has-submenu" id="audioItem" tabindex="0">
                 <div class="item-content">
                     <span class="icon"><span class="material-symbols-outlined">
-                            graphic_eq
-                        </span></span>
+                                graphic_eq
+                            </span></span>
                     <span class="mnu-tit">Audio Songs</span>
                 </div>
             </div>
@@ -933,28 +1090,28 @@
                 style="border-top: 1.5px solid #ddd;">
                 <div class="item-content">
                     <span class="icon"><span class="material-symbols-outlined">
-                            forum
-                        </span></span>
+                                forum
+                            </span></span>
                     <span class="mnu-tit">Share Thoughts</span>
                 </div>
             </div>
-            <div class="submenu" id="audioSubmenu">
+            <div class="submenu" id="thoughtsSubmenuContent">
                 <a href="/vidhyardhi-geethavali/write-review" class="submenu-item" tabindex="0">
                     <span class="icon"><span class="material-symbols-outlined">
-                            edit_square
-                        </span></span>
+                                edit_square
+                            </span></span>
                     <span class="mnu-tit">Write a Review</span>
                 </a>
                 <a href="/vidhyardhi-geethavali/give-correction" class="submenu-item" tabindex="0">
                     <span class="icon"><span class="material-symbols-outlined">
-                            lyrics
-                        </span></span>
+                                lyrics
+                            </span></span>
                     <span class="mnu-tit">Give Correction</span>
                 </a>
                 <a href="/vidhyardhi-geethavali/user-feedback" class="submenu-item" tabindex="0">
                     <span class="icon"><span class="material-symbols-outlined">
-                            thumbs_up_down
-                        </span></span>
+                                thumbs_up_down
+                            </span></span>
                     <span class="mnu-tit">Feedback</span>
                 </a>
             </div>
@@ -972,7 +1129,7 @@
                 style="text-decoration: none; color: var(--text-dark); display: block;">
                 <h3 class="go-to-too" style="margin-top: 5px; padding-bottom: 0px; margin-bottom: rem;">
                     <i class="fa-solid fa-music" style="margin-right: 10px; margin-bottom: 1rem;"></i>
-                    Go to Music Player &ensp;<i class="fa-solid fa-arrow-right"></i>
+                    Go to Music Player <i class="fa-solid fa-arrow-right"></i>
                 </h3>
             </a>
 
@@ -983,103 +1140,107 @@
             <span id="teluguSongs" class="songs-grid">
                 <h3 class="go-to ao">
                     <a href="/vidhyardhi-geethavali/tsongs/song10">
-                        1. అర్పింతు దేవా - ప్రాణాత్మదేహం (10)
+                        అర్పింతు దేవా - ప్రాణాత్మదేహం (10)
                     </a>
                 </h3>
                 <h3 class="go-to ao">
                     <a href="/vidhyardhi-geethavali/tsongs/song24">
-                        2. ఇది కోతకు సమయం (24)
+                        ఇది కోతకు సమయం (24)
                     </a>
                 </h3>
                 <h3 class="go-to ao">
                     <a href="/vidhyardhi-geethavali/tsongs/song25">
-                        3. ఇదిగో దేవా నా జీవితం (25)
+                        ఇదిగో దేవా నా జీవితం (25)
                     </a>
                 </h3>
                 <h3 class="go-to ao">
                     <a href="/vidhyardhi-geethavali/tsongs/song32">
-                        4. ఉన్నతమైన స్థలములలో (32)
+                        ఉన్నతమైన స్థలములలో (32)
                     </a>
                 </h3>
                 <h3 class="go-to ao">
                     <a href="/vidhyardhi-geethavali/tsongs/song56">
-                        5. కదలిరమ్ము క్రైస్తవ యువకా (56)
+                        కదలిరమ్ము క్రైస్తవ యువకా (56)
                     </a>
                 </h3>
                 <h3 class="go-to ao">
                     <a href="/vidhyardhi-geethavali/tsongs/song57">
-                        6. కన్నులెత్తి పైరుల చూడు (57)
+                        కన్నులెత్తి పైరుల చూడు (57)
                     </a>
                 </h3>
                 <h3 class="go-to ao">
                     <a href="/vidhyardhi-geethavali/tsongs/song80">
-                        7. చాటించుడి (80)
+                        చాటించుడి (80)
                     </a>
                 </h3>
                 <h3 class="go-to ao">
                     <a href="/vidhyardhi-geethavali/tsongs/song98">
-                        8. తండ్రికి ప్రియమైన పిల్లలం (98)
+                        తండ్రికి ప్రియమైన పిల్లలం (98)
                     </a>
                 </h3>
                 <h3 class="go-to ao">
                     <a href="/vidhyardhi-geethavali/tsongs/song117">
-                        9. దేవునితో జతపనివారము (117)
+                        దేవునితో జతపనివారము (117)
                     </a>
                 </h3>
                 <h3 class="go-to ao">
                     <a href="/vidhyardhi-geethavali/tsongs/song118">
-                        10. దేవుని పిలుపును వినుము (118)
+                        దేవుని పిలుపును వినుము (118)
                     </a>
                 </h3>
                 <h3 class="go-to ao">
                     <a href="/vidhyardhi-geethavali/tsongs/song132">
-                        11. నశించు ఆత్మలెన్నో (132)
+                        నశించు ఆత్మలెన్నో (132)
                     </a>
                 </h3>
                 <h3 class="go-to ao">
                     <a href="/vidhyardhi-geethavali/tsongs/song144">
-                        12. నా పేరే తెలియని ప్రజలు (144)
+                        నా పేరే తెలియని ప్రజలు (144)
                     </a>
                 </h3>
                 <h3 class="go-to ao">
                     <a href="/vidhyardhi-geethavali/tsongs/song159">
-                        13. ని చిత్తమే నీ చిత్తమే (159)
+                        ని చిత్తమే నీ చిత్తమే (159)
                     </a>
                 </h3>
                 <h3 class="go-to ao">
                     <a href="/vidhyardhi-geethavali/tsongs/song210">
-                        14. ప్రభువా పంపుము (210)
+                        ప్రభువా పంపుము (210)
                     </a>
                 </h3>
                 <h3 class="go-to ao">
                     <a href="/vidhyardhi-geethavali/tsongs/song294">
-                        15. సువార్త గూర్చి సిగ్గుపడను (294)
+                        సువార్త గూర్చి సిగ్గుపడను (294)
                     </a>
                 </h3>
                 <h3 class="go-to ao">
                     <a href="/vidhyardhi-geethavali/tsongs/song313">
-                        16. హృదయం వెలిగించు దేవా (313)
+                        హృదయం వెలిగించు దేవా (313)
                     </a>
                 </h3>
                 <h3 class="go-to ao">
                     <a href="/vidhyardhi-geethavali/tsongs/neetho/song9">
-                        17. దేవుని రాజ్యముకై (నీతో 9)
+                        దేవుని రాజ్యముకై (నీతో 9)
                     </a>
                 </h3>
                 <h3 class="go-to ao">
                     <a href="/vidhyardhi-geethavali/tsongs/neetho/song10">
-                        18. లోకములో తెల్పెదము (నీతో 10)
+                        లోకములో తెల్పెదము (నీతో 10)
                     </a>
                 </h3>
                 <h3 class="go-to ao">
                     <a href="/vidhyardhi-geethavali/tsongs/new-songs/song2">
-                        19. ఎవరెళతారూ (new 2)
+                        ఎవరెళతారూ (new 2)
                     </a>
                 </h3>
             </span>
+            <span id="englishSongs" class="songs-grid hidden">
+                <div class="no-songs-message">No English songs available yet.</div>
+            </span>
+            <div id="noSongsMessage" class="no-songs-message hidden">No songs matched your search.</div>
         </div>
     </main>
-    <footer>©2025 Designed &amp; Maintained by <button class="my_name"
+    <footer>©2025 Designed & Maintained by <button class="my_name"
             onclick="window.location.href='https://melamrahul.github.io/'">M.Rahul</button>
     </footer>
 
@@ -1087,19 +1248,165 @@
         const menuBtn = document.getElementById('menuBtn');
         const drawer = document.getElementById('drawer');
         const overlay = document.getElementById('overlay');
+        const submenuItems = document.querySelectorAll('.drawer-item.has-submenu');
+        const submenuLinks = document.querySelectorAll('.submenu-item');
 
-        function toggleMenu() {
-            const menu = document.getElementById("customMenu");
-            const overlay = document.getElementById("menuOverlay");
-            const closeBtn = document.getElementById("cls-btn");
+        // Search Functionality Elements
+        const searchToggle = document.getElementById('searchToggle');
+        const searchBox = document.getElementById('searchBox');
+        const searchInput = document.getElementById('songSearchInput');
+        const clearSearch = document.getElementById('clearSearch');
+        const searchIcon = document.getElementById('searchIcon');
+        const closeIcon = document.getElementById('closeIcon');
+        const noSongsMessage = document.getElementById('noSongsMessage');
 
-            const isVisible = menu.style.display === "block";
+        let currentQuery = '';
 
-            menu.style.display = isVisible ? "none" : "block";
-            overlay.style.display = isVisible ? "none" : "block";
-            closeBtn.style.display = isVisible ? "none" : "block";
+        // --- Navigation and Drawer Logic ---
+        function toggleDrawer() {
+            const isOpen = drawer.classList.toggle('open');
+            overlay.classList.toggle('show');
+            menuBtn.setAttribute('aria-expanded', isOpen);
+            menuBtn.querySelector('.menu-toggle').classList.toggle('open', isOpen);
         }
 
+        menuBtn.addEventListener('click', toggleDrawer);
+
+        overlay.addEventListener('click', () => {
+            drawer.classList.remove('open');
+            overlay.classList.remove('show');
+            menuBtn.setAttribute('aria-expanded', 'false');
+            menuBtn.querySelector('.menu-toggle').classList.remove('open');
+            submenuItems.forEach(item => {
+                item.classList.remove('open');
+                const submenu = item.nextElementSibling;
+                if (submenu) submenu.classList.remove('open');
+            });
+        });
+
+        submenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                drawer.classList.remove('open');
+                overlay.classList.remove('show');
+                menuBtn.setAttribute('aria-expanded', 'false');
+                menuBtn.querySelector('.menu-toggle').classList.remove('open');
+                submenuItems.forEach(item => item.classList.remove('open'));
+                document.querySelectorAll('.submenu').forEach(submenu => submenu.classList.remove('open'));
+            });
+        });
+
+        submenuItems.forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.stopPropagation();
+                submenuItems.forEach(otherItem => {
+                    if (otherItem !== item) {
+                        otherItem.classList.remove('open');
+                        const otherSubmenu = otherItem.nextElementSibling;
+                        if (otherSubmenu) otherSubmenu.classList.remove('open');
+                    }
+                });
+                item.classList.toggle('open');
+                const submenu = item.nextElementSibling;
+                if (submenu) submenu.classList.toggle('open');
+            });
+
+            item.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    item.click();
+                }
+            });
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && drawer.classList.contains('open')) {
+                drawer.classList.remove('open');
+                overlay.classList.remove('show');
+                menuBtn.setAttribute('aria-expanded', 'false');
+                menuBtn.querySelector('.menu-toggle').classList.remove('open');
+            }
+            if (e.ctrlKey && e.key === 'm') {
+                e.preventDefault();
+                toggleDrawer();
+            }
+        });
+
+        // --- Search Functionality ---
+
+        searchToggle.addEventListener('click', () => {
+            const isVisible = !searchBox.classList.contains('hidden');
+            searchBox.classList.toggle('hidden', isVisible);
+            if (!isVisible) {
+                searchInput.focus();
+                updatePlaceholder();
+                filterSongs(currentQuery);
+                searchIcon.classList.add('hidden');
+                closeIcon.classList.remove('hidden');
+            } else {
+                searchInput.innerText = '';
+                currentQuery = '';
+                updatePlaceholder();
+                filterSongs('');
+                searchIcon.classList.remove('hidden');
+                closeIcon.classList.add('hidden');
+            }
+        });
+
+        searchInput.addEventListener('input', () => {
+            currentQuery = searchInput.innerText.toLowerCase().trim();
+            updatePlaceholder();
+            filterSongs(currentQuery);
+        });
+
+        clearSearch.addEventListener('click', () => {
+            searchInput.innerText = '';
+            currentQuery = '';
+            updatePlaceholder();
+            filterSongs('');
+            searchInput.focus();
+        });
+
+        function updatePlaceholder() {
+            const hasText = searchInput.innerText.trim().length > 0;
+            searchInput.classList.toggle('placeholder', !hasText);
+            clearSearch.style.display = hasText ? 'block' : 'none';
+        }
+
+        function filterSongs(query) {
+            const teluguSongsContainer = document.getElementById('teluguSongs');
+            const englishSongsContainer = document.getElementById('englishSongs');
+
+            // Determine the currently active song list (Telugu or English)
+            const activeContainer = teluguSongsContainer.classList.contains('hidden') ? englishSongsContainer : teluguSongsContainer;
+            const allSongsInActiveContainer = activeContainer.querySelectorAll('.go-to');
+
+            let matchCount = 0;
+            allSongsInActiveContainer.forEach(songElement => {
+                const songName = songElement.querySelector('a').innerText.toLowerCase();
+                const matches = songName.includes(query);
+                songElement.style.display = matches ? 'block' : 'none';
+                if (matches) matchCount++;
+            });
+
+            // Show/hide "No songs matched" message based on the active container
+            const currentNoSongsMessage = activeContainer.querySelector('.no-songs-message');
+            if (currentNoSongsMessage) { // Check if the message element exists for the current tab
+                if (matchCount === 0 && query.length > 0) {
+                    currentNoSongsMessage.classList.remove('hidden');
+                } else {
+                    currentNoSongsMessage.classList.add('hidden');
+                }
+            } else {
+                // If there's no specific message for the active container, use the general one
+                if (matchCount === 0 && query.length > 0) {
+                    noSongsMessage.classList.remove('hidden');
+                } else {
+                    noSongsMessage.classList.add('hidden');
+                }
+            }
+        }
+
+        // --- Tab Switching Logic ---
         function showSongs(language, event) {
             const telugu = document.getElementById("teluguSongs");
             const english = document.getElementById("englishSongs");
@@ -1117,115 +1424,18 @@
             const buttons = document.querySelectorAll('.tab-btn');
             buttons.forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
+
+            // Re-apply search filter when tabs are switched
+            filterSongs(currentQuery);
         }
 
-
-
-
-        // Close menu when clicking outside
-        document.addEventListener("click", function (event) {
-            const menu = document.getElementById("customMenu");
-            const button = document.querySelector(".menu-button");
-            if (!button.contains(event.target) && !menu.contains(event.target)) {
-                menu.style.display = "none";
-            }
+        // Initial setup for placeholder and filter on load
+        document.addEventListener('DOMContentLoaded', () => {
+            updatePlaceholder();
+            filterSongs(currentQuery);
         });
 
-        // Get all items with submenus
-        const submenuItems = document.querySelectorAll('.drawer-item.has-submenu');
-
-        // Toggle drawer
-        const toggleDrawer = () => {
-            const isOpen = drawer.classList.toggle('open');
-            overlay.classList.toggle('show');
-            menuBtn.setAttribute('aria-expanded', isOpen);
-
-            const icon = menuBtn.querySelector('.menu-toggle');
-            icon.classList.toggle('open', isOpen);
-        };
-
-
-        menuBtn.addEventListener('click', toggleDrawer);
-
-        // Close drawer when clicking overlay
-        overlay.addEventListener('click', () => {
-            drawer.classList.remove('open');
-            overlay.classList.remove('show');
-            menuBtn.setAttribute('aria-expanded', 'false');
-            menuBtn.querySelector('.menu-toggle').classList.remove('open');
-
-            submenuItems.forEach(item => {
-                item.classList.remove('open');
-                const submenu = item.nextElementSibling;
-                submenu.classList.remove('open');
-            });
-        });
-
-
-        // Close drawer and submenus when any submenu item is clicked
-        const submenuLinks = document.querySelectorAll('.submenu-item');
-
-        submenuLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                drawer.classList.remove('open');
-                overlay.classList.remove('show');
-                menuBtn.setAttribute('aria-expanded', 'false');
-                menuBtn.querySelector('.menu-toggle').classList.remove('open');
-
-                submenuItems.forEach(item => item.classList.remove('open'));
-                document.querySelectorAll('.submenu').forEach(submenu => submenu.classList.remove('open'));
-            });
-        });
-
-
-
-
-        // Handle submenu toggle
-        submenuItems.forEach(item => {
-            item.addEventListener('click', (e) => {
-                e.stopPropagation();
-
-                // Close all other submenus
-                submenuItems.forEach(otherItem => {
-                    if (otherItem !== item) {
-                        otherItem.classList.remove('open');
-                        const otherSubmenu = otherItem.nextElementSibling;
-                        if (otherSubmenu) otherSubmenu.classList.remove('open');
-                    }
-                });
-
-                // Toggle clicked submenu
-                item.classList.toggle('open');
-                const submenu = item.nextElementSibling;
-                if (submenu) submenu.classList.toggle('open');
-            });
-
-
-            // Keyboard accessibility
-            item.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    item.click();
-                }
-            });
-        });
-
-        // Close drawer when pressing Escape
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && drawer.classList.contains('open')) {
-                drawer.classList.remove('open');
-                overlay.classList.remove('show');
-                menuBtn.setAttribute('aria-expanded', 'false');
-                menuBtn.querySelector('.menu-toggle').classList.remove('open');
-            }
-
-            if (e.ctrlKey && e.key === 'm') {
-                e.preventDefault();
-                toggleDrawer();
-            }
-        });
-
-
+        // --- Other existing scripts (Service Worker, Storage Cleanup) ---
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', function () {
                 navigator.serviceWorker.register('/vidhyardhi-geethavali/service-worker.js')
@@ -1237,67 +1447,6 @@
                     });
             });
         }
-
-    </script>
-    <script>
-        (function () {
-            // Keys to retain in localStorage
-            const keysToRetain = ["bbsRole", "bbsName"];
-
-            // Store the values of the keys that actually exist
-            const existingKeys = new Set(keysToRetain.filter(key => localStorage.getItem(key) !== null));
-
-            // Remove all keys not in the existingKeys set
-            Object.keys(localStorage).forEach((key) => {
-                if (!existingKeys.has(key)) {
-                    localStorage.removeItem(key);
-                }
-            });
-
-            console.log("LocalStorage cleared except for:", [...existingKeys]);
-
-            // Clear sessionStorage
-            sessionStorage.clear();
-            console.log("SessionStorage cleared.");
-
-            // Clear IndexedDB data
-            const clearIndexedDB = () => {
-                if (!window.indexedDB) {
-                    console.warn("IndexedDB is not supported by this browser.");
-                    return;
-                }
-                indexedDB.databases().then((databases) => {
-                    databases.forEach((db) => {
-                        indexedDB.deleteDatabase(db.name);
-                        console.log(`Deleted IndexedDB: ${db.name}`);
-                    });
-                }).catch((error) => {
-                    console.error("Error clearing IndexedDB:", error);
-                });
-            };
-
-            // Clear browser cache
-            const clearCache = () => {
-                if ("caches" in window) {
-                    caches.keys().then((cacheNames) => {
-                        cacheNames.forEach((cacheName) => {
-                            caches.delete(cacheName);
-                            console.log(`Deleted Cache: ${cacheName}`);
-                        });
-                    }).catch((error) => {
-                        console.error("Error clearing cache:", error);
-                    });
-                } else {
-                    console.warn("Cache API is not supported by this browser.");
-                }
-            };
-
-            // Execute cleanup functions
-            clearIndexedDB();
-            clearCache();
-
-            console.log(`All data cleared except for ${[...existingKeys].join(", ")} in localStorage.`);
-        })();
     </script>
 </body>
 
