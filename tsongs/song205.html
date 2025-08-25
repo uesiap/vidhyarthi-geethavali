@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-                        <html lang="en">
-                            <head>
-                                <meta charset="UTF-8">
-                                        <meta charset="UTF-8">
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta charset="UTF-8">
     <!-- Clear all Data -->
     <script>
         (function () {
@@ -80,8 +81,10 @@
     <meta name="theme-color" content="#128C7E">
 
     <!-- Meta Tags for Web Application-->
-    <link rel="manifest" href="https://uesiap.github.io/vidhyardhi-geethavali/manifest.json" crossorigin="use-credentials">
-    <link rel="apple-touch-icon" href="https://uesiap.github.io/vidhyardhi-geethavali/Icon192.png"> <!-- iOS splash icon -->
+    <link rel="manifest" href="https://uesiap.github.io/vidhyardhi-geethavali/manifest.json"
+        crossorigin="use-credentials">
+    <link rel="apple-touch-icon" href="https://uesiap.github.io/vidhyardhi-geethavali/Icon192.png">
+    <!-- iOS splash icon -->
 
     <!-- Author and Robots -->
     <meta name="author" content="M.Rahul">
@@ -122,7 +125,7 @@
     <meta name="twitter:data1" content="UESI AP">
 
     <!-- Structured Data (JSON-LD) -->
-  <script type="application/ld+json">
+    <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "WebPage",
@@ -163,8 +166,8 @@
     }
     </script>
 
-  <!-- Site Name Markup -->
-  <script type="application/ld+json">
+    <!-- Site Name Markup -->
+    <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "WebSite",
@@ -177,662 +180,662 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-                                    <style>
-                                            @import url('https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500&display=swap');
-    @import url('https://fonts.googleapis.com/css?family=Noto+Sans+Telugu:wght@400;500&display=swap');
-    @import url('https://fonts.googleapis.com/css2?family=Sree+Krushnadevaraya&display=swap');
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500&display=swap');
+        @import url('https://fonts.googleapis.com/css?family=Noto+Sans+Telugu:wght@400;500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Sree+Krushnadevaraya&display=swap');
 
-    :root {
-        --primary-color: #128C7E;
-        --primary-dark: #075E54;
-        --text-light: #ffffff;
-        --text-dark: #333333;
-        --text-gray: #666666;
-        --bg-light: #f5f5f5;
-        --bg-white: #ffffff;
-        --border-light: #eeeeee;
-        --shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-        --transition: all 0.3s ease;
-    }
-
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-weight: 500;
-        font-style: normal;
-    }
-
-    body {
-        font-family: 'Google Sans', sans-serif;
-        background: white;
-        margin: 0;
-        margin-top: 80px;
-        padding: 0;
-        user-select: none;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-    }
-
-    /* Navbar Styles */
-    .navbar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 12px 5%;
-        background-color: var(--primary-color);
-        color: var(--text-light);
-        box-shadow: var(--shadow);
-        position: fixed;
-        border-bottom: 3px dotted rgb(160, 225, 161);
-        top: 0;
-        left: 0;
-        right: 0;
-        z-index: 1000;
-    }
-
-    .logo-title {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-
-    .logo {
-        width: 36px;
-        height: 36px;
-        border-radius: 50%;
-        object-fit: cover;
-        border: 2px solid rgba(255, 255, 255, 0.2);
-    }
-
-    .title {
-        font-size: 1rem;
-        font-weight: 500;
-    }
-
-    .menu-btn {
-        background: none;
-        border: none;
-        color: var(--text-light);
-        font-size: 1.8rem;
-        cursor: pointer;
-        padding: 8px;
-        transition: var(--transition);
-        border-radius: 50%;
-        width: 40px;
-        height: 40px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .menu-btn:focus {
-        outline: 2px solid rgba(255, 255, 255, 0.5);
-        background: rgba(255, 255, 255, 0.1);
-    }
-
-    .menu-btn:hover {
-        background: rgba(255, 255, 255, 0.1);
-        transform: scale(1.05);
-    }
-
-    /* Drawer Styles */
-    .drawer {
-        position: fixed;
-        top: 0;
-        right: -100%;
-        width: 320px;
-        max-width: 90%;
-        height: 100vh;
-        background-color: var(--bg-white);
-        box-shadow: -2px 0 15px rgba(0, 0, 0, 0.1);
-        transition: var(--transition);
-        z-index: 999;
-        padding-top: 70px;
-        overflow-y: auto;
-        will-change: transform;
-    }
-
-    @media (min-width: 768px) {
-        .drawer {
-            width: 400px;
+        :root {
+            --primary-color: #128C7E;
+            --primary-dark: #075E54;
+            --text-light: #ffffff;
+            --text-dark: #333333;
+            --text-gray: #666666;
+            --bg-light: #f5f5f5;
+            --bg-white: #ffffff;
+            --border-light: #eeeeee;
+            --shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
         }
-    }
 
-    .drawer.open {
-        right: 0;
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-weight: 500;
+            font-style: normal;
+        }
 
-    .drawer-content {
-        padding: 0;
-    }
+        body {
+            font-family: 'Google Sans', sans-serif;
+            background: white;
+            margin: 0;
+            margin-top: 80px;
+            padding: 0;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
 
-    .drawer-item {
-        padding: 16px 25px;
-        color: var(--text-dark);
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        transition: var(--transition);
-        border-left: 4px solid transparent;
-        font-weight: 500;
-        border-bottom: 1.5px solid #ddd;
-    }
-
-    .drawer-item:hover,
-    .drawer-item:focus {
-        background-color: rgba(0, 0, 0, 0.03);
-        border-left-color: var(--primary-color);
-        outline: none;
-    }
-
-    .drawer-item .item-content {
-        display: flex;
-        align-items: center;
-        gap: 15px;
-    }
-
-    .drawer-item .icon {
-        width: 30px;
-        text-align: center;
-        font-size: 1.5rem;
-        color: var(--primary-color);
-    }
-
-    .mnu-tit {
-        font-size: 1.3rem;
-        font-weight: 400;
-    }
-
-    .drawer-item.has-submenu::after {
-        content: "\f078";
-        font-family: "Font Awesome 6 Free";
-        font-weight: 900;
-        font-size: 0.8rem;
-        color: var(--text-gray);
-        transition: var(--transition);
-    }
-
-    .drawer-item.has-submenu.open::after {
-        transform: rotate(180deg);
-        color: var(--primary-color);
-    }
-
-    .drawer a,
-    .drawer a:visited,
-    .drawer a:hover,
-    .drawer a:active {
-        text-decoration: none;
-        color: inherit;
-        /* Optional: keeps the same color as parent */
-    }
-
-
-    /* Submenu Items */
-    .submenu {
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.4s ease-out;
-        background-color: rgba(0, 0, 0, 0.02);
-    }
-
-    .submenu.open {
-        max-height: 500px;
-        border-bottom: 1.5px solid #ddd;
-    }
-
-    .submenu-item {
-        padding: 14px 25px 14px 60px;
-        color: var(--text-gray);
-        cursor: pointer;
-        transition: var(--transition);
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        font-weight: 400;
-        font-size: 0.95rem;
-    }
-
-    .submenu-item .icon {
-        font-size: 0.9rem;
-        color: var(--text-gray);
-        width: 20px;
-        text-align: center;
-    }
-
-    .submenu-item:hover,
-    .submenu-item:focus {
-        background-color: rgba(0, 0, 0, 0.05);
-        color: var(--primary-dark);
-        outline: none;
-    }
-
-    .submenu-item:hover .icon,
-    .submenu-item:focus .icon {
-        color: var(--primary-dark);
-    }
-
-    /* Overlay */
-    .overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        opacity: 0;
-        visibility: hidden;
-        transition: var(--transition);
-        z-index: 998;
-    }
-
-    .overlay.show {
-        opacity: 1;
-        visibility: visible;
-    }
-
-    /* Main Content */
-    .main-content {
-        background-color: f5f5f5;
-    }
-
-    .page-title {
-        margin-bottom: 25px;
-        color: var(--text-dark);
-        font-size: 1.8rem;
-        font-weight: 600;
-    }
-
-    .card {
-        background: var(--bg-white);
-        border-radius: 10px;
-        padding: 25px;
-        box-shadow: var(--shadow);
-        margin-bottom: 25px;
-    }
-
-    .card h2 {
-        color: var(--primary-dark);
-        margin-bottom: 15px;
-        font-size: 1.4rem;
-    }
-
-    .card p {
-        color: var(--text-gray);
-        margin-bottom: 10px;
-    }
-
-    /* Responsive Adjustments */
-    @media (max-width: 768px) {
+        /* Navbar Styles */
         .navbar {
-            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 5%;
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            box-shadow: var(--shadow);
+            position: fixed;
+            border-bottom: 3px dotted rgb(160, 225, 161);
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
         }
 
-        .main-content {
-            padding: 0px 20px 0px;
+        .logo-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .page-title {
-            font-size: 1.5rem;
+        .logo {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(255, 255, 255, 0.2);
         }
 
-        .card {
-            padding: 20px;
-        }
-    }
-
-    @media (max-width: 480px) {
         .title {
-            font-size: 1.1rem;
+            font-size: 1rem;
+            font-weight: 500;
         }
 
+        .menu-btn {
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 1.8rem;
+            cursor: pointer;
+            padding: 8px;
+            transition: var(--transition);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .menu-btn:focus {
+            outline: 2px solid rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .menu-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: scale(1.05);
+        }
+
+        /* Drawer Styles */
         .drawer {
-            width: 85%;
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 320px;
+            max-width: 90%;
+            height: 100vh;
+            background-color: var(--bg-white);
+            box-shadow: -2px 0 15px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+            z-index: 999;
+            padding-top: 70px;
+            overflow-y: auto;
+            will-change: transform;
+        }
+
+        @media (min-width: 768px) {
+            .drawer {
+                width: 400px;
+            }
+        }
+
+        .drawer.open {
+            right: 0;
+        }
+
+        .drawer-content {
+            padding: 0;
         }
 
         .drawer-item {
-            padding: 14px 20px;
+            padding: 16px 25px;
+            color: var(--text-dark);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: var(--transition);
+            border-left: 4px solid transparent;
+            font-weight: 500;
+            border-bottom: 1.5px solid #ddd;
+        }
+
+        .drawer-item:hover,
+        .drawer-item:focus {
+            background-color: rgba(0, 0, 0, 0.03);
+            border-left-color: var(--primary-color);
+            outline: none;
+        }
+
+        .drawer-item .item-content {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .drawer-item .icon {
+            width: 30px;
+            text-align: center;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .mnu-tit {
+            font-size: 1.3rem;
+            font-weight: 400;
+        }
+
+        .drawer-item.has-submenu::after {
+            content: "\f078";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            font-size: 0.8rem;
+            color: var(--text-gray);
+            transition: var(--transition);
+        }
+
+        .drawer-item.has-submenu.open::after {
+            transform: rotate(180deg);
+            color: var(--primary-color);
+        }
+
+        .drawer a,
+        .drawer a:visited,
+        .drawer a:hover,
+        .drawer a:active {
+            text-decoration: none;
+            color: inherit;
+            /* Optional: keeps the same color as parent */
+        }
+
+
+        /* Submenu Items */
+        .submenu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out;
+            background-color: rgba(0, 0, 0, 0.02);
+        }
+
+        .submenu.open {
+            max-height: 500px;
+            border-bottom: 1.5px solid #ddd;
         }
 
         .submenu-item {
-            padding: 12px 20px 12px 55px;
+            padding: 14px 25px 14px 60px;
+            color: var(--text-gray);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 400;
+            font-size: 0.95rem;
         }
-    }
 
-    /* songs grid */
-    .grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 12px;
-        max-width: 600px;
-        margin: 20px auto;
-    }
+        .submenu-item .icon {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+            width: 20px;
+            text-align: center;
+        }
 
-    @media (min-width: 1024px) {
+        .submenu-item:hover,
+        .submenu-item:focus {
+            background-color: rgba(0, 0, 0, 0.05);
+            color: var(--primary-dark);
+            outline: none;
+        }
+
+        .submenu-item:hover .icon,
+        .submenu-item:focus .icon {
+            color: var(--primary-dark);
+        }
+
+        /* Overlay */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 998;
+        }
+
+        .overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Main Content */
+        .main-content {
+            background-color: f5f5f5;
+        }
+
+        .page-title {
+            margin-bottom: 25px;
+            color: var(--text-dark);
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+
+        .card {
+            background: var(--bg-white);
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+        }
+
+        .card h2 {
+            color: var(--primary-dark);
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+
+        .card p {
+            color: var(--text-gray);
+            margin-bottom: 10px;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 12px 20px;
+            }
+
+            .main-content {
+                padding: 0px 20px 0px;
+            }
+
+            .page-title {
+                font-size: 1.5rem;
+            }
+
+            .card {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .title {
+                font-size: 1.1rem;
+            }
+
+            .drawer {
+                width: 85%;
+            }
+
+            .drawer-item {
+                padding: 14px 20px;
+            }
+
+            .submenu-item {
+                padding: 12px 20px 12px 55px;
+            }
+        }
+
+        /* songs grid */
         .grid {
-            grid-template-columns: repeat(7, 1fr);
-            max-width: 900px;
-            /* Optional: adjust max-width for wider grid */
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            max-width: 600px;
+            margin: 20px auto;
         }
 
-        .title {
+        @media (min-width: 1024px) {
+            .grid {
+                grid-template-columns: repeat(7, 1fr);
+                max-width: 900px;
+                /* Optional: adjust max-width for wider grid */
+            }
+
+            .title {
                 font-size: 1.3rem;
             }
-    }
-
-    .box {
-        background-color: #e0e0e0;
-        border-radius: 8px;
-        padding: 12px;
-        text-align: center;
-        font-size: 20px;
-        cursor: pointer;
-        transition: background-color 0.2s, color 0.2s;
-    }
-
-    .box:hover {
-        background-color: #e0e0e0;
-    }
-
-    .box.active {
-        background-color: #128C7E;
-        color: white;
-    }
-
-    #songs {
-        max-width: 600px;
-        margin: 20px auto;
-        list-style-type: none;
-        padding: 0;
-    }
-
-    #songs li {
-        background-color: white;
-        margin-bottom: 10px;
-        padding: 12px;
-        border-radius: 6px;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    }
-
-    label[for="langSelect"] {
-        display: inline-block;
-        margin-bottom: 8px;
-        font-size: 16px;
-        color: #333;
-    }
-
-    #langSelect {
-        display: inline-block;
-        padding: 6px 10px;
-        font-size: 16px;
-        border: 1px solid #128C7E;
-        border-radius: 5px;
-        background-color: #f9f9f9;
-        color: #333;
-        margin-left: 10px;
-        margin-bottom: 10px;
-        cursor: pointer;
-        transition: border-color 0.3s, background-color 0.3s;
-    }
-
-    #langSelect:hover {
-        border-color: #128C7E;
-        background-color: #f0f0f0;
-    }
-
-    #langSelect:focus {
-        outline: none;
-        border-color: #128C7E;
-    }
-
-    #songs {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
-
-    #songs li {
-        margin-bottom: px;
-        border-radius: 8px;
-        transition: background-color 0.3s, transform 0.2s;
-    }
-
-    .song-link {
-        display: block;
-        padding: 10px 8px;
-        text-decoration: none;
-        color: #333;
-        font-weight: bold;
-        font-size: 1rem;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        background: #fafafa;
-        transition: all 0.3s ease;
-    }
-
-    .song-link:hover {
-        background-color: #f0f8ff;
-        color: #128C7E;
-        transform: scale(1.02);
-    }
-
-    .lyrics {
-        font-family: 'Noto Sans Telugu', sans-serif;
-        margin: 20px;
-        padding: 20px;
-        background-color: white;
-        color: black;
-        position: relative;
-        animation: fade-in 0.9s ease-in-out forwards;
-        border-radius: 8px;
-    }
-
-    .lyricsHead {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 35px;
-        background-color: white;
-        color: black;
-        font-size: 1.1rem;
-        padding: 5px;
-        border-radius: 8px;
-        border: 2px dotted var(--primary-color);
-        width: 100%;
-        height: 40px;
-        margin-left: -8px;
-    }
-
-    .lyricsHead b {
-        margin: 0;
-    }
-
-    .head-text {
-        font-size: 1.1rem;
-    }
-
-    .lyrics-text {
-        font-size: 1.175rem;
-    }
-
-    .back-button {
-        margin-left: 10px;
-    }
-
-
-    .back-button,
-    .next-button {
-        cursor: pointer;
-        color: black;
-        text-decoration: none;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 30px;
-        width: 40px;
-        padding: 3px;
-        padding-top: 5px;
-        padding-bottom: 5px;
-        border-radius: 50%;
-        background-color: white;
-        border: 1px solid var(--primary-color);
-        font-size: 20px;
-    }
-
-    .arrow {
-        font-size: 20px;
-    }
-
-    @keyframes fade-in {
-        from {
-            opacity: 0;
         }
 
-        to {
-            opacity: 1;
-        }
-    }
-
-    /* Responsive adjustments */
-    @media (max-width: 1024px) {
-        .lyrics {
-            padding: 15px;
-            margin: 10px;
+        .box {
+            background-color: #e0e0e0;
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+            font-size: 20px;
+            cursor: pointer;
+            transition: background-color 0.2s, color 0.2s;
         }
 
-        .back-button,
-        .next-button {
-            height: 25px;
-            width: 25px;
+        .box:hover {
+            background-color: #e0e0e0;
         }
 
-        .arrow {
+        .box.active {
+            background-color: #128C7E;
+            color: white;
+        }
+
+        #songs {
+            max-width: 600px;
+            margin: 20px auto;
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #songs li {
+            background-color: white;
+            margin-bottom: 10px;
+            padding: 12px;
+            border-radius: 6px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        label[for="langSelect"] {
+            display: inline-block;
+            margin-bottom: 8px;
             font-size: 16px;
+            color: #333;
         }
-    }
 
-    @media (max-width: 480px) {
-        .lyricsHead {
-            font-size: 0.875rem;
+        #langSelect {
+            display: inline-block;
+            padding: 6px 10px;
+            font-size: 16px;
+            border: 1px solid #128C7E;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            color: #333;
+            margin-left: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: border-color 0.3s, background-color 0.3s;
         }
+
+        #langSelect:hover {
+            border-color: #128C7E;
+            background-color: #f0f0f0;
+        }
+
+        #langSelect:focus {
+            outline: none;
+            border-color: #128C7E;
+        }
+
+        #songs {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #songs li {
+            margin-bottom: px;
+            border-radius: 8px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .song-link {
+            display: block;
+            padding: 10px 8px;
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            font-size: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: #fafafa;
+            transition: all 0.3s ease;
+        }
+
+        .song-link:hover {
+            background-color: #f0f8ff;
+            color: #128C7E;
+            transform: scale(1.02);
+        }
+
+        .lyrics {
+            font-family: 'Noto Sans Telugu', sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: white;
+            color: black;
+            position: relative;
+            animation: fade-in 0.9s ease-in-out forwards;
+            border-radius: 8px;
+        }
+
+        .lyricsHead {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 35px;
+            background-color: white;
+            color: black;
+            font-size: 1.1rem;
+            padding: 5px;
+            border-radius: 8px;
+            border: 2px dotted var(--primary-color);
+            width: 100%;
+            height: 40px;
+            margin-left: -8px;
+        }
+
+        .lyricsHead b {
+            margin: 0;
+        }
+
+        .head-text {
+            font-size: 1.1rem;
+        }
+
+        .lyrics-text {
+            font-size: 1.175rem;
+        }
+
+        .back-button {
+            margin-left: 10px;
+        }
+
 
         .back-button,
         .next-button {
-            height: 20px;
-            width: 20px;
+            cursor: pointer;
+            color: black;
+            text-decoration: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 30px;
+            width: 40px;
+            padding: 3px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            border-radius: 50%;
+            background-color: white;
+            border: 1px solid var(--primary-color);
+            font-size: 20px;
         }
 
         .arrow {
-            font-size: 14px;
+            font-size: 20px;
         }
-    }
 
-    /* Audio Player Styling */
-    .audio-player {
-        position: fixed;
-        bottom: 63px;
-        margin-bottom: -7px;
-        left: 0;
-        color: black;
-        width: 100%;
-        height: 52px;
-        background-color: white;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding-top: 1rem;
-        padding-bottom: 0.8rem;
-        padding-left: 6px;
-        box-shadow: 0 -2px 0px rgba(0, 0, 0, 0.5);
-    }
+        @keyframes fade-in {
+            from {
+                opacity: 0;
+            }
 
-    /* Track Player Styling */
-    .track-player {
-        position: fixed;
-        bottom: 3px;
-        left: 0;
-        width: 100%;
-        height: 45px;
-        color: black;
-        background-color: white;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding-top: 2rem;
-        padding-bottom: 1.05rem;
-        padding-left: 6px;
-        box-shadow: 0 -2px 0px rgba(0, 0, 0, 0.5);
-    }
+            to {
+                opacity: 1;
+            }
+        }
 
-    .audio-controls {
-        display: flex;
-        align-items: center;
-        width: 100%;
-    }
+        /* Responsive adjustments */
+        @media (max-width: 1024px) {
+            .lyrics {
+                padding: 15px;
+                margin: 10px;
+            }
 
-    .play-pause-btn {
-        background-color: var(--primary-color);
-        border: none;
-        color: white;
-        padding: 10px;
-        border-radius: 50%;
-        cursor: pointer;
-        margin-right: 10px;
-        font-size: 16px;
-        height: 40px;
-        width: 40px;
-        user-select: none;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+            .back-button,
+            .next-button {
+                height: 25px;
+                width: 25px;
+            }
 
-    .seek-slider {
-        width: 100%;
-        cursor: pointer;
-        margin-right: 15px;
-        -webkit-appearance: none;
-        appearance: none;
-        background: var(--primary-color);
-        height: 5px;
-        border-radius: 5px;
-        outline: none;
-    }
+            .arrow {
+                font-size: 16px;
+            }
+        }
 
-    .seek-slider::-webkit-slider-thumb {
-        -webkit-appearance: none;
-        appearance: none;
-        background-color: white;
-        border-radius: 50%;
-        border: 2px solid black;
-        width: 15px;
-        height: 15px;
-    }
+        @media (max-width: 480px) {
+            .lyricsHead {
+                font-size: 0.875rem;
+            }
 
-    .seek-slider::-moz-range-thumb {
-        background: #fff;
-        border-radius: 50%;
-        width: 12px;
-        height: 12px;
-    }
+            .back-button,
+            .next-button {
+                height: 20px;
+                width: 20px;
+            }
 
-    .time-indicator {
-        color: black;
-        margin-right: 10px;
-        padding-right: 6px;
-    }
+            .arrow {
+                font-size: 14px;
+            }
+        }
 
-    .menu-button:hover {
-        background-color: #f0f0f0;
-        cursor: pointer;
-    }
+        /* Audio Player Styling */
+        .audio-player {
+            position: fixed;
+            bottom: 63px;
+            margin-bottom: -7px;
+            left: 0;
+            color: black;
+            width: 100%;
+            height: 52px;
+            background-color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            padding-bottom: 0.8rem;
+            padding-left: 6px;
+            box-shadow: 0 -2px 0px rgba(0, 0, 0, 0.5);
+        }
 
-    .menu-toggle {
+        /* Track Player Styling */
+        .track-player {
+            position: fixed;
+            bottom: 3px;
+            left: 0;
+            width: 100%;
+            height: 45px;
+            color: black;
+            background-color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 2rem;
+            padding-bottom: 1.05rem;
+            padding-left: 6px;
+            box-shadow: 0 -2px 0px rgba(0, 0, 0, 0.5);
+        }
+
+        .audio-controls {
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+
+        .play-pause-btn {
+            background-color: var(--primary-color);
+            border: none;
+            color: white;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            margin-right: 10px;
+            font-size: 16px;
+            height: 40px;
+            width: 40px;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .seek-slider {
+            width: 100%;
+            cursor: pointer;
+            margin-right: 15px;
+            -webkit-appearance: none;
+            appearance: none;
+            background: var(--primary-color);
+            height: 5px;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        .seek-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            background-color: white;
+            border-radius: 50%;
+            border: 2px solid black;
+            width: 15px;
+            height: 15px;
+        }
+
+        .seek-slider::-moz-range-thumb {
+            background: #fff;
+            border-radius: 50%;
+            width: 12px;
+            height: 12px;
+        }
+
+        .time-indicator {
+            color: black;
+            margin-right: 10px;
+            padding-right: 6px;
+        }
+
+        .menu-button:hover {
+            background-color: #f0f0f0;
+            cursor: pointer;
+        }
+
+        .menu-toggle {
             cursor: pointer;
             width: 24px;
             height: 24px;
@@ -840,7 +843,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-    }
+        }
 
         .menu-bars {
             width: 24px;
@@ -895,16 +898,22 @@
         }
 
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
+            0% {
+                transform: rotate(0deg);
+            }
 
-                                    </style>
-                            </head>
-                            <body>
-                                          <nav class="navbar" aria-label="Main navigation">
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar" aria-label="Main navigation">
         <div class="logo-title">
-<img  src="https://uesiap.github.io/vidhyardhi-geethavali/Icon192.jpg" alt="App Logo"  class="logo code-line" data-line="1103" >
+            <img src="https://uesiap.github.io/vidhyardhi-geethavali/Icon192.jpg" alt="App Logo" class="logo code-line"
+                data-line="1103">
             <span class="title">UESI-AP Audio & Visuals Dept</span>
         </div>
         <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">
@@ -1133,7 +1142,8 @@
                 </a>
 
                 <!-- Center Title -->
-<p   class="head-text code-line" data-line="1332"  style="margin: 0 auto; text-align: center;">ప్రభు పనిలో నిలచి (205)</p>
+                <p class="head-text code-line" data-line="1332" style="margin: 0 auto; text-align: center;">ప్రభు పనిలో
+                    నిలచి (205)</p>
             </div>
               
             <!-- Right Menu -->
@@ -1169,34 +1179,34 @@
                     onclick="downloadTrack()"><span class="icon"><span class="material-symbols-outlined">
                             download
                         </span></span>
-                    <span class="mnu-tit"
-                        style="font-size: 1.3rem; margin-bottom: 10px; margin-bottom: 5px;" id="trackText">Track</span>
+                    <span class="mnu-tit" style="font-size: 1.3rem; margin-bottom: 10px; margin-bottom: 5px;"
+                        id="trackText">Track</span>
                     <span id="trackLoader" class="loader" style="display: none; margin-left: 10px;"></span>
                 </li>
             </ul>
         </div>
         <div class="lyrics-text" style="text-align: left; margin-bottom: 120px;">
             <span>
-ప్రభు పనిలో నిలచి యుండి - స్థిరముగ కొనసాగెదమా <br> 
-ప్రభు మనసును కలిగి యుండి - ఆసక్తితో వెళ్లెదమా <br>
-హల్లెలూయా జయస్తోత్రం - జయశాలి జయమిచ్చును <br>
-హల్లెలూయా జయస్తోత్రం - ప్రయాసకు ఫలమిచ్చును <br>
-<br>
-1. తన తోటలో పనిచేయన్‌ - తన పిలుపును మనకిచ్చిను <br>
-వినయముతో లోబడెదం - విడువక పని చేయుదుము  ||హల్లె|| <br>
-<br>
-2. తన పనికై మీనాలన్‌ - విరివిగను వాడెదమా <br>
-కొంచెములో నమ్మకము - కొంతైనా చూపెదము  ||హల్లె|| <br>
-<br>
-3. సిగ్గుపడ నక్కరలేని - యోగ్యులముగ కనబడుదాం <br>
-జతపనివారము మనము - ప్రభువుతో సమకూర్చెదము  ||హల్లె|| <br>
-<br>
-4. స్వార్ధముకై ప్రభుపనిని - పాడుచేయక భయపడుదాం <br>
-మన కక్ష విపక్షములన్‌ - దహించును దైవాగ్ని  ||హల్లె|| <br>
-<br>
-5. ప్రభు రాకడ సామీప్యం - ప్రభుపనికై త్వరపడుదాం <br>
-మన భేదములను మరచి - ఐక్యతతో సాగెదము  ||హల్లె|| <br>
-</span>
+                ప్రభు పనిలో నిలచి యుండి - స్థిరముగ కొనసాగెదమా <br>
+                ప్రభు మనసును కలిగి యుండి - ఆసక్తితో వెళ్లెదమా <br>
+                హల్లెలూయా జయస్తోత్రం - జయశాలి జయమిచ్చును <br>
+                హల్లెలూయా జయస్తోత్రం - ప్రయాసకు ఫలమిచ్చును <br>
+                <br>
+                1. తన తోటలో పనిచేయన్‌ - తన పిలుపును మనకిచ్చిను <br>
+                వినయముతో లోబడెదం - విడువక పని చేయుదుము (హల్లె) <br>
+                <br>
+                2. తన పనికై మీనాలన్‌ - విరివిగను వాడెదమా <br>
+                కొంచెములో నమ్మకము - కొంతైనా చూపెదము (హల్లె) <br>
+                <br>
+                3. సిగ్గుపడ నక్కరలేని - యోగ్యులముగ కనబడుదాం <br>
+                జతపనివారము మనము - ప్రభువుతో సమకూర్చెదము (హల్లె) <br>
+                <br>
+                4. స్వార్ధముకై ప్రభుపనిని - పాడుచేయక భయపడుదాం <br>
+                మన కక్ష విపక్షములన్‌ - దహించును దైవాగ్ని (హల్లె) <br>
+                <br>
+                5. ప్రభు రాకడ సామీప్యం - ప్రభుపనికై త్వరపడుదాం <br>
+                మన భేదములను మరచి - ఐక్యతతో సాగెదము (హల్లె) <br>
+            </span>
         </div>
     </div>
     <div class="audio-player">
@@ -1205,9 +1215,10 @@
         <div class="audio-controls">
             <span id="audioDurationTime" class="time-indicator">0:00</span>
             <button id="audioPlayPauseBtn" class="play-pause-btn"><i class="fas fa-play"></i></button>
-<p   class="slider-text code-line" data-line="1384" >Audio</p>
+            <p class="slider-text code-line" data-line="1384">Audio</p>
         </div>
-        <audio id="audioPlayer" src="https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/ltcamp-audios/%E0%B0%AA%E0%B1%8D%E0%B0%B0%E0%B0%AD%E0%B1%81%20%E0%B0%AA%E0%B0%A8%E0%B0%BF%E0%B0%B2%E0%B1%8B_Audio.mp3"></audio>
+        <audio id="audioPlayer"
+            src="https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/ltcamp-audios/%E0%B0%AA%E0%B1%8D%E0%B0%B0%E0%B0%AD%E0%B1%81%20%E0%B0%AA%E0%B0%A8%E0%B0%BF%E0%B0%B2%E0%B1%8B_Audio.mp3"></audio>
     </div>
     <div class="track-player">
         <span id="trackCurrentTime" class="time-indicator" style="padding-left: 8px;">0:00</span>
@@ -1215,9 +1226,10 @@
         <div class="audio-controls">
             <span id="trackDurationTime" class="time-indicator">0:00</span>
             <button id="trackPlayPauseBtn" class="play-pause-btn"><i class="fas fa-play"></i></button>
-<p   class="slider-text code-line" data-line="1394" >Track</p>
+            <p class="slider-text code-line" data-line="1394">Track</p>
         </div>
-        <audio id="trackPlayer" src="https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/ltcamp-tracks/%E0%B0%AA%E0%B1%8D%E0%B0%B0%E0%B0%AD%E0%B1%81%20%E0%B0%AA%E0%B0%A8%E0%B0%BF%E0%B0%B2%E0%B1%8B_Track.mp3"></audio>
+        <audio id="trackPlayer"
+            src="https://pub-43e3b530db1540f4a16cdacc0e749843.r2.dev/ltcamp-tracks/%E0%B0%AA%E0%B1%8D%E0%B0%B0%E0%B0%AD%E0%B1%81%20%E0%B0%AA%E0%B0%A8%E0%B0%BF%E0%B0%B2%E0%B1%8B_Track.mp3"></audio>
     </div>
     <script>
         const menuBtn = document.getElementById('menuBtn');
@@ -1680,6 +1692,7 @@
             console.log(`All data cleared except for ${[...existingKeys].join(", ")} in localStorage.`);
         })();
     </script>
-        
-                            </body>
-                        </html>
+
+</body>
+
+</html>
