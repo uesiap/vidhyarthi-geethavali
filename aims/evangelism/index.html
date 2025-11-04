@@ -1138,8 +1138,7 @@
 
             <div style="text-align: center; margin-bottom: 1rem;">
                 <button class="tab-btn active" onclick="showSongs('telugu', event)">Telugu Songs</button>
-                <button class="tab-btn" onclick="showSongs('english', event)">English</button>
-                <!-- <button class="tab-btn" onclick="showSongs('new', event)">New Album</button> -->
+                <button class="tab-btn" onclick="showSongs('english', event)">English Songs</button>
             </div>
 
             <span id="teluguSongs" class="songs-grid">
@@ -1346,25 +1345,18 @@
             }
         }
 
-        // --- Tab Switching Logic (Existing Code, minor adjustment for search) ---
+        // --- Tab Switching Logic ---
         function showSongs(language, event) {
             const telugu = document.getElementById("teluguSongs");
             const english = document.getElementById("englishSongs");
-            const newSongs = document.getElementById("newSongs");
 
             // Toggle visibility using class
             if (language === 'telugu') {
                 telugu.classList.remove("hidden");
                 english.classList.add("hidden");
-                newSongs.classList.add("hidden");
-            } else if (language === 'english') {
+            } else {
                 telugu.classList.add("hidden");
                 english.classList.remove("hidden");
-                newSongs.classList.add("hidden");
-            } else if (language === 'new') {
-                telugu.classList.add("hidden");
-                english.classList.add("hidden");
-                newSongs.classList.remove("hidden");
             }
 
             // Update tab button states
