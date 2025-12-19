@@ -335,6 +335,142 @@
       top: 0;
     }
 
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .search-toggle {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s ease;
+    }
+
+    .search-toggle:focus-visible {
+      outline: 2px solid rgba(255, 255, 255, 0.5);
+      outline-offset: 2px;
+    }
+
+    .search-toggle:hover {
+      transform: scale(1.1);
+      border: 1px solid var(--bg-white);
+      border-radius: 50%;
+    }
+
+    .custom-search-icon {
+      width: 18px;
+      height: 18px;
+      border: 2px solid #fff;
+      border-radius: 50%;
+      position: relative;
+      box-sizing: border-box;
+    }
+    
+
+    .custom-search-icon::after {
+      content: '';
+      position: absolute;
+      width: 8px;
+      height: 2px;
+      background-color: white;
+      bottom: -3px;
+      right: -4px;
+      transform: rotate(45deg);
+    }
+
+    .custom-close-icon {
+      font-size: 1.3rem;
+      color: white;
+      cursor: pointer;
+      margin-top: -5px;
+      margin-bottom: -5px;
+      transition: opacity 0.2s ease;
+      display: block;
+    }
+
+    .search-box {
+      position: relative;
+      width: 100%;
+      max-width: 600px;
+      margin: 1.2rem auto;
+      transition: all 0.3s ease;
+    }
+
+    .search-box.hidden {
+      display: none;
+    }
+
+    .go-to-too-search {
+      width: 100%;
+      padding: 12px 40px 12px 14px;
+      font-size: 1rem;
+      border-left: 5px solid var(--primary-color);
+      border-right: 5px solid var(--primary-color);
+      border-top: 2px solid var(--primary-color);
+      border-bottom: 2px solid var(--primary-color);
+      color: black;
+      cursor: text;
+      outline: none;
+      min-height: 44px;
+      box-sizing: border-box;
+      position: relative;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      white-space: pre-wrap;
+      max-height: 120px;
+      overflow-y: auto;
+    }
+
+    .go-to-too-search:empty {
+      min-height: 44px;
+    }
+
+    .go-to-too-search[contenteditable]:empty::before {
+      content: attr(data-placeholder);
+      color: #aaa;
+      opacity: 0.8;
+      pointer-events: none;
+    }
+
+    .clear-search {
+      position: absolute;
+      top: 50%;
+      right: 12px;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: black;
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: none;
+      z-index: 2;
+      padding: 4px;
+      line-height: 1;
+    }
+
+    .clear-search:hover {
+      color: #555;
+    }
+
+    .go-to-too-search:not(.placeholder)~.clear-search {
+      display: block;
+    }
+
+    .no-songs-message {
+      text-align: center;
+      color: #777;
+      font-size: 1.1rem;
+      margin: 1rem 0;
+      font-style: italic;
+    }
+
     /* Drawer Styles - Optimized */
     .drawer {
       position: fixed;
@@ -728,6 +864,27 @@
         font-weight: 500;
       }
 
+      .search-box {
+        margin: 1rem 4%;
+        position: relative;
+        max-width: calc(100% - 8%);
+      }
+
+      .go-to-too-search {
+        font-size: 0.95rem;
+        padding: 10px 36px 10px 12px;
+        min-height: 40px;
+      }
+
+      .clear-search {
+        right: 10px;
+        font-size: 1rem;
+      }
+
+      .go-to-too-search[contenteditable]:empty::before {
+        font-size: 0.95rem;
+      }
+
       .drawer {
         width: 85%;
       }
@@ -1066,6 +1223,14 @@
         right: 30px;
       }
     }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .hide-icon {
+      display: none !important;
+    }
   </style>
 
 </head>
@@ -1081,18 +1246,27 @@
       <img src="https://uesiap.github.io/vidhyardhi-geethavali/Icon192.jpg" alt="App Logo" class="logo">
       <span class="title">UESI-AP Audio & Visuals Dept</span>
     </div>
-    <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">
-      <!--<span class="material-symbols-outlined" style="font-size: 2rem;">
-                dehaze
-            </span>-->
-      <!--<i class="fas fa-bars" style="font-size: 1.5rem; transform: scaleX(1.3);"></i>-->
-      <span id="menuBtn" aria-expanded="false">
-        <div class="menu-toggle">
-          <div class="menu-bars"></div>
-        </div>
-      </span>
-    </button>
+    <div class="nav-actions">
+      <button id="searchToggle" class="search-toggle" aria-label="Toggle Search">
+        <span id="searchIcon" class="custom-search-icon"></span>
+        <span id="closeIcon" class="custom-close-icon hide-icon">✕</span>
+      </button>
+      <button class=" menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">
+        <span>
+          <div class="menu-toggle">
+            <div class="menu-bars"></div>
+          </div>
+        </span>
+      </button>
+    </div>
   </nav>
+
+  <div id="searchBox" class="search-box hidden">
+    <div id="songSearchInput" class="go-to-too-search placeholder" contenteditable="true"
+      data-placeholder="Type the song number or name..." role="textbox" aria-label="Search songs" spellcheck="false">
+    </div>
+    <button id="clearSearch" class="clear-search" aria-label="Clear search">✕</button>
+  </div>
 
 
   <div class="drawer" id="drawer" role="navigation" aria-label="Side menu">
@@ -1340,6 +1514,7 @@
         <li><a href="/vidhyardhi-geethavali/tsongs/song1" class="song-link">అయ్యయో యేసయ్యా</a></li>
         <li><a href="/vidhyardhi-geethavali/tsongs/song2" class="song-link">అనుగ్రహమే నా జీవితం</a></li>
       </ul>
+      <div id="noSongsMessage" class="no-songs-message hidden">No songs matched your search.</div>
     </section>
 
   </main>
@@ -1379,6 +1554,115 @@
         behavior: "smooth"
       });
     });
+
+    // Search Functionality
+
+    const searchToggle = document.getElementById('searchToggle');
+    const searchBox = document.getElementById('searchBox');
+    const searchInput = document.getElementById('songSearchInput');
+    const clearSearch = document.getElementById('clearSearch');
+    const searchIcon = document.getElementById('searchIcon');
+    const closeIcon = document.getElementById('closeIcon');
+    const noSongsMessage = document.getElementById('noSongsMessage');
+
+    let currentQuery = '';
+
+    /* ---------- SEARCH TOGGLE ---------- */
+    searchToggle.addEventListener('click', () => {
+      const isHidden = searchBox.classList.contains('hidden');
+
+      if (isHidden) {
+        // Show search box
+        searchBox.classList.remove('hidden');
+        searchInput.focus();
+        searchIcon.classList.add('hide-icon');
+        closeIcon.classList.remove('hide-icon');
+        searchInput.innerText = '';
+        currentQuery = '';
+        updatePlaceholder();
+        filterSongs('');
+        searchInput.focus();
+      } else {
+        // Hide search box
+        searchBox.classList.add('hidden');
+        searchInput.innerText = '';
+        currentQuery = '';
+        updatePlaceholder();
+        filterSongs('');
+        searchIcon.classList.remove('hide-icon');
+        closeIcon.classList.add('hide-icon');
+      }
+    });
+
+    /* ---------- LIVE SEARCH ---------- */
+    searchInput.addEventListener('input', () => {
+      currentQuery = searchInput.innerText.toLowerCase().trim();
+      updatePlaceholder();
+      filterSongs(currentQuery);
+    });
+
+    /* ---------- CLEAR SEARCH ---------- */
+    clearSearch.addEventListener('click', () => {
+      searchInput.innerText = '';
+      currentQuery = '';
+      updatePlaceholder();
+      filterSongs('');
+      searchInput.focus();
+    });
+
+    /* ---------- PLACEHOLDER ---------- */
+    function updatePlaceholder() {
+      const hasText = searchInput.innerText.trim().length > 0;
+      clearSearch.style.display = hasText ? 'block' : 'none';
+    }
+
+    /* ---------- FILTER SONGS ---------- */
+    function filterSongs(query) {
+      const links = document.querySelectorAll('#songs .song-link');
+      let matchCount = 0;
+
+      links.forEach(link => {
+        const text = link.innerText.toLowerCase();
+        const li = link.closest('li') || link.parentElement;
+
+        const match = text.includes(query);
+        li.style.display = match ? '' : 'none';
+
+        if (match) matchCount++;
+      });
+
+      if (matchCount === 0 && query.length > 0) {
+        noSongsMessage.classList.remove('hidden');
+      } else {
+        noSongsMessage.classList.add('hidden');
+      }
+    }
+
+    /* ---------- TABS (IMPORTANT) ---------- */
+    function showSongs(language, event) {
+      const telugu = document.getElementById("teluguSongs");
+      const english = document.getElementById("englishSongs");
+
+      if (language === 'telugu') {
+        telugu.classList.remove("hidden");
+        english.classList.add("hidden");
+      } else {
+        telugu.classList.add("hidden");
+        english.classList.remove("hidden");
+      }
+
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+
+      filterSongs(currentQuery);
+    }
+
+    /* ---------- INIT ---------- */
+    document.addEventListener('DOMContentLoaded', () => {
+      updatePlaceholder();
+      filterSongs(currentQuery);
+    });
+
 
     // Close menu when clicking outside
     document.addEventListener("click", function (event) {
@@ -1611,7 +1895,6 @@
       }
     }
 
-
     function renderLetters(letters, lang, scroll = true) {
       letterDiv.innerHTML = "";
       songList.innerHTML = "";
@@ -1626,6 +1909,12 @@
           document.querySelectorAll('.box').forEach(b => b.classList.remove('active'));
           box.classList.add('active');
           showSongs(letter, lang);
+
+          // Apply current search filter after showing songs
+          if (currentQuery) {
+            filterSongs(currentQuery);
+          }
+
           if (scroll) {
             scrollToSongs();
           }
@@ -1638,7 +1927,11 @@
         if (firstBox) {
           firstBox.classList.add('active');
           showSongs(letters[0], lang);
-          // Do NOT scroll here on initial load
+
+          // Apply current search filter on initial load
+          if (currentQuery) {
+            filterSongs(currentQuery);
+          }
         }
       }
     }
@@ -1661,19 +1954,26 @@
       const lang = langSelect.value;
       selLis.textContent = lang.charAt(0).toUpperCase() + lang.slice(1);
 
-      // update URL hash (capitalized for neatness)
-      const hash = lang.charAt(0).toUpperCase() + lang.slice(1);
-      history.replaceState(null, "", "#" + hash);
-
+      // remove hash when Telugu selected
       if (lang === "telugu") {
+        history.replaceState(null, "", location.pathname);
+        letterDiv.classList.remove("hidden");
         ssl.style.display = "block";
         renderLetters(teluguLetters, "telugu");
+      }
 
-      } else if (lang === "english") {
+      // keep hash only for English
+      else if (lang === "english") {
+        history.replaceState(null, "", "#English");
+        letterDiv.classList.remove("hidden");
         ssl.style.display = "block";
         renderLetters(englishLetters, "english");
+      }
 
-      } else if (lang === "hindi") {
+      // Hindi logic unchanged
+      else if (lang === "hindi") {
+        history.replaceState(null, "", "#Hindi");
+        letterDiv.innerHTML = "";
         letterDiv.classList.add("hidden");
         songList.innerHTML = "";
         title.textContent = `"Hindi"`;
