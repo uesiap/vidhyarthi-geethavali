@@ -1367,11 +1367,12 @@
             <div id="noSongsMessage" class="no-songs-message hidden">No songs matched your search.</div>
         </div>
     </main>
-    <footer>©2025 Designed & Maintained by <button class="my_name"
-            onclick="window.location.href='https://melamrahul.github.io/'">M.Rahul</button>
+    <footer>©<span id="current-yr" style="font-weight: 300"></span> Designed &amp; Maintained by <button class="my_name"
+      onclick="window.location.href='https://melamrahul.github.io/'">M.Rahul</button>
     </footer>
 
     <script>
+        document.getElementById("current-yr").textContent = new Date().getFullYear();
         const menuBtn = document.getElementById('menuBtn');
         const drawer = document.getElementById('drawer');
         const overlay = document.getElementById('overlay');
