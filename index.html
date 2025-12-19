@@ -215,7 +215,6 @@
       -webkit-user-select: none;
       -moz-user-select: none;
       -ms-user-select: none;
-      -webkit-tap-highlight-color: transparent;
     }
 
     /* Navbar Styles - Optimized */
@@ -359,7 +358,6 @@
 
     .search-toggle:hover {
       transform: scale(1.1);
-      background-color: rgba(255, 255, 255, 0.15);;
       border-radius: 50%;
     }
 
@@ -371,7 +369,7 @@
       position: relative;
       box-sizing: border-box;
     }
-    
+
 
     .custom-search-icon::after {
       content: '';
@@ -677,41 +675,31 @@
       line-height: 1.5;
     }
 
-    /* Language Selector - Optimized */
-    .lang-select {
-      margin-bottom: 20px;
-    }
-
-    label[for="langSelect"] {
-      display: inline-block;
-      margin-bottom: 8px;
-      font-size: 16px;
-      color: var(--text-dark);
-      font-weight: 500;
-    }
-
-    #langSelect {
-      display: inline-block;
-      padding: 8px 12px;
-      font-size: 16px;
+    .tab-btn {
+      background-color: #fcfcfc;
       border: 2px solid var(--primary-color);
-      border-radius: 5px;
-      background-color: #fff;
-      color: var(--text-dark);
-      margin-left: 10px;
+      color: var(--primary-color);
+      padding: 10px 13px;
       cursor: pointer;
-      transition: var(--transition);
-      font-weight: 500;
-      min-width: 120px;
+      margin: 0 5px;
+      font-size: 1rem;
+      transition: background-color 0.3s ease, color 0.3s ease, border 0.3s ease;
     }
 
-    #langSelect:hover {
-      border-color: var(--primary-color);
+    .tab-btn:hover {
+      background-color: var(--primary-color);
+      color: var(--bg-light);
     }
 
-    #langSelect:focus {
-      outline: none;
+    .tab-btn.active {
+      background-color: var(--primary-color);
       border-color: var(--primary-color);
+      color: var(--bg-light);
+    }
+
+    #teluguSongs,
+    #englishSongs {
+      text-align: center;
     }
 
     /* Grid Styles - Fully Optimized */
@@ -943,12 +931,6 @@
         font-size: 1rem;
       }
 
-      #langSelect {
-        padding: 7px 10px;
-        font-size: 15px;
-        min-width: 110px;
-      }
-
       #scrollTopBtn {
         width: 44px;
         height: 44px;
@@ -1098,7 +1080,7 @@
       }
 
       .main-content {
-        max-width: 1100px;
+        max-width: 1250px;
         margin: 0 auto;
         padding: 30px 5%;
       }
@@ -1127,7 +1109,7 @@
       }
 
       .card {
-        max-width: 1000px;
+        max-width: 1250px;
         margin-left: auto;
         margin-right: auto;
         padding: 32px 35px;
@@ -1149,32 +1131,6 @@
 
       .card p {
         font-size: 1.02rem;
-      }
-
-      .lang-select {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        margin-bottom: 24px;
-      }
-
-      label[for="langSelect"] {
-        margin-bottom: 0;
-        font-size: 17px;
-      }
-
-      #langSelect {
-        font-size: 17px;
-        padding: 9px 14px;
-        border-radius: 0px;
-        background: #fff;
-        border-width: 2px;
-        margin-left: 0;
-      }
-
-      #langSelect:hover {
-        background-color: #fff;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
       }
 
       .grid {
@@ -1469,63 +1425,35 @@
 
   <div class="overlay" id="overlay"></div>
   <main class="main-content">
-    <h1 class="page-title">Vidhyardhi Geethavali Songs</h1>
-    <!-- <h4 style="margin-top: 1rem; color: #EB696B; margin-bottom: 25px; font-weight: 500; font-size: 1.3rem">This main
-      page is under update, We're adding songs gradually..</h4> -->
-    <div class="card">
-      <h2><i class="fa-solid fa-music" style="margin-right: 5px;"></i><span id="sel-lis">Telugu</span> Songs</h2>
+    <span id="songs-grid">
+      <h1 class="page-title">Vidhyardhi Geethavali Songs</h1>
+      <h6 class="page-title" style="color: rgb(52, 42, 165); font-weight: 500; font-size: 1.1rem">
+        This main
+        page is under update, We're adding songs gradually.. <br>We appriciate your intrest in Singing..</h6>
+      <div class="card">
+        <h2><i class="fa-solid fa-music" style="margin-right: 5px;"></i><span id="sel-lis">Telugu</span> Songs</h2>
 
-      <!-- Language Selector -->
-      <div class="lang-select" style="border-radius: 0px;">
-        <label for="langSelect"><strong>Select <i class="fa-solid fa-language"
-              style="font-size: 1.5rem; color: #128C7E;"></i>:</strong></label>
-        <select id="langSelect" style="border-radius: 0px;">
-          <option value="telugu" selected="">Telugu</option>
-          <option value="english">English</option>
-          <option value="hindi">Hindi</option>
-        </select>
+        <!-- Language Selector -->
+        <div style="text-align:center; margin-bottom:1rem;">
+          <button class="tab-btn active" onclick="switchLanguage('telugu', event)">Telugu</button>
+          <button class="tab-btn" onclick="switchLanguage('english', event)">English</button>
+          <button class="tab-btn" onclick="switchLanguage('hindi', event)">Hindi</button>
+        </div>
+        <hr>
+
+
+        <!-- Letter Grid (for Telugu & English) -->
+        <div class="grid" id="letters"></div>
       </div>
-
-
-      <!-- Letter Grid (for Telugu & English) -->
-      <div class="grid" id="letters">
-        <div class="box active">అ</div>
-        <div class="box">ఆ</div>
-        <div class="box">ఇ</div>
-        <div class="box">ఉ</div>
-        <div class="box">ఊ</div>
-        <div class="box">ఎ</div>
-        <div class="box">ఏ</div>
-        <div class="box">ఐ</div>
-        <div class="box">ఒ</div>
-        <div class="box">ఓ</div>
-        <div class="box">క</div>
-        <div class="box">గ</div>
-        <div class="box">ఘ</div>
-        <div class="box">చ</div>
-        <div class="box">జ</div>
-        <div class="box">త</div>
-        <div class="box">ద</div>
-        <div class="box">న</div>
-        <div class="box">ప</div>
-        <div class="box">బ</div>
-        <div class="box">మ</div>
-        <div class="box">య</div>
-        <div class="box">ర</div>
-        <div class="box">ల</div>
-        <div class="box">వ</div>
-        <div class="box">శ</div>
-        <div class="box">ష</div>
-        <div class="box">స</div>
-        <div class="box">హ</div>
-      </div>
-    </div>
+    </span>
 
     <!-- Song Display Section -->
     <section class="card" id="ssl">
-      <span id="all-songs"><h2><i class="fa-solid fa-music" style="margin-right: 10px;"></i>All Songs of <span id="title">"అ"</span>
-      </h2>
-      <hr></span>
+      <span id="all-songs">
+        <h2><i class="fa-solid fa-music" style="margin-right: 10px;"></i>All Songs of <span id="title">"అ"</span>
+        </h2>
+        <hr>
+      </span>
       <ul id="songs">
         <li><a href="/vidhyardhi-geethavali/tsongs/song1" class="song-link">అయ్యయో యేసయ్యా</a></li>
         <li><a href="/vidhyardhi-geethavali/tsongs/song2" class="song-link">అనుగ్రహమే నా జీవితం</a></li>
@@ -1538,7 +1466,7 @@
     ↑
   </button>
   <footer>©<span id="current-yr" style="font-weight: 300"></span> Designed &amp; Maintained by <button class="my_name"
-            onclick="window.location.href='https://melamrahul.github.io/'">M.Rahul</button>
+      onclick="window.location.href='https://melamrahul.github.io/'">M.Rahul</button>
   </footer>
   <script>
     document.getElementById("current-yr").textContent = new Date().getFullYear();
@@ -1586,6 +1514,7 @@
     const noSongsMessage = document.getElementById('noSongsMessage');
 
     let currentQuery = '';
+    let currentLanguage = 'telugu';
 
     /* ---------- SEARCH TOGGLE ---------- */
     searchToggle.addEventListener('click', () => {
@@ -1595,24 +1524,40 @@
         // Show search box
         searchBox.classList.remove('hidden');
         searchInput.focus();
+
         document.querySelector('#all-songs').style.display = 'none';
+        document.querySelector('#songs-grid').style.display = 'none';
+
         searchIcon.classList.add('hide-icon');
         closeIcon.classList.remove('hide-icon');
+
         searchInput.innerText = '';
         currentQuery = '';
-        updatePlaceholder();
+
+        // Show ALL songs for current language
+        renderSearchSongs(currentLanguage);
         filterSongs('');
-        searchInput.focus();
+
       } else {
         // Hide search box
         searchBox.classList.add('hidden');
         searchInput.innerText = '';
         currentQuery = '';
-        updatePlaceholder();
-        filterSongs('');
+
         document.querySelector('#all-songs').style.display = 'block';
+        document.querySelector('#songs-grid').style.display = 'block';
+
         searchIcon.classList.remove('hide-icon');
         closeIcon.classList.add('hide-icon');
+
+        // Restore normal letter-based view
+        if (currentLanguage === "telugu") {
+          renderLetters(teluguLetters, "telugu");
+        } else if (currentLanguage === "english") {
+          renderLetters(englishLetters, "english");
+        } else {
+          switchLanguage("hindi");
+        }
       }
     });
 
@@ -1938,7 +1883,7 @@
       "త": [
         { id: "song4", name: "" }
       ],
-      
+
 
     };
 
@@ -1966,7 +1911,6 @@
     const letterDiv = document.getElementById("letters");
     const songList = document.getElementById("songs");
     const title = document.getElementById("title");
-    const langSelect = document.getElementById("langSelect");
     const ssl = document.getElementById("ssl");
     const selLis = document.getElementById("sel-lis");
     selLis.textContent = "Telugu";
@@ -1979,7 +1923,40 @@
         .replace(/^-+|-+$/g, '');
     }
 
-    function showSongs(letter, lang) {
+    function renderSearchSongs(lang) {
+      songList.innerHTML = "";
+      title.textContent = `"All ${lang.charAt(0).toUpperCase() + lang.slice(1)} Songs"`;
+
+      const allSongs = getAllSongsByLanguage(lang);
+
+      if (allSongs.length === 0) {
+        const li = document.createElement("li");
+        li.textContent = "No songs available";
+        songList.appendChild(li);
+        return;
+      }
+
+      allSongs.forEach(song => {
+        const li = document.createElement("li");
+        const a = document.createElement("a");
+
+        a.textContent = song.name;
+        a.className = "song-link";
+
+        if (lang === "telugu") {
+          a.href = `/vidhyardhi-geethavali/tsongs/${song.id}`;
+        } else if (lang === "english") {
+          a.href = `/vidhyardhi-geethavali/esongs/${song.id}`;
+        } else {
+          a.href = `/vidhyardhi-geethavali/hsongs/${song.id}`;
+        }
+
+        li.appendChild(a);
+        songList.appendChild(li);
+      });
+    }
+
+    function showSongsTab(letter, lang) {
       title.textContent = `"${letter}"`;
       songList.innerHTML = "";
 
@@ -2002,43 +1979,43 @@
       }
     }
 
-    function renderLetters(letters, lang, scroll = true) {
+    function renderLetters(letters, lang, scroll = false) {
       letterDiv.innerHTML = "";
       songList.innerHTML = "";
       title.textContent = "";
       selLis.textContent = lang.charAt(0).toUpperCase() + lang.slice(1);
 
-      letters.forEach(letter => {
+      letters.forEach((letter, index) => {
         const box = document.createElement("div");
         box.className = "box";
         box.textContent = letter;
+
         box.onclick = () => {
           document.querySelectorAll('.box').forEach(b => b.classList.remove('active'));
           box.classList.add('active');
-          showSongs(letter, lang);
+          showSongsTab(letter, lang);
 
           // Apply current search filter after showing songs
-          if (currentQuery) {
-            filterSongs(currentQuery);
-          }
+          if (currentQuery) filterSongs(currentQuery);
 
-          if (scroll) {
-            scrollToSongs();
-          }
+          scrollToSongs();
         };
+
+        // Auto-activate first letter
+        if (index === 0) {
+          box.classList.add('active');
+        }
+
         letterDiv.appendChild(box);
       });
 
+      // Automatically show songs for first letter
       if (letters.length > 0) {
-        const firstBox = document.querySelectorAll('.box')[0];
-        if (firstBox) {
-          firstBox.classList.add('active');
-          showSongs(letters[0], lang);
+        showSongsTab(letters[0], lang);
 
-          // Apply current search filter on initial load
-          if (currentQuery) {
-            filterSongs(currentQuery);
-          }
+        // Apply current search filter on initial load
+        if (currentQuery) {
+          filterSongs(currentQuery);
         }
       }
     }
@@ -2057,29 +2034,30 @@
 
 
 
-    langSelect.addEventListener("change", () => {
-      const lang = langSelect.value;
+    function switchLanguage(lang, event) {
+      currentLanguage = lang;
       selLis.textContent = lang.charAt(0).toUpperCase() + lang.slice(1);
 
-      // remove hash when Telugu selected
+      // TELUGU
       if (lang === "telugu") {
         history.replaceState(null, "", location.pathname);
         letterDiv.classList.remove("hidden");
         ssl.style.display = "block";
-        renderLetters(teluguLetters, "telugu");
+        renderLetters(teluguLetters, "telugu", true);
       }
 
-      // keep hash only for English
+      // ENGLISH
       else if (lang === "english") {
         history.replaceState(null, "", "#English");
         letterDiv.classList.remove("hidden");
         ssl.style.display = "block";
-        renderLetters(englishLetters, "english");
+        renderLetters(englishLetters, "english", true);
       }
 
-      // Hindi logic unchanged
+      // HINDI
       else if (lang === "hindi") {
         history.replaceState(null, "", "#Hindi");
+
         letterDiv.innerHTML = "";
         letterDiv.classList.add("hidden");
         songList.innerHTML = "";
@@ -2096,68 +2074,113 @@
         });
 
         ssl.style.display = "block";
-        ssl.scrollIntoView({ behavior: "smooth" });
+
+        // Apply search filter if active
+        if (currentQuery) {
+          filterSongs(currentQuery);
+        }
       }
-    });
 
+      // TAB ACTIVE UI
+      if (event && event.target) {
+        document.querySelectorAll('.tab-btn').forEach(btn =>
+          btn.classList.remove('active')
+        );
+        event.target.classList.add('active');
+      }
+    }
 
-    // Initial Load
-    selLis.textContent = "Telugu";
-    renderLetters(teluguLetters, "telugu");
+    function getAllSongsByLanguage(lang) {
+      let allSongs = [];
 
-    // Register Service Worker
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', function () {
-
-        // --- Service Worker ---
-        navigator.serviceWorker
-          .register('/vidhyardhi-geethavali/service-worker.js')
-          .then(function (registration) {
-            console.log('ServiceWorker registration successful with scope:', registration.scope);
-          })
-          .catch(function (error) {
-            console.log('ServiceWorker registration failed:', error);
-          });
-
-        // --- Language Restore from URL Hash ---
-        const hash = location.hash.replace("#", "").toLowerCase();
-
-        if (hash) {
-          langSelect.value = hash;
-          selLis.textContent = hash.charAt(0).toUpperCase() + hash.slice(1);
-
-          if (hash === "telugu") {
-            ssl.style.display = "block";
-            renderLetters(teluguLetters, "telugu");
-
-          } else if (hash === "english") {
-            ssl.style.display = "block";
-            renderLetters(englishLetters, "english");
-
-          } else if (hash === "hindi") {
-            letterDiv.innerHTML = "";
-            songList.innerHTML = "";
-            title.textContent = `"Hindi"`;
-
-            hindiSongs.forEach(song => {
-              const li = document.createElement("li");
-              const a = document.createElement("a");
-              a.textContent = song.name;
-              a.href = `/vidhyardhi-geethavali/hsongs/${song.id}`;
-              a.className = "song-link";
-              li.appendChild(a);
-              songList.appendChild(li);
+      if (lang === "telugu") {
+        Object.values(teluguSongs).forEach(list => {
+          list.forEach(song => {
+            allSongs.push({
+              ...song,
+              lang: "telugu"
             });
+          });
+        });
+      }
 
-            ssl.style.display = "block";
-          }
+      else if (lang === "english") {
+        Object.values(englishSongs).forEach(list => {
+          list.forEach(song => {
+            allSongs.push({
+              ...song,
+              lang: "english"
+            });
+          });
+        });
+      }
 
-          ssl.scrollIntoView({ behavior: "smooth" });
+      else if (lang === "hindi") {
+        hindiSongs.forEach(song => {
+          allSongs.push({
+            ...song,
+            lang: "hindi"
+          });
+        });
+      }
+
+      return allSongs;
+    }
+
+    function renderSearchSongs(lang) {
+      songList.innerHTML = "";
+
+      const allSongs = getAllSongsByLanguage(lang);
+
+      allSongs.forEach(song => {
+        const li = document.createElement("li");
+        const a = document.createElement("a");
+
+        a.textContent = song.name;
+        a.className = "song-link";
+
+        if (lang === "telugu") {
+          a.href = `/vidhyardhi-geethavali/tsongs/${song.id}`;
+        } else if (lang === "english") {
+          a.href = `/vidhyardhi-geethavali/esongs/${song.id}`;
+        } else {
+          a.href = `/vidhyardhi-geethavali/hsongs/${song.id}`;
         }
 
+        li.appendChild(a);
+        songList.appendChild(li);
       });
     }
 
+
+
+    // Register Service Worker
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker
+        .register('/vidhyardhi-geethavali/service-worker.js')
+        .then(reg => console.log('ServiceWorker registration successful:', reg.scope))
+        .catch(err => console.log('ServiceWorker registration failed:', err));
+    }
+
+    // Initial Load - Handle URL Hash
+    window.addEventListener('load', function () {
+      const hash = location.hash.replace("#", "").toLowerCase();
+
+      const tabs = {
+        telugu: document.querySelector(".tab-btn:nth-child(1)"),
+        english: document.querySelector(".tab-btn:nth-child(2)"),
+        hindi: document.querySelector(".tab-btn:nth-child(3)")
+      };
+
+      if (hash === "english") {
+        switchLanguage("english", { target: tabs.english });
+      } else if (hash === "hindi") {
+        switchLanguage("hindi", { target: tabs.hindi });
+      } else {
+        // Default to Telugu - already rendered above
+        tabs.telugu.classList.add('active');
+      }
+    });
     (function () {
       // Keys to retain in localStorage
       const keysToRetain = ["bbsRole", "bbsName"];
