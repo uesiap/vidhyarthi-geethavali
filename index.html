@@ -1524,9 +1524,9 @@
 
     <!-- Song Display Section -->
     <section class="card" id="ssl">
-      <h2><i class="fa-solid fa-music" style="margin-right: 10px;"></i>All Songs of <span id="title">"అ"</span>
+      <span id="all-songs"><h2><i class="fa-solid fa-music" style="margin-right: 10px;"></i>All Songs of <span id="title">"అ"</span>
       </h2>
-      <hr>
+      <hr></span>
       <ul id="songs">
         <li><a href="/vidhyardhi-geethavali/tsongs/song1" class="song-link">అయ్యయో యేసయ్యా</a></li>
         <li><a href="/vidhyardhi-geethavali/tsongs/song2" class="song-link">అనుగ్రహమే నా జీవితం</a></li>
@@ -1596,6 +1596,7 @@
         // Show search box
         searchBox.classList.remove('hidden');
         searchInput.focus();
+        document.querySelector('#all-songs').style.display = 'none';
         searchIcon.classList.add('hide-icon');
         closeIcon.classList.remove('hide-icon');
         searchInput.innerText = '';
@@ -1610,6 +1611,7 @@
         currentQuery = '';
         updatePlaceholder();
         filterSongs('');
+        document.querySelector('#all-songs').style.display = 'block';
         searchIcon.classList.remove('hide-icon');
         closeIcon.classList.add('hide-icon');
       }
