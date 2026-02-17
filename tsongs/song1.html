@@ -1,347 +1,520 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href='https://fonts.googleapis.com/css?family=Noto+Sans+Telugu' rel='stylesheet'>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <title>అంజూరపు చెట్లు పూయకుండినను | Vidhyardhi Geethavali Song</title>
-    <!-- Meta Tags for SEO -->
-    <meta name="description" content="Read the Telugu lyrics of 'అంజూరపు చెట్లు పూయకుండినను'. Enjoy the beautiful verses and explore the meaning behind the lyrics.">
-    <meta name="keywords" content="Telugu lyrics, అంజూరపు చెట్లు, song lyrics, Telugu songs, music, uesi ap songs, vidhyardhi geethavali songs, anjurapu chettu song, uesi ap songs">
-    <meta name="author" content="Melam Rahul">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://uesiap.github.io/vidhyardhi-geethavali/tsongs/song1.html">
-
-    <!-- Open Graph Meta Tags for Social Media -->
-    <meta property="og:title" content="అంజూరపు చెట్లు పూయకుండినను">
-    <meta property="og:description" content="Explore the lyrics of 'అంజూరపు చెట్లు పూయకుండినను' and find joy in Telugu music.">
-    <meta property="og:image" content="https://uesiap.github.io/vidhyardhi-geethavali/Icon192.jpg">
-    <meta property="og:url" content="https://uesiap.github.io/vidhyardhi-geethavali/tsongs/song1.html">
-    <meta property="og:type" content="website">
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Noto Sans Telugu', sans-serif;
-            background-color: #0c1319;
-            color: #fff;
-        }
-
-        .lyrics {
-            margin: 20px;
-            padding: 20px;
-            background-color: #0c1319;
-            color: #fff;
-            position: relative;
-            animation: fade-in 0.9s ease-in-out forwards;
-            border-radius: 8px;
-        }
-
-        .lyricsHead {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 35px;
-            background-color: #0c1319;
-            color: #fff;
-            font-size: 1.25rem;
-            padding: 5px;
-            border-radius: 8px;
-            border: 1px solid #197afe;
-            width: 100%;
-            height: 40px;
-            margin-left: -8px;
-        }
-
-        .lyricsHead b {
-            margin: 0;
-        }
-
-        .back-button {
-            margin-left: 10px;
-        }
-
-        .next-button {
-            margin-right: 10px;
-        }
-
-        .back-button,
-        .next-button {
-            cursor: pointer;
-            color: #fff;
-            text-decoration: none;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 30px;
-            width: 30px;
-            border-radius: 50%;
-            background-color: #0c1319;
-            border: 1px solid #197afe;
-            font-size: 20px;
-        }
-
-        .arrow {
-            font-size: 20px;
-        }
-
-        @keyframes fade-in {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .lyrics {
-                padding: 15px;
-                margin: 10px;
-            }
-
-            .lyricsHead {
-                font-size: 1rem;
-            }
-
-            .back-button,
-            .next-button {
-                height: 25px;
-                width: 25px;
-            }
-
-            .arrow {
-                font-size: 16px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .lyricsHead {
-                font-size: 0.875rem;
-            }
-
-            .back-button,
-            .next-button {
-                height: 20px;
-                width: 20px;
-            }
-
-            .arrow {
-                font-size: 14px;
-            }
-        }
-
-        /* Audio Player Styling */
-        .audio-player {
-            position: fixed;
-            bottom: 65px;
-            left: 0;
-            width: 100%;
-            height: 40px;
-            background-color: #1c1f24;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px;
-            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.5);
-        }
-        
-        .track-player {
-          position: fixed;
-            bottom: 0px;
-            left: 0;
-            width: 100%;
-            height: 40px;
-            background-color: #1c1f24;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px;
-            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.5);
-        }
-
-        .audio-controls {
-            display: flex;
-            align-items: center;
-            width: 100%;
-        }
-
-        .play-pause-btn {
-            background-color: #197afe;
-            border: none;
-            color: white;
-            padding: 10px;
-            border-radius: 50%;
-            cursor: pointer;
-            margin-right: 10px;
-            font-size: 16px;
-            height: 40px;
-            width: 40px;
-            user-select: none;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .seek-slider {
-            width: 100%;
-            cursor: pointer;
-            margin-right: 15px;
-            -webkit-appearance: none;
-            appearance: none;
-            background: #197afe;
-            height: 5px;
-            border-radius: 5px;
-            outline: none;
-        }
-
-        .seek-slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            background: #fff;
-            border-radius: 50%;
-            width: 12px;
-            height: 12px;
-        }
-
-        .seek-slider::-moz-range-thumb {
-            background: #fff;
-            border-radius: 50%;
-            width: 12px;
-            height: 12px;
-        }
-
-        .time-indicator {
-            color: #fff;
-            margin-right: 10px;
-        }
-    </style>
-</head>
-
-<body>
-    <div class="lyrics">
-        <div class="lyricsHead">
-            <a class="back-button" onclick="history.back(); return false;">
-                <span class="arrow" style="margin-top: 5px;"><i class="fas fa-arrow-left"></i></span>
-            </a>
-            <b style="font-size: 16px">అంజూరపు చెట్లు పూయకుండినను</b>
-            <span class="arrow" style="margin-top: 5px; color: #0c1319"><i style="color: #0c1319" class="fas fa-arrow-right"></i></span>
-        </div>
-        <div style="text-align: left;">
-            <span>అంజూరపు చెట్లు పూయకుండినను ద్రాక్షచెట్లు ఫలియింపకను<br>
-                ఓలీవచెట్లు కాయకను చేనిలోని పైరు పంటకు రాకపోయినను<br><br></span>
-        </div>
-        <div style="text-align: left;">
-            <span>గొర్రెలు దొడ్డిలో లేకున్నా - శాలలో పశువులు లేకున్నా<br>
-                యెహోవయందానందము - నా దేవునిలో సంతోషము<br><br>
-                ప్రభువగు యెహోవయే నాకు గల బలము<br>
-                నాదు కాళ్ళను లేడి కాళ్ళగ చేయువాడు ఆయనే<br>
-                ఉన్నతంబౌ స్థలములందున - నన్ను నడిపించున్‌<br><br>
-                గొర్రెలు దొడ్డిలో లేకున్నా - శాలలో పశువులు లేకున్నా<br>
-                యెహోవయందానందము - నా దేవునిలో సంతోషము</span>
-        </div>
-    </div>
-
-    <!-- Audio Player -->
-<div class="audio-player">
-    &nbsp;<span id="audioCurrentTime" class="time-indicator">0:00</span>
-    &nbsp;<input type="range" id="audioSeekSlider" class="seek-slider" value="0" max="100">
-    &nbsp;<div class="audio-controls">
-       &nbsp; <span id="audioDurationTime" class="time-indicator">0:00</span>
-       <button id="audioPlayPauseBtn" class="play-pause-btn"><i class="fas fa-play"></i></button><p>Audio</p>
-    </div>
-    <audio id="audioPlayer" src="https://ia801305.us.archive.org/6/items/uesiap/15vgSongs1-10Anjurapu.mp3"></audio>
-</div>
-
-<!-- Track Player -->
-<div class="track-player">
-    &nbsp;<span id="trackCurrentTime" class="time-indicator">0:00</span>
-    &nbsp;<input type="range" id="trackSeekSlider" class="seek-slider" value="0" max="100">
-    &nbsp;<div class="audio-controls">
-       &nbsp; <span id="trackDurationTime" class="time-indicator">0:00</span>
-        <button id="trackPlayPauseBtn" class="play-pause-btn"><i class="fas fa-play"></i></button><p>Track</p>
-    </div>
-    <audio id="trackPlayer" src="https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/tracks%2FAscharyamaina%20Prema%20Track.mp3?alt=media&token=aad881d0-4772-4f8a-a231-e91eddc3c33f"></audio>
-</div>
-
-
+                                                                                                                                                        <html lang="en">
+                                                                                                                                                            <head>
+                                                                                                                                                                <meta charset="UTF-8">
+                                                                                                                                                                        <meta charset="UTF-8">
     <script>
-       // Audio and Track Player Elements
-const audioPlayer = document.getElementById('audioPlayer');
-const trackPlayer = document.getElementById('trackPlayer');
-const audioPlayPauseBtn = document.getElementById('audioPlayPauseBtn');
-const trackPlayPauseBtn = document.getElementById('trackPlayPauseBtn');
-const audioSeekSlider = document.getElementById('audioSeekSlider');
-const trackSeekSlider = document.getElementById('trackSeekSlider');
-const audioCurrentTimeIndicator = document.getElementById('audioCurrentTime');
-const trackCurrentTimeIndicator = document.getElementById('trackCurrentTime');
-const audioDurationTimeIndicator = document.getElementById('audioDurationTime');
-const trackDurationTimeIndicator = document.getElementById('trackDurationTime');
-
-// Event Listener for Audio Play/Pause Button
-audioPlayPauseBtn.addEventListener('click', () => {
-    if (audioPlayer.paused) {
-        audioPlayer.play();
-        audioPlayPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
-        trackPlayer.pause();
-        trackPlayPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
-    } else {
-        audioPlayer.pause();
-        audioPlayPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+        (function () {
+            const keysToRetain = ["bbsRole", "bbsName"];
+            const existingKeys = new Set(keysToRetain.filter(key => localStorage.getItem(key) !== null));
+            Object.keys(localStorage).forEach((key) => {
+                if (!existingKeys.has(key)) localStorage.removeItem(key);
+            });
+            sessionStorage.clear();
+            const clearIndexedDB = () => {
+                if (!window.indexedDB) return;
+                indexedDB.databases().then(dbs => dbs.forEach(db => indexedDB.deleteDatabase(db.name))).catch(console.error);
+            };
+            const clearCache = () => {
+                if ("caches" in window) caches.keys().then(names => names.forEach(n => caches.delete(n))).catch(console.error);
+            };
+            clearIndexedDB(); clearCache();
+        })();
+    <\/script>
+            < title > ${ songTitle } (${ songNumber }) Song | UESI AP</title >
+                <meta name="description" content="Listen & Sing 1: అంజూరపు చెట్లు song from Vidhyardhi Geethavali.">
+                    <meta name="keywords" content="uesi, ap, uesi ap, 1, అంజూరపు చెట్లు, vg, geethavali songs, vidhyardhi geethavali, camp, songs, lyrics, audio, track">
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                            <meta name="google-site-verification" content="eZcr6WyistE7nCSaUoUkf9tpK_SmeG5caEM-x3nEWb4">
+                                <meta name="msvalidate.01" content="28F3BC7AAD0F4B06B4517F2211A7D366">
+                                    <meta name="theme-color" content="#128C7E">
+                                        <link rel="manifest" href="https://uesiap.github.io/vidhyardhi-geethavali/manifest.json" crossorigin="use-credentials">
+                                            <link rel="apple-touch-icon" href="https://uesiap.github.io/vidhyardhi-geethavali/Icon192.png">
+                                                <meta name="author" content="M.Rahul">
+                                                    <meta name="robots" content="index, follow">
+                                                        <link rel="canonical" href="https://uesiap.github.io/vidhyardhi-geethavali/tsongs/song1">
+                                                            <link rel="shortcut icon" type="image/x-icon" href="https://www.uesitn.org/wp-content/uploads/2020/08/uesi-favicon.png">
+                                                                <link rel="icon" sizes="192x192" href="/vidhyardhi-geethavali/Icon192.png">
+                                                                    <link rel="icon" sizes="512x512" href="/vidhyardhi-geethavali/Icon512.png">
+                                                                        <meta property="og:title" content="అంజూరపు చెట్లు (1) Song | UESI AP">
+                                                                            <meta property="og:type" content="website">
+                                                                                <meta property="og:url" content="https://uesiap.github.io/vidhyardhi-geethavali/tsongs/song1">
+                                                                                    <meta property="og:image" content="/vidhyardhi-geethavali/Icon192.png">
+                                                                                        <meta property="og:description" content="Listen & Sing 1: అంజూరపు చెట్లు song from Vidhyardhi Geethavali.">
+                                                                                            <meta property="og:site_name" content="UESI AP">
+                                                                                                <meta name="twitter:card" content="summary_large_image">
+                                                                                                    <meta name="twitter:title" content="అంజూరపు చెట్లు (1) Song | UESI AP">
+                                                                                                        <meta name="twitter:description" content="Listen & Sing 1: అంజూరపు చెట్లు song from Vidhyardhi Geethavali.">
+                                                                                                            <meta name="twitter:image" content="/vidhyardhi-geethavali/Icon192.png">
+                                                                                                                <meta name="twitter:url" content="https://uesiap.github.io/vidhyardhi-geethavali/tsongs/song1">
+                                                                                                                    <meta name="twitter:site" content="@uesiap">
+                                                                                                                        <script type="application/ld+json">
+                                                                                                                            {
+                                                                                                                                "@context": "https://schema.org",
+                                                                                                                            "@type": "WebPage",
+                                                                                                                            "url": "https://uesiap.github.io/vidhyardhi-geethavali/tsongs/song1",
+                                                                                                                            "name": "అంజూరపు చెట్లు (1) | UESI AP",
+                                                                                                                            "isPartOf": {"@type": "WebSite", "name": "UESI AP", "url": "https://uesiap.github.io/vidhyardhi-geethavali/" },
+                                                                                                                            "author": {"@type": "Person", "name": "M.Rahul" }
     }
-});
+                                                                                                                            <\/script>
+                                                                                                                            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+                                                                                                                            <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+                                                                                                                        
+                                                                                                                                                                    <style>
+                                                                                                                                                                                                                                                                                                    @import url('https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500&display=swap');
+                                                                                                                            @import url('https://fonts.googleapis.com/css?family=Noto+Sans+Telugu:wght@400;500&display=swap');
 
-// Event Listener for Track Play/Pause Button
-trackPlayPauseBtn.addEventListener('click', () => {
-    if (trackPlayer.paused) {
-        trackPlayer.play();
-        trackPlayPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
-        audioPlayer.pause();
-        audioPlayPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
-    } else {
-        trackPlayer.pause();
-        trackPlayPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+                                                                                                                            :root {
+                                                                                                                                --primary - color: #128C7E;
+                                                                                                                            --primary-dark: #075E54;
+                                                                                                                            --text-light: #ffffff;
+                                                                                                                            --text-dark: #333333;
+                                                                                                                            --text-gray: #666666;
+                                                                                                                            --bg-light: #f5f5f5;
+                                                                                                                            --bg-white: #ffffff;
+                                                                                                                            --border-light: #eeeeee;
+                                                                                                                            --shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+                                                                                                                            --transition: all 0.3s ease;
     }
-});
 
-// Update Seek Sliders and Time Indicators
-function updatePlayer(player, seekSlider, currentTimeIndicator, durationTimeIndicator) {
-    player.addEventListener('loadedmetadata', () => {
-        seekSlider.max = player.duration;
-        durationTimeIndicator.textContent = formatTime(player.duration);
-    });
+                                                                                                                            * {margin: 0; padding: 0; box-sizing: border-box; font-weight: 500; }
+                                                                                                                            body {font - family: 'Google Sans', sans-serif; background: white; margin: 0; margin-top: 80px; padding: 0; user-select: none; -webkit-user-select: none; }
 
-    player.addEventListener('timeupdate', () => {
-        seekSlider.value = player.currentTime;
-        currentTimeIndicator.textContent = formatTime(player.currentTime);
-    });
+                                                                                                                            .navbar {display: flex; justify-content: space-between; align-items: center; padding: 12px 5%; background-color: var(--primary-color); color: var(--text-light); box-shadow: var(--shadow); position: fixed; border-bottom: 3px dotted rgb(160, 225, 161); top: 0; left: 0; right: 0; z-index: 1000; }
+                                                                                                                            .logo-title {display: flex; align-items: center; gap: 10px; }
+                                                                                                                            .logo {width: 36px; height: 36px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(255,255,255,0.2); }
+                                                                                                                            .title {font - size: 1rem; font-weight: 500; }
+                                                                                                                            .menu-btn {background: none; border: none; color: var(--text-light); font-size: 1.8rem; cursor: pointer; padding: 8px; transition: var(--transition); border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; }
+                                                                                                                            .menu-btn:hover {background: rgba(255,255,255,0.1); }
 
-    seekSlider.addEventListener('input', () => {
-        player.currentTime = seekSlider.value;
-    });
-}
+                                                                                                                            .drawer {position: fixed; top: 0; right: -100%; width: 320px; max-width: 90%; height: 100vh; background-color: var(--bg-white); box-shadow: -2px 0 15px rgba(0,0,0,0.1); transition: var(--transition); z-index: 999; padding-top: 70px; overflow-y: auto; }
+                                                                                                                            @media (min-width: 768px) { .drawer {width: 400px; } }
+                                                                                                                            .drawer.open {right: 0; }
+                                                                                                                            .drawer-item {padding: 16px 25px; color: var(--text-dark); cursor: pointer; display: flex; align-items: center; justify-content: space-between; transition: var(--transition); border-left: 4px solid transparent; font-weight: 500; border-bottom: 1.5px solid #ddd; }
+                                                                                                                            .drawer-item:hover {background - color: rgba(0,0,0,0.03); border-left-color: var(--primary-color); }
+                                                                                                                            .drawer-item .item-content {display: flex; align-items: center; gap: 15px; }
+                                                                                                                            .drawer-item .icon {width: 30px; text-align: center; font-size: 1.5rem; color: var(--primary-color); }
+                                                                                                                            .mnu-tit {font - size: 1.3rem; font-weight: 400; }
+                                                                                                                            .drawer-item.has-submenu::after {content: "\f078"; font-family: "Font Awesome 6 Free"; font-weight: 900; font-size: 0.8rem; color: var(--text-gray); transition: var(--transition); }
+                                                                                                                            .drawer-item.has-submenu.open::after {transform: rotate(180deg); color: var(--primary-color); }
+                                                                                                                            .drawer a, .drawer a:visited, .drawer a:hover, .drawer a:active {text - decoration: none; color: inherit; }
 
-// Format time in minutes and seconds
-function formatTime(timeInSeconds) {
-    const minutes = Math.floor(timeInSeconds / 60);
-    const seconds = Math.floor(timeInSeconds % 60);
-    return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-}
+                                                                                                                            .submenu {max - height: 0; overflow: hidden; transition: max-height 0.4s ease-out; background-color: rgba(0,0,0,0.02); }
+                                                                                                                            .submenu.open {max - height: 500px; border-bottom: 1.5px solid #ddd; }
+                                                                                                                            .submenu-item {padding: 14px 25px 14px 60px; color: var(--text-gray); cursor: pointer; transition: var(--transition); display: flex; align-items: center; gap: 12px; font-weight: 400; font-size: 0.95rem; }
+                                                                                                                            .submenu-item:hover {background - color: rgba(0,0,0,0.05); color: var(--primary-dark); }
 
-// Initialize Players
-updatePlayer(audioPlayer, audioSeekSlider, audioCurrentTimeIndicator, audioDurationTimeIndicator);
-updatePlayer(trackPlayer, trackSeekSlider, trackCurrentTimeIndicator, trackDurationTimeIndicator);
+                                                                                                                            .overlay {position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); opacity: 0; visibility: hidden; transition: var(--transition); z-index: 998; }
+                                                                                                                            .overlay.show {opacity: 1; visibility: visible; }
 
+                                                                                                                            .menu-toggle {cursor: pointer; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; }
+                                                                                                                            .menu-bars {width: 24px; height: 2.4px; background: white; position: relative; transition: background 0.3s ease; }
+                                                                                                                            .menu-bars::before, .menu-bars::after {content: ''; position: absolute; width: 24px; height: 2.4px; background: white; transition: transform 0.3s ease, top 0.3s ease; left: 0; }
+                                                                                                                            .menu-bars::before {top: -8px; }
+                                                                                                                            .menu-bars::after {top: 8px; }
+                                                                                                                            .menu-toggle.open .menu-bars {background: transparent; }
+                                                                                                                            .menu-toggle.open .menu-bars::before {transform: rotate(45deg); top: 0; }
+                                                                                                                            .menu-toggle.open .menu-bars::after {transform: rotate(-45deg); top: 0; }
 
+                                                                                                                            .lyrics {font - family: 'Noto Sans Telugu', sans-serif; margin: 20px; padding: 20px; background-color: white; position: relative; animation: fade-in 0.9s ease-in-out forwards; border-radius: 8px; }
+                                                                                                                            .lyricsHead {display: flex; align-items: center; justify-content: space-between; margin-bottom: 35px; font-size: 1.1rem; padding: 5px; border-radius: 8px; border: 2px dotted var(--primary-color); width: 100%; height: 40px; margin-left: -8px; }
+                                                                                                                            .head-text {font - size: 1.1rem; }
+                                                                                                                            .lyrics-text {font - size: 1.175rem; }
+                                                                                                                            .back-button {margin - left: 10px; }
+                                                                                                                            .back-button, .next-button {cursor: pointer; color: black; text-decoration: none; display: flex; justify-content: center; align-items: center; height: 30px; width: 40px; padding: 3px 5px; border-radius: 50%; background-color: white; border: 1px solid var(--primary-color); font-size: 20px; }
+                                                                                                                            .arrow {font - size: 20px; }
+                                                                                                                            @keyframes fade-in {from {opacity: 0; } to {opacity: 1; } }
 
-    </script>
-</body>
+                                                                                                                            .audio-player {position: fixed; bottom: 63px; margin-bottom: -7px; left: 0; color: black; width: 100%; height: 52px; background-color: white; display: flex; justify-content: space-between; align-items: center; padding: 1rem 0 0.8rem 6px; box-shadow: 0 -2px 0px rgba(0,0,0,0.5); }
+                                                                                                                            .track-player {position: fixed; bottom: 3px; left: 0; width: 100%; height: 45px; color: black; background-color: white; display: flex; justify-content: space-between; align-items: center; padding: 2rem 0 1.05rem 6px; box-shadow: 0 -2px 0px rgba(0,0,0,0.5); }
+                                                                                                                            .audio-controls {display: flex; align-items: center; width: 100%; }
+                                                                                                                            .play-pause-btn {background - color: var(--primary-color); border: none; color: white; padding: 10px; border-radius: 50%; cursor: pointer; margin-right: 10px; font-size: 16px; height: 40px; width: 40px; display: flex; justify-content: center; align-items: center; }
+                                                                                                                            .seek-slider {width: 100%; cursor: pointer; margin-right: 15px; -webkit-appearance: none; appearance: none; background: var(--primary-color); height: 5px; border-radius: 5px; outline: none; }
+                                                                                                                            .seek-slider::-webkit-slider-thumb {-webkit - appearance: none; appearance: none; background-color: white; border-radius: 50%; border: 2px solid black; width: 15px; height: 15px; }
+                                                                                                                            .time-indicator {color: black; margin-right: 10px; padding-right: 6px; }
+                                                                                                                            .menu-button:hover {background - color: #f0f0f0; cursor: pointer; }
+                                                                                                                            .loader {border: 4px solid #ccc; border-top: 4px solid #075E54; border-radius: 50%; width: 20px; height: 20px; animation: spin 0.5s linear infinite; display: inline-block; vertical-align: middle; }
+                                                                                                                            @keyframes spin {0 % { transform: rotate(0deg); } 100% {transform: rotate(360deg); } }
+                                                                                                                            @media (max-width: 768px) { .navbar {padding: 12px 20px; } .lyrics {padding: 15px; margin: 10px; } }
+                                                                                                                            @media (min-width: 1024px) { .title {font - size: 1.3rem; } }
+                                                                                                                        
+                                                                                                                                                                    </style>
+                                                                                                                                                            </head>
+                                                                                                                                                            <body>
+                                                                                                                                                                                                                                                                                            <nav class="navbar" aria-label="Main navigation">
+                                                                                                                                <div class="logo-title">
+                                                                                                                                    <img src="https://uesiap.github.io/vidhyardhi-geethavali/Icon192.jpg" alt="App Logo" class="logo">
+                                                                                                                                        <span class="title">UESI-AP Audio & Visuals Dept</span>
+                                                                                                                                </div>
+                                                                                                                                <button class="menu-btn" id="menuBtnEl" aria-label="Open menu" aria-expanded="false">
+                                                                                                                                    <span>
+                                                                                                                                        <div class="menu-toggle" id="menuToggle">
+                                                                                                                                            <div class="menu-bars"></div>
+                                                                                                                                        </div>
+                                                                                                                                    </span>
+                                                                                                                                </button>
+                                                                                                                            </nav>
 
-</html>
+                                                                                                                            <div class="drawer" id="drawer" role="navigation" aria-label="Side menu">
+                                                                                                                                <div class="drawer-content">
+                                                                                                                                    <a href="/vidhyardhi-geethavali/" class="drawer-item" tabindex="0">
+                                                                                                                                        <div class="item-content">
+                                                                                                                                            <span class="icon"><span class="material-symbols-outlined">home</span></span>
+                                                                                                                                            <span class="mnu-tit">Home</span>
+                                                                                                                                        </div>
+                                                                                                                                    </a>
+                                                                                                                                    <div class="drawer-item has-submenu" tabindex="0">
+                                                                                                                                        <div class="item-content"><span class="icon"><span class="material-symbols-outlined">camping</span></span><span class="mnu-tit">Camp Songs</span></div>
+                                                                                                                                    </div>
+                                                                                                                                    <div class="submenu" id="campSubmenu">
+                                                                                                                                        <a href="/vidhyardhi-geethavali/camps/ecamp" class="submenu-item" tabindex="0"><span class="icon"><i class="fas fa-users"></i></span><span class="mnu-tit">E Camp Songs</span></a>
+                                                                                                                                        <a href="/vidhyardhi-geethavali/camps/dtcamp" class="submenu-item" tabindex="0"><span class="icon"><i class="fas fa-users"></i></span><span class="mnu-tit">DT Camp Songs</span></a>
+                                                                                                                                        <a href="/vidhyardhi-geethavali/camps/ltcamp" class="submenu-item" tabindex="0"><span class="icon"><i class="fas fa-users"></i></span><span class="mnu-tit">LT Camp Songs</span></a>
+                                                                                                                                        <a href="/vidhyardhi-geethavali/camps/cmtc" class="submenu-item" tabindex="0"><span class="icon"><i class="fas fa-users"></i></span><span class="mnu-tit">CMTC Songs</span></a>
+                                                                                                                                        <a href="/vidhyardhi-geethavali/camps/smtc" class="submenu-item" tabindex="0"><span class="icon"><i class="fas fa-users"></i></span><span class="mnu-tit">SMTC Songs</span></a>
+                                                                                                                                    </div>
+                                                                                                                                    <div class="drawer-item has-submenu" tabindex="0">
+                                                                                                                                        <div class="item-content"><span class="icon"><span class="material-symbols-outlined">stars_2</span></span><span class="mnu-tit">Special Songs</span></div>
+                                                                                                                                    </div>
+                                                                                                                                    <div class="submenu" id="specialSubmenu">
+                                                                                                                                        <a href="/vidhyardhi-geethavali/special/praise" class="submenu-item" tabindex="0"><span class="icon"><span class="material-symbols-outlined">cheer</span></span><span class="mnu-tit">Praise & Worship</span></a>
+                                                                                                                                        <a href="/vidhyardhi-geethavali/special/prayer" class="submenu-item" tabindex="0"><span class="icon"><span class="material-symbols-outlined">folded_hands</span></span><span class="mnu-tit">Prayer</span></a>
+                                                                                                                                        <a href="/vidhyardhi-geethavali/special/thanks" class="submenu-item" tabindex="0"><span class="icon"><span class="material-symbols-outlined">handshake</span></span><span class="mnu-tit">Thanks Giving</span></a>
+                                                                                                                                        <a href="/vidhyardhi-geethavali/special/christmas" class="submenu-item" tabindex="0"><span class="icon"><span class="material-symbols-outlined">Forest</span></span><span class="mnu-tit">Christmas</span></a>
+                                                                                                                                    </div>
+                                                                                                                                    <div class="drawer-item has-submenu" tabindex="0">
+                                                                                                                                        <div class="item-content"><span class="icon"><span class="material-symbols-outlined">my_location</span></span><span class="mnu-tit">Aims Songs</span></div>
+                                                                                                                                    </div>
+                                                                                                                                    <div class="submenu" id="aimsSubmenu">
+                                                                                                                                        <a href="/vidhyardhi-geethavali/aims/evangelism" class="submenu-item" tabindex="0"><span class="icon"><i class="fa-solid fa-arrow-right-long"></i></span><span class="mnu-tit">Evangelism</span></a>
+                                                                                                                                        <a href="/vidhyardhi-geethavali/aims/fellowship" class="submenu-item" tabindex="0"><span class="icon"><i class="fa-solid fa-arrow-right-long"></i></span><span class="mnu-tit">Fellowship</span></a>
+                                                                                                                                        <a href="/vidhyardhi-geethavali/aims/testimony" class="submenu-item" tabindex="0"><span class="icon"><i class="fa-solid fa-arrow-right-long"></i></span><span class="mnu-tit">Testimony</span></a>
+                                                                                                                                        <a href="/vidhyardhi-geethavali/aims/missions" class="submenu-item" tabindex="0"><span class="icon"><i class="fa-solid fa-arrow-right-long"></i></span><span class="mnu-tit">Missions</span></a>
+                                                                                                                                    </div>
+                                                                                                                                    <div class="drawer-item has-submenu" tabindex="0">
+                                                                                                                                        <div class="item-content"><span class="icon"><span class="material-symbols-outlined">graphic_eq</span></span><span class="mnu-tit">Audio Songs</span></div>
+                                                                                                                                    </div>
+                                                                                                                                    <div class="submenu" id="audioNavSubmenu">
+                                                                                                                                        <a href="/vidhyardhi-geethavali/audios/telugu" class="submenu-item" tabindex="0"><span class="icon"><i class="fa-solid fa-music"></i></span><span class="mnu-tit">Telugu Songs</span></a>
+                                                                                                                                        <a href="/vidhyardhi-geethavali/audios/english" class="submenu-item" tabindex="0"><span class="icon"><i class="fa-solid fa-music"></i></span><span class="mnu-tit">English Songs</span></a>
+                                                                                                                                        <a href="/vidhyardhi-geethavali/audios/hindi" class="submenu-item" tabindex="0"><span class="icon"><i class="fa-solid fa-music"></i></span><span class="mnu-tit">Hindi Songs</span></a>
+                                                                                                                                    </div>
+                                                                                                                                    <br><hr style="border: 1.5px dotted var(--primary-color);"><br>
+                                                                                                                                        <div class="drawer-item has-submenu" tabindex="0">
+                                                                                                                                            <div class="item-content"><span class="icon"><span class="material-symbols-outlined">forum</span></span><span class="mnu-tit">Share Thoughts</span></div>
+                                                                                                                                        </div>
+                                                                                                                                        <div class="submenu" id="thoughtsNavSubmenu">
+                                                                                                                                            <a href="/vidhyardhi-geethavali/write-review" class="submenu-item" tabindex="0"><span class="icon"><span class="material-symbols-outlined">edit_square</span></span><span class="mnu-tit">Write a Review</span></a>
+                                                                                                                                            <a href="/vidhyardhi-geethavali/give-correction" class="submenu-item" tabindex="0"><span class="icon"><span class="material-symbols-outlined">lyrics</span></span><span class="mnu-tit">Give Correction</span></a>
+                                                                                                                                            <a href="/vidhyardhi-geethavali/user-feedback" class="submenu-item" tabindex="0"><span class="icon"><span class="material-symbols-outlined">thumbs_up_down</span></span><span class="mnu-tit">Feedback</span></a>
+                                                                                                                                        </div>
+                                                                                                                                        <div class="drawer-item has-submenu" id="shareMenuToggle" tabindex="0">
+                                                                                                                                            <div class="item-content"><span class="icon"><span class="material-symbols-outlined">sync_arrow_down</span></span><span class="mnu-tit">Share & Download</span></div>
+                                                                                                                                        </div>
+                                                                                                                                        <div class="submenu" id="shareNavSubmenu">
+                                                                                                                                            <a onclick="shareSong()" class="submenu-item" tabindex="0"><span class="icon"><span class="material-symbols-outlined">share</span></span><span class="mnu-tit">Share this Song</span></a>
+                                                                                                                                            <a onclick="downloadAudio()" class="submenu-item" tabindex="0"><span class="icon"><span class="material-symbols-outlined">download</span></span><span class="mnu-tit">Download Audio</span></a>
+                                                                                                                                            <a onclick="downloadTrack()" class="submenu-item" tabindex="0"><span class="icon"><span class="material-symbols-outlined">download</span></span><span class="mnu-tit">Download Track</span></a>
+                                                                                                                                            <a href="https://play.google.com/store/apps/details?id=com.uesiap.geethavali" class="submenu-item" tabindex="0"><span class="icon"><span class="material-symbols-outlined">phone_android</span></span><span class="mnu-tit">UESI AP App</span></a>
+                                                                                                                                        </div>
+                                                                                                                                        <br><br><br><br>
+                                                                                                                                        </div>
+                                                                                                                                        </div>
+
+                                                                                                                                            <div class="overlay" id="overlay"></div>
+
+    <!-- Menu overlay for custom popup -->
+                                                                                                                                            <div id="menuOverlay" onclick="toggleMenu()" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; z-index:999; background:rgba(0,0,0,0.3);"></div>
+
+                                                                                                                                            <div class="lyrics">
+                                                                                                                                                <span style="display: flex;">
+                                                                                                                                                    <div class="lyricsHead" style="position: relative; width: 100%; display: flex; align-items: center;">
+                                                                                                                                                        <a class="back-button" onclick="history.back(); return false;" style="position: absolute; left: 10px;">
+                                                                                                                                                            <span class="arrow" style="margin-top: 5px;"><i class="fas fa-arrow-left"></i></span>
+                                                                                                                                                        </a>
+                                                                                                                                                        <p class="head-text" style="margin: 0 auto; text-align: center;">అంజూరపు చెట్లు (1)</p>
+                                                                                                                                                    </div>
+                                                                                                                                                      
+                                                                                                                                                    <a class="menu-button" href="javascript:void(0)" onclick="toggleMenu()"
+                                                                                                                                                        style="position: absolute; right: 10px; border: 2px dotted var(--primary-color); border-radius: 30%; margin-top: 0.2rem;">
+                                                                                                                                                        <i class="fa-solid fa-ellipsis-vertical" style="padding: 7px; font-size: 1rem;"></i>
+                                                                                                                                                    </a>
+                                                                                                                                                </span>
+
+                                                                                                                                                <!-- Custom popup menu -->
+                                                                                                                                                <div id="customMenu" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #fff; border: 2px solid var(--primary-color); border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); z-index: 1000; padding: 12px; min-width: 160px;">
+                                                                                                                                                    <ul style="list-style: none; margin: 0; padding: 0;">
+                                                                                                                                                        <li style="padding: 10px 14px; cursor: pointer; border: 1px solid var(--primary-dark); transition: background 0.2s; margin-bottom: 8px; border-radius: 8px;" onmouseover="this.style.background='#f5f5f5'" onmouseout="this.style.background='none'" onclick="shareSong()">
+                                                                                                                                                            <span class="icon"><span class="material-symbols-outlined">share</span></span>
+                                                                                                                                                            <span class="mnu-tit" style="font-size:1.3rem;">Song</span>
+                                                                                                                                                        </li>
+                                                                                                                                                        <li style="padding: 10px 14px; cursor: pointer; border: 1px solid var(--primary-dark); transition: background 0.2s; margin-bottom: 8px; border-radius: 8px;" onmouseover="this.style.background='#f5f5f5'" onmouseout="this.style.background='none'" onclick="downloadAudio()">
+                                                                                                                                                            <span class="icon"><span class="material-symbols-outlined">download</span></span>
+                                                                                                                                                            <span class="mnu-tit" style="font-size:1.3rem;" id="audioText">Audio</span>
+                                                                                                                                                            <span id="audioLoader" class="loader" style="display:none; margin-left:10px;"></span>
+                                                                                                                                                        </li>
+                                                                                                                                                        <li style="padding: 10px 14px; cursor: pointer; border: 1px solid var(--primary-dark); transition: background 0.2s; border-radius: 8px;" onmouseover="this.style.background='#f5f5f5'" onmouseout="this.style.background='none'" onclick="downloadTrack()">
+                                                                                                                                                            <span class="icon"><span class="material-symbols-outlined">download</span></span>
+                                                                                                                                                            <span class="mnu-tit" style="font-size:1.3rem;" id="trackText">Track</span>
+                                                                                                                                                            <span id="trackLoader" class="loader" style="display:none; margin-left:10px;"></span>
+                                                                                                                                                        </li>
+                                                                                                                                                    </ul>
+                                                                                                                                                </div>
+
+                                                                                                                                                <div class="lyrics-text" style="text-align: left; margin-bottom: 120px;">
+                                                                                                                                                    అంజూరపు చెట్లు పూయకుండినను ద్రాక్షచెట్లు ఫలియింపకను
+ఓలీవచెట్లు కాయకను చేనిలోని పైరు పంటకు రాకపోయినను
+
+గొర్రెలు దొడ్డిలో లేకున్నా - శాలలో పశువులు లేకున్నా
+యెహోవయందానందము - నా దేవునిలో సంతోషము
+
+ప్రభువగు యెహోవయే నాకు గల బలము
+నాదు కాళ్ళను లేడి కాళ్ళగ చేయువాడు ఆయనే
+ఉన్నతంబౌ స్థలములందున - నన్ను నడిపించున్‌
+
+గొర్రెలు దొడ్డిలో లేకున్నా - శాలలో పశువులు లేకున్నా
+యెహోవయందానందము - నా దేవునిలో సంతోషము
+                                                                                                                                                </div>
+                                                                                                                                            </div>
+
+                                                                                                                                            <div class="audio-player">
+                                                                                                                                                <span id="audioCurrentTime" class="time-indicator" style="padding-left: 8px;">0:00</span>
+                                                                                                                                                <input type="range" id="audioSeekSlider" class="seek-slider" value="0" max="300">
+                                                                                                                                                    <div class="audio-controls">
+                                                                                                                                                        <span id="audioDurationTime" class="time-indicator">0:00</span>
+                                                                                                                                                        <button id="audioPlayPauseBtn" class="play-pause-btn"><i class="fas fa-play"></i></button>
+                                                                                                                                                        <p class="slider-text">Audio</p>
+                                                                                                                                                    </div>
+                                                                                                                                                    <audio id="audioPlayer" src="https://ia801305.us.archive.org/6/items/uesiap/15vgSongs1-10Anjurapu.mp3"></audio>
+                                                                                                                                            </div>
+                                                                                                                                            <div class="track-player">
+                                                                                                                                                <span id="trackCurrentTime" class="time-indicator" style="padding-left: 8px;">0:00</span>
+                                                                                                                                                <input type="range" id="trackSeekSlider" class="seek-slider" value="0" max="300">
+                                                                                                                                                    <div class="audio-controls">
+                                                                                                                                                        <span id="trackDurationTime" class="time-indicator">0:00</span>
+                                                                                                                                                        <button id="trackPlayPauseBtn" class="play-pause-btn"><i class="fas fa-play"></i></button>
+                                                                                                                                                        <p class="slider-text">Track</p>
+                                                                                                                                                    </div>
+                                                                                                                                                    <audio id="trackPlayer" src="https://ia801305.us.archive.org/6/items/uesiap/15vgSongs1-10Anjurapu.mp3"></audio>
+                                                                                                                                            </div>
+
+                                                                                                                                            <script>
+        // ── Element references ──
+                                                                                                                                                const menuBtnEl = document.getElementById('menuBtnEl');
+                                                                                                                                                const menuToggle = document.getElementById('menuToggle');
+                                                                                                                                                const drawer = document.getElementById('drawer');
+                                                                                                                                                const overlay = document.getElementById('overlay');
+                                                                                                                                                const audioPlayer = document.getElementById('audioPlayer');
+                                                                                                                                                const trackPlayer = document.getElementById('trackPlayer');
+                                                                                                                                                const audioPlayPauseBtn = document.getElementById('audioPlayPauseBtn');
+                                                                                                                                                const trackPlayPauseBtn = document.getElementById('trackPlayPauseBtn');
+                                                                                                                                                const audioSeekSlider = document.getElementById('audioSeekSlider');
+                                                                                                                                                const trackSeekSlider = document.getElementById('trackSeekSlider');
+                                                                                                                                                const audioCurrentTimeEl = document.getElementById('audioCurrentTime');
+                                                                                                                                                const trackCurrentTimeEl = document.getElementById('trackCurrentTime');
+                                                                                                                                                const audioDurationEl = document.getElementById('audioDurationTime');
+                                                                                                                                                const trackDurationEl = document.getElementById('trackDurationTime');
+
+                                                                                                                                                // ── Custom popup menu ──
+                                                                                                                                                function toggleMenu() {
+            const menu = document.getElementById('customMenu');
+                                                                                                                                                const mOverlay = document.getElementById('menuOverlay');
+                                                                                                                                                const isVisible = menu.style.display === 'block';
+                                                                                                                                                menu.style.display = isVisible ? 'none' : 'block';
+                                                                                                                                                mOverlay.style.display = isVisible ? 'none' : 'block';
+        }
+
+        // ── Drawer toggle ──
+        const toggleDrawer = () => {
+            const isOpen = drawer.classList.toggle('open');
+                                                                                                                                                overlay.classList.toggle('show', isOpen);
+                                                                                                                                                menuBtnEl.setAttribute('aria-expanded', isOpen);
+                                                                                                                                                menuToggle.classList.toggle('open', isOpen);
+        };
+
+                                                                                                                                                menuBtnEl.addEventListener('click', toggleDrawer);
+
+        overlay.addEventListener('click', () => {
+                                                                                                                                                    drawer.classList.remove('open');
+                                                                                                                                                overlay.classList.remove('show');
+                                                                                                                                                menuBtnEl.setAttribute('aria-expanded', 'false');
+                                                                                                                                                menuToggle.classList.remove('open');
+        });
+
+                                                                                                                                                // ── Submenu handling ──
+                                                                                                                                                const submenuItems = document.querySelectorAll('.drawer-item.has-submenu');
+        submenuItems.forEach(item => {
+                                                                                                                                                    item.addEventListener('click', (e) => {
+                                                                                                                                                        e.stopPropagation();
+                                                                                                                                                        submenuItems.forEach(other => {
+                                                                                                                                                            if (other !== item) {
+                                                                                                                                                                other.classList.remove('open');
+                                                                                                                                                                const otherSub = other.nextElementSibling;
+                                                                                                                                                                if (otherSub && otherSub.classList.contains('submenu')) otherSub.classList.remove('open');
+                                                                                                                                                            }
+                                                                                                                                                        });
+                                                                                                                                                        item.classList.toggle('open');
+                                                                                                                                                        const sub = item.nextElementSibling;
+                                                                                                                                                        if (sub && sub.classList.contains('submenu')) sub.classList.toggle('open');
+                                                                                                                                                    });
+            item.addEventListener('keydown', e => {
+                if (e.key === 'Enter' || e.key === ' ') {e.preventDefault(); item.click(); }
+            });
+        });
+
+        // Close drawer submenu items
+        document.querySelectorAll('.submenu-item').forEach(link => {
+                                                                                                                                                    link.addEventListener('click', () => {
+                                                                                                                                                        drawer.classList.remove('open');
+                                                                                                                                                        overlay.classList.remove('show');
+                                                                                                                                                        menuBtnEl.setAttribute('aria-expanded', 'false');
+                                                                                                                                                        menuToggle.classList.remove('open');
+                                                                                                                                                        submenuItems.forEach(i => i.classList.remove('open'));
+                                                                                                                                                        document.querySelectorAll('.submenu').forEach(s => s.classList.remove('open'));
+                                                                                                                                                    });
+        });
+
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape' && drawer.classList.contains('open')) {
+                                                                                                                                                    drawer.classList.remove('open');
+                                                                                                                                                overlay.classList.remove('show');
+                                                                                                                                                menuBtnEl.setAttribute('aria-expanded', 'false');
+                                                                                                                                                menuToggle.classList.remove('open');
+            }
+                                                                                                                                                if (e.ctrlKey && e.key === 'm') {e.preventDefault(); toggleDrawer(); }
+        });
+
+                                                                                                                                                // ── Touch swipe close ──
+                                                                                                                                                let startX = 0, currentX = 0;
+        drawer.addEventListener('touchstart', e => {startX = e.touches[0].clientX; }, {passive: true });
+        drawer.addEventListener('touchmove', e => {currentX = e.touches[0].clientX; }, {passive: true });
+        drawer.addEventListener('touchend', () => {
+            if (startX - currentX > 50) {
+                                                                                                                                                    drawer.classList.remove('open');
+                                                                                                                                                overlay.classList.remove('show');
+                                                                                                                                                menuBtnEl.setAttribute('aria-expanded', 'false');
+                                                                                                                                                menuToggle.classList.remove('open');
+            }
+        });
+
+                                                                                                                                                // ── Share ──
+                                                                                                                                                function shareSong() {
+                                                                                                                                                    drawer.classList.remove('open'); overlay.classList.remove('show');
+                                                                                                                                                const songTitleWithNumber = "అంజూరపు చెట్లు (1)";
+                                                                                                                                                const lyricsContent = document.querySelector('.lyrics-text span')?.innerHTML || '';
+                                                                                                                                                const match = songTitleWithNumber.match(/\((\d+)\)/);
+                                                                                                                                                const songNumber = match ? parseInt(match[1]) : null;
+                                                                                                                                                const canonicalUrl = 'https://uesiap.github.io/vidhyardhi-geethavali/tsongs/song' + songNumber;
+                                                                                                                                                let cleanLyrics = lyricsContent.replace(/<span>/g,'').replace(/<\/span>/g,'').replace(/<br><br>/g,'\n').replace(/<br>/g,'');
+                                                                                                                                                    const lines = cleanLyrics.split('\n');
+                                                                                                                                                    let formattedLyrics = '';
+                                                                                                                                                    let isVerse = false;
+                                                                                                                                                    for (let line of lines) {
+                                                                                                                                                        line = line.trim();
+                                                                                                                                                    if (!line) {formattedLyrics += '\n'; isVerse = false; continue; }
+                                                                                                                                                    if (/^\d+\./.test(line)) {formattedLyrics += line + '\n'; isVerse = true; }
+                                                                                                                                                    else if (isVerse) {formattedLyrics += '    ' + line + '\n'; }
+                                                                                                                                                    else {formattedLyrics += line + '\n'; }
+            }
+                                                                                                                                                    const shareText = '*' + songTitleWithNumber + '*\n\n' + formattedLyrics.trim() + '\n\n';
+                                                                                                                                                    if (navigator.share) {
+                                                                                                                                                        navigator.share({ title: songTitleWithNumber, text: shareText, url: canonicalUrl }).catch(err => console.error('Share failed:', err));
+            }
+                                                                                                                                                    document.getElementById('customMenu').style.display = 'none';
+                                                                                                                                                    document.getElementById('menuOverlay').style.display = 'none';
+        }
+
+                                                                                                                                                    // ── Download helpers ──
+                                                                                                                                                    async function downloadFile(url, filename, textEl, loaderEl) {
+                                                                                                                                                        textEl.style.display = 'none'; loaderEl.style.display = 'inline-block';
+                                                                                                                                                    drawer.classList.remove('open'); overlay.classList.remove('show');
+                                                                                                                                                    document.getElementById('customMenu').style.display = 'none';
+                                                                                                                                                    document.getElementById('menuOverlay').style.display = 'none';
+                                                                                                                                                    try {
+                const response = await fetch(url, {mode: 'cors' });
+                                                                                                                                                    if (!response.ok) throw new Error('HTTP ' + response.status);
+                                                                                                                                                    const blob = await response.blob();
+                                                                                                                                                    const blobUrl = window.URL.createObjectURL(blob);
+                                                                                                                                                    const link = document.createElement('a');
+                                                                                                                                                    link.href = blobUrl; link.download = filename;
+                                                                                                                                                    document.body.appendChild(link); link.click();
+                                                                                                                                                    document.body.removeChild(link);
+                                                                                                                                                    window.URL.revokeObjectURL(blobUrl);
+            } catch (err) {
+                const link = document.createElement('a');
+                                                                                                                                                    link.href = url; link.download = filename;
+                                                                                                                                                    document.body.appendChild(link); link.click();
+                                                                                                                                                    document.body.removeChild(link);
+                                                                                                                                                    alert('If nothing downloaded, please open the link in a new tab.');
+            } finally {
+                                                                                                                                                        loaderEl.style.display = 'none'; textEl.style.display = 'inline';
+            }
+        }
+
+                                                                                                                                                    function downloadAudio() {
+                                                                                                                                                        downloadFile('https://ia801305.us.archive.org/6/items/uesiap/15vgSongs1-10Anjurapu.mp3', 'అంజూరపు చెట్లు (1)_Audio.mp3',
+                                                                                                                                                            document.getElementById('audioText'), document.getElementById('audioLoader'));
+        }
+                                                                                                                                                    function downloadTrack() {
+                                                                                                                                                        downloadFile('https://ia801305.us.archive.org/6/items/uesiap/15vgSongs1-10Anjurapu.mp3', 'అంజూరపు చెట్లు (1)_Track.mp3',
+                                                                                                                                                            document.getElementById('trackText'), document.getElementById('trackLoader'));
+        }
+
+        // ── Audio players ──
+        audioPlayPauseBtn.addEventListener('click', () => {
+            if (audioPlayer.paused) {
+                                                                                                                                                        audioPlayer.play();
+                                                                                                                                                    audioPlayPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                                                                                                                                                    trackPlayer.pause();
+                                                                                                                                                    trackPlayPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+            } else {
+                                                                                                                                                        audioPlayer.pause();
+                                                                                                                                                    audioPlayPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+            }
+        });
+
+        trackPlayPauseBtn.addEventListener('click', () => {
+            if (trackPlayer.paused) {
+                                                                                                                                                        trackPlayer.play();
+                                                                                                                                                    trackPlayPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                                                                                                                                                    audioPlayer.pause();
+                                                                                                                                                    audioPlayPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+            } else {
+                                                                                                                                                        trackPlayer.pause();
+                                                                                                                                                    trackPlayPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+            }
+        });
+
+                                                                                                                                                    function formatTime(t) {
+            const m = Math.floor(t / 60), s = Math.floor(t % 60);
+                                                                                                                                                    return m + ':' + (s < 10 ? '0' : '') + s;
+        }
+
+                                                                                                                                                    function initPlayer(player, seekSlider, currentEl, durationEl) {
+                                                                                                                                                        player.addEventListener('loadedmetadata', () => {
+                                                                                                                                                            seekSlider.max = player.duration;
+                                                                                                                                                            durationEl.textContent = formatTime(player.duration);
+                                                                                                                                                        });
+            player.addEventListener('timeupdate', () => {
+                                                                                                                                                        seekSlider.value = player.currentTime;
+                                                                                                                                                    currentEl.textContent = formatTime(player.currentTime);
+            });
+            seekSlider.addEventListener('input', () => {player.currentTime = seekSlider.value; });
+        }
+
+                                                                                                                                                    initPlayer(audioPlayer, audioSeekSlider, audioCurrentTimeEl, audioDurationEl);
+                                                                                                                                                    initPlayer(trackPlayer, trackSeekSlider, trackCurrentTimeEl, trackDurationEl);
+
+                                                                                                                                                    // ── Service Worker ──
+                                                                                                                                                    if ('serviceWorker' in navigator) {
+                                                                                                                                                        window.addEventListener('load', () => {
+                                                                                                                                                            navigator.serviceWorker.register('/vidhyardhi-geethavali/service-worker.js')
+                                                                                                                                                                .then(reg => console.log('SW registered:', reg.scope))
+                                                                                                                                                                .catch(err => console.log('SW failed:', err));
+                                                                                                                                                        });
+        }
+                                                                                                                                                    <\/script>
+                                                                                                                                                
+                                                                                                                                                            </body>
+                                                                                                                                                        </html>
