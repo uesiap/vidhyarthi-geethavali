@@ -241,11 +241,13 @@
                 <a onclick="shareSong()" class="submenu-item" tabindex="0"><span class="icon"><span
                             class="material-symbols-outlined">share</span></span><span class="mnu-tit">Share this
                         Song</span></a>
-                <a onclick="downloadAudio()" class="submenu-item" tabindex="0"><span class="icon"><span
-                            class="material-symbols-outlined">download</span></span><span class="mnu-tit">Download
+                <a onclick="downloadAudio()" id="menu-downAudio" class="submenu-item" tabindex="0"><span
+                        class="icon"><span class="material-symbols-outlined">download</span></span><span
+                        class="mnu-tit">Download
                         Audio</span></a>
-                <a onclick="downloadTrack()" class="submenu-item" tabindex="0"><span class="icon"><span
-                            class="material-symbols-outlined">download</span></span><span class="mnu-tit">Download
+                <a onclick="downloadTrack()" id="menu-downTrack" class="submenu-item" tabindex="0"><span
+                        class="icon"><span class="material-symbols-outlined">download</span></span><span
+                        class="mnu-tit">Download
                         Track</span></a>
                 <a href="https://play.google.com/store/apps/details?id=com.uesiap.geethavali" class="submenu-item"
                     tabindex="0"><span class="icon"><span
@@ -337,10 +339,10 @@
     ════════════════════════════════════ -->
     <script>
         // ─── Config ───────────────────────────────────────
-        const juice = "/vidhyardhi-geethavali";
         const BATCH = 50;
 
         const params = new URLSearchParams(window.location.search);
+        const juice = "/vidhyardhi-geethavali";
         const songType = params.get("tp") || "";
         const songNumber = params.get("sn") || "";
 
@@ -354,6 +356,12 @@
 
         // ─── Boot ────────────────────────────────────────
         async function loadSong() {
+            // Hide download menu items
+            const audioBtn = document.getElementById("menu-downAudio");
+            const trackBtn = document.getElementById("menu-downTrack");
+
+            if (audioBtn) audioBtn.style.display = "none";
+            if (trackBtn) trackBtn.style.display = "none";
             if (!jsonPath || !songNumber) {
                 renderError(
                     "Song not added yet",
@@ -683,6 +691,5 @@
     </script>
 
 </body>
-
 
 </html>
