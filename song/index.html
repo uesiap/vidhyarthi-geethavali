@@ -373,8 +373,8 @@
                 json = await res.json();
             } catch (err) {
                 renderError(
-                    "Could not load data file.",
-                    `<code>${escHtml(fileUrl)}</code><br>${escHtml(err.message)}`
+                    "Song not added yet",
+                    `We will add this song soon.<br><code>UESI AP - Audio & Visuals Dept</code>`
                 );
                 return;
             }
@@ -382,8 +382,8 @@
             const song = json[songNumber];
             if (!song) {
                 renderError(
-                    "Song Not Found",
-                    `Song number <b>${escHtml(songNumber)}</b> was not found in the data file.`
+                    "Song not added yet",
+                    `We will add this song soon.<br><code>UESI AP - Audio & Visuals Dept</code>`
                 );
                 return;
             }
