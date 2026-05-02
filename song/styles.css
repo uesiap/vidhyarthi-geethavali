@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Dynamic meta tags — overwritten by JS after song loads -->
+    <title>Song | UESI AP</title>
+    <meta name="description" content="Vidhyardhi Geethavali song from UESI AP.">
+    <meta name="keywords" content="uesi, ap, geethavali, lyrics, audio">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="eZcr6WyistE7nCSaUoUkf9tpK_SmeG5caEM-x3nEWb4">
+    <meta name="msvalidate.01" content="28F3BC7AAD0F4B06B4517F2211A7D366">
+    <meta name="theme-color" content="#128C7E">
+    <meta name="author" content="M.Rahul">
+    <meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow">
+    <meta name="googlebot-news" content="index, follow">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://uesiap.github.io/vidhyardhi-geethavali/Icon192.png">
+    <meta property="og:image:alt" content="Vidhyardhi Geethavali">
+    <meta property="og:site_name" content="UESI AP">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://uesiap.github.io/vidhyardhi-geethavali/Icon192.png">
+    <meta name="twitter:site" content="@uesiap">
+    <meta name="twitter:creator" content="@uesiap">
+    <meta name="twitter:image:alt" content="Vidhyardhi Geethavali">
+    <meta name="twitter:label1" content="Published by">
+    <meta name="twitter:data1" content="UESI AP">
+    <meta name="twitter:domain" content="uesiap.github.io">
+
+    <link rel="apple-touch-icon" href="https://uesiap.github.io/vidhyardhi-geethavali/Icon192.png">
+    <link rel="shortcut icon" type="image/x-icon"
+        href="https://www.uesitn.org/wp-content/uploads/2020/08/uesi-favicon.png">
+    <link rel="apple-touch-icon" href="https://uesiap.github.io/vidhyardhi-geethavali/favicon.png">
+    <link rel="icon" sizes="192x192" href="https://uesiap.github.io/vidhyardhi-geethavali/Icon192.png">
+    <link rel="icon" sizes="512x512" href="https://uesiap.github.io/vidhyardhi-geethavali/Icon512.png">
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://uesiap.github.io/vidhyardhi-geethavali/"
+      },
+      "keywords": "lyrics, vidhyardhi, geethavali, UESI, AP, uesi, ap, camps, songs, vidhyarthi,camp songs, camps,  uesi songs, uesi ap songs, vidhyardhi geethavali songs, ap Vidhyardhi Geethavali Uesi songs, uesi songs, VJ Songs, Uesi Vj songs, Telugu Vidhyardhi Gethavali songs, english songs, telugu songs, audio songs, Vidhyardhi Geethavali Track songs, Vidhyardhi Geethavali Audio songs",
+      "inLanguage": "telugu",
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "UESI AP",
+        "url": "https://uesiap.github.io/vidhyardhi-geethavali/"
+      },
+      "image": {
+        "@type": "ImageObject",
+        "url": "/vidhyardhi-geethavali/Icon192.png",
+        "width": 192,
+        "height": 192
+      },
+      "author": {
+        "@type": "Person",
+        "name": "M.Rahul"
+      },
+      "url": "https://uesiap.github.io/vidhyardhi-geethavali/",
+      "image": "/vidhyardhi-geethavali/Icon192.png",
+      "sameAs": [
+        "https://www.youtube.com/@UESIOfficial"
+      ],
+      "publisher": {
+        "@type": "Organization",
+        "name": "UESI AP",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://uesiap.github.io/vidhyardhi-geethavali/"
+        }
+      }
+    }
+    </script>
+
+    <!-- Site Name Markup -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "UESI AP",
+      "url": "https://uesiap.github.io/vidhyardhi-geethavali/"
+    }
+    </script>
+
+    <link rel="stylesheet" href="/vidhyardhi-geethavali/song/styles.css?v=1.0">
+
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+
+<body>
+
+    <!-- ═══════════════════════════════════
+         NAVBAR
+    ════════════════════════════════════ -->
+    <nav class="navbar" aria-label="Main navigation">
+        <div class="logo-title">
+            <img src="https://uesiap.github.io/vidhyardhi-geethavali/Icon192.jpg" alt="App Logo" class="logo">
+            <span class="title">UESI-AP Audio &amp; Visuals Dept</span>
+        </div>
+        <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">
+            <span>
+                <div class="menu-toggle">
+                    <div class="menu-bars"></div>
+                </div>
+            </span>
+        </button>
+    </nav>
+
+    <!-- ═══════════════════════════════════
+         SIDE DRAWER
+    ════════════════════════════════════ -->
+    <div class="drawer" id="drawer" role="navigation" aria-label="Side menu">
+        <div class="drawer-content">
+
+            <a href="/vidhyardhi-geethavali/" class="drawer-item" tabindex="0">
+                <div class="item-content">
+                    <span class="icon"><span class="material-symbols-outlined">home</span></span>
+                    <span class="mnu-tit">Home</span>
+                </div>
+            </a>
+
+            <!-- Camp Songs -->
+            <div class="drawer-item has-submenu" tabindex="0">
+                <div class="item-content">
+                    <span class="icon"><span class="material-symbols-outlined">camping</span></span>
+                    <span class="mnu-tit">Camp Songs</span>
+                </div>
+            </div>
+            <div class="submenu">
+                <a href="/vidhyardhi-geethavali/camps/ecamp" class="submenu-item" tabindex="0"><span class="icon"><i
+                            class="fas fa-users"></i></span><span class="mnu-tit">E Camp Songs</span></a>
+                <a href="/vidhyardhi-geethavali/camps/dtcamp" class="submenu-item" tabindex="0"><span class="icon"><i
+                            class="fas fa-users"></i></span><span class="mnu-tit">DT Camp Songs</span></a>
+                <a href="/vidhyardhi-geethavali/camps/ltcamp" class="submenu-item" tabindex="0"><span class="icon"><i
+                            class="fas fa-users"></i></span><span class="mnu-tit">LT Camp Songs</span></a>
+                <a href="/vidhyardhi-geethavali/camps/cmtc" class="submenu-item" tabindex="0"><span class="icon"><i
+                            class="fas fa-users"></i></span><span class="mnu-tit">CMTC Songs</span></a>
+                <a href="/vidhyardhi-geethavali/camps/smtc" class="submenu-item" tabindex="0"><span class="icon"><i
+                            class="fas fa-users"></i></span><span class="mnu-tit">SMTC Songs</span></a>
+            </div>
+
+            <!-- Special Songs -->
+            <div class="drawer-item has-submenu" tabindex="0">
+                <div class="item-content">
+                    <span class="icon"><span class="material-symbols-outlined">stars_2</span></span>
+                    <span class="mnu-tit">Special Songs</span>
+                </div>
+            </div>
+            <div class="submenu">
+                <a href="/vidhyardhi-geethavali/special/praise" class="submenu-item" tabindex="0"><span
+                        class="icon"><span class="material-symbols-outlined">cheer</span></span><span
+                        class="mnu-tit">Praise &amp; Worship</span></a>
+                <a href="/vidhyardhi-geethavali/special/prayer" class="submenu-item" tabindex="0"><span
+                        class="icon"><span class="material-symbols-outlined">folded_hands</span></span><span
+                        class="mnu-tit">Prayer</span></a>
+                <a href="/vidhyardhi-geethavali/special/thanks" class="submenu-item" tabindex="0"><span
+                        class="icon"><span class="material-symbols-outlined">handshake</span></span><span
+                        class="mnu-tit">Thanks Giving</span></a>
+                <a href="/vidhyardhi-geethavali/special/christmas" class="submenu-item" tabindex="0"><span
+                        class="icon"><span class="material-symbols-outlined">Forest</span></span><span
+                        class="mnu-tit">Christmas</span></a>
+            </div>
+
+            <!-- Aims Songs -->
+            <div class="drawer-item has-submenu" tabindex="0">
+                <div class="item-content">
+                    <span class="icon"><span class="material-symbols-outlined">my_location</span></span>
+                    <span class="mnu-tit">Aims Songs</span>
+                </div>
+            </div>
+            <div class="submenu">
+                <a href="/vidhyardhi-geethavali/aims/evangelism" class="submenu-item" tabindex="0"><span class="icon"><i
+                            class="fa-solid fa-arrow-right-long"></i></span><span class="mnu-tit">Evangelism</span></a>
+                <a href="/vidhyardhi-geethavali/aims/fellowship" class="submenu-item" tabindex="0"><span class="icon"><i
+                            class="fa-solid fa-arrow-right-long"></i></span><span class="mnu-tit">Fellowship</span></a>
+                <a href="/vidhyardhi-geethavali/aims/testimony" class="submenu-item" tabindex="0"><span class="icon"><i
+                            class="fa-solid fa-arrow-right-long"></i></span><span class="mnu-tit">Testimony</span></a>
+                <a href="/vidhyardhi-geethavali/aims/missions" class="submenu-item" tabindex="0"><span class="icon"><i
+                            class="fa-solid fa-arrow-right-long"></i></span><span class="mnu-tit">Missions</span></a>
+            </div>
+
+            <!-- Audio Songs -->
+            <div class="drawer-item has-submenu" tabindex="0">
+                <div class="item-content">
+                    <span class="icon"><span class="material-symbols-outlined">graphic_eq</span></span>
+                    <span class="mnu-tit">Audio Songs</span>
+                </div>
+            </div>
+            <div class="submenu">
+                <a href="/vidhyardhi-geethavali/audios/telugu" class="submenu-item" tabindex="0"><span class="icon"><i
+                            class="fa-solid fa-music"></i></span><span class="mnu-tit">Telugu Songs</span></a>
+                <a href="/vidhyardhi-geethavali/audios/english" class="submenu-item" tabindex="0"><span class="icon"><i
+                            class="fa-solid fa-music"></i></span><span class="mnu-tit">English Songs</span></a>
+                <a href="/vidhyardhi-geethavali/audios/hindi" class="submenu-item" tabindex="0"><span class="icon"><i
+                            class="fa-solid fa-music"></i></span><span class="mnu-tit">Hindi Songs</span></a>
+            </div>
+
+            <br>
+            <hr style="border: 1.5px dotted var(--primary-color);">
+            <br>
+
+            <!-- Share Thoughts -->
+            <div class="drawer-item has-submenu" tabindex="0" style="border-top: 1.5px solid #ddd;">
+                <div class="item-content">
+                    <span class="icon"><span class="material-symbols-outlined">forum</span></span>
+                    <span class="mnu-tit">Share Thoughts</span>
+                </div>
+            </div>
+            <div class="submenu">
+                <a href="/vidhyardhi-geethavali/write-review" class="submenu-item" tabindex="0"><span class="icon"><span
+                            class="material-symbols-outlined">edit_square</span></span><span class="mnu-tit">Write a
+                        Review</span></a>
+                <a href="/vidhyardhi-geethavali/give-correction" class="submenu-item" tabindex="0"><span
+                        class="icon"><span class="material-symbols-outlined">lyrics</span></span><span
+                        class="mnu-tit">Give Correction</span></a>
+                <a href="/vidhyardhi-geethavali/user-feedback" class="submenu-item" tabindex="0"><span
+                        class="icon"><span class="material-symbols-outlined">thumbs_up_down</span></span><span
+                        class="mnu-tit">Feedback</span></a>
+            </div>
+
+            <!-- Share & Download -->
+            <div class="drawer-item has-submenu" tabindex="0">
+                <div class="item-content">
+                    <span class="icon"><span class="material-symbols-outlined">sync_arrow_down</span></span>
+                    <span class="mnu-tit">Share &amp; Download</span>
+                </div>
+            </div>
+            <div class="submenu">
+                <a onclick="shareSong()" class="submenu-item" tabindex="0"><span class="icon"><span
+                            class="material-symbols-outlined">share</span></span><span class="mnu-tit">Share this
+                        Song</span></a>
+                <a onclick="downloadAudio()" class="submenu-item" tabindex="0"><span class="icon"><span
+                            class="material-symbols-outlined">download</span></span><span class="mnu-tit">Download
+                        Audio</span></a>
+                <a onclick="downloadTrack()" class="submenu-item" tabindex="0"><span class="icon"><span
+                            class="material-symbols-outlined">download</span></span><span class="mnu-tit">Download
+                        Track</span></a>
+                <a href="https://play.google.com/store/apps/details?id=com.uesiap.geethavali" class="submenu-item"
+                    tabindex="0"><span class="icon"><span
+                            class="material-symbols-outlined">phone_android</span></span><span class="mnu-tit">UESI AP
+                        App</span></a>
+            </div>
+
+            <br><br><br><br>
+        </div>
+    </div>
+
+    <!-- Custom Menu -->
+    <div id="customMenu" class="custom-menu"
+        style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #fff; border: 2px solid var(--primary-color); border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); z-index: 1000; padding: 12px; min-width: 160px;">
+        <ul style="list-style: none; margin: 0; padding: 0;">
+            <li style="padding: 10px 14px; cursor: pointer; color: #333; font-family: 'Segoe UI', sans-serif; font-size: 14px; border: 1px solid var(--primary-dark); transition: background 0.2s; margin-bottom: 8px; border-radius: 8px;"
+                onmouseover="this.style.background='#f5f5f5'" onmouseout="this.style.background='none'"
+                onclick="shareSong()"><span class="icon"><span class="material-symbols-outlined">
+                        share
+                    </span></span>
+                <span class="mnu-tit" style="font-size: 1.3rem; margin-bottom: 10px; margin-bottom: 5px;">Song</span>
+            </li>
+            <li style="padding: 10px 14px; cursor: pointer; color: #333; font-family: 'Segoe UI', sans-serif; font-size: 14px; border: 1px solid var(--primary-dark); transition: background 0.2s; margin-bottom: 8px; border-radius: 8px;"
+                onmouseover="this.style.background='#f5f5f5'" onmouseout="this.style.background='none'"
+                onclick="downloadAudio()"><span class="icon"><span class="material-symbols-outlined">
+                        download
+                    </span></span>
+                <span class="mnu-tit" style="font-size: 1.3rem; margin-bottom: 10px; margin-bottom: 5px;"
+                    id="audioText">Audio</span>
+                <span id="audioLoader" class="loader" style="display: none; margin-left: 10px;"></span>
+            </li>
+            <li style="padding: 10px 14px; cursor: pointer; color: #333; font-family: 'Segoe UI', sans-serif; font-size: 14px; border: 1px solid var(--primary-dark); transition: background 0.2s; margin-bottom: px; border-radius: 8px;"
+                onmouseover="this.style.background='#f5f5f5'" onmouseout="this.style.background='none'"
+                onclick="downloadTrack()"><span class="icon"><span class="material-symbols-outlined">
+                        download
+                    </span></span>
+                <span class="mnu-tit" style="font-size: 1.3rem; margin-bottom: 10px; margin-bottom: 5px;"
+                    id="trackText">Track</span>
+                <span id="trackLoader" class="loader" style="display: none; margin-left: 10px;"></span>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Drawer overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Menu overlay (closes context menu on outside click) -->
+    <div id="menuOverlay" onclick="closeContextMenu()"></div>
+
+    <!-- ═══════════════════════════════════
+         MAIN SONG CONTENT (dynamic)
+    ════════════════════════════════════ -->
+    <div id="songContainer">
+        <!-- Loading spinner shown until song data arrives -->
+        <div id="loadingScreen">
+            <div class="loader-ring"></div>
+            <p>Loading song…</p>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════
+         AUDIO / TRACK PLAYERS
+    ════════════════════════════════════ -->
+    <div class="audio-player" id="audioPlayerBar" style="display:none;">
+        <span id="audioCurrentTime" class="time-indicator" style="padding-left:8px;">0:00</span>
+        <input type="range" id="audioSeekSlider" class="seek-slider" value="0" max="100">
+        <div class="audio-controls">
+            <span id="audioDurationTime" class="time-indicator">0:00</span>
+            <button id="audioPlayPauseBtn" class="play-pause-btn"><i class="fas fa-play"></i></button>
+            <p class="slider-text">Audio</p>
+        </div>
+        <audio id="audioPlayer"></audio>
+    </div>
+
+    <div class="track-player" id="trackPlayerBar" style="display:none;">
+        <span id="trackCurrentTime" class="time-indicator" style="padding-left:8px;">0:00</span>
+        <input type="range" id="trackSeekSlider" class="seek-slider" value="0" max="100">
+        <div class="audio-controls">
+            <span id="trackDurationTime" class="time-indicator">0:00</span>
+            <button id="trackPlayPauseBtn" class="play-pause-btn"><i class="fas fa-play"></i></button>
+            <p class="slider-text">Track</p>
+        </div>
+        <audio id="trackPlayer"></audio>
+    </div>
+
+
+    <!-- ═══════════════════════════════════
+         JAVASCRIPT
+    ════════════════════════════════════ -->
+    <script>
+        // ─── Config ───────────────────────────────────────
+        const juice = "/vidhyardhi-geethavali";
+        const BATCH = 50;
+
+        const params = new URLSearchParams(window.location.search);
+        const songType = params.get("tp") || "";
+        const songNumber = params.get("sn") || "";
+
+        function getBatchNum(sn) { return Math.ceil(parseInt(sn) / BATCH) * BATCH; }
+        const root = juice + "/data/";
+        const jsonPath = songType && songNumber
+            ? `${songType}/${getBatchNum(songNumber)}/list.json`
+            : "";
+
+        let songData = null;
+
+        // ─── Boot ────────────────────────────────────────
+        async function loadSong() {
+            if (!jsonPath || !songNumber) {
+                renderError(
+                    "Song not added yet",
+                    `We will add this song soon.<br><code>UESI AP - Audio & Visuals Dept</code>`
+                );
+                return;
+            }
+
+            const fileUrl = root + jsonPath;
+            let json;
+
+            try {
+                const res = await fetch(fileUrl + "?v=" + Date.now(), {
+                    cache: "no-store"
+                });
+                if (!res.ok) throw new Error("HTTP " + res.status);
+                json = await res.json();
+            } catch (err) {
+                renderError(
+                    "Could not load data file.",
+                    `<code>${escHtml(fileUrl)}</code><br>${escHtml(err.message)}`
+                );
+                return;
+            }
+
+            const song = json[songNumber];
+            if (!song) {
+                renderError(
+                    "Song Not Found",
+                    `Song number <b>${escHtml(songNumber)}</b> was not found in the data file.`
+                );
+                return;
+            }
+
+            songData = song;
+            renderSong(song);
+        }
+
+        // ─── Render song ─────────────────────────────────
+        function renderSong(song) {
+            const titleWithNumber = `${song.title} (${songNumber})`;
+
+            // Dynamic meta
+            document.title = `${titleWithNumber} Song | UESI AP`;
+            setMeta("name", "description", `Listen & Sing ${songNumber}: ${song.title} song from Vidhyardhi Geethavali.`);
+            setMeta("name", "keywords", `uesi, ap, ${songNumber}, ${song.title}, geethavali, lyrics, audio`);
+            setMeta("property", "og:title", `${titleWithNumber} Song | UESI AP`);
+            setMeta("property", "og:description", `Listen & Sing ${songNumber}: ${song.title} song from Vidhyardhi Geethavali.`);
+            setMeta("property", "og:url", canonicalUrl());
+            setMeta("name", "twitter:title", `${titleWithNumber} Song | UESI AP`);
+            setMeta("name", "twitter:description", `Listen & Sing ${songNumber}: ${song.title} song from Vidhyardhi Geethavali.`);
+            setMeta("name", "twitter:url", canonicalUrl());
+
+            let canonical = document.querySelector("link[rel='canonical']");
+            if (!canonical) {
+                canonical = document.createElement("link");
+                canonical.rel = "canonical";
+                document.head.appendChild(canonical);
+            }
+            canonical.href = canonicalUrl();
+
+            // Inject lyrics HTML
+            document.getElementById("songContainer").innerHTML = `
+                <div class="lyrics">
+                    <span style="display:flex;">
+                        <div class="lyricsHead" style="position:relative; width:100%; display:flex; align-items:center;">
+                            <a class="back-button" onclick="history.back(); return false;" style="position:absolute; left:10px;">
+                                <span class="arrow" style="margin-top:5px;"><i class="fas fa-arrow-left"></i></span>
+                            </a>
+                            <p class="head-text" style="margin:0 auto; text-align:center;">${escHtml(titleWithNumber)}</p>
+                        </div>
+                        &emsp;&emsp;
+                        <a class="menu-button" href="javascript:void(0)" onclick="toggleContextMenu()"
+                            style="position:absolute; right:10px; border:2px dotted var(--primary-color); border-radius:30%; margin-top:0.2rem;">
+                            <i class="fa-solid fa-ellipsis-vertical" style="padding:7px; font-weight:bold; font-size:1rem;"></i>
+                        </a>
+                    </span>
+ 
+                    <div class="lyrics-text" style="text-align:left; margin-bottom:120px;">
+                        <span>${song.lyrics}</span>
+                    </div>
+                </div>`;
+
+            // Set audio sources & show players
+            document.getElementById("audioPlayer").src = song.audioLink + "?v=" + Date.now();
+            document.getElementById("trackPlayer").src = song.trackLink + "?v=" + Date.now();
+            document.getElementById("audioPlayerBar").style.display = "flex";
+            document.getElementById("trackPlayerBar").style.display = "flex";
+
+            // JSON-LD for this page
+            const ld = document.createElement("script");
+            ld.type = "application/ld+json";
+            ld.textContent = JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "WebPage",
+                "name": titleWithNumber + " Song | UESI AP",
+                "url": canonicalUrl(),
+                "description": `Listen & Sing ${songNumber}: ${song.title} song from Vidhyardhi Geethavali.`,
+                "isPartOf": { "@type": "WebSite", "name": "UESI AP", "url": juice + "/" },
+                "author": { "@type": "Person", "name": "M.Rahul" },
+                "publisher": { "@type": "Organization", "name": "UESI AP" }
+            });
+            document.head.appendChild(ld);
+
+            initPlayers();
+        }
+
+        // ─── Error card ──────────────────────────────────
+        function renderError(heading, detail = "") {
+            document.getElementById("audioPlayerBar").style.display = "none";
+            document.getElementById("trackPlayerBar").style.display = "none";
+            document.getElementById("songContainer").innerHTML = `
+                <div class="error-card">
+                    <div class="error-icon-wrap">🎵</div>
+                    <h2>${heading}</h2>
+                    <p>${detail}</p>
+                    <a href="/vidhyardhi-geethavali/" class="go-home-btn">
+                        <i class="fas fa-arrow-left"></i> Go Home
+                    </a>
+                </div>`;
+        }
+
+        // ─── Helpers ─────────────────────────────────────
+        function canonicalUrl() {
+            return `${juice}/song?tp=${encodeURIComponent(songType)}&sn=${encodeURIComponent(songNumber)}`;
+        }
+
+        function setMeta(attrName, attrVal, content) {
+            let el = document.querySelector(`meta[${attrName}="${attrVal}"]`);
+            if (!el) { el = document.createElement("meta"); el.setAttribute(attrName, attrVal); document.head.appendChild(el); }
+            el.setAttribute("content", content);
+        }
+
+        function escHtml(s) {
+            return String(s)
+                .replace(/&/g, "&amp;").replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+        }
+
+        function cleanUrl(url) { return url ? url.split("?")[0] : ""; }
+
+        // ─── Context menu ────────────────────────────────
+        function toggleContextMenu() {
+            const menu = document.getElementById("customMenu");
+            const overlay = document.getElementById("menuOverlay");
+            const visible = menu && menu.style.display === "block";
+            if (menu) menu.style.display = visible ? "none" : "block";
+            if (overlay) overlay.style.display = visible ? "none" : "block";
+        }
+
+        function closeContextMenu() {
+            const menu = document.getElementById("customMenu");
+            const overlay = document.getElementById("menuOverlay");
+            if (menu) menu.style.display = "none";
+            if (overlay) overlay.style.display = "none";
+        }
+
+        // ─── Share ───────────────────────────────────────
+        function shareSong() {
+            closeContextMenu();
+            closeDrawer();
+            if (!songData) return;
+
+            const titleWithNumber = `${songData.title} (${songNumber})`;
+            const lyricsEl = document.querySelector(".lyrics-text span");
+            let raw = lyricsEl ? lyricsEl.innerHTML : "";
+
+            let clean = raw
+                .replace(/<br><br>/gi, "\n\n")
+                .replace(/<br>/gi, "\n")
+                .replace(/<[^>]+>/g, "");
+
+            const lines = clean.split("\n");
+            let formatted = "", inVerse = false;
+            for (let line of lines) {
+                line = line.trim();
+                if (!line) { formatted += "\n"; inVerse = false; continue; }
+                if (/^\d+\./.test(line)) { formatted += line + "\n"; inVerse = true; }
+                else if (inVerse) { formatted += "    " + line + "\n"; }
+                else { formatted += line + "\n"; }
+            }
+
+            const shareText = `*${titleWithNumber}*\n\n${formatted.trim()}\n\n`;
+
+            if (navigator.share) {
+                navigator.share({ title: titleWithNumber, text: shareText, url: canonicalUrl() }).catch(() => { });
+            }
+        }
+
+        // ─── Download ────────────────────────────────────
+        async function downloadFile(url, filename, textId, loaderId) {
+            closeDrawer();
+            if (!url) { alert("Link not available."); return; }
+
+            const textEl = document.getElementById(textId);
+            const loaderEl = document.getElementById(loaderId);
+            if (textEl) textEl.style.display = "none";
+            if (loaderEl) loaderEl.style.display = "inline-block";
+
+            try {
+                const res = await fetch(url, { mode: "cors" });
+                if (!res.ok) throw new Error("HTTP " + res.status);
+                const blob = await res.blob();
+                const blobUrl = URL.createObjectURL(blob);
+                const a = document.createElement("a");
+                a.href = blobUrl; a.download = filename;
+                a.style.display = "none";
+                document.body.appendChild(a); a.click();
+                setTimeout(() => { document.body.removeChild(a); URL.revokeObjectURL(blobUrl); }, 1000);
+            } catch (err) {
+                console.warn("Fetch failed, forcing link download:", err);
+                const a = document.createElement("a");
+                a.href = url; a.download = filename;
+                a.target = "_blank"; a.rel = "noopener";
+                a.style.display = "none";
+                document.body.appendChild(a); a.click();
+                setTimeout(() => document.body.removeChild(a), 1000);
+            }
+
+            if (textEl) textEl.style.display = "inline";
+            if (loaderEl) loaderEl.style.display = "none";
+        }
+
+        function downloadAudio() {
+            if (!songData) return;
+            downloadFile(songData.audioLink, `${songData.title}_Audio.mp3`, "audioText", "audioLoader");
+        }
+        function downloadTrack() {
+            if (!songData) return;
+            downloadFile(songData.trackLink, `${songData.title}_Track.mp3`, "trackText", "trackLoader");
+        }
+
+        // ─── Players ─────────────────────────────────────
+        function initPlayers() {
+            const ap = document.getElementById("audioPlayer");
+            const tp = document.getElementById("trackPlayer");
+            const apb = document.getElementById("audioPlayPauseBtn");
+            const tpb = document.getElementById("trackPlayPauseBtn");
+            const as_ = document.getElementById("audioSeekSlider");
+            const ts_ = document.getElementById("trackSeekSlider");
+            const act = document.getElementById("audioCurrentTime");
+            const tct = document.getElementById("trackCurrentTime");
+            const adt = document.getElementById("audioDurationTime");
+            const tdt = document.getElementById("trackDurationTime");
+
+            apb.addEventListener("click", () => {
+                if (ap.paused) { ap.play(); apb.innerHTML = '<i class="fas fa-pause"></i>'; tp.pause(); tpb.innerHTML = '<i class="fas fa-play"></i>'; }
+                else { ap.pause(); apb.innerHTML = '<i class="fas fa-play"></i>'; }
+            });
+            tpb.addEventListener("click", () => {
+                if (tp.paused) { tp.play(); tpb.innerHTML = '<i class="fas fa-pause"></i>'; ap.pause(); apb.innerHTML = '<i class="fas fa-play"></i>'; }
+                else { tp.pause(); tpb.innerHTML = '<i class="fas fa-play"></i>'; }
+            });
+
+            function bind(player, slider, curEl, durEl) {
+                player.addEventListener("loadedmetadata", () => { slider.max = player.duration; durEl.textContent = fmt(player.duration); });
+                player.addEventListener("timeupdate", () => { slider.value = player.currentTime; curEl.textContent = fmt(player.currentTime); });
+                slider.addEventListener("input", () => { player.currentTime = slider.value; });
+            }
+            function fmt(t) { const m = Math.floor(t / 60), s = Math.floor(t % 60); return `${m}:${s < 10 ? "0" : ""}${s}`; }
+
+            bind(ap, as_, act, adt);
+            bind(tp, ts_, tct, tdt);
+        }
+
+        // ─── Drawer ──────────────────────────────────────
+        const menuBtn = document.getElementById("menuBtn");
+        const drawer = document.getElementById("drawer");
+        const drawerOverlay = document.getElementById("overlay");
+        const submenuItems = document.querySelectorAll(".drawer-item.has-submenu");
+
+        function closeDrawer() {
+            drawer.classList.remove("open");
+            drawerOverlay.classList.remove("show");
+            menuBtn.setAttribute("aria-expanded", "false");
+            menuBtn.querySelector(".menu-toggle")?.classList.remove("open");
+        }
+
+        menuBtn.addEventListener("click", () => {
+            const isOpen = drawer.classList.toggle("open");
+            drawerOverlay.classList.toggle("show", isOpen);
+            menuBtn.setAttribute("aria-expanded", isOpen);
+            menuBtn.querySelector(".menu-toggle")?.classList.toggle("open", isOpen);
+        });
+
+        drawerOverlay.addEventListener("click", () => {
+            closeDrawer();
+            submenuItems.forEach(i => {
+                i.classList.remove("open");
+                i.nextElementSibling?.classList.remove("open");
+            });
+        });
+
+        document.querySelectorAll(".submenu-item").forEach(link => {
+            link.addEventListener("click", () => {
+                closeDrawer();
+                submenuItems.forEach(i => i.classList.remove("open"));
+                document.querySelectorAll(".submenu").forEach(s => s.classList.remove("open"));
+            });
+        });
+
+        submenuItems.forEach(item => {
+            item.addEventListener("click", e => {
+                e.stopPropagation();
+                submenuItems.forEach(o => {
+                    if (o !== item) { o.classList.remove("open"); o.nextElementSibling?.classList.remove("open"); }
+                });
+                item.classList.toggle("open");
+                item.nextElementSibling?.classList.toggle("open");
+            });
+            item.addEventListener("keydown", e => {
+                if (e.key === "Enter" || e.key === " ") { e.preventDefault(); item.click(); }
+            });
+        });
+
+        document.addEventListener("keydown", e => {
+            if (e.key === "Escape" && drawer.classList.contains("open")) closeDrawer();
+            if (e.ctrlKey && e.key === "m") { e.preventDefault(); menuBtn.click(); }
+        });
+
+        let touchX = 0;
+        drawer.addEventListener("touchstart", e => { touchX = e.touches[0].clientX; }, { passive: true });
+        drawer.addEventListener("touchend", e => { if (touchX - e.changedTouches[0].clientX > 50) closeDrawer(); }, { passive: true });
+
+        // ─── Boot ─────────────────────────────────────────
+        loadSong();
+    </script>
+
+</body>
+
+
+</html>
