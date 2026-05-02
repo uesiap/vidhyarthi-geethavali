@@ -33,8 +33,7 @@
     <meta name="twitter:domain" content="uesiap.github.io">
 
     <link rel="apple-touch-icon" href="https://uesiap.github.io/vidhyardhi-geethavali/Icon192.png">
-    <link rel="shortcut icon" type="image/x-icon"
-        href="https://uesiap.github.io/vidhyardhi-geethavali/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="https://uesiap.github.io/vidhyardhi-geethavali/favicon.png">
     <link rel="apple-touch-icon" href="https://uesiap.github.io/vidhyardhi-geethavali/favicon.png">
     <link rel="icon" sizes="192x192" href="https://uesiap.github.io/vidhyardhi-geethavali/Icon192.png">
     <link rel="icon" sizes="512x512" href="https://uesiap.github.io/vidhyardhi-geethavali/Icon512.png">
@@ -554,31 +553,52 @@
 
         // ─── Download ────────────────────────────────────
         async function downloadFile(url, filename, textId, loaderId) {
-            closeDrawer();
             if (!url) { alert("Link not available."); return; }
 
             const textEl = document.getElementById(textId);
             const loaderEl = document.getElementById(loaderId);
             if (textEl) textEl.style.display = "none";
             if (loaderEl) loaderEl.style.display = "inline-block";
+            const noCacheUrl = url + (url.includes("?") ? "&" : "?") + "t=" + Date.now();
 
             try {
-                const res = await fetch(url, { mode: "cors" });
+                const res = await fetch(noCacheUrl, {
+                    mode: "cors",
+                    cache: "no-store"
+                });
+
                 if (!res.ok) throw new Error("HTTP " + res.status);
+                closeContextMenu();
+
                 const blob = await res.blob();
                 const blobUrl = URL.createObjectURL(blob);
+                closeContextMenu();
+
                 const a = document.createElement("a");
-                a.href = blobUrl; a.download = filename;
+                a.href = blobUrl;
+                a.download = filename;
                 a.style.display = "none";
-                document.body.appendChild(a); a.click();
-                setTimeout(() => { document.body.removeChild(a); URL.revokeObjectURL(blobUrl); }, 1000);
+                document.body.appendChild(a);
+                a.click();
+
+                setTimeout(() => {
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(blobUrl);
+                }, 1000);
+
             } catch (err) {
                 console.warn("Fetch failed, forcing link download:", err);
+                closeContextMenu();
+
                 const a = document.createElement("a");
-                a.href = url; a.download = filename;
-                a.target = "_blank"; a.rel = "noopener";
+                a.href = noCacheUrl;
+                a.download = filename;
+                a.target = "_blank";
+                a.rel = "noopener";
                 a.style.display = "none";
-                document.body.appendChild(a); a.click();
+                document.body.appendChild(a);
+                a.click();
+
                 setTimeout(() => document.body.removeChild(a), 1000);
             }
 
@@ -690,8 +710,6 @@
         // ─── Boot ─────────────────────────────────────────
         loadSong();
     </script>
-
 </body>
-
 
 </html>
