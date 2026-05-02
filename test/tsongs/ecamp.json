@@ -1,0 +1,39 @@
+{
+  "tsongs": {
+    "101": {
+      "title": "Song Title Here",
+      "audioLink": "https://example.com/audio/song101.mp3",
+      "trackLink": "https://example.com/track/song101.mp3",
+      "marginBottom": "120px",
+      "lyrics": "మొదటి చరణం పదాలు ఇక్కడ<br><br>పల్లవి పదాలు ఇక్కడ<br><br>1. రెండవ చరణం పదాలు ఇక్కడ<br>   మరింత వివరాలు<br><br>2. మూడవ చరణం పదాలు<br>   ఇక్కడ పదాలు"
+    },
+    "102": {
+      "title": "Another Song",
+      "audioLink": "https://example.com/audio/song102.mp3",
+      "trackLink": "https://example.com/track/song102.mp3",
+      "marginBottom": "200px",
+      "lyrics": "Lyrics for song 102 go here<br><br>Chorus line<br><br>1. Verse 1<br>   More words here"
+    }
+  },
+  "ecamp": {
+    "1": {
+      "title": "E Camp Song One",
+      "audioLink": "https://example.com/audio/ecamp1.mp3",
+      "trackLink": "https://example.com/track/ecamp1.mp3",
+      "marginBottom": "120px",
+      "lyrics": "E Camp song lyrics here<br><br>Chorus here<br><br>1. Verse one<br>   More words"
+    }
+  },
+  "dtcamp": {},
+  "ltcamp": {},
+  "cmtc": {},
+  "smtc": {},
+  "praise": {},
+  "prayer": {},
+  "thanks": {},
+  "christmas": {},
+  "evangelism": {},
+  "fellowship": {},
+  "testimony": {},
+  "missions": {}
+}
