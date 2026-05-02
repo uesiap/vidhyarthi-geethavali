@@ -3,7 +3,7 @@
 
 <head>
     <!-- Dynamic meta tags — overwritten by JS after song loads -->
-    <title>Song | UESI AP</title>
+    <title>VG Song | UESI AP</title>
     <meta name="description" content="Vidhyardhi Geethavali song from UESI AP.">
     <meta name="keywords" content="uesi, ap, geethavali, lyrics, audio">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -356,12 +356,10 @@
 
         // ─── Boot ────────────────────────────────────────
         async function loadSong() {
-            const audioBtn = document.getElementById("menu-downAudio");
-            const trackBtn = document.getElementById("menu-downTrack");
+            const shareDownload = document.getElementById("shareDownload")
 
             // Hide by default
-            if (audioBtn) audioBtn.style.display = "none";
-            if (trackBtn) trackBtn.style.display = "none";
+            if (shareDownload) shareDownload.style.display = "none";
 
             if (!jsonPath || !songNumber) {
                 renderError(
@@ -397,8 +395,7 @@
                 return;
             }
 
-            if (audioBtn) audioBtn.style.display = "block";
-            if (trackBtn) trackBtn.style.display = "block";
+            if (shareDownload) shareDownload.style.display = "block";
 
             songData = song;
             renderSong(song);
