@@ -566,9 +566,8 @@
                     mode: "cors",
                     cache: "no-store"
                 });
-
+                
                 if (!res.ok) throw new Error("HTTP " + res.status);
-                closeContextMenu();
 
                 const blob = await res.blob();
                 const blobUrl = URL.createObjectURL(blob);
