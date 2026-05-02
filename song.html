@@ -1132,6 +1132,38 @@
         </div>
     </div>
 
+    <!-- Custom Menu -->
+    <div id="customMenu" class="custom-menu"
+        style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #fff; border: 2px solid var(--primary-color); border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); z-index: 1000; padding: 12px; min-width: 160px;">
+        <ul style="list-style: none; margin: 0; padding: 0;">
+            <li style="padding: 10px 14px; cursor: pointer; color: #333; font-family: 'Segoe UI', sans-serif; font-size: 14px; border: 1px solid var(--primary-dark); transition: background 0.2s; margin-bottom: 8px; border-radius: 8px;"
+                onmouseover="this.style.background='#f5f5f5'" onmouseout="this.style.background='none'"
+                onclick="shareSong()"><span class="icon"><span class="material-symbols-outlined">
+                        share
+                    </span></span>
+                <span class="mnu-tit" style="font-size: 1.3rem; margin-bottom: 10px; margin-bottom: 5px;">Song</span>
+            </li>
+            <li style="padding: 10px 14px; cursor: pointer; color: #333; font-family: 'Segoe UI', sans-serif; font-size: 14px; border: 1px solid var(--primary-dark); transition: background 0.2s; margin-bottom: 8px; border-radius: 8px;"
+                onmouseover="this.style.background='#f5f5f5'" onmouseout="this.style.background='none'"
+                onclick="downloadAudio()"><span class="icon"><span class="material-symbols-outlined">
+                        download
+                    </span></span>
+                <span class="mnu-tit" style="font-size: 1.3rem; margin-bottom: 10px; margin-bottom: 5px;"
+                    id="audioText">Audio</span>
+                <span id="audioLoader" class="loader" style="display: none; margin-left: 10px;"></span>
+            </li>
+            <li style="padding: 10px 14px; cursor: pointer; color: #333; font-family: 'Segoe UI', sans-serif; font-size: 14px; border: 1px solid var(--primary-dark); transition: background 0.2s; margin-bottom: px; border-radius: 8px;"
+                onmouseover="this.style.background='#f5f5f5'" onmouseout="this.style.background='none'"
+                onclick="downloadTrack()"><span class="icon"><span class="material-symbols-outlined">
+                        download
+                    </span></span>
+                <span class="mnu-tit" style="font-size: 1.3rem; margin-bottom: 10px; margin-bottom: 5px;"
+                    id="trackText">Track</span>
+                <span id="trackLoader" class="loader" style="display: none; margin-left: 10px;"></span>
+            </li>
+        </ul>
+    </div>
+
     <!-- Drawer overlay -->
     <div class="overlay" id="overlay"></div>
 
@@ -1272,29 +1304,6 @@
                             <i class="fa-solid fa-ellipsis-vertical" style="padding:7px; font-weight:bold; font-size:1rem;"></i>
                         </a>
                     </span>
- 
-                    <!-- Context Menu -->
-                   <div id="customMenu"
-                        style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%);
-                            background:#fff; border:2px solid var(--primary-color); border-radius:8px;
-                            box-shadow:0 4px 12px rgba(0,0,0,0.2); z-index:1001; padding:12px; min-width:160px;">
-                        <ul style="list-style:none; margin:0; padding:0;">
-                            <li class="ctx-item" onclick="shareSong()">
-                                <span class="material-symbols-outlined">share</span>
-                                <span class="mnu-tit" style="font-size:1.3rem;">Song</span>
-                            </li>
-                            <li class="ctx-item" onclick="downloadAudio()">
-                                <span class="material-symbols-outlined">download</span>
-                                <span class="mnu-tit" id="audioText" style="font-size:1.3rem;">Audio</span>
-                                <span id="audioLoader" class="loader-sm" style="display:none; margin-left:8px;"></span>
-                            </li>
-                            <li class="ctx-item" onclick="downloadTrack()">
-                                <span class="material-symbols-outlined">download</span>
-                                <span class="mnu-tit" id="trackText" style="font-size:1.3rem;">Track</span>
-                                <span id="trackLoader" class="loader-sm" style="display:none; margin-left:8px;"></span>
-                            </li>
-                        </ul>
-                    </div>
  
                     <div class="lyrics-text" style="text-align:left; margin-bottom:120px;">
                         <span>${song.lyrics}</span>
