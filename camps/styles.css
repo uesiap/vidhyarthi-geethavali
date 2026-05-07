@@ -708,6 +708,8 @@ body {
 #teluguSongs,
 #englishSongs {
     text-align: center;
+    max-width: 1000px;
+    margin: auto;
 }
 
 .hidden {
