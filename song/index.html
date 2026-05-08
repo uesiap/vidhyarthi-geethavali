@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-    <!-- Dynamic meta tags — overwritten by JS after song loads -->
     <title>Vidhyardhi Geethavali Song | UESI AP</title>
     <meta name="description" content="Sing the lyrics and listen to the song from Vidhyardhi Geethavali.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,8 +13,6 @@
     <link rel="apple-touch-icon" href="https://uesiap.github.io/vidhyardhi-geethavali/favicon.png">
     <link rel="shortcut icon" type="image/x-icon" href="https://uesiap.github.io/vidhyardhi-geethavali/favicon.png">
     <link rel="apple-touch-icon" href="https://uesiap.github.io/vidhyardhi-geethavali/favicon.png">
-
-    <!-- Site Name Markup -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -24,20 +21,12 @@
       "url": "https://uesiap.github.io/vidhyardhi-geethavali/"
     }
     </script>
-
     <link rel="stylesheet" href="/vidhyardhi-geethavali/song/styles.css?v=1.0">
-
-    <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
-
 <body>
-
-    <!-- ═══════════════════════════════════
-         NAVBAR
-    ════════════════════════════════════ -->
     <nav class="navbar" aria-label="Main navigation">
         <div class="logo-title">
             <img src="https://uesiap.github.io/vidhyardhi-geethavali/Icon192.jpg" alt="App Logo" class="logo">
@@ -51,10 +40,6 @@
             </span>
         </button>
     </nav>
-
-    <!-- ═══════════════════════════════════
-         SIDE DRAWER
-    ════════════════════════════════════ -->
     <div class="drawer" id="drawer" role="navigation" aria-label="Side menu">
         <div class="drawer-content">
 
@@ -64,8 +49,6 @@
                     <span class="mnu-tit">Home</span>
                 </div>
             </a>
-
-            <!-- Camp Songs -->
             <div class="drawer-item has-submenu" tabindex="0">
                 <div class="item-content">
                     <span class="icon"><span class="material-symbols-outlined">camping</span></span>
@@ -84,8 +67,6 @@
                 <a href="/vidhyardhi-geethavali/camps/smtc" class="submenu-item" tabindex="0"><span class="icon"><i
                             class="fas fa-users"></i></span><span class="mnu-tit">SMTC Songs</span></a>
             </div>
-
-            <!-- Special Songs -->
             <div class="drawer-item has-submenu" tabindex="0">
                 <div class="item-content">
                     <span class="icon"><span class="material-symbols-outlined">stars_2</span></span>
@@ -106,8 +87,6 @@
                         class="icon"><span class="material-symbols-outlined">Forest</span></span><span
                         class="mnu-tit">Christmas</span></a>
             </div>
-
-            <!-- Aims Songs -->
             <div class="drawer-item has-submenu" tabindex="0">
                 <div class="item-content">
                     <span class="icon"><span class="material-symbols-outlined">my_location</span></span>
@@ -124,8 +103,6 @@
                 <a href="/vidhyardhi-geethavali/aims/missions" class="submenu-item" tabindex="0"><span class="icon"><i
                             class="fa-solid fa-arrow-right-long"></i></span><span class="mnu-tit">Missions</span></a>
             </div>
-
-            <!-- Audio Songs -->
             <div class="drawer-item has-submenu" tabindex="0">
                 <div class="item-content">
                     <span class="icon"><span class="material-symbols-outlined">graphic_eq</span></span>
@@ -159,8 +136,6 @@
             <br>
             <hr style="border: 1.5px dotted var(--primary-color);">
             <br>
-
-            <!-- Share Thoughts -->
             <div class="drawer-item has-submenu" tabindex="0" style="border-top: 1.5px solid #ddd;">
                 <div class="item-content">
                     <span class="icon"><span class="material-symbols-outlined">forum</span></span>
@@ -178,8 +153,6 @@
                         class="icon"><span class="material-symbols-outlined">thumbs_up_down</span></span><span
                         class="mnu-tit">Feedback</span></a>
             </div>
-
-            <!-- Share & Download -->
             <div class="drawer-item has-submenu" tabindex="0">
                 <div class="item-content">
                     <span class="icon"><span class="material-symbols-outlined">sync_arrow_down</span></span>
@@ -207,8 +180,6 @@
             <br><br><br><br>
         </div>
     </div>
-
-    <!-- Custom Menu -->
     <div id="customMenu" class="custom-menu"
         style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #fff; border: 2px solid var(--primary-color); border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); z-index: 1000; padding: 12px; min-width: 160px;">
         <ul style="list-style: none; margin: 0; padding: 0;">
@@ -239,27 +210,15 @@
             </li>
         </ul>
     </div>
-
-    <!-- Drawer overlay -->
     <div class="overlay" id="overlay"></div>
-
-    <!-- Menu overlay (closes context menu on outside click) -->
     <div id="menuOverlay" onclick="closeContextMenu()"></div>
-
-    <!-- ═══════════════════════════════════
-         MAIN SONG CONTENT (dynamic)
-    ════════════════════════════════════ -->
     <div id="songContainer">
-        <!-- Loading spinner shown until song data arrives -->
         <div id="loadingScreen">
             <div class="loader-ring"></div>
             <p>Loading song…</p>
         </div>
     </div>
-
-    <!-- ═══════════════════════════════════
-         AUDIO / TRACK PLAYERS
-    ════════════════════════════════════ -->
+    
     <div class="audio-player" id="audioPlayerBar" style="display:none;">
         <span id="audioCurrentTime" class="time-indicator" style="padding-left:8px;">0:00</span>
         <input type="range" id="audioSeekSlider" class="seek-slider" value="0" max="100">
@@ -281,11 +240,6 @@
         </div>
         <audio id="trackPlayer"></audio>
     </div>
-
-
-    <!-- ═══════════════════════════════════
-         JAVASCRIPT
-    ════════════════════════════════════ -->
     <script>
         // ─── Config ───────────────────────────────────────
         const BATCH = 50;
