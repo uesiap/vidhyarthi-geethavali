@@ -104,7 +104,6 @@
       }
     }
     </script>
-
   <!-- Site Name Markup -->
   <script type="application/ld+json">
     {
@@ -114,1037 +113,12 @@
       "url": "https://uesiap.github.io/vidhyardhi-geethavali/"
     }
     </script>
-
   <!-- Font Awesome for Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500&display=swap');
-    @import url('https://fonts.googleapis.com/css?family=Noto+Sans+Telugu:wght@400;500&display=swap');
-    @import url('https://fonts.googleapis.com/css2?family=Sree+Krushnadevaraya&display=swap');
-
-    :root {
-      --primary-color: #128C7E;
-      --primary-dark: #075E54;
-      --text-light: #ffffff;
-      --text-dark: #333333;
-      --text-gray: #666666;
-      --bg-light: #f5f5f5;
-      --bg-white: #ffffff;
-      --border-light: #eeeeee;
-      --shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-      --transition: all 0.3s ease;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-weight: 500;
-      font-style: normal;
-    }
-
-    body {
-      font-family: 'Google Sans', sans-serif;
-      background: var(--bg-light);
-      margin: 0;
-      padding-top: 70px;
-      user-select: none;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-    }
-
-    /* Navbar Styles - Optimized */
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px 5%;
-      background-color: var(--primary-color);
-      color: var(--text-light);
-      box-shadow: var(--shadow);
-      position: fixed;
-      border-bottom: 3px dotted rgb(160, 225, 161);
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1000;
-      height: 70px;
-    }
-
-    .logo-title {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      flex: 1;
-      min-width: 0;
-    }
-
-    .logo {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid rgba(255, 255, 255, 0.2);
-      flex-shrink: 0;
-    }
-
-    .title {
-      font-size: 1.1rem;
-      font-weight: 500;
-    }
-
-    .menu-btn {
-      background: none;
-      border: none;
-      color: var(--text-light);
-      cursor: pointer;
-      padding: 8px;
-      transition: var(--transition);
-      border-radius: 50%;
-      width: 44px;
-      height: 44px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-
-    .menu-btn:focus {
-      outline: 2px solid rgba(255, 255, 255, 0.5);
-      background: rgba(255, 255, 255, 0.1);
-    }
-
-    .menu-btn:hover {
-      background: rgba(255, 255, 255, 0.1);
-      transform: scale(1.05);
-    }
-
-    .menu-toggle {
-      cursor: pointer;
-      width: 24px;
-      height: 24px;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .menu-bars {
-      width: 24px;
-      height: 2.4px;
-      background: white;
-      position: relative;
-      transition: background 0.3s ease;
-    }
-
-    .menu-bars::before,
-    .menu-bars::after {
-      content: '';
-      position: absolute;
-      width: 24px;
-      height: 2.4px;
-      background: white;
-      transition: transform 0.3s ease, top 0.3s ease, opacity 0.3s ease;
-      left: 0;
-    }
-
-    .menu-bars::before {
-      top: -8px;
-    }
-
-    .menu-bars::after {
-      top: 8px;
-    }
-
-    .menu-toggle.open .menu-bars {
-      background: transparent;
-    }
-
-    .menu-toggle.open .menu-bars::before {
-      transform: rotate(45deg);
-      top: 0;
-    }
-
-    .menu-toggle.open .menu-bars::after {
-      transform: rotate(-45deg);
-      top: 0;
-    }
-
-    .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: 3px;
-    }
-
-    .search-toggle {
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: transform 0.2s ease;
-    }
-
-    .search-toggle:focus-visible {
-      outline: 2px solid rgba(255, 255, 255, 0.5);
-      outline-offset: 2px;
-    }
-
-    .search-toggle:hover {
-      transform: scale(1.1);
-      border-radius: 50%;
-    }
-
-    .custom-search-icon {
-      width: 18px;
-      height: 18px;
-      border: 2px solid #fff;
-      border-radius: 50%;
-      position: relative;
-      box-sizing: border-box;
-    }
-
-
-    .custom-search-icon::after {
-      content: '';
-      position: absolute;
-      width: 8px;
-      height: 2px;
-      background-color: white;
-      bottom: -3px;
-      right: -4px;
-      transform: rotate(45deg);
-    }
-
-    .custom-close-icon {
-      font-size: 1.3rem;
-      color: white;
-      cursor: pointer;
-      margin-top: -5px;
-      margin-bottom: -5px;
-      transition: opacity 0.2s ease;
-      display: block;
-    }
-
-    .search-box {
-      position: relative;
-      width: 100%;
-      max-width: 600px;
-      margin: 1.2rem auto;
-      transition: all 0.3s ease;
-    }
-
-    .search-box.hidden {
-      display: none;
-    }
-
-    .go-to-too-search {
-      width: 100%;
-      padding: 12px 40px 12px 14px;
-      font-size: 1rem;
-      border-left: 5px solid var(--primary-color);
-      border-right: 5px solid var(--primary-color);
-      border-top: 2px solid var(--primary-color);
-      border-bottom: 2px solid var(--primary-color);
-      color: black;
-      cursor: text;
-      outline: none;
-      min-height: 44px;
-      box-sizing: border-box;
-      position: relative;
-      transition: border-color 0.3s ease, box-shadow 0.3s ease;
-      word-wrap: break-word;
-      overflow-wrap: break-word;
-      white-space: pre-wrap;
-      max-height: 120px;
-      overflow-y: auto;
-    }
-
-    .go-to-too-search:empty {
-      min-height: 44px;
-    }
-
-    .go-to-too-search[contenteditable]:empty::before {
-      content: attr(data-placeholder);
-      color: #aaa;
-      opacity: 0.8;
-      pointer-events: none;
-    }
-
-    .clear-search {
-      position: absolute;
-      top: 50%;
-      right: 12px;
-      transform: translateY(-50%);
-      background: none;
-      border: none;
-      color: black;
-      font-size: 1.1rem;
-      cursor: pointer;
-      display: none;
-      z-index: 2;
-      padding: 4px;
-      line-height: 1;
-    }
-
-    .clear-search:hover {
-      color: #555;
-    }
-
-    .go-to-too-search:not(.placeholder)~.clear-search {
-      display: block;
-    }
-
-    .no-songs-message {
-      text-align: center;
-      color: #777;
-      font-size: 1.1rem;
-      margin: 1rem 0;
-      font-style: italic;
-    }
-
-    /* Drawer Styles - Optimized */
-    .drawer {
-      position: fixed;
-      top: 0;
-      right: -100%;
-      width: 320px;
-      max-width: 90%;
-      height: 100vh;
-      background-color: var(--bg-white);
-      box-shadow: -2px 0 15px rgba(0, 0, 0, 0.1);
-      transition: var(--transition);
-      z-index: 999;
-      padding-top: 70px;
-      overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
-      will-change: transform;
-    }
-
-    .drawer.open {
-      right: 0;
-    }
-
-    .drawer-content {
-      padding: 0;
-    }
-
-    .drawer-item {
-      padding: 16px 25px;
-      color: var(--text-dark);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      transition: var(--transition);
-      border-left: 4px solid transparent;
-      font-weight: 500;
-      border-bottom: 1.5px solid #ddd;
-      text-decoration: none;
-      min-height: 56px;
-    }
-
-    .drawer-item:hover,
-    .drawer-item:focus {
-      background-color: rgba(0, 0, 0, 0.03);
-      border-left-color: var(--primary-color);
-      outline: none;
-    }
-
-    .drawer-item .item-content {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      flex: 1;
-    }
-
-    .drawer-item .icon {
-      width: 30px;
-      text-align: center;
-      font-size: 1.5rem;
-      color: var(--primary-color);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .mnu-tit {
-      font-size: 1.3rem;
-      font-weight: 400;
-    }
-
-    .drawer-item.has-submenu::after {
-      content: "\f078";
-      font-family: "Font Awesome 6 Free";
-      font-weight: 900;
-      font-size: 0.8rem;
-      color: var(--text-gray);
-      transition: var(--transition);
-    }
-
-    .drawer-item.has-submenu.open::after {
-      transform: rotate(180deg);
-      color: var(--primary-color);
-    }
-
-    .drawer a,
-    .drawer a:visited,
-    .drawer a:hover,
-    .drawer a:active {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    /* Submenu Items - Optimized */
-    .submenu {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.4s ease-out;
-      background-color: rgba(0, 0, 0, 0.02);
-    }
-
-    .submenu.open {
-      max-height: 600px;
-      border-bottom: 1.5px solid #ddd;
-    }
-
-    .submenu-item {
-      padding: 14px 25px 14px 60px;
-      color: var(--text-gray);
-      cursor: pointer;
-      transition: var(--transition);
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-weight: 400;
-      font-size: 1rem;
-      text-decoration: none;
-      min-height: 48px;
-    }
-
-    .submenu-item .icon {
-      font-size: 0.9rem;
-      color: var(--text-gray);
-      width: 20px;
-      text-align: center;
-    }
-
-    .submenu-item:hover,
-    .submenu-item:focus {
-      background-color: rgba(0, 0, 0, 0.05);
-      color: var(--primary-dark);
-      outline: none;
-    }
-
-    .submenu-item:hover .icon,
-    .submenu-item:focus .icon {
-      color: var(--primary-dark);
-    }
-
-    /* Overlay - Optimized */
-    .overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-      opacity: 0;
-      visibility: hidden;
-      transition: var(--transition);
-      z-index: 998;
-      will-change: opacity;
-    }
-
-    .overlay.show {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    /* Main Content - Optimized */
-    .main-content {
-      background-color: var(--bg-light);
-      padding: 20px 5%;
-      min-height: calc(100vh - 70px);
-    }
-
-    .page-title {
-      margin-bottom: 20px;
-      margin-top: 0px;
-      color: var(--text-dark);
-      font-size: 1.8rem;
-      font-weight: 500;
-    }
-
-    .update-notice {
-      color: #EB696B;
-      margin-bottom: 25px;
-      font-weight: 500;
-      font-size: 1.15rem;
-      line-height: 1.4;
-    }
-
-    /* Card Styles - Optimized */
-    .card {
-      background: var(--bg-white);
-      border: 1.5px double var(--primary-color);
-      border-radius: 0px;
-      padding: 25px;
-      margin-bottom: 20px;
-      width: 100%;
-    }
-
-    .card h2 {
-      color: var(--primary-dark);
-      margin-bottom: 20px;
-      font-size: 1.4rem;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .card p {
-      color: var(--text-gray);
-      margin-bottom: 10px;
-      line-height: 1.5;
-    }
-
-    .tab-btn {
-      background-color: #fcfcfc;
-      border: 2px solid var(--primary-color);
-      color: var(--primary-color);
-      padding: 10px 13px;
-      cursor: pointer;
-      margin: 0 5px;
-      font-size: 1rem;
-      transition: background-color 0.3s ease, color 0.3s ease, border 0.3s ease;
-    }
-
-    .tab-btn:hover {
-      background-color: var(--primary-color);
-      color: var(--bg-light);
-    }
-
-    .tab-btn.active {
-      background-color: var(--primary-color);
-      border-color: var(--primary-color);
-      color: var(--bg-light);
-    }
-
-    #teluguSongs,
-    #englishSongs {
-      text-align: center;
-    }
-
-    /* Grid Styles - Fully Optimized */
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-      max-width: 100%;
-      margin: 20px 0;
-    }
-
-    .box {
-      background-color: white;
-      border-radius: 0px;
-      border: 1.5px solid var(--primary-color);
-      padding: 12px 8px;
-      text-align: center;
-      font-size: 1.2rem;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      font-weight: 500;
-      min-height: 52px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .box:hover {
-      background-color: var(--primary-color);
-      color: white;
-      transform: translateY(-2px);
-    }
-
-    .box.active {
-      background-color: var(--primary-color);
-      color: white;
-      border-color: var(--primary-dark);
-    }
-
-    /* Songs List - Fully Optimized */
-    #songs {
-      max-width: 100%;
-      margin: 20px 0;
-      list-style-type: none;
-      padding: 0;
-      display: block;
-    }
-
-    #songs li {
-      background: none;
-      margin-bottom: 8px;
-      padding: 0;
-      list-style: none;
-    }
-
-    .song-link {
-      display: block;
-      width: 100%;
-      padding: 14px 12px;
-      text-decoration: none;
-      color: var(--text-dark);
-      font-weight: 500;
-      font-size: 1rem;
-      border: 1.5px solid #666;
-      border-left: 3px solid var(--primary-color);
-      border-right: 3px solid var(--primary-color);
-      background-color: #fff;
-      transition: var(--transition);
-      line-height: 1.4;
-      box-sizing: border-box;
-    }
-
-    .song-link:hover,
-    .song-link:focus {
-      background-color: rgba(0, 0, 0, 0.03);
-      border-left: 6px solid var(--primary-color);
-      border-right: 6px solid var(--primary-color);
-      color: #197afe;
-      outline: none;
-      transform: translateX(2px);
-    }
-
-    /* Scroll to Top Button - Optimized */
-    #scrollTopBtn {
-      position: fixed;
-      bottom: 25px;
-      right: 25px;
-      width: 48px;
-      height: 48px;
-      border-radius: 0px;
-      border: 2px solid var(--primary-color);
-      background: var(--bg-white);
-      color: var(--primary-color);
-      font-size: 1.5rem;
-      font-weight: bold;
-      cursor: pointer;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
-      transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s;
-      z-index: 9999;
-    }
-
-    #scrollTopBtn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
-      background: var(--primary-color);
-      color: var(--bg-white);
-    }
-
-    .visually-hidden {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
-      border: 0;
-    }
-
-    #ssl {
-      scroll-margin-top: 100px;
-    }
-
-    /* Mobile Optimizations - 480px and below */
-    @media (max-width: 480px) {
-      body {
-        padding-top: 65px;
-      }
-
-      .navbar {
-        padding: 10px 4%;
-        height: 65px;
-      }
-
-      .logo {
-        width: 36px;
-        height: 36px;
-      }
-
-      .title {
-        font-size: 1.1rem;
-        font-weight: 500;
-      }
-
-      .search-box {
-        margin: 1rem 4%;
-        position: relative;
-        max-width: calc(100% - 8%);
-      }
-
-      .go-to-too-search {
-        font-size: 0.95rem;
-        padding: 10px 36px 10px 12px;
-        min-height: 40px;
-      }
-
-      .clear-search {
-        right: 10px;
-        font-size: 1rem;
-      }
-
-      .go-to-too-search[contenteditable]:empty::before {
-        font-size: 0.95rem;
-      }
-
-      .drawer {
-        width: 85%;
-      }
-
-      .drawer-item {
-        padding: 14px 20px;
-      }
-
-      .submenu-item {
-        padding: 12px 20px 12px 50px;
-      }
-
-      .main-content {
-        padding: 16px 4%;
-      }
-
-      .page-title {
-        font-size: 1.5rem;
-        margin-bottom: 16px;
-        margin-top: 0px;
-      }
-
-      .update-notice {
-        font-size: 1.05rem;
-        margin-bottom: 20px;
-      }
-
-      .card {
-        padding: 18px;
-        margin-bottom: 16px;
-      }
-
-      .card h2 {
-        font-size: 1.25rem;
-        margin-bottom: 16px;
-      }
-
-      .grid {
-        grid-template-columns: repeat(4, 1fr);
-        gap: 8px;
-        margin: 16px 0;
-      }
-
-      .box {
-        font-size: 1.1rem;
-        padding: 10px 6px;
-        min-height: 48px;
-      }
-
-      #songs {
-        margin: 16px 0;
-      }
-
-      #songs li {
-        margin-bottom: 16px;
-      }
-
-      .song-link {
-        padding: 13px 10px;
-        font-size: 1rem;
-      }
-
-      #scrollTopBtn {
-        width: 44px;
-        height: 44px;
-        bottom: 70px;
-        right: 20px;
-        font-size: 2rem;
-      }
-    }
-
-    /* Tablet Optimizations - 481px to 768px */
-    @media (min-width: 481px) and (max-width: 768px) {
-      .navbar {
-        padding: 12px 5%;
-      }
-
-      .main-content {
-        padding: 20px 5%;
-      }
-
-      .page-title {
-        font-size: 1.65rem;
-      }
-
-      .card {
-        padding: 22px;
-      }
-
-      .grid {
-        grid-template-columns: repeat(5, 1fr);
-        gap: 10px;
-        max-width: 500px;
-        margin: 20px auto;
-      }
-
-      .box {
-        font-size: 1.25rem;
-        padding: 12px 8px;
-        min-height: 54px;
-      }
-
-      #songs {
-        max-width: 600px;
-        margin: 20px auto;
-      }
-
-      .song-link {
-        padding: 15px 12px;
-      }
-    }
-
-    /* Desktop Optimizations - 769px to 1023px */
-    @media (min-width: 769px) and (max-width: 1023px) {
-      body {
-        padding-top: 75px;
-      }
-
-      .navbar {
-        height: 75px;
-      }
-
-      .logo {
-        width: 38px;
-        height: 38px;
-      }
-
-      .title {
-        font-size: 1.15rem;
-      }
-
-      .drawer {
-        width: 380px;
-      }
-
-      .main-content {
-        max-width: 750px;
-        margin: 0 auto;
-        padding: 25px 5%;
-      }
-
-      .page-title {
-        font-size: 2rem;
-        margin-bottom: 20px;
-      }
-
-      .card {
-        padding: 28px;
-        margin-bottom: 25px;
-      }
-
-      .card h2 {
-        font-size: 1.5rem;
-      }
-
-      .grid {
-        grid-template-columns: repeat(6, 1fr);
-        gap: 8px;
-        max-width: 600px;
-        margin: 22px auto;
-      }
-
-      .box {
-        font-size: 1rem;
-        padding: 4;
-        min-height: 44px;
-      }
-
-      #songs {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
-        max-width: 700px;
-        margin: 22px auto;
-      }
-
-      #songs li {
-        margin-bottom: 0;
-      }
-
-      .song-link {
-        padding: 16px 13px;
-        font-size: 1rem;
-      }
-    }
-
-    /* Large Desktop Optimizations - 1024px and above */
-    @media (min-width: 1024px) {
-      body {
-        padding-top: 80px;
-      }
-
-      .navbar {
-        height: 80px;
-        padding: 12px 5%;
-      }
-
-      .logo {
-        width: 40px;
-        height: 40px;
-      }
-
-      .title {
-        font-size: 1.3rem;
-      }
-
-      .drawer {
-        width: 400px;
-      }
-
-      .main-content {
-        max-width: 1250px;
-        margin: 0 auto;
-        padding: 30px 5%;
-      }
-
-      .page-title {
-        max-width: 900px;
-        margin-left: auto;
-        margin-right: auto;
-        font-size: 2rem;
-        font-weight: 500;
-        margin-top: 0px;
-        letter-spacing: 0.5px;
-        margin-bottom: 25px;
-        color: var(--primary-dark);
-      }
-
-      h4 {
-        max-width: 800px;
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      .update-notice {
-        font-size: 1.25rem;
-        margin-bottom: 30px;
-      }
-
-      .card {
-        max-width: 1250px;
-        margin-left: auto;
-        margin-right: auto;
-        padding: 32px 35px;
-        border-radius: 0px;
-        border: 1.5px double var(--primary-color);
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-        margin-bottom: 30px;
-      }
-
-      .card:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
-      }
-
-      .card h2 {
-        font-size: 1.6rem;
-        margin-bottom: 24px;
-      }
-
-      .card p {
-        font-size: 1.02rem;
-      }
-
-      .grid {
-        grid-template-columns: repeat(8, 1fr);
-        gap: 10px;
-        font-size: 1rem;
-        max-width: 900px;
-      }
-
-      .box {
-        padding: 6px 6px;
-        cursor: pointer !important;
-        font-size: 1rem;
-        min-height: 44px;
-      }
-
-      #songs {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 16px;
-        max-width: 100%;
-        margin: 24px 0;
-      }
-
-      #songs li {
-        margin-bottom: 0;
-      }
-
-      .song-link {
-        display: block;
-        width: 100%;
-        padding: 17px 14px;
-        font-size: 1.02rem;
-        line-height: 1.35;
-      }
-
-      #scrollTopBtn {
-        width: 50px;
-        height: 50px;
-        bottom: 30px;
-        right: 30px;
-      }
-    }
-
-    .hidden {
-      display: none !important;
-    }
-
-    .hide-icon {
-      display: none !important;
-    }
-
-    .my_name {
-      background-color: white;
-      border: none;
-      cursor: pointer;
-      font-weight: 500;
-      font-size: 1rem;
-      color: #197afe;
-      border-bottom: 1px solid #197afe;
-    }
-
-    footer {
-      padding-top: 15px;
-      padding-bottom: 15px;
-      text-align: center;
-      color: black;
-      font-size: 1rem;
-      font-weight: 400;
-      border-top: 1px solid #ccc;
-      background-color: white;
-    }
-  </style>
-
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/vidhyardhi-geethavali/styles.css?v=1.0.0">
 </head>
 
 <body>
@@ -1179,7 +153,6 @@
     </div>
     <button id="clearSearch" class="clear-search" aria-label="Clear search">✕</button>
   </div>
-
 
   <div class="drawer" id="drawer" role="navigation" aria-label="Side menu">
     <div class="drawer-content">
@@ -1394,15 +367,13 @@
         <hr>
       </span>
       <ul id="songs">
-        <li><a href="/vidhyardhi-geethavali/tsongs/song1" class="song-link">అయ్యయో యేసయ్యా</a></li>
-        <li><a href="/vidhyardhi-geethavali/tsongs/song2" class="song-link">అనుగ్రహమే నా జీవితం</a></li>
       </ul>
       <div id="noSongsMessage" class="no-songs-message hidden">No songs matched your search.</div>
     </section>
 
     <h6 class="page-title" style="color: rgb(52, 42, 165); font-weight: 500; font-size: 1.1rem">
       This main
-      page is under update, We're adding songs gradually.. <br>We appriciate your intrest in Singing..</h6>
+      page is under update, We're adding songs gradually.. <br>We appriciate your interest in Singing..</h6>
 
   </main><br><br><br>
   <button id="scrollTopBtn" title="Go to top">
@@ -1412,789 +383,621 @@
       onclick="window.location.href='https://melamrahul.github.io/'">M.Rahul</button>
   </footer>
   <script>
-    document.getElementById("current-yr").textContent = new Date().getFullYear();
-    const menuBtn = document.getElementById('menuBtn');
-    const drawer = document.getElementById('drawer');
-    const overlay = document.getElementById('overlay');
+    // ═══════════════════════════════════════════════════════════════════
+    // CONFIG
+    // ═══════════════════════════════════════════════════════════════════
+    const BASE = '/vidhyardhi-geethavali/data';
+    const CHUNK_SIZE = 50;
+    const CACHE_VER = 'vg-v1';
+    
+    const teluguLetters = [
+      "అ", "ఆ", "ఇ", "ఈ", "ఉ", "ఊ", "ఋ", "ఎ", "ఏ", "ఐ", "ఒ", "ఓ", "ఔ",
+      "క", "ఖ", "గ", "ఘ", "ఙ", "చ", "ఛ", "జ", "ఝ", "ఞ", "ట", "ఠ", "డ", "ఢ", "ణ",
+      "త", "థ", "ద", "ధ", "న", "ప", "ఫ", "బ", "భ", "మ", "య", "ర", "ల", "వ", "శ", "ష", "స", "హ"
+    ];
+    const englishLetters = Array.from({ length: 26 }, (_, i) => String.fromCharCode(65 + i));
 
-    function toggleMenu() {
-      const menu = document.getElementById("customMenu");
-      const overlay = document.getElementById("menuOverlay");
-      const closeBtn = document.getElementById("cls-btn");
+    // ═══════════════════════════════════════════════════════════════════
+    // DOM REFS
+    // ═══════════════════════════════════════════════════════════════════
+    const letterDiv = document.getElementById('letters');
+    const songList = document.getElementById('songs');
+    const titleEl = document.getElementById('title');
+    const ssl = document.getElementById('ssl');
+    const selLis = document.getElementById('sel-lis');
+    const noSongsMessage = document.getElementById('noSongsMessage');
 
-      const isVisible = menu.style.display === "block";
+    // ═══════════════════════════════════════════════════════════════════
+    // STATE
+    // ═══════════════════════════════════════════════════════════════════
+    const songIndex = { telugu: {}, english: {}, hindi: [] };
+    const fetched = { telugu: new Set(), english: new Set(), hindi: new Set() };
+    const knownChunks = { telugu: null, english: null, hindi: null };
+    const langInited = { telugu: false, english: false, hindi: false };
 
-      menu.style.display = isVisible ? "none" : "block";
-      overlay.style.display = isVisible ? "none" : "block";
-      closeBtn.style.display = isVisible ? "none" : "block";
+    // In-flight fetch promises — prevents duplicate concurrent fetches for same chunk
+    const inFlight = { telugu: {}, english: {}, hindi: {} };
+
+    const LANG_FOLDER = { telugu: 'tsongs', english: 'esongs', hindi: 'hsongs' };
+
+    let currentLanguage = 'telugu';
+    let currentQuery = '';
+
+    // ═══════════════════════════════════════════════════════════════════
+    // SPINNER CSS
+    // ═══════════════════════════════════════════════════════════════════
+    (function injectSpinCSS() {
+      if (document.getElementById('vg-spin-css')) return;
+      const s = document.createElement('style');
+      s.id = 'vg-spin-css';
+      s.textContent = '@keyframes vg-spin{to{transform:rotate(360deg)}}';
+      document.head.appendChild(s);
+    })();
+
+    function showSongListLoader(label) {
+      if (label) titleEl.textContent = `"${label}"`;
+      songList.innerHTML = `
+  <li style="list-style:none;display:flex;align-items:center;gap:10px;
+             padding:.9rem 0;color:var(--text-color,#555)">
+    <div style="width:20px;height:20px;border:3px solid rgba(0,0,0,.12);
+                border-top-color:var(--primary-color,#128C7E);border-radius:50%;
+                flex-shrink:0;animation:vg-spin .7s linear infinite"></div>
+    <span style="font-size:13px;font-weight:500">Loading songs…</span>
+  </li>`;
     }
 
-    const scrollBtn = document.getElementById("scrollTopBtn");
+    // ═══════════════════════════════════════════════════════════════════
+    // SESSION-STORAGE CACHE
+    // ═══════════════════════════════════════════════════════════════════
+    function ck(url) { return CACHE_VER + '|' + url; }
+    function ckChunks(lang) { return CACHE_VER + '|chunks|' + lang; }
 
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > 300) {
-        scrollBtn.style.display = "flex";
-      } else {
-        scrollBtn.style.display = "none";
+    function cacheGet(url) {
+      try { const v = sessionStorage.getItem(ck(url)); return v ? JSON.parse(v) : null; }
+      catch (e) { return null; }
+    }
+    function cacheSet(url, data) {
+      try { sessionStorage.setItem(ck(url), JSON.stringify(data)); }
+      catch (e) { purgeStaleCacheEntries(); try { sessionStorage.setItem(ck(url), JSON.stringify(data)); } catch (e2) { } }
+    }
+    function purgeStaleCacheEntries() {
+      const prefix = CACHE_VER + '|';
+      const drop = [];
+      for (let i = 0; i < sessionStorage.length; i++) {
+        const k = sessionStorage.key(i);
+        if (k && !k.startsWith(prefix)) drop.push(k);
       }
-    });
+      drop.forEach(k => sessionStorage.removeItem(k));
+    }
 
-    scrollBtn.addEventListener("click", () => {
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
+    // ═══════════════════════════════════════════════════════════════════
+    // CHUNK DISCOVERY
+    // ═══════════════════════════════════════════════════════════════════
+    const MAX_PROBE = 20;
+    const BATCH = 5;
+
+    async function discoverChunks(lang) {
+      if (knownChunks[lang]) return knownChunks[lang];
+      try {
+        const cached = sessionStorage.getItem(ckChunks(lang));
+        if (cached) { knownChunks[lang] = JSON.parse(cached); return knownChunks[lang]; }
+      } catch (e) { }
+
+      const folder = LANG_FOLDER[lang];
+
+      // Manifest fast-path
+      try {
+        const mres = await fetch(`${BASE}/${folder}/manifest.json`, { cache: 'no-store' });
+        if (mres.ok) {
+          const md = await mres.json();
+          if (Array.isArray(md.chunks) && md.chunks.length) {
+            knownChunks[lang] = md.chunks;
+            try { sessionStorage.setItem(ckChunks(lang), JSON.stringify(md.chunks)); } catch (e) { }
+            return knownChunks[lang];
+          }
+        }
+      } catch (e) { }
+
+      // Auto-probe fallback
+      const url = n => `${BASE}/${folder}/${n}/list.json`;
+      const ceil = (start, count) => Array.from({ length: count }, (_, i) => (start + i + 1) * CHUNK_SIZE);
+      const probe = async n => { try { const r = await fetch(url(n), { method: 'HEAD' }); return r.ok ? n : null; } catch (e) { return null; } };
+
+      let found = (await Promise.all(ceil(0, MAX_PROBE).map(probe))).filter(Boolean);
+      if (found.length === MAX_PROBE) {
+        let next = MAX_PROBE;
+        while (true) {
+          const hits = (await Promise.all(ceil(next, BATCH).map(probe))).filter(Boolean);
+          found = found.concat(hits);
+          if (hits.length < BATCH) break;
+          next += BATCH;
+        }
+      }
+      found.sort((a, b) => a - b);
+      knownChunks[lang] = found;
+      try { sessionStorage.setItem(ckChunks(lang), JSON.stringify(found)); } catch (e) { }
+      return found;
+    }
+
+    // ═══════════════════════════════════════════════════════════════════
+    // FETCH ONE CHUNK — deduplicates concurrent calls for same chunk
+    // ═══════════════════════════════════════════════════════════════════
+    async function fetchChunk(lang, ceiling) {
+      // Return from session cache if available
+      const folder = LANG_FOLDER[lang];
+      const url = `${BASE}/${folder}/${ceiling}/list.json`;
+      const hit = cacheGet(url);
+      if (hit) return hit;
+
+      // Already fetching this chunk? Return the same promise
+      if (inFlight[lang][ceiling]) return inFlight[lang][ceiling];
+
+      inFlight[lang][ceiling] = (async () => {
+        try {
+          const res = await fetch(url);
+          if (!res.ok) return {};
+          const data = await res.json();
+          cacheSet(url, data);
+          return data;
+        } finally {
+          delete inFlight[lang][ceiling];
+        }
+      })();
+
+      return inFlight[lang][ceiling];
+    }
+
+    // ═══════════════════════════════════════════════════════════════════
+    // INDEX INGESTION
+    // ═══════════════════════════════════════════════════════════════════
+    function numOf(id) { return parseInt((id || '').replace('song', ''), 10) || 0; }
+
+    function ingestTelugu(raw) {
+      teluguLetters.forEach(l => { if (!songIndex.telugu[l]) songIndex.telugu[l] = []; });
+      Object.entries(raw).forEach(([num, song]) => {
+        if (!song.title) return;
+        const letter = teluguLetters.find(l => l === song.title.charAt(0));
+        if (!letter) return;
+        const id = `song${num}`;
+        if (!songIndex.telugu[letter].find(s => s.id === id))
+          songIndex.telugu[letter].push({ id, name: `${song.title} (${num})` });
       });
-    });
+      teluguLetters.forEach(l => songIndex.telugu[l].sort((a, b) => numOf(a.id) - numOf(b.id)));
+    }
 
-    // Search Functionality
+    function ingestEnglish(raw) {
+      englishLetters.forEach(l => { if (!songIndex.english[l]) songIndex.english[l] = []; });
+      Object.entries(raw).forEach(([num, song]) => {
+        if (!song.title) return;
+        const letter = song.title.charAt(0).toUpperCase();
+        if (!songIndex.english[letter]) return;
+        const id = `song${num}`;
+        if (!songIndex.english[letter].find(s => s.id === id))
+          songIndex.english[letter].push({ id, name: `${song.title} (${num})` });
+      });
+      englishLetters.forEach(l => songIndex.english[l].sort((a, b) => numOf(a.id) - numOf(b.id)));
+    }
 
+    function ingestHindi(raw) {
+      Object.entries(raw).forEach(([num, song]) => {
+        if (!song.title) return;
+        const id = `song${num}`;
+        if (!songIndex.hindi.find(s => s.id === id))
+          songIndex.hindi.push({ id, name: `${song.title} (${num})` });
+      });
+      songIndex.hindi.sort((a, b) => numOf(a.id) - numOf(b.id));
+    }
+
+    // ═══════════════════════════════════════════════════════════════════
+    // FETCH CHUNK FOR LETTER — only fetches chunks not yet fetched,
+    // stops as soon as the letter has at least one song
+    // ═══════════════════════════════════════════════════════════════════
+    async function ensureLetterHasSongs(lang, letter) {
+      const idx = lang === 'telugu' ? songIndex.telugu : songIndex.english;
+      const ingest = lang === 'telugu' ? ingestTelugu : ingestEnglish;
+      const chunks = knownChunks[lang] || [];
+
+      for (const ceiling of chunks) {
+        // Stop early if letter already has songs
+        if ((idx[letter] || []).length > 0) break;
+        // Skip already-fetched chunks
+        if (fetched[lang].has(ceiling)) continue;
+
+        const raw = await fetchChunk(lang, ceiling);
+        ingest(raw);
+        fetched[lang].add(ceiling);
+      }
+    }
+
+    // ═══════════════════════════════════════════════════════════════════
+    // INIT PER LANGUAGE
+    // ═══════════════════════════════════════════════════════════════════
+    async function initTelugu() {
+      if (langInited.telugu) return;
+      langInited.telugu = true;
+
+      renderLetterBoxes(teluguLetters, 'telugu');
+      showSongListLoader(teluguLetters[0]);
+
+      // Only fetch first chunk on init
+      const chunks = await discoverChunks('telugu');
+      if (chunks.length) {
+        const raw = await fetchChunk('telugu', chunks[0]);
+        ingestTelugu(raw);
+        fetched.telugu.add(chunks[0]);
+      }
+
+      titleEl.textContent = `"${teluguLetters[0]}"`;
+      renderSongItems(songIndex.telugu[teluguLetters[0]] || [], 'telugu');
+      // No background preloading — remaining chunks fetched on demand
+    }
+
+    async function initEnglish() {
+      if (langInited.english) return;
+      langInited.english = true;
+
+      renderLetterBoxes(englishLetters, 'english');
+      showSongListLoader(englishLetters[0]);
+
+      const chunks = await discoverChunks('english');
+      if (chunks.length) {
+        const raw = await fetchChunk('english', chunks[0]);
+        ingestEnglish(raw);
+        fetched.english.add(chunks[0]);
+      }
+
+      titleEl.textContent = `"${englishLetters[0]}"`;
+      renderSongItems(songIndex.english[englishLetters[0]] || [], 'english');
+    }
+
+    async function initHindi() {
+      if (langInited.hindi) return;
+      langInited.hindi = true;
+
+      titleEl.textContent = '"Hindi"';
+      showSongListLoader();
+
+      // Hindi has no letter index so we must load all chunks
+      const chunks = await discoverChunks('hindi');
+      for (const ceiling of chunks) {
+        if (fetched.hindi.has(ceiling)) continue;
+        const raw = await fetchChunk('hindi', ceiling);
+        ingestHindi(raw);
+        fetched.hindi.add(ceiling);
+      }
+      renderSongItems(songIndex.hindi, 'hindi');
+    }
+
+    // ═══════════════════════════════════════════════════════════════════
+    // RENDER HELPERS
+    // ═══════════════════════════════════════════════════════════════════
+    function renderLetterBoxes(letters, lang) {
+      letterDiv.innerHTML = '';
+      songList.innerHTML = '';
+      titleEl.textContent = '';
+      selLis.textContent = lang.charAt(0).toUpperCase() + lang.slice(1);
+
+      letters.forEach((letter, index) => {
+        const box = document.createElement('div');
+        box.className = 'box' + (index === 0 ? ' active' : '');
+        box.textContent = letter;
+
+        box.onclick = async () => {
+          document.querySelectorAll('.box').forEach(b => b.classList.remove('active'));
+          box.classList.add('active');
+
+          const idx = lang === 'telugu' ? songIndex.telugu : songIndex.english;
+
+          // Only fetch if this letter has no songs yet
+          if (!(idx[letter] || []).length) {
+            showSongListLoader(letter);
+            await ensureLetterHasSongs(lang, letter);
+          }
+
+          titleEl.textContent = `"${letter}"`;
+          renderSongItems(idx[letter] || [], lang);
+          if (currentQuery) filterSongs(currentQuery);
+          scrollToSongs();
+        };
+
+        letterDiv.appendChild(box);
+      });
+    }
+
+    function renderSongItems(songs, lang) {
+      songList.innerHTML = '';
+      noSongsMessage.classList.add('hidden');
+      if (!songs || !songs.length) {
+        const li = document.createElement('li');
+        li.textContent = 'No songs found';
+        songList.appendChild(li);
+        return;
+      }
+      const tp = lang === 'telugu' ? 'tsongs' : lang === 'english' ? 'esongs' : 'hsongs';
+      songs.forEach(song => {
+        const sn = song.id.replace('song', '');
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        a.textContent = song.name;
+        a.href = `/vidhyardhi-geethavali/song/?tp=${tp}&sn=${sn}`;
+        a.className = 'song-link';
+        li.appendChild(a);
+        songList.appendChild(li);
+      });
+    }
+
+    function renderSearchSongs(lang) {
+      let all = [];
+      if (lang === 'telugu') all = Object.values(songIndex.telugu).flat();
+      else if (lang === 'english') all = Object.values(songIndex.english).flat();
+      else all = songIndex.hindi;
+      renderSongItems(all, lang);
+    }
+
+    // ═══════════════════════════════════════════════════════════════════
+    // FILTER
+    // ═══════════════════════════════════════════════════════════════════
+    function filterSongs(query) {
+      const links = document.querySelectorAll('#songs .song-link');
+      let count = 0;
+      links.forEach(link => {
+        const li = link.closest('li') || link.parentElement;
+        const show = link.innerText.toLowerCase().includes(query);
+        li.style.display = show ? '' : 'none';
+        if (show) count++;
+      });
+      noSongsMessage.classList.toggle('hidden', !(count === 0 && query.length > 0));
+    }
+
+    // ═══════════════════════════════════════════════════════════════════
+    // LANGUAGE SWITCH
+    // ═══════════════════════════════════════════════════════════════════
+    async function switchLanguage(lang, event) {
+      currentLanguage = lang;
+      selLis.textContent = lang.charAt(0).toUpperCase() + lang.slice(1);
+
+      if (lang === 'telugu') {
+        history.replaceState(null, '', location.pathname);
+        letterDiv.classList.remove('hidden');
+        ssl.style.display = 'block';
+        if (!langInited.telugu) {
+          await initTelugu();
+        } else {
+          renderLetterBoxes(teluguLetters, 'telugu');
+          titleEl.textContent = `"${teluguLetters[0]}"`;
+          renderSongItems(songIndex.telugu[teluguLetters[0]] || [], 'telugu');
+        }
+      } else if (lang === 'english') {
+        history.replaceState(null, '', '#English');
+        letterDiv.classList.remove('hidden');
+        ssl.style.display = 'block';
+        if (!langInited.english) {
+          await initEnglish();
+        } else {
+          renderLetterBoxes(englishLetters, 'english');
+          titleEl.textContent = `"${englishLetters[0]}"`;
+          renderSongItems(songIndex.english[englishLetters[0]] || [], 'english');
+        }
+      } else if (lang === 'hindi') {
+        history.replaceState(null, '', '#Hindi');
+        letterDiv.innerHTML = '';
+        letterDiv.classList.add('hidden');
+        ssl.style.display = 'block';
+        if (!langInited.hindi) {
+          await initHindi();
+        } else {
+          titleEl.textContent = '"Hindi"';
+          renderSongItems(songIndex.hindi, 'hindi');
+        }
+        if (currentQuery) filterSongs(currentQuery);
+      }
+
+      if (event && event.target) {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        event.target.classList.add('active');
+      }
+    }
+
+    // ═══════════════════════════════════════════════════════════════════
+    // SEARCH
+    // ═══════════════════════════════════════════════════════════════════
     const searchToggle = document.getElementById('searchToggle');
     const searchBox = document.getElementById('searchBox');
     const searchInput = document.getElementById('songSearchInput');
     const clearSearch = document.getElementById('clearSearch');
     const searchIcon = document.getElementById('searchIcon');
     const closeIcon = document.getElementById('closeIcon');
-    const noSongsMessage = document.getElementById('noSongsMessage');
 
-    let currentQuery = '';
-    let currentLanguage = 'telugu';
-
-    /* ---------- SEARCH TOGGLE ---------- */
-    searchToggle.addEventListener('click', () => {
+    searchToggle.addEventListener('click', async () => {
       const isHidden = searchBox.classList.contains('hidden');
-
       if (isHidden) {
-        // Show search box
         searchBox.classList.remove('hidden');
         searchInput.focus();
-
         document.querySelector('#all-songs').style.display = 'none';
         document.querySelector('#songs-grid').style.display = 'none';
-
         searchIcon.classList.add('hide-icon');
         closeIcon.classList.remove('hide-icon');
-
         searchInput.innerText = '';
         currentQuery = '';
 
-        // Show ALL songs for current language
+        // For search we need ALL chunks loaded — fetch any missing ones now
+        await ensureAllChunksLoaded(currentLanguage);
+
         renderSearchSongs(currentLanguage);
         filterSongs('');
-
       } else {
-        // Hide search box
         searchBox.classList.add('hidden');
         searchInput.innerText = '';
         currentQuery = '';
-
         document.querySelector('#all-songs').style.display = 'block';
         document.querySelector('#songs-grid').style.display = 'block';
-
         searchIcon.classList.remove('hide-icon');
         closeIcon.classList.add('hide-icon');
-
-        // Restore normal letter-based view
-        if (currentLanguage === "telugu") {
-          renderLetters(teluguLetters, "telugu");
-        } else if (currentLanguage === "english") {
-          renderLetters(englishLetters, "english");
+        if (currentLanguage === 'telugu') {
+          renderLetterBoxes(teluguLetters, 'telugu');
+          titleEl.textContent = `"${teluguLetters[0]}"`;
+          renderSongItems(songIndex.telugu[teluguLetters[0]] || [], 'telugu');
+        } else if (currentLanguage === 'english') {
+          renderLetterBoxes(englishLetters, 'english');
+          titleEl.textContent = `"${englishLetters[0]}"`;
+          renderSongItems(songIndex.english[englishLetters[0]] || [], 'english');
         } else {
-          switchLanguage("hindi");
+          titleEl.textContent = '"Hindi"';
+          renderSongItems(songIndex.hindi, 'hindi');
         }
       }
     });
 
-    /* ---------- LIVE SEARCH ---------- */
+    // Loads ALL remaining chunks for a language (used by search)
+    async function ensureAllChunksLoaded(lang) {
+      const chunks = knownChunks[lang] || await discoverChunks(lang);
+      const ingest = lang === 'telugu' ? ingestTelugu
+        : lang === 'english' ? ingestEnglish
+          : ingestHindi;
+      for (const ceiling of chunks) {
+        if (fetched[lang].has(ceiling)) continue;
+        showSongListLoader();   // keep spinner visible while loading
+        const raw = await fetchChunk(lang, ceiling);
+        ingest(raw);
+        fetched[lang].add(ceiling);
+      }
+    }
+
     searchInput.addEventListener('input', () => {
       currentQuery = searchInput.innerText.toLowerCase().trim();
-      updatePlaceholder();
+      clearSearch.style.display = currentQuery ? 'block' : 'none';
       filterSongs(currentQuery);
     });
 
-    /* ---------- CLEAR SEARCH ---------- */
     clearSearch.addEventListener('click', () => {
       searchInput.innerText = '';
       currentQuery = '';
-      updatePlaceholder();
+      clearSearch.style.display = 'none';
       filterSongs('');
       searchInput.focus();
     });
 
-    /* ---------- PLACEHOLDER ---------- */
-    function updatePlaceholder() {
-      const hasText = searchInput.innerText.trim().length > 0;
-      clearSearch.style.display = hasText ? 'block' : 'none';
+    // ═══════════════════════════════════════════════════════════════════
+    // SCROLL
+    // ═══════════════════════════════════════════════════════════════════
+    function scrollToSongs() {
+      const offset = window.innerWidth <= 768 ? 85 : 100;
+      window.scrollTo({ top: ssl.getBoundingClientRect().top + window.scrollY - offset, behavior: 'smooth' });
     }
 
-    /* ---------- FILTER SONGS ---------- */
-    function filterSongs(query) {
-      const links = document.querySelectorAll('#songs .song-link');
-      let matchCount = 0;
-
-      links.forEach(link => {
-        const text = link.innerText.toLowerCase();
-        const li = link.closest('li') || link.parentElement;
-
-        const match = text.includes(query);
-        li.style.display = match ? '' : 'none';
-
-        if (match) matchCount++;
-      });
-
-      if (matchCount === 0 && query.length > 0) {
-        noSongsMessage.classList.remove('hidden');
-      } else {
-        noSongsMessage.classList.add('hidden');
-      }
-    }
-
-    /* ---------- TABS (IMPORTANT) ---------- */
-    function showSongs(language, event) {
-      const telugu = document.getElementById("teluguSongs");
-      const english = document.getElementById("englishSongs");
-
-      if (language === 'telugu') {
-        telugu.classList.remove("hidden");
-        english.classList.add("hidden");
-      } else {
-        telugu.classList.add("hidden");
-        english.classList.remove("hidden");
-      }
-
-      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-      event.target.classList.add('active');
-
-      filterSongs(currentQuery);
-    }
-
-    /* ---------- INIT ---------- */
-    document.addEventListener('DOMContentLoaded', () => {
-      updatePlaceholder();
-      filterSongs(currentQuery);
+    const scrollBtn = document.getElementById('scrollTopBtn');
+    window.addEventListener('scroll', () => {
+      scrollBtn.style.display = window.scrollY > 300 ? 'flex' : 'none';
     });
+    scrollBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-
-    // Close menu when clicking outside
-    document.addEventListener("click", function (event) {
-      const menu = document.getElementById("customMenu");
-      const button = document.querySelector(".menu-button");
-      if (!button.contains(event.target) && !menu.contains(event.target)) {
-        menu.style.display = "none";
-      }
-    });
-
-    // Get all items with submenus
+    // ═══════════════════════════════════════════════════════════════════
+    // DRAWER
+    // ═══════════════════════════════════════════════════════════════════
+    const menuBtn = document.getElementById('menuBtn');
+    const drawer = document.getElementById('drawer');
+    const overlay = document.getElementById('overlay');
     const submenuItems = document.querySelectorAll('.drawer-item.has-submenu');
 
-    // Toggle drawer
     const toggleDrawer = () => {
       const isOpen = drawer.classList.toggle('open');
       overlay.classList.toggle('show');
       menuBtn.setAttribute('aria-expanded', isOpen);
-
-      const icon = menuBtn.querySelector('.menu-toggle');
-      icon.classList.toggle('open', isOpen);
+      menuBtn.querySelector('.menu-toggle').classList.toggle('open', isOpen);
     };
-
-
     menuBtn.addEventListener('click', toggleDrawer);
 
-    // Close drawer when clicking overlay
     overlay.addEventListener('click', () => {
       drawer.classList.remove('open');
       overlay.classList.remove('show');
       menuBtn.setAttribute('aria-expanded', 'false');
       menuBtn.querySelector('.menu-toggle').classList.remove('open');
-
-      submenuItems.forEach(item => {
-        item.classList.remove('open');
-        const submenu = item.nextElementSibling;
-        submenu.classList.remove('open');
-      });
+      submenuItems.forEach(i => { i.classList.remove('open'); i.nextElementSibling?.classList.remove('open'); });
     });
 
-
-    // Close drawer and submenus when any submenu item is clicked
-    const submenuLinks = document.querySelectorAll('.submenu-item');
-
-    submenuLinks.forEach(link => {
+    document.querySelectorAll('.submenu-item').forEach(link => {
       link.addEventListener('click', () => {
         drawer.classList.remove('open');
         overlay.classList.remove('show');
         menuBtn.setAttribute('aria-expanded', 'false');
         menuBtn.querySelector('.menu-toggle').classList.remove('open');
-
-        submenuItems.forEach(item => item.classList.remove('open'));
-        document.querySelectorAll('.submenu').forEach(submenu => submenu.classList.remove('open'));
+        submenuItems.forEach(i => i.classList.remove('open'));
+        document.querySelectorAll('.submenu').forEach(s => s.classList.remove('open'));
       });
     });
 
-
-
-
-    // Handle submenu toggle
     submenuItems.forEach(item => {
-      item.addEventListener('click', (e) => {
+      item.addEventListener('click', e => {
         e.stopPropagation();
-
-        // Close all other submenus
-        submenuItems.forEach(otherItem => {
-          if (otherItem !== item) {
-            otherItem.classList.remove('open');
-            const otherSubmenu = otherItem.nextElementSibling;
-            if (otherSubmenu) otherSubmenu.classList.remove('open');
-          }
+        submenuItems.forEach(o => {
+          if (o !== item) { o.classList.remove('open'); o.nextElementSibling?.classList.remove('open'); }
         });
-
-        // Toggle clicked submenu
         item.classList.toggle('open');
-        const submenu = item.nextElementSibling;
-        if (submenu) submenu.classList.toggle('open');
+        item.nextElementSibling?.classList.toggle('open');
       });
-
-
-      // Keyboard accessibility
-      item.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          item.click();
-        }
+      item.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); item.click(); }
       });
     });
 
-    // Close drawer when pressing Escape
-    document.addEventListener('keydown', (e) => {
+    document.addEventListener('keydown', e => {
       if (e.key === 'Escape' && drawer.classList.contains('open')) {
-        drawer.classList.remove('open');
-        overlay.classList.remove('show');
+        drawer.classList.remove('open'); overlay.classList.remove('show');
         menuBtn.setAttribute('aria-expanded', 'false');
         menuBtn.querySelector('.menu-toggle').classList.remove('open');
       }
-
-      if (e.ctrlKey && e.key === 'm') {
-        e.preventDefault();
-        toggleDrawer();
-      }
+      if (e.ctrlKey && e.key === 'm') { e.preventDefault(); toggleDrawer(); }
     });
 
-
-    // Improve touch experience on mobile
-    let startX = 0;
-    let currentX = 0;
-
-    drawer.addEventListener('touchstart', (e) => {
-      startX = e.touches[0].clientX;
-      currentX = startX;
-    }, { passive: true });
-
-    drawer.addEventListener('touchmove', (e) => {
-      currentX = e.touches[0].clientX;
-    }, { passive: true });
-
+    let startX = 0, currentX = 0;
+    drawer.addEventListener('touchstart', e => { startX = currentX = e.touches[0].clientX; }, { passive: true });
+    drawer.addEventListener('touchmove', e => { currentX = e.touches[0].clientX; }, { passive: true });
     drawer.addEventListener('touchend', () => {
       if (startX - currentX > 50) {
-        drawer.classList.remove('open');
-        overlay.classList.remove('show');
+        drawer.classList.remove('open'); overlay.classList.remove('show');
         menuBtn.setAttribute('aria-expanded', 'false');
-        menuBtn.querySelector('i').className = 'fas fa-bars';
       }
     }, { passive: true });
 
-    // Telugu letters from "అ" to "హ"
-    const teluguLetters = [
-      "అ", "ఆ", "ఇ", "ఈ", "ఉ", "ఊ",
-      "ఋ", "ఎ", "ఏ", "ఐ", "ఒ", "ఓ",
-      "ఔ", "క", "ఖ", "గ", "ఘ", "ఙ",
-      "చ", "ఛ", "జ", "ఝ", "ఞ", "ట",
-      "ఠ", "డ", "ఢ", "ణ", "త", "థ",
-      "ద", "ధ", "న", "ప", "ఫ", "బ",
-      "భ", "మ", "య", "ర", "ల", "వ",
-      "శ", "ష", "స", "హ"
-    ];
-
-    const englishLetters = Array.from({ length: 26 }, (_, i) => String.fromCharCode(65 + i)); // A-Z
-
-    const teluguSongs = {
-      "అ": [
-        { id: "song1", name: "అంజూరపు చెట్లు (1)" },
-        { id: "song2", name: "అంతా నూతనమే (2)" },
-        { id: "song3", name: "అందరి ప్రభువు ఆ యేసే (3)" },
-        { id: "song4", name: "అందాల ఆశాకిరణం (4)" },
-        { id: "song5", name: "అదిగో బహుమానము (5)" },
-        { id: "song6", name: "అద్వితీయ సత్యదేవుడు (6)" },
-        { id: "song7", name: "అనుదినం నిను ధ్యానయింతును (7)" },
-        { id: "song8", name: "అపవిత్రతకు దూరముగా మీరు (8)" },
-        { id: "song9", name: "అపవిత్రతను దూరపరచుము (9)" },
-        { id: "song10", name: "అర్పింతు దేవ - ప్రాణాత్మ దేహం (10)" }
-      ],
-      "ఆ": [
-        { id: "song", name: "" }
-      ],
-      "ఇ": [
-        { id: "song4", name: "" }
-      ],
-      "ఈ": [
-        { id: "song4", name: "" }
-      ],
-      "ఉ": [
-        { id: "song4", name: "" }
-      ],
-      "ఊ": [
-        { id: "song4", name: "" }
-      ],
-      "ఎ": [
-        { id: "song4", name: "" }
-      ],
-      "ఏ": [
-        { id: "song4", name: "" }
-      ],
-      "ఒ": [
-        { id: "song4", name: "" }
-      ],
-      "ఓ": [
-        { id: "song4", name: "" }
-      ],
-      "క": [
-        { id: "song4", name: "" }
-      ],
-      "గ": [
-        { id: "song4", name: "" }
-      ],
-      "ఘ": [
-        { id: "song4", name: "" }
-      ],
-      "చ": [
-        { id: "song4", name: "" }
-      ],
-      "జ": [
-        { id: "song4", name: "" }
-      ],
-      "త": [
-        { id: "song4", name: "" }
-      ],
-      "త": [
-        { id: "song4", name: "" }
-      ],
-      "త": [
-        { id: "song4", name: "" }
-      ],
-      "త": [
-        { id: "song4", name: "" }
-      ],
-      "త": [
-        { id: "song4", name: "" }
-      ],
-      "త": [
-        { id: "song4", name: "" }
-      ],
-      "త": [
-        { id: "song4", name: "" }
-      ],
-      "త": [
-        { id: "song4", name: "" }
-      ],
-      "త": [
-        { id: "song4", name: "" }
-      ],
-      "త": [
-        { id: "song4", name: "" }
-      ],
-      "త": [
-        { id: "song4", name: "" }
-      ],
-      "త": [
-        { id: "song4", name: "" }
-      ],
-      "త": [
-        { id: "song4", name: "" }
-      ],
-      "త": [
-        { id: "song4", name: "" }
-      ],
-      "త": [
-        { id: "song4", name: "" }
-      ],
-      "త": [
-        { id: "song4", name: "" }
-      ],
-      "త": [
-        { id: "song4", name: "" }
-      ],
-      "త": [
-        { id: "song4", name: "" }
-      ],
-      "త": [
-        { id: "song4", name: "" }
-      ],
-
-
-    };
-
-    const englishSongs = {
-      "A": [
-        { id: "song1", name: "" },
-        { id: "song2", name: "" }
-      ],
-      "J": [
-        { id: "song3", name: "" }
-      ],
-      "G": [
-        { id: "song4", name: "" }
-      ]
-    };
-
-    const hindiSongs = [
-      { id: "song16", name: "Sam sabka hai thuni" },
-      { id: "song38", name: "Shor dhuni yah mein" }
-    ];
-
-
-    const letterDiv = document.getElementById("letters");
-    const songList = document.getElementById("songs");
-    const title = document.getElementById("title");
-    const ssl = document.getElementById("ssl");
-    const selLis = document.getElementById("sel-lis");
-    selLis.textContent = "Telugu";
-    renderLetters(teluguLetters, "telugu", false);
-
-    function slugify(text) {
-      return text
-        .toLowerCase()
-        .replace(/[^a-zA-Z0-9\u0C00-\u0C7F\u0900-\u097F]+/g, '-')
-        .replace(/^-+|-+$/g, '');
-    }
-
-    function renderSearchSongs(lang) {
-      songList.innerHTML = "";
-      title.textContent = `"All ${lang.charAt(0).toUpperCase() + lang.slice(1)} Songs"`;
-
-      const allSongs = getAllSongsByLanguage(lang);
-
-      if (allSongs.length === 0) {
-        const li = document.createElement("li");
-        li.textContent = "No songs available";
-        songList.appendChild(li);
-        return;
-      }
-
-      allSongs.forEach(song => {
-        const li = document.createElement("li");
-        const a = document.createElement("a");
-
-        a.textContent = song.name;
-        a.className = "song-link";
-
-        if (lang === "telugu") {
-          a.href = `/vidhyardhi-geethavali/tsongs/${song.id}`;
-        } else if (lang === "english") {
-          a.href = `/vidhyardhi-geethavali/esongs/${song.id}`;
-        } else {
-          a.href = `/vidhyardhi-geethavali/hsongs/${song.id}`;
-        }
-
-        li.appendChild(a);
-        songList.appendChild(li);
-      });
-    }
-
-    function showSongsTab(letter, lang) {
-      title.textContent = `"${letter}"`;
-      songList.innerHTML = "";
-
-      const list = (lang === "telugu" ? teluguSongs : englishSongs)[letter] || [];
-
-      if (list.length === 0) {
-        const li = document.createElement("li");
-        li.textContent = "No songs found";
-        songList.appendChild(li);
-      } else {
-        list.forEach(song => {
-          const li = document.createElement("li");
-          const a = document.createElement("a");
-          a.textContent = song.name;
-          a.href = `/vidhyardhi-geethavali/${lang === "telugu" ? "tsongs" : "esongs"}/${song.id}`;
-          a.className = "song-link";
-          li.appendChild(a);
-          songList.appendChild(li);
-        });
-      }
-    }
-
-    function renderLetters(letters, lang, scroll = false) {
-      letterDiv.innerHTML = "";
-      songList.innerHTML = "";
-      title.textContent = "";
-      selLis.textContent = lang.charAt(0).toUpperCase() + lang.slice(1);
-
-      letters.forEach((letter, index) => {
-        const box = document.createElement("div");
-        box.className = "box";
-        box.textContent = letter;
-
-        box.onclick = () => {
-          document.querySelectorAll('.box').forEach(b => b.classList.remove('active'));
-          box.classList.add('active');
-          showSongsTab(letter, lang);
-
-          // Apply current search filter after showing songs
-          if (currentQuery) filterSongs(currentQuery);
-
-          scrollToSongs();
-        };
-
-        // Auto-activate first letter
-        if (index === 0) {
-          box.classList.add('active');
-        }
-
-        letterDiv.appendChild(box);
-      });
-
-      // Automatically show songs for first letter
-      if (letters.length > 0) {
-        showSongsTab(letters[0], lang);
-
-        // Apply current search filter on initial load
-        if (currentQuery) {
-          filterSongs(currentQuery);
-        }
-      }
-    }
-
-    function scrollToSongs() {
-      const mobile = window.innerWidth <= 768;
-      const offset = mobile ? 85 : 100;
-
-      const top = ssl.getBoundingClientRect().top + window.scrollY - offset;
-
-      window.scrollTo({
-        top,
-        behavior: "smooth"
-      });
-    }
-
-
-
-    function switchLanguage(lang, event) {
-      currentLanguage = lang;
-      selLis.textContent = lang.charAt(0).toUpperCase() + lang.slice(1);
-
-      // TELUGU
-      if (lang === "telugu") {
-        history.replaceState(null, "", location.pathname);
-        letterDiv.classList.remove("hidden");
-        ssl.style.display = "block";
-        renderLetters(teluguLetters, "telugu", true);
-      }
-
-      // ENGLISH
-      else if (lang === "english") {
-        history.replaceState(null, "", "#English");
-        letterDiv.classList.remove("hidden");
-        ssl.style.display = "block";
-        renderLetters(englishLetters, "english", true);
-      }
-
-      // HINDI
-      else if (lang === "hindi") {
-        history.replaceState(null, "", "#Hindi");
-
-        letterDiv.innerHTML = "";
-        letterDiv.classList.add("hidden");
-        songList.innerHTML = "";
-        title.textContent = `"Hindi"`;
-
-        hindiSongs.forEach(song => {
-          const li = document.createElement("li");
-          const a = document.createElement("a");
-          a.textContent = song.name;
-          a.href = `/vidhyardhi-geethavali/hsongs/${song.id}`;
-          a.className = "song-link";
-          li.appendChild(a);
-          songList.appendChild(li);
-        });
-
-        ssl.style.display = "block";
-
-        // Apply search filter if active
-        if (currentQuery) {
-          filterSongs(currentQuery);
-        }
-      }
-
-      // TAB ACTIVE UI
-      if (event && event.target) {
-        document.querySelectorAll('.tab-btn').forEach(btn =>
-          btn.classList.remove('active')
-        );
-        event.target.classList.add('active');
-      }
-    }
-
-    function getAllSongsByLanguage(lang) {
-      let allSongs = [];
-
-      if (lang === "telugu") {
-        Object.values(teluguSongs).forEach(list => {
-          list.forEach(song => {
-            allSongs.push({
-              ...song,
-              lang: "telugu"
-            });
-          });
-        });
-      }
-
-      else if (lang === "english") {
-        Object.values(englishSongs).forEach(list => {
-          list.forEach(song => {
-            allSongs.push({
-              ...song,
-              lang: "english"
-            });
-          });
-        });
-      }
-
-      else if (lang === "hindi") {
-        hindiSongs.forEach(song => {
-          allSongs.push({
-            ...song,
-            lang: "hindi"
-          });
-        });
-      }
-
-      return allSongs;
-    }
-
-    function renderSearchSongs(lang) {
-      songList.innerHTML = "";
-
-      const allSongs = getAllSongsByLanguage(lang);
-
-      allSongs.forEach(song => {
-        const li = document.createElement("li");
-        const a = document.createElement("a");
-
-        a.textContent = song.name;
-        a.className = "song-link";
-
-        if (lang === "telugu") {
-          a.href = `/vidhyardhi-geethavali/tsongs/${song.id}`;
-        } else if (lang === "english") {
-          a.href = `/vidhyardhi-geethavali/esongs/${song.id}`;
-        } else {
-          a.href = `/vidhyardhi-geethavali/hsongs/${song.id}`;
-        }
-
-        li.appendChild(a);
-        songList.appendChild(li);
-      });
-    }
-
-
-
-    // Register Service Worker
+    // ═══════════════════════════════════════════════════════════════════
+    // SERVICE WORKER
+    // ═══════════════════════════════════════════════════════════════════
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker
-        .register('/vidhyardhi-geethavali/service-worker.js')
-        .then(reg => console.log('ServiceWorker registration successful:', reg.scope))
-        .catch(err => console.log('ServiceWorker registration failed:', err));
+      navigator.serviceWorker.register('/vidhyardhi-geethavali/service-worker.js')
+        .then(r => console.log('SW:', r.scope))
+        .catch(e => console.log('SW failed:', e));
     }
 
-    // Initial Load - Handle URL Hash
-    window.addEventListener('load', function () {
-      const hash = location.hash.replace("#", "").toLowerCase();
+    // ═══════════════════════════════════════════════════════════════════
+    // INIT
+    // ═══════════════════════════════════════════════════════════════════
+    document.getElementById('current-yr').textContent = new Date().getFullYear();
+    purgeStaleCacheEntries();
 
-      const tabs = {
-        telugu: document.querySelector(".tab-btn:nth-child(1)"),
-        english: document.querySelector(".tab-btn:nth-child(2)"),
-        hindi: document.querySelector(".tab-btn:nth-child(3)")
-      };
+    const _tabs = {
+      telugu: document.querySelector('.tab-btn:nth-child(1)'),
+      english: document.querySelector('.tab-btn:nth-child(2)'),
+      hindi: document.querySelector('.tab-btn:nth-child(3)')
+    };
+    const _hash = location.hash.replace('#', '').toLowerCase();
 
-      if (hash === "english") {
-        switchLanguage("english", { target: tabs.english });
-      } else if (hash === "hindi") {
-        switchLanguage("hindi", { target: tabs.hindi });
-      } else {
-        // Default to Telugu - already rendered above
-        tabs.telugu.classList.add('active');
-      }
-    });
-    (function () {
-      // Keys to retain in localStorage
-      const keysToRetain = ["bbsRole", "bbsName"];
-
-      // Store the values of the keys that actually exist
-      const existingKeys = new Set(keysToRetain.filter(key => localStorage.getItem(key) !== null));
-
-      // Remove all keys not in the existingKeys set
-      Object.keys(localStorage).forEach((key) => {
-        if (!existingKeys.has(key)) {
-          localStorage.removeItem(key);
-        }
-      });
-
-      console.log("LocalStorage cleared except for:", [...existingKeys]);
-
-      // Clear sessionStorage
-      sessionStorage.clear();
-      console.log("SessionStorage cleared.");
-
-      // Clear IndexedDB data
-      const clearIndexedDB = () => {
-        if (!window.indexedDB) {
-          console.warn("IndexedDB is not supported by this browser.");
-          return;
-        }
-        indexedDB.databases().then((databases) => {
-          databases.forEach((db) => {
-            indexedDB.deleteDatabase(db.name);
-            console.log(`Deleted IndexedDB: ${db.name}`);
-          });
-        }).catch((error) => {
-          console.error("Error clearing IndexedDB:", error);
-        });
-      };
-
-      // Clear browser cache
-      const clearCache = () => {
-        if ("caches" in window) {
-          caches.keys().then((cacheNames) => {
-            cacheNames.forEach((cacheName) => {
-              caches.delete(cacheName);
-              console.log(`Deleted Cache: ${cacheName}`);
-            });
-          }).catch((error) => {
-            console.error("Error clearing cache:", error);
-          });
-        } else {
-          console.warn("Cache API is not supported by this browser.");
-        }
-      };
-
-      // Execute cleanup functions
-      clearIndexedDB();
-      clearCache();
-
-      console.log(`All data cleared except for ${[...existingKeys].join(", ")} in localStorage.`);
-    })();
+    if (_hash === 'english') switchLanguage('english', { target: _tabs.english });
+    else if (_hash === 'hindi') switchLanguage('hindi', { target: _tabs.hindi });
+    else { _tabs.telugu.classList.add('active'); switchLanguage('telugu', { target: _tabs.telugu }); }
   </script>
   <script>
-        var _paq = window._paq = window._paq || [];
-        /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
-        _paq.push(['trackPageView']);
-        _paq.push(['enableLinkTracking']);
-        (function () {
-            var u = "//a.ruvs.in/_wy5s/";
-            _paq.push(['setTrackerUrl', u + '_e7hw.php']);
-            _paq.push(['setSiteId', '3']);
-            var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
-            g.async = true; g.src = u + '_ue4c.js'; s.parentNode.insertBefore(g, s);
-        })();
+    var _paq = window._paq = window._paq || [];
+    /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function () {
+      var u = "//a.ruvs.in/_wy5s/";
+      _paq.push(['setTrackerUrl', u + '_e7hw.php']);
+      _paq.push(['setSiteId', '3']);
+      var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
+      g.async = true; g.src = u + '_ue4c.js'; s.parentNode.insertBefore(g, s);
+    })();
   </script>
-
 </body>
 
 </html>
