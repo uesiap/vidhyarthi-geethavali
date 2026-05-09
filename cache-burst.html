@@ -1,42 +1,158 @@
 <!DOCTYPE html>
 <html>
+<head>
+  <title>Storage Manager</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    button {
+      margin: 5px;
+      padding: 10px 15px;
+      cursor: pointer;
+    }
+
+    pre {
+      background: #f4f4f4;
+      padding: 15px;
+      border-radius: 8px;
+      overflow: auto;
+    }
+
+    #status {
+      margin-top: 10px;
+      color: green;
+    }
+  </style>
+</head>
+
 <body>
-  <h2>Storage Info</h2>
-  <pre id="output"></pre>
+
+  <h2>Storage Manager</h2>
+
+  <button onclick="getStorageInfo()">Refresh Info</button>
+  <button onclick="clearCaches()">Clear Cache Storage</button>
+  <button onclick="clearAllSiteData()">Clear ALL Site Data</button>
+
+  <div id="status"></div>
+
+  <pre id="output">Loading...</pre>
 
   <script>
-async function getStorageBreakdown() {
-  // Storage API estimate
-  const estimate = await navigator.storage.estimate();
 
-  // localStorage size
-  let localStorageSize = 0;
-  for (let key in localStorage) {
-    if (localStorage.hasOwnProperty(key)) {
-      localStorageSize +=
-        (key.length + localStorage[key].length) * 2;
+    function formatBytes(bytes) {
+      if (bytes < 1024) return bytes + " B";
+      if (bytes < 1024 * 1024)
+        return (bytes / 1024).toFixed(2) + " KB";
+
+      return (bytes / (1024 * 1024)).toFixed(2) + " MB";
     }
-  }
 
-  // sessionStorage size
-  let sessionStorageSize = 0;
-  for (let key in sessionStorage) {
-    if (sessionStorage.hasOwnProperty(key)) {
-      sessionStorageSize +=
-        (key.length + sessionStorage[key].length) * 2;
+    async function getStorageInfo() {
+
+      const outputEl = document.getElementById("output");
+
+      if (!(navigator.storage && navigator.storage.estimate)) {
+        outputEl.textContent = "Storage API not supported.";
+        return;
+      }
+
+      const estimate = await navigator.storage.estimate();
+
+      const cacheNames = await caches.keys();
+
+      const output = {
+        usageBytes: estimate.usage,
+        usageReadable: formatBytes(estimate.usage),
+
+        quotaBytes: estimate.quota,
+        quotaReadable: formatBytes(estimate.quota),
+
+        usageDetails: estimate.usageDetails || "Not supported",
+
+        cacheNames: cacheNames
+      };
+
+      outputEl.textContent =
+        JSON.stringify(output, null, 2);
     }
-  }
 
-  console.log({
-    totalUsage: estimate.usage,
-    quota: estimate.quota,
-    browserReported: estimate.usageDetails,
-    localStorageBytes: localStorageSize,
-    sessionStorageBytes: sessionStorageSize
-  });
-}
+    async function clearCaches() {
 
-getStorageBreakdown();
-</script>
+      const status = document.getElementById("status");
+
+      try {
+
+        const cacheNames = await caches.keys();
+
+        await Promise.all(
+          cacheNames.map(name => caches.delete(name))
+        );
+
+        status.textContent = "All caches cleared.";
+
+        await getStorageInfo();
+
+      } catch (err) {
+
+        status.textContent = "Error clearing caches: " + err;
+      }
+    }
+
+    async function clearAllSiteData() {
+
+      const status = document.getElementById("status");
+
+      try {
+
+        // Clear Cache Storage
+        const cacheNames = await caches.keys();
+
+        await Promise.all(
+          cacheNames.map(name => caches.delete(name))
+        );
+
+        // Clear localStorage
+        localStorage.clear();
+
+        // Clear sessionStorage
+        sessionStorage.clear();
+
+        // Delete IndexedDB databases
+        if (indexedDB.databases) {
+
+          const dbs = await indexedDB.databases();
+
+          await Promise.all(
+            dbs.map(db => indexedDB.deleteDatabase(db.name))
+          );
+        }
+
+        // Remove service workers
+        const registrations =
+          await navigator.serviceWorker.getRegistrations();
+
+        await Promise.all(
+          registrations.map(r => r.unregister())
+        );
+
+        status.textContent =
+          "All possible site data cleared.";
+
+        await getStorageInfo();
+
+      } catch (err) {
+
+        status.textContent =
+          "Error clearing site data: " + err;
+      }
+    }
+
+    getStorageInfo();
+
+  </script>
+
 </body>
 </html>
