@@ -5,7 +5,7 @@
         console.log("[CACHE BURST] Starting...");
 
         // ------------------------------------------------
-        // Delete Cache Storage
+        // Delete Cache Storage ONLY
         // ------------------------------------------------
         if ("caches" in window) {
 
@@ -24,23 +24,8 @@
         }
 
         // ------------------------------------------------
-        // Remove Service Workers
+        // DO NOT REMOVE SERVICE WORKERS
         // ------------------------------------------------
-        if ("serviceWorker" in navigator) {
-
-            const registrations =
-                await navigator.serviceWorker.getRegistrations();
-
-            await Promise.all(
-                registrations.map(r =>
-                    r.unregister()
-                )
-            );
-
-            console.log(
-                "[CACHE BURST] Service workers removed"
-            );
-        }
 
         // ------------------------------------------------
         // Delete IndexedDB
