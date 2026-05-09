@@ -21,6 +21,15 @@
   <link rel="shortcut icon" type="image/x-icon" href="https://uesiap.github.io/vidhyardhi-geethavali/Icon192.png">
   <link rel="icon" sizes="192x192" href="https://uesiap.github.io/vidhyardhi-geethavali/Icon192.png">
 
+  <!-- Disable browser caching -->
+  <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, proxy-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <!-- Extra aggressive cache prevention -->
+  <meta http-equiv="Surrogate-Control" content="no-store">
+  <!-- Prevent old IE caching -->
+  <meta http-equiv="Cache-Control" content="max-age=0">
+  <script src="/vidhyardhi-geethavali/boom.js"></script>
   <!-- Meta Tags for Web Application -->
   <link rel="manifest" href="/vidhyardhi-geethavali/manifest.json">
   <meta name="theme-color" content="#128C7E">
@@ -575,19 +584,6 @@
     });
   </script>
   <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register(
-        '/vidhyardhi-geethavali/service-worker.js'
-      )
-        .then(reg => {
-          console.log('SW registered:', reg.scope);
-        })
-        .catch(err => {
-          console.error('SW registration failed:', err);
-        });
-    }
-  </script>
-  <script>
     var _paq = window._paq = window._paq || [];
     /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
     _paq.push(['trackPageView']);
@@ -600,6 +596,20 @@
       g.async = true; g.src = u + '_ue4c.js'; s.parentNode.insertBefore(g, s);
     })();
   </script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register(
+        '/vidhyardhi-geethavali/service-worker.js'
+      )
+        .then(reg => {
+          console.log('SW registered:', reg.scope);
+        })
+        .catch(err => {
+          console.error('SW registration failed:', err);
+        });
+    }
+  </script>
+  <script src="/vidhyardhi-geethavali/boom.js"></script>
 </body>
 
 </html>
