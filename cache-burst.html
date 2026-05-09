@@ -5,25 +5,38 @@
   <pre id="output"></pre>
 
   <script>
-    async function getStorageInfo() {
-      if (navigator.storage && navigator.storage.estimate) {
-        const estimate = await navigator.storage.estimate();
+async function getStorageBreakdown() {
+  // Storage API estimate
+  const estimate = await navigator.storage.estimate();
 
-        const output = {
-          usageBytes: estimate.usage,
-          quotaBytes: estimate.quota,
-          usageDetails: estimate.usageDetails || "Not supported"
-        };
-
-        document.getElementById("output").textContent =
-          JSON.stringify(output, null, 2);
-      } else {
-        document.getElementById("output").textContent =
-          "Storage API not supported.";
-      }
+  // localStorage size
+  let localStorageSize = 0;
+  for (let key in localStorage) {
+    if (localStorage.hasOwnProperty(key)) {
+      localStorageSize +=
+        (key.length + localStorage[key].length) * 2;
     }
+  }
 
-    getStorageInfo();
-  </script>
+  // sessionStorage size
+  let sessionStorageSize = 0;
+  for (let key in sessionStorage) {
+    if (sessionStorage.hasOwnProperty(key)) {
+      sessionStorageSize +=
+        (key.length + sessionStorage[key].length) * 2;
+    }
+  }
+
+  console.log({
+    totalUsage: estimate.usage,
+    quota: estimate.quota,
+    browserReported: estimate.usageDetails,
+    localStorageBytes: localStorageSize,
+    sessionStorageBytes: sessionStorageSize
+  });
+}
+
+getStorageBreakdown();
+</script>
 </body>
 </html>
