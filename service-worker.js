@@ -1,81 +1,102 @@
-const CACHE_NAME = 'my-cache';
-const urlsToCache = [
-  '/',
+const CACHE_NAME = 'vg-shell-v1';
+
+// Only your static app shell — nothing else
+const SHELL_ASSETS = [
+  '/vidhyardhi-geethavali/',
   '/vidhyardhi-geethavali/index.html',
   '/vidhyardhi-geethavali/Icon192.png',
   '/vidhyardhi-geethavali/Icon512.png',
-  '/vidhyardhi-geethavali/uesisongsmain.jpg'  // Add the splash screen image to the cache
+  '/vidhyardhi-geethavali/uesisongsmain.jpg'
 ];
 
-// Install event
+// ── Install: pre-cache shell only ───────────────────────────────────
 self.addEventListener('install', event => {
   console.log('Service Worker: Installing');
-  // Perform install steps
   event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(cache => {
-        console.log('Service Worker: Cache opened');
-        return cache.addAll(urlsToCache);
-      })
-  );
-});
-
-// Activate event
-self.addEventListener('activate', event => {
-  console.log('Service Worker: Activating');
-  // Remove old caches
-  event.waitUntil(
-    caches.keys().then(cacheNames => {
-      return Promise.all(
-        cacheNames.map(cacheName => {
-          if (cacheName !== CACHE_NAME) {
-            console.log('Service Worker: Clearing old cache');
-            return caches.delete(cacheName);
-          }
-        })
-      );
+    caches.open(CACHE_NAME).then(cache => {
+      console.log('Service Worker: Cache opened');
+      return cache.addAll(SHELL_ASSETS);
     })
   );
+  self.skipWaiting();
 });
 
-// Fetch event
+// ── Activate: delete every old cache version ─────────────────────────
+self.addEventListener('activate', event => {
+  console.log('Service Worker: Activating');
+  event.waitUntil(
+    caches.keys().then(keys =>
+      Promise.all(
+        keys.filter(k => k !== CACHE_NAME).map(k => {
+          console.log('Service Worker: Deleting old cache:', k);
+          return caches.delete(k);
+        })
+      )
+    )
+  );
+  self.clients.claim();
+});
+
+// ── Fetch: three strict rules ────────────────────────────────────────
 self.addEventListener('fetch', event => {
-  console.log('Service Worker: Fetching');
+  const url = event.request.url;
+
+  // RULE 1 — Never intercept JSON data files.
+  //          sessionStorage in the page handles caching these.
+  //          If SW cached them, users would never see song updates.
+  if (url.includes('/data/') && url.endsWith('.json')) {
+    event.respondWith(fetch(event.request));
+    return;
+  }
+
+  // RULE 2 — Never intercept cross-origin requests.
+  //          Audio/track CDN files, fonts, icon libraries etc.
+  //          must always go straight to their origin servers.
+  if (!url.startsWith(self.location.origin)) {
+    event.respondWith(fetch(event.request));
+    return;
+  }
+
+  // RULE 3 — For same-origin requests: cache-first for shell assets,
+  //          network-only for everything else (no silent caching).
   event.respondWith(
-    caches.match(event.request)
-      .then(response => {
-        // Cache hit - return response
-        if (response) {
-          console.log('Service Worker: Cache hit');
-          return response;
+    caches.match(event.request).then(cached => {
+      if (cached) {
+        console.log('Service Worker: Cache hit:', url);
+        return cached;
+      }
+
+      // Not in cache — fetch from network
+      return fetch(event.request).then(response => {
+        // Only cache if ALL conditions are met:
+        //   • valid response exists
+        //   • HTTP 200 status
+        //   • same-origin ("basic") — not opaque CDN response
+        //   • GET request (never cache POST/PUT etc.)
+        //   • it's one of the known shell assets we want cached
+        const isShellAsset = SHELL_ASSETS.some(path =>
+          url.endsWith(path) || url === self.location.origin + path
+        );
+
+        if (
+          response &&
+          response.status === 200 &&
+          response.type === 'basic' &&
+          event.request.method === 'GET' &&
+          isShellAsset
+        ) {
+          const clone = response.clone();
+          caches.open(CACHE_NAME).then(cache => {
+            console.log('Service Worker: Caching shell asset:', url);
+            cache.put(event.request, clone);
+          });
         }
 
-        // Clone the request because it's a stream
-        const fetchRequest = event.request.clone();
-
-        return fetch(fetchRequest).then(
-          response => {
-            // Check if we received a valid response
-            if (!response || response.status !== 200 || response.type !== 'basic') {
-              console.log('Service Worker: Invalid response');
-              return response;
-            }
-
-            // Clone the response because it's a stream
-            const responseToCache = response.clone();
-
-            caches.open(CACHE_NAME)
-              .then(cache => {
-                console.log('Service Worker: Caching new resource');
-                cache.put(event.request, responseToCache);
-              });
-
-            return response;
-          }
-        );
-      })
-      .catch(error => {
-        console.error('Service Worker: Fetch error:', error);
-      })
+        return response;
+      }).catch(err => {
+        console.error('Service Worker: Fetch failed:', url, err);
+        // Optionally return a fallback offline page here
+      });
+    })
   );
 });
