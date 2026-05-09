@@ -1,120 +1,364 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Advanced Storage Debugger</title>
-    <style>
-        body { font-family: monospace; padding: 20px; background: #f4f4f4; }
-        #out { background: #fff; padding: 15px; border: 1px solid #ccc; border-radius: 5px; overflow-x: auto; }
-        button { padding: 10px 15px; cursor: pointer; margin-right: 5px; }
-        .danger { background: #ff4444; color: white; border: none; font-weight: bold; }
-    </style>
+<meta charset="UTF-8">
+<title>Ultimate Storage Wipe</title>
+
+<style>
+    body {
+        font-family: monospace;
+        padding: 20px;
+        background: #111;
+        color: #00ff88;
+    }
+
+    h2 {
+        color: #00ffaa;
+    }
+
+    button {
+        padding: 10px 15px;
+        margin-right: 10px;
+        margin-bottom: 10px;
+        cursor: pointer;
+        background: #222;
+        color: white;
+        border: 1px solid #555;
+        border-radius: 5px;
+    }
+
+    button:hover {
+        background: #333;
+    }
+
+    .danger {
+        border-color: #ff4444;
+        color: #ff4444;
+    }
+
+    #out {
+        background: black;
+        padding: 15px;
+        border: 1px solid #00ff88;
+        border-radius: 5px;
+        white-space: pre-wrap;
+        overflow-x: auto;
+    }
+
+    #status {
+        margin-bottom: 15px;
+        color: yellow;
+    }
+</style>
 </head>
+
 <body>
 
-    <h2>Site Storage & Data Debugger</h2>
-    
-    <button onclick="refresh()">Refresh Status</button>
-    <button class="danger" onclick="clearAllSiteData()">Clear All Site Data & Cookies</button>
+<h2>Ultimate Site Storage Purge</h2>
 
-    <p><strong>Storage Details:</strong></p>
-    <pre id="out">Loading...</pre>
+<button onclick="refresh()">
+    Check Usage
+</button>
 
-    <script>
-        // Utility to format bytes to KB/MB
-        function formatBytes(v) {
-            if (!v) return "0 KB";
-            return (v / 1024).toFixed(2) + " KB";
+<button class="danger" onclick="nukeAllData()">
+    Nuke Everything & Reload
+</button>
+
+<div id="status"></div>
+
+<pre id="out">Loading...</pre>
+
+<script>
+
+function logStatus(msg) {
+    document.getElementById("status").textContent = msg;
+}
+
+function kb(v) {
+    return (v / 1024).toFixed(2) + " KB";
+}
+
+// ----------------------------------------------------
+// Real cache size calculation
+// ----------------------------------------------------
+async function getActualCacheSize() {
+
+    let total = 0;
+
+    const names = await caches.keys();
+
+    for (const name of names) {
+
+        const cache = await caches.open(name);
+
+        const requests = await cache.keys();
+
+        for (const req of requests) {
+
+            try {
+
+                const res = await cache.match(req);
+
+                if (!res) continue;
+
+                const blob = await res.clone().blob();
+
+                total += blob.size;
+
+            } catch (e) {
+
+                console.warn("Skipped opaque response", req.url);
+            }
         }
+    }
 
-        // Deep scan of Cache API size
-        async function getRealCacheSize() {
-            let total = 0;
-            const names = await caches.keys();
-            for (const name of names) {
-                const cache = await caches.open(name);
-                const requests = await cache.keys();
-                for (const req of requests) {
-                    const res = await cache.match(req);
-                    if (!res) continue;
-                    const blob = await res.clone().blob();
-                    total += blob.size;
+    return total;
+}
+
+// ----------------------------------------------------
+// IndexedDB delete helper
+// ----------------------------------------------------
+async function deleteIndexedDBs() {
+
+    if (!indexedDB.databases) {
+        return [];
+    }
+
+    const dbs = await indexedDB.databases();
+
+    await Promise.all(
+
+        dbs.map(db => {
+
+            return new Promise((resolve, reject) => {
+
+                if (!db.name) {
+                    resolve();
+                    return;
                 }
+
+                const req =
+                    indexedDB.deleteDatabase(db.name);
+
+                req.onsuccess = () => resolve();
+
+                req.onerror = () =>
+                    reject(req.error);
+
+                req.onblocked = () =>
+                    reject("Blocked: " + db.name);
+            });
+        })
+    );
+
+    return dbs;
+}
+
+// ----------------------------------------------------
+// Clear cookies aggressively
+// ----------------------------------------------------
+function clearCookies() {
+
+    const cookies =
+        document.cookie.split(";");
+
+    const hostname =
+        location.hostname;
+
+    const domains = [
+        hostname,
+        "." + hostname
+    ];
+
+    const paths = [
+        "/"
+    ];
+
+    for (const cookie of cookies) {
+
+        const eqPos = cookie.indexOf("=");
+
+        const name =
+            eqPos > -1
+                ? cookie.substr(0, eqPos).trim()
+                : cookie.trim();
+
+        for (const domain of domains) {
+
+            for (const path of paths) {
+
+                document.cookie =
+                    `${name}=; ` +
+                    `expires=Thu, 01 Jan 1970 00:00:00 GMT; ` +
+                    `path=${path}; ` +
+                    `domain=${domain};`;
+
+                document.cookie =
+                    `${name}=; Max-Age=0; path=${path};`;
             }
-            return total;
+        }
+    }
+}
+
+// ----------------------------------------------------
+// Nuclear wipe
+// ----------------------------------------------------
+async function nukeAllData() {
+
+    const ok = confirm(
+        "Delete ALL possible site data?"
+    );
+
+    if (!ok) return;
+
+    try {
+
+        // ----------------------------
+        // Cache Storage
+        // ----------------------------
+        logStatus("Deleting Cache API...");
+
+        const cacheNames =
+            await caches.keys();
+
+        await Promise.all(
+            cacheNames.map(name =>
+                caches.delete(name)
+            )
+        );
+
+        // ----------------------------
+        // Service Workers
+        // ----------------------------
+        logStatus("Unregistering Service Workers...");
+
+        if (navigator.serviceWorker) {
+
+            const regs =
+                await navigator.serviceWorker.getRegistrations();
+
+            await Promise.all(
+                regs.map(r => r.unregister())
+            );
         }
 
-        // The "Manual Clear" equivalent
-        async function clearAllSiteData() {
-            const confirmed = confirm("This will delete all cookies, local storage, and databases for this site. Continue?");
-            if (!confirmed) return;
+        // ----------------------------
+        // IndexedDB
+        // ----------------------------
+        logStatus("Deleting IndexedDB...");
 
-            // 1. Clear Cache Storage
-            const cacheNames = await caches.keys();
-            await Promise.all(cacheNames.map(name => caches.delete(name)));
+        await deleteIndexedDBs();
 
-            // 2. Clear LocalStorage and SessionStorage
-            localStorage.clear();
-            sessionStorage.clear();
+        // ----------------------------
+        // Web Storage
+        // ----------------------------
+        logStatus("Clearing local/session storage...");
 
-            // 3. Clear Cookies
-            const cookies = document.cookie.split(";");
-            for (let i = 0; i < cookies.length; i++) {
-                const cookie = cookies[i];
-                const eqPos = cookie.indexOf("=");
-                const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
-                document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
-            }
+        localStorage.clear();
+        sessionStorage.clear();
 
-            // 4. Clear IndexedDB
-            if (window.indexedDB.databases) {
-                const dbs = await window.indexedDB.databases();
-                dbs.forEach(db => {
-                    window.indexedDB.deleteDatabase(db.name);
-                });
-            }
+        // ----------------------------
+        // Cookies
+        // ----------------------------
+        logStatus("Deleting cookies...");
 
-            // 5. Unregister Service Workers
-            if (navigator.serviceWorker) {
-                const registrations = await navigator.serviceWorker.getRegistrations();
-                for (let registration of registrations) {
-                    await registration.unregister();
-                }
-            }
+        clearCookies();
 
-            alert("Site data cleared. Refreshing UI...");
-            await refresh();
+        // ----------------------------
+        // Small wait helps Chromium
+        // release quota references
+        // ----------------------------
+        logStatus("Waiting for browser cleanup...");
+
+        await new Promise(r =>
+            setTimeout(r, 2500)
+        );
+
+        // ----------------------------
+        // Refresh display
+        // ----------------------------
+        await refresh();
+
+        logStatus("Storage wipe complete.");
+
+        // ----------------------------
+        // Better reload strategy
+        // ----------------------------
+        setTimeout(() => {
+
+            location.href =
+                location.origin +
+                location.pathname +
+                "?cachebust=" +
+                Date.now();
+
+        }, 1500);
+
+    } catch (err) {
+
+        console.error(err);
+
+        logStatus("ERROR: " + err);
+    }
+}
+
+// ----------------------------------------------------
+// Refresh diagnostics
+// ----------------------------------------------------
+async function refresh() {
+
+    const estimate =
+        await navigator.storage.estimate();
+
+    const cacheNames =
+        await caches.keys();
+
+    const actualBytes =
+        await getActualCacheSize();
+
+    const report = {
+
+        browserEstimate: {
+
+            totalUsage:
+                kb(estimate.usage),
+
+            quota:
+                kb(estimate.quota),
+
+            details:
+                estimate.usageDetails
+        },
+
+        actualContent: {
+
+            cacheApiSize:
+                kb(actualBytes),
+
+            cacheBuckets:
+                cacheNames,
+
+            cookiesCount:
+                document.cookie
+                    ? document.cookie.split(";").length
+                    : 0,
+
+            localStorageKeys:
+                localStorage.length,
+
+            sessionStorageKeys:
+                sessionStorage.length
         }
+    };
 
-        // Update the display
-        async function refresh() {
-            const estimate = await navigator.storage.estimate();
-            const cacheNames = await caches.keys();
-            const realCacheSize = await getRealCacheSize();
+    document.getElementById("out")
+        .textContent =
+        JSON.stringify(report, null, 2);
+}
 
-            const data = {
-                browserEstimate: {
-                    usage: formatBytes(estimate.usage),
-                    quota: formatBytes(estimate.quota),
-                    details: estimate.usageDetails || "No details provided by browser"
-                },
-                actualCache: {
-                    byteSize: realCacheSize,
-                    readable: formatBytes(realCacheSize),
-                    buckets: cacheNames
-                },
-                otherStorage: {
-                    localStorageItems: Object.keys(localStorage).length,
-                    cookiesFound: document.cookie ? document.cookie.split(';').length : 0
-                }
-            };
+refresh();
 
-            document.getElementById("out").textContent = JSON.stringify(data, null, 2);
-        }
+</script>
 
-        // Run on load
-        refresh();
-    </script>
 </body>
 </html>
