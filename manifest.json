@@ -7,6 +7,7 @@
   "orientation": "portrait",
   "background_color": "#ffffff",
   "theme_color": "#128C7E",
+
   "icons": [
     {
       "src": "/vidhyardhi-geethavali/Icon192.png",
@@ -22,10 +23,46 @@
 
   "screenshots": [
     {
-      "src": "/vidhyardhi-geethavali/uesisongsmain.jpg",
+      "src": "/vidhyardhi-geethavali/images/screenshorts/home.jpg",
       "sizes": "640x1136",
       "type": "image/jpeg",
-      "form_factor": "narrow"
+      "form_factor": "narrow",
+      "label": "Home Screen"
+    },
+    {
+      "src": "/vidhyardhi-geethavali/images/screenshorts/drawer.jpg",
+      "sizes": "640x1136",
+      "type": "image/jpeg",
+      "form_factor": "narrow",
+      "label": "Navigation Drawer"
+    },
+    {
+      "src": "/vidhyardhi-geethavali/images/screenshorts/render.jpg",
+      "sizes": "640x1136",
+      "type": "image/jpeg",
+      "form_factor": "narrow",
+      "label": "Song Rendering"
+    },
+    {
+      "src": "/vidhyardhi-geethavali/images/screenshorts/options.jpg",
+      "sizes": "640x1136",
+      "type": "image/jpeg",
+      "form_factor": "narrow",
+      "label": "Options Menu"
+    },
+    {
+      "src": "/vidhyardhi-geethavali/images/screenshorts/subpage.jpg",
+      "sizes": "640x1136",
+      "type": "image/jpeg",
+      "form_factor": "narrow",
+      "label": "Subpage View"
+    },
+    {
+      "src": "/vidhyardhi-geethavali/images/screenshorts/player.jpg",
+      "sizes": "640x1136",
+      "type": "image/jpeg",
+      "form_factor": "narrow",
+      "label": "Music Player"
     }
   ]
 }
