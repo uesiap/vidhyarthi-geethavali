@@ -26,12 +26,11 @@
   <meta name="google-site-verification" content="eZcr6WyistE7nCSaUoUkf9tpK_SmeG5caEM-x3nEWb4">
   <meta name="msvalidate.01" content="28F3BC7AAD0F4B06B4517F2211A7D366">
 
-  <!-- Your theme color -->
-  <meta name="theme-color" content="#128C7E">
-
   <!-- Meta Tags for Web Application-->
-  <link rel="manifest" href="https://uesiap.github.io/vidhyardhi-geethavali/manifest.json"
-    crossorigin="use-credentials">
+  <link rel="manifest" href="/vidhyardhi-geethavali/manifest.json">
+  <meta name="theme-color" content="#128C7E">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
   <link rel="apple-touch-icon" href="https://uesiap.github.io/vidhyardhi-geethavali/Icon192.png">
   <!-- iOS splash icon -->
 
@@ -45,9 +44,7 @@
   <link rel="canonical" href="https://uesiap.github.io/vidhyardhi-geethavali/">
 
   <!-- Favicon Links -->
-  <link rel="shortcut icon" type="image/x-icon"
-    href="https://www.uesitn.org/wp-content/uploads/2020/08/uesi-favicon.png">
-  <link rel="apple-touch-icon" href="/vidhyardhi-geethavali/favicon.png">
+  <link rel="shortcut icon" type="image/x-icon" href="/vidhyardhi-geethavali/favicon.png">
   <link rel="icon" sizes="192x192" href="/vidhyardhi-geethavali/Icon192.png">
   <link rel="icon" sizes="512x512" href="/vidhyardhi-geethavali/Icon512.png">
 
@@ -995,6 +992,19 @@
     if (_hash === 'english') switchLanguage('english', { target: _tabs.english });
     else if (_hash === 'hindi') switchLanguage('hindi', { target: _tabs.hindi });
     else { _tabs.telugu.classList.add('active'); switchLanguage('telugu', { target: _tabs.telugu }); }
+  </script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register(
+        '/vidhyardhi-geethavali/service-worker.js'
+      )
+      .then(reg => {
+        console.log('SW registered:', reg.scope);
+      })
+      .catch(err => {
+        console.error('SW registration failed:', err);
+      });
+    }
   </script>
   <script>
     var _paq = window._paq = window._paq || [];
