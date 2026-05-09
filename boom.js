@@ -5,14 +5,6 @@
         console.log("[CACHE BURST] Starting...");
 
         // ------------------------------------------------
-        // Prevent infinite reload loop
-        // ------------------------------------------------
-        const reloadKey = "__cache_burst_done__";
-
-        const alreadyReloaded =
-            sessionStorage.getItem(reloadKey);
-
-        // ------------------------------------------------
         // Delete Cache Storage
         // ------------------------------------------------
         if ("caches" in window) {
@@ -51,7 +43,7 @@
         }
 
         // ------------------------------------------------
-        // Delete IndexedDB databases
+        // Delete IndexedDB
         // ------------------------------------------------
         if (
             window.indexedDB &&
@@ -93,17 +85,10 @@
         }
 
         // ------------------------------------------------
-        // localStorage + sessionStorage
+        // Clear local/session storage
         // ------------------------------------------------
         localStorage.clear();
-
-        // preserve reload flag temporarily
-        if (alreadyReloaded) {
-            sessionStorage.setItem(
-                reloadKey,
-                "1"
-            );
-        }
+        sessionStorage.clear();
 
         console.log(
             "[CACHE BURST] Web storage cleared"
@@ -151,35 +136,6 @@
         console.log(
             "[CACHE BURST] Cookies cleared"
         );
-
-        // ------------------------------------------------
-        // Force one clean reload
-        // ------------------------------------------------
-        if (!alreadyReloaded) {
-
-            sessionStorage.setItem(
-                reloadKey,
-                "1"
-            );
-
-            console.log(
-                "[CACHE BURST] Reloading clean page..."
-            );
-
-            const separator =
-                location.href.includes("?")
-                    ? "&"
-                    : "?";
-
-            location.replace(
-                location.href +
-                separator +
-                "_cacheburst=" +
-                Date.now()
-            );
-
-            return;
-        }
 
         console.log(
             "[CACHE BURST] Complete"
