@@ -1,158 +1,91 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Storage Manager</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 20px;
-    }
-
-    button {
-      margin: 5px;
-      padding: 10px 15px;
-      cursor: pointer;
-    }
-
-    pre {
-      background: #f4f4f4;
-      padding: 15px;
-      border-radius: 8px;
-      overflow: auto;
-    }
-
-    #status {
-      margin-top: 10px;
-      color: green;
-    }
-  </style>
-</head>
-
 <body>
 
-  <h2>Storage Manager</h2>
+<h2>Storage Debugger</h2>
 
-  <button onclick="getStorageInfo()">Refresh Info</button>
-  <button onclick="clearCaches()">Clear Cache Storage</button>
-  <button onclick="clearAllSiteData()">Clear ALL Site Data</button>
+<button onclick="refresh()">Refresh</button>
+<button onclick="clearCaches()">Clear Caches</button>
 
-  <div id="status"></div>
+<pre id="out"></pre>
 
-  <pre id="output">Loading...</pre>
+<script>
 
-  <script>
+function bytes(v) {
+  return (v / 1024).toFixed(2) + " KB";
+}
 
-    function formatBytes(bytes) {
-      if (bytes < 1024) return bytes + " B";
-      if (bytes < 1024 * 1024)
-        return (bytes / 1024).toFixed(2) + " KB";
+async function getRealCacheSize() {
 
-      return (bytes / (1024 * 1024)).toFixed(2) + " MB";
+  let total = 0;
+
+  const names = await caches.keys();
+
+  for (const name of names) {
+
+    const cache = await caches.open(name);
+
+    const requests = await cache.keys();
+
+    for (const req of requests) {
+
+      const res = await cache.match(req);
+
+      if (!res) continue;
+
+      const blob = await res.clone().blob();
+
+      total += blob.size;
     }
+  }
 
-    async function getStorageInfo() {
+  return total;
+}
 
-      const outputEl = document.getElementById("output");
+async function refresh() {
 
-      if (!(navigator.storage && navigator.storage.estimate)) {
-        outputEl.textContent = "Storage API not supported.";
-        return;
-      }
+  const estimate = await navigator.storage.estimate();
 
-      const estimate = await navigator.storage.estimate();
+  const cacheNames = await caches.keys();
 
-      const cacheNames = await caches.keys();
+  const realCacheSize = await getRealCacheSize();
 
-      const output = {
-        usageBytes: estimate.usage,
-        usageReadable: formatBytes(estimate.usage),
+  document.getElementById("out").textContent =
+    JSON.stringify({
+      estimatedUsage: estimate.usage,
+      estimatedUsageReadable: bytes(estimate.usage),
 
-        quotaBytes: estimate.quota,
-        quotaReadable: formatBytes(estimate.quota),
+      estimatedDetails: estimate.usageDetails,
 
-        usageDetails: estimate.usageDetails || "Not supported",
+      actualCacheBytes: realCacheSize,
+      actualCacheReadable: bytes(realCacheSize),
 
-        cacheNames: cacheNames
-      };
+      cacheNames
+    }, null, 2);
+}
 
-      outputEl.textContent =
-        JSON.stringify(output, null, 2);
-    }
+async function clearCaches() {
 
-    async function clearCaches() {
+  const names = await caches.keys();
 
-      const status = document.getElementById("status");
+  await Promise.all(
+    names.map(n => caches.delete(n))
+  );
 
-      try {
+  // force small delay
+  await new Promise(r => setTimeout(r, 1500));
 
-        const cacheNames = await caches.keys();
+  // try to encourage cleanup
+  if (window.gc) {
+    gc();
+  }
 
-        await Promise.all(
-          cacheNames.map(name => caches.delete(name))
-        );
+  await refresh();
+}
 
-        status.textContent = "All caches cleared.";
+refresh();
 
-        await getStorageInfo();
-
-      } catch (err) {
-
-        status.textContent = "Error clearing caches: " + err;
-      }
-    }
-
-    async function clearAllSiteData() {
-
-      const status = document.getElementById("status");
-
-      try {
-
-        // Clear Cache Storage
-        const cacheNames = await caches.keys();
-
-        await Promise.all(
-          cacheNames.map(name => caches.delete(name))
-        );
-
-        // Clear localStorage
-        localStorage.clear();
-
-        // Clear sessionStorage
-        sessionStorage.clear();
-
-        // Delete IndexedDB databases
-        if (indexedDB.databases) {
-
-          const dbs = await indexedDB.databases();
-
-          await Promise.all(
-            dbs.map(db => indexedDB.deleteDatabase(db.name))
-          );
-        }
-
-        // Remove service workers
-        const registrations =
-          await navigator.serviceWorker.getRegistrations();
-
-        await Promise.all(
-          registrations.map(r => r.unregister())
-        );
-
-        status.textContent =
-          "All possible site data cleared.";
-
-        await getStorageInfo();
-
-      } catch (err) {
-
-        status.textContent =
-          "Error clearing site data: " + err;
-      }
-    }
-
-    getStorageInfo();
-
-  </script>
+</script>
 
 </body>
 </html>
