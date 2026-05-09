@@ -627,20 +627,6 @@
     loadSong();
   </script>
   <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register(
-        '/vidhyardhi-geethavali/service-worker.js'
-      )
-        .then(reg => {
-          console.log('SW registered:', reg.scope);
-        })
-        .catch(err => {
-          console.error('SW registration failed:', err);
-        });
-    }
-  </script>
-  <script src="/vidhyardhi-geethavali/boom.js"></script>
-  <script>
     var _paq = window._paq = window._paq || [];
     /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
     _paq.push(['trackPageView']);
@@ -652,6 +638,19 @@
       var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
       g.async = true; g.src = u + '_ue4c.js'; s.parentNode.insertBefore(g, s);
     })();
+  </script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register(
+        '/vidhyardhi-geethavali/service-worker.js'
+      )
+        .then(reg => {
+          console.log('SW registered:', reg.scope);
+        })
+        .catch(err => {
+          console.error('SW registration failed:', err);
+        });
+    }
   </script>
   <script src="/vidhyardhi-geethavali/boom.js"></script>
 </body>
