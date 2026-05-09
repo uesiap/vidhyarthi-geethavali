@@ -1,91 +1,120 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Storage Debugger</title>
+    <style>
+        body { font-family: monospace; padding: 20px; background: #f4f4f4; }
+        #out { background: #fff; padding: 15px; border: 1px solid #ccc; border-radius: 5px; overflow-x: auto; }
+        button { padding: 10px 15px; cursor: pointer; margin-right: 5px; }
+        .danger { background: #ff4444; color: white; border: none; font-weight: bold; }
+    </style>
+</head>
 <body>
 
-<h2>Storage Debugger</h2>
+    <h2>Site Storage & Data Debugger</h2>
+    
+    <button onclick="refresh()">Refresh Status</button>
+    <button class="danger" onclick="clearAllSiteData()">Clear All Site Data & Cookies</button>
 
-<button onclick="refresh()">Refresh</button>
-<button onclick="clearCaches()">Clear Caches</button>
+    <p><strong>Storage Details:</strong></p>
+    <pre id="out">Loading...</pre>
 
-<pre id="out"></pre>
+    <script>
+        // Utility to format bytes to KB/MB
+        function formatBytes(v) {
+            if (!v) return "0 KB";
+            return (v / 1024).toFixed(2) + " KB";
+        }
 
-<script>
+        // Deep scan of Cache API size
+        async function getRealCacheSize() {
+            let total = 0;
+            const names = await caches.keys();
+            for (const name of names) {
+                const cache = await caches.open(name);
+                const requests = await cache.keys();
+                for (const req of requests) {
+                    const res = await cache.match(req);
+                    if (!res) continue;
+                    const blob = await res.clone().blob();
+                    total += blob.size;
+                }
+            }
+            return total;
+        }
 
-function bytes(v) {
-  return (v / 1024).toFixed(2) + " KB";
-}
+        // The "Manual Clear" equivalent
+        async function clearAllSiteData() {
+            const confirmed = confirm("This will delete all cookies, local storage, and databases for this site. Continue?");
+            if (!confirmed) return;
 
-async function getRealCacheSize() {
+            // 1. Clear Cache Storage
+            const cacheNames = await caches.keys();
+            await Promise.all(cacheNames.map(name => caches.delete(name)));
 
-  let total = 0;
+            // 2. Clear LocalStorage and SessionStorage
+            localStorage.clear();
+            sessionStorage.clear();
 
-  const names = await caches.keys();
+            // 3. Clear Cookies
+            const cookies = document.cookie.split(";");
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i];
+                const eqPos = cookie.indexOf("=");
+                const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+                document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
+            }
 
-  for (const name of names) {
+            // 4. Clear IndexedDB
+            if (window.indexedDB.databases) {
+                const dbs = await window.indexedDB.databases();
+                dbs.forEach(db => {
+                    window.indexedDB.deleteDatabase(db.name);
+                });
+            }
 
-    const cache = await caches.open(name);
+            // 5. Unregister Service Workers
+            if (navigator.serviceWorker) {
+                const registrations = await navigator.serviceWorker.getRegistrations();
+                for (let registration of registrations) {
+                    await registration.unregister();
+                }
+            }
 
-    const requests = await cache.keys();
+            alert("Site data cleared. Refreshing UI...");
+            await refresh();
+        }
 
-    for (const req of requests) {
+        // Update the display
+        async function refresh() {
+            const estimate = await navigator.storage.estimate();
+            const cacheNames = await caches.keys();
+            const realCacheSize = await getRealCacheSize();
 
-      const res = await cache.match(req);
+            const data = {
+                browserEstimate: {
+                    usage: formatBytes(estimate.usage),
+                    quota: formatBytes(estimate.quota),
+                    details: estimate.usageDetails || "No details provided by browser"
+                },
+                actualCache: {
+                    byteSize: realCacheSize,
+                    readable: formatBytes(realCacheSize),
+                    buckets: cacheNames
+                },
+                otherStorage: {
+                    localStorageItems: Object.keys(localStorage).length,
+                    cookiesFound: document.cookie ? document.cookie.split(';').length : 0
+                }
+            };
 
-      if (!res) continue;
+            document.getElementById("out").textContent = JSON.stringify(data, null, 2);
+        }
 
-      const blob = await res.clone().blob();
-
-      total += blob.size;
-    }
-  }
-
-  return total;
-}
-
-async function refresh() {
-
-  const estimate = await navigator.storage.estimate();
-
-  const cacheNames = await caches.keys();
-
-  const realCacheSize = await getRealCacheSize();
-
-  document.getElementById("out").textContent =
-    JSON.stringify({
-      estimatedUsage: estimate.usage,
-      estimatedUsageReadable: bytes(estimate.usage),
-
-      estimatedDetails: estimate.usageDetails,
-
-      actualCacheBytes: realCacheSize,
-      actualCacheReadable: bytes(realCacheSize),
-
-      cacheNames
-    }, null, 2);
-}
-
-async function clearCaches() {
-
-  const names = await caches.keys();
-
-  await Promise.all(
-    names.map(n => caches.delete(n))
-  );
-
-  // force small delay
-  await new Promise(r => setTimeout(r, 1500));
-
-  // try to encourage cleanup
-  if (window.gc) {
-    gc();
-  }
-
-  await refresh();
-}
-
-refresh();
-
-</script>
-
+        // Run on load
+        refresh();
+    </script>
 </body>
 </html>
