@@ -375,7 +375,7 @@
 
     <h6 class="page-title" style="color: rgb(52, 42, 165); font-weight: 500; font-size: 1.1rem">
       This main
-      page is under update, We're adding songs gradually.. <br>We appriciate your intrest in Singing..</h6>
+      page is under update, We're adding songs gradually.. <br>We appriciate your interest in Singing..</h6>
 
   </main><br><br><br>
   <button id="scrollTopBtn" title="Go to top">
@@ -388,8 +388,9 @@
     // ═══════════════════════════════════════════════════════════════════
     // CONFIG
     // ═══════════════════════════════════════════════════════════════════
-    const BASE = 'https://uesiap.github.io/vidhyardhi-geethavali/data';
-    const CACHE_VER = 'vg-v1'; // bump to wipe all users' sessionStorage
+    const BASE = '/vidhyardhi-geethavali/data';
+    const CHUNK_SIZE = 50;
+    const CACHE_VER = 'vg-v4';
 
     const teluguLetters = [
       "అ", "ఆ", "ఇ", "ఈ", "ఉ", "ఊ", "ఋ", "ఎ", "ఏ", "ఐ", "ఒ", "ఓ", "ఔ",
@@ -410,18 +411,16 @@
 
     // ═══════════════════════════════════════════════════════════════════
     // STATE
-    // Each language tracks:
-    //   index   — { letter: [{id, name}] }
-    //   chunks  — sorted ceiling numbers found by discovery [50,100,…]
-    //   loaded  — Set of ceiling numbers whose data is IN MEMORY
-    //   ready   — true once first chunk is ingested (letters can show songs)
-    //   initing — Promise while init is in progress (prevents double-init)
     // ═══════════════════════════════════════════════════════════════════
-    const LANGS = {
-      telugu: { key: 'tsongs', index: {}, chunks: null, loaded: new Set(), ready: false, initing: null },
-      english: { key: 'esongs', index: {}, chunks: null, loaded: new Set(), ready: false, initing: null },
-      hindi: { key: 'hsongs', index: [], chunks: null, loaded: new Set(), ready: false, initing: null }
-    };
+    const songIndex = { telugu: {}, english: {}, hindi: [] };
+
+    // Use consistent lang keys everywhere: 'telugu' | 'english' | 'hindi'
+    const fetched = { telugu: new Set(), english: new Set(), hindi: new Set() };
+    const knownChunks = { telugu: null, english: null, hindi: null };
+    const langInited = { telugu: false, english: false, hindi: false };
+
+    // Map lang → folder name on the server
+    const LANG_FOLDER = { telugu: 'tsongs', english: 'esongs', hindi: 'hsongs' };
 
     let currentLanguage = 'telugu';
     let currentQuery = '';
@@ -429,7 +428,7 @@
     // ═══════════════════════════════════════════════════════════════════
     // SPINNER CSS
     // ═══════════════════════════════════════════════════════════════════
-    (function () {
+    (function injectSpinCSS() {
       if (document.getElementById('vg-spin-css')) return;
       const s = document.createElement('style');
       s.id = 'vg-spin-css';
@@ -437,36 +436,36 @@
       document.head.appendChild(s);
     })();
 
-    function spinnerHTML(text) {
-      return `<li style="list-style:none;display:flex;align-items:center;gap:10px;
-    padding:.9rem 0;color:var(--text-color,#555)">
+    // ═══════════════════════════════════════════════════════════════════
+    // SONG-LIST LOADER
+    // ═══════════════════════════════════════════════════════════════════
+    function showSongListLoader(label) {
+      if (label) titleEl.textContent = `"${label}"`;
+      songList.innerHTML = `
+  <li style="list-style:none;display:flex;align-items:center;gap:10px;
+             padding:.9rem 0;color:var(--text-color,#555)">
     <div style="width:20px;height:20px;border:3px solid rgba(0,0,0,.12);
-    border-top-color:var(--primary-color,#128C7E);border-radius:50%;
-    flex-shrink:0;animation:vg-spin .7s linear infinite"></div>
-    <span style="font-size:13px;font-weight:500">${text || 'Loading…'}</span>
+                border-top-color:var(--primary-color,#128C7E);border-radius:50%;
+                flex-shrink:0;animation:vg-spin .7s linear infinite"></div>
+    <span style="font-size:13px;font-weight:500">Loading…</span>
   </li>`;
     }
 
     // ═══════════════════════════════════════════════════════════════════
     // SESSION-STORAGE CACHE
-    // Key format:  CACHE_VER|url
-    // Chunks list: CACHE_VER|chunks|langKey
-    // Bumping CACHE_VER invalidates everything automatically.
-    // sessionStorage dies when the tab closes → never grows across visits.
     // ═══════════════════════════════════════════════════════════════════
-    function scGet(key) {
-      try { const v = sessionStorage.getItem(key); return v ? JSON.parse(v) : null; }
+    function ck(url) { return CACHE_VER + '|' + url; }
+    function ckChunks(lang) { return CACHE_VER + '|chunks|' + lang; }   // lang = 'telugu' etc.
+
+    function cacheGet(url) {
+      try { const v = sessionStorage.getItem(ck(url)); return v ? JSON.parse(v) : null; }
       catch (e) { return null; }
     }
-    function scSet(key, val) {
-      try { sessionStorage.setItem(key, JSON.stringify(val)); }
-      catch (e) {
-        // quota — clear stale version entries then retry once
-        purgeStaleSC();
-        try { sessionStorage.setItem(key, JSON.stringify(val)); } catch (e2) { }
-      }
+    function cacheSet(url, data) {
+      try { sessionStorage.setItem(ck(url), JSON.stringify(data)); }
+      catch (e) { purgeStaleCacheEntries(); try { sessionStorage.setItem(ck(url), JSON.stringify(data)); } catch (e2) { } }
     }
-    function purgeStaleSC() {
+    function purgeStaleCacheEntries() {
       const prefix = CACHE_VER + '|';
       const drop = [];
       for (let i = 0; i < sessionStorage.length; i++) {
@@ -475,262 +474,206 @@
       }
       drop.forEach(k => sessionStorage.removeItem(k));
     }
-    function jsonCacheKey(url) { return CACHE_VER + '|json|' + url; }
-    function chunksCacheKey(lk) { return CACHE_VER + '|chunks|' + lk; }
 
     // ═══════════════════════════════════════════════════════════════════
-    // CHUNK DISCOVERY
-    // Probes HEAD requests to find which ceiling files exist.
-    // Result is cached in sessionStorage so it only runs once per session.
-    // Adding a new file on the server is picked up on the next session.
+    // CHUNK DISCOVERY  — keyed by canonical lang ('telugu'/'english'/'hindi')
     // ═══════════════════════════════════════════════════════════════════
-    async function discoverChunks(langKey) {
-      // Return in-memory result if already discovered this session
-      const st = Object.values(LANGS).find(l => l.key === langKey);
-      if (st && st.chunks) return st.chunks;
+    const MAX_PROBE = 20;
+    const BATCH = 5;
 
-      // Check sessionStorage
-      const cached = scGet(chunksCacheKey(langKey));
-      if (cached && Array.isArray(cached) && cached.length) {
-        if (st) st.chunks = cached;
-        return cached;
-      }
+    async function discoverChunks(lang) {
+      if (knownChunks[lang]) return knownChunks[lang];
 
-      // Probe: try /50, /100, /150 … up to /1000 in one parallel batch
-      // then continue in groups of 5 until we hit a gap
-      const STEP = 50, FIRST_BATCH = 20, CONT_BATCH = 5;
-      const url = n => `${BASE}/${langKey}/${n}/list.json`;
-      const head = async n => {
-        try { const r = await fetch(url(n), { method: 'HEAD' }); return r.ok ? n : null; }
-        catch (e) { return null; }
-      };
+      // Session cache
+      try {
+        const cached = sessionStorage.getItem(ckChunks(lang));
+        if (cached) { knownChunks[lang] = JSON.parse(cached); return knownChunks[lang]; }
+      } catch (e) { }
 
-      // First batch: probe 50 … 1000 simultaneously
-      const firstCeils = Array.from({ length: FIRST_BATCH }, (_, i) => (i + 1) * STEP);
-      let found = (await Promise.all(firstCeils.map(head))).filter(Boolean);
+      const folder = LANG_FOLDER[lang];
+      const url = n => `${BASE}/${folder}/${n}/list.json`;
 
-      // If all 20 existed, keep probing in batches of 5 until a gap
-      if (found.length === FIRST_BATCH) {
-        let next = FIRST_BATCH;
+      // Optional manifest fast-path
+      try {
+        const mres = await fetch(`${BASE}/${folder}/manifest.json`, { cache: 'no-store' });
+        if (mres.ok) {
+          const md = await mres.json();
+          if (Array.isArray(md.chunks) && md.chunks.length) {
+            knownChunks[lang] = md.chunks;
+            try { sessionStorage.setItem(ckChunks(lang), JSON.stringify(md.chunks)); } catch (e) { }
+            return knownChunks[lang];
+          }
+        }
+      } catch (e) { }
+
+      // Auto-probe
+      const ceil = (start, count) => Array.from({ length: count }, (_, i) => (start + i + 1) * CHUNK_SIZE);
+      const probe = async n => { try { const r = await fetch(url(n), { method: 'HEAD' }); return r.ok ? n : null; } catch (e) { return null; } };
+
+      let found = (await Promise.all(ceil(0, MAX_PROBE).map(probe))).filter(Boolean);
+      if (found.length === MAX_PROBE) {
+        let next = MAX_PROBE;
         while (true) {
-          const batch = Array.from({ length: CONT_BATCH }, (_, i) => (next + i + 1) * STEP);
-          const hits = (await Promise.all(batch.map(head))).filter(Boolean);
+          const hits = (await Promise.all(ceil(next, BATCH).map(probe))).filter(Boolean);
           found = found.concat(hits);
-          if (hits.length < CONT_BATCH) break;
-          next += CONT_BATCH;
+          if (hits.length < BATCH) break;
+          next += BATCH;
         }
       }
 
       found.sort((a, b) => a - b);
-      if (st) st.chunks = found;
-      scSet(chunksCacheKey(langKey), found);
+      knownChunks[lang] = found;
+      try { sessionStorage.setItem(ckChunks(lang), JSON.stringify(found)); } catch (e) { }
       return found;
     }
 
     // ═══════════════════════════════════════════════════════════════════
-    // FETCH ONE CHUNK JSON  (network → sessionStorage cache)
-    // Only fetches if not already cached in sessionStorage.
+    // FETCH ONE CHUNK  — folder derived from lang
     // ═══════════════════════════════════════════════════════════════════
-    async function fetchChunk(langKey, ceiling) {
-      const url = `${BASE}/${langKey}/${ceiling}/list.json`;
-      const hit = scGet(jsonCacheKey(url));
-      if (hit) return hit;                        // already in sessionStorage
+    async function fetchChunk(lang, ceiling) {
+      const folder = LANG_FOLDER[lang];
+      const url = `${BASE}/${folder}/${ceiling}/list.json`;
+      const hit = cacheGet(url);
+      if (hit) return hit;
       const res = await fetch(url);
       if (!res.ok) return {};
       const data = await res.json();
-      scSet(jsonCacheKey(url), data);             // store for this session only
+      cacheSet(url, data);
       return data;
     }
 
     // ═══════════════════════════════════════════════════════════════════
-    // INGEST  (parse raw JSON into the in-memory index)
-    // Safe to call multiple times — duplicate guard on id.
+    // INDEX INGESTION
     // ═══════════════════════════════════════════════════════════════════
     function numOf(id) { return parseInt((id || '').replace('song', ''), 10) || 0; }
 
     function ingestTelugu(raw) {
-      const idx = LANGS.telugu.index;
-      teluguLetters.forEach(l => { if (!idx[l]) idx[l] = []; });
+      teluguLetters.forEach(l => { if (!songIndex.telugu[l]) songIndex.telugu[l] = []; });
       Object.entries(raw).forEach(([num, song]) => {
         if (!song.title) return;
         const letter = teluguLetters.find(l => l === song.title.charAt(0));
         if (!letter) return;
         const id = `song${num}`;
-        if (!idx[letter].find(s => s.id === id))
-          idx[letter].push({ id, name: `${song.title} (${num})` });
+        if (!songIndex.telugu[letter].find(s => s.id === id))
+          songIndex.telugu[letter].push({ id, name: `${song.title} (${num})` });
       });
-      teluguLetters.forEach(l => idx[l].sort((a, b) => numOf(a.id) - numOf(b.id)));
+      teluguLetters.forEach(l => songIndex.telugu[l].sort((a, b) => numOf(a.id) - numOf(b.id)));
     }
 
     function ingestEnglish(raw) {
-      const idx = LANGS.english.index;
-      englishLetters.forEach(l => { if (!idx[l]) idx[l] = []; });
+      englishLetters.forEach(l => { if (!songIndex.english[l]) songIndex.english[l] = []; });
       Object.entries(raw).forEach(([num, song]) => {
         if (!song.title) return;
         const letter = song.title.charAt(0).toUpperCase();
-        if (!idx[letter]) return;
+        if (!songIndex.english[letter]) return;
         const id = `song${num}`;
-        if (!idx[letter].find(s => s.id === id))
-          idx[letter].push({ id, name: `${song.title} (${num})` });
+        if (!songIndex.english[letter].find(s => s.id === id))
+          songIndex.english[letter].push({ id, name: `${song.title} (${num})` });
       });
-      englishLetters.forEach(l => idx[l].sort((a, b) => numOf(a.id) - numOf(b.id)));
+      englishLetters.forEach(l => songIndex.english[l].sort((a, b) => numOf(a.id) - numOf(b.id)));
     }
 
     function ingestHindi(raw) {
-      const arr = LANGS.hindi.index;
       Object.entries(raw).forEach(([num, song]) => {
         if (!song.title) return;
         const id = `song${num}`;
-        if (!arr.find(s => s.id === id))
-          arr.push({ id, name: `${song.title} (${num})` });
+        if (!songIndex.hindi.find(s => s.id === id))
+          songIndex.hindi.push({ id, name: `${song.title} (${num})` });
       });
-      arr.sort((a, b) => numOf(a.id) - numOf(b.id));
+      songIndex.hindi.sort((a, b) => numOf(a.id) - numOf(b.id));
     }
 
     // ═══════════════════════════════════════════════════════════════════
-    // LANGUAGE INIT  (called exactly once per language, on first tab open)
-    //
-    // Flow:
-    //   1. Discover chunk list (HEAD probes, cached in sessionStorage)
-    //   2. Fetch ONLY the first chunk (e.g. /50/list.json)
-    //   3. Render immediately
-    //   4. Remaining chunks load in background, ONE AT A TIME,
-    //      only updating the visible letter if it gains new songs
-    //
-    // The `initing` promise prevents double-init if the user
-    // clicks the tab twice quickly.
+    // BACKGROUND LOADER  — all params use canonical lang key
     // ═══════════════════════════════════════════════════════════════════
-    function initLang(lang) {
-      const st = LANGS[lang];
-      if (st.initing) return st.initing;   // already running — return same promise
+    async function loadRemaining(lang, chunks) {
+      const ingest = lang === 'telugu' ? ingestTelugu
+        : lang === 'english' ? ingestEnglish
+          : ingestHindi;
 
-      st.initing = _doInit(lang, st);
-      return st.initing;
-    }
+      for (const ceiling of chunks) {
+        if (fetched[lang].has(ceiling)) continue;
+        const raw = await fetchChunk(lang, ceiling);
+        ingest(raw);
+        fetched[lang].add(ceiling);
 
-    async function _doInit(lang, st) {
-      // --- Step 1: discover which chunk files exist ---
-      const chunks = await discoverChunks(st.key);
-      // chunks is e.g. [50, 100, 150] for tsongs
-
-      if (!chunks.length) {
-        // No data files found at all
-        st.ready = true;
-        return;
-      }
-
-      // --- Step 2: fetch ONLY the first chunk ---
-      const firstRaw = await fetchChunk(st.key, chunks[0]);
-      if (lang === 'telugu') ingestTelugu(firstRaw);
-      else if (lang === 'english') ingestEnglish(firstRaw);
-      else ingestHindi(firstRaw);
-      st.loaded.add(chunks[0]);
-      st.ready = true;
-
-      // --- Step 3: render the first letter/list ---
-      // (called by the switchLanguage flow after this promise resolves)
-
-      // --- Step 4: background-load remaining chunks LAZILY ---
-      // Each chunk loads only after the previous one finishes,
-      // so we never fire multiple JSON fetches simultaneously.
-      // We do NOT await this — it runs in the background.
-      _backgroundLoad(lang, st, chunks.slice(1));
-    }
-
-    async function _backgroundLoad(lang, st, remaining) {
-      for (const ceiling of remaining) {
-        if (st.loaded.has(ceiling)) continue;  // already loaded (e.g. from letter-click)
-
-        // Fetch one chunk
-        const raw = await fetchChunk(st.key, ceiling);
-        if (lang === 'telugu') ingestTelugu(raw);
-        else if (lang === 'english') ingestEnglish(raw);
-        else ingestHindi(raw);
-        st.loaded.add(ceiling);
-
-        // Only refresh UI if this language is currently shown
-        // and the new data affects the currently active letter
-        if (currentLanguage === lang) {
-          _silentRefreshCurrentLetter(lang);
+        // Silently refresh the visible letter if this language is active
+        if (currentLanguage === lang && searchBox.classList.contains('hidden')) {
+          const active = letterDiv.querySelector('.box.active');
+          if (active) {
+            const letter = active.textContent;
+            const idx = lang === 'telugu' ? songIndex.telugu : songIndex.english;
+            if (idx[letter] && idx[letter].length) {
+              titleEl.textContent = `"${letter}"`;
+              renderSongItems(idx[letter], lang);
+              if (currentQuery) filterSongs(currentQuery);
+            }
+          } else if (lang === 'hindi') {
+            renderSongItems(songIndex.hindi, 'hindi');
+            if (currentQuery) filterSongs(currentQuery);
+          }
         }
       }
     }
 
-    // Refreshes the currently visible letter silently (no scroll, no loader)
-    // Called only when a background chunk finishes loading
-    function _silentRefreshCurrentLetter(lang) {
-      if (lang === 'hindi') {
-        // For Hindi just re-render the list
-        renderSongItems(LANGS.hindi.index, 'hindi');
-        if (currentQuery) filterSongs(currentQuery);
-        return;
+    // ═══════════════════════════════════════════════════════════════════
+    // INIT PER LANGUAGE  — each runs exactly once
+    // ═══════════════════════════════════════════════════════════════════
+    async function initTelugu() {
+      if (langInited.telugu) return;
+      langInited.telugu = true;
+
+      renderLetterBoxes(teluguLetters, 'telugu');
+      showSongListLoader(teluguLetters[0]);
+
+      const chunks = await discoverChunks('telugu');
+      if (chunks.length) {
+        const raw = await fetchChunk('telugu', chunks[0]);
+        ingestTelugu(raw);
+        fetched.telugu.add(chunks[0]);
       }
-      const active = letterDiv.querySelector('.box.active');
-      if (!active) return;
-      const letter = active.textContent;
-      const idx = lang === 'telugu' ? LANGS.telugu.index : LANGS.english.index;
-      const songs = idx[letter] || [];
-      // Only re-render if songs list actually changed (avoid flicker)
-      const currentCount = document.querySelectorAll('#songs .song-link').length;
-      if (songs.length !== currentCount) {
-        titleEl.textContent = `"${letter}"`;
-        renderSongItems(songs, lang);
-        if (currentQuery) filterSongs(currentQuery);
-      }
+
+      titleEl.textContent = `"${teluguLetters[0]}"`;
+      renderSongItems(songIndex.telugu[teluguLetters[0]] || [], 'telugu');
+
+      if (chunks.length > 1) loadRemaining('telugu', chunks.slice(1));  // fire-and-forget
     }
 
-    // ═══════════════════════════════════════════════════════════════════
-    // LETTER BOX CLICK  (on-demand fetch for letters with no songs yet)
-    //
-    // When user clicks a letter that has 0 songs even after the first
-    // chunk loaded, we fetch remaining chunks one by one until songs
-    // appear for that letter, then stop.  This avoids loading all chunks
-    // just because one edge-case letter was clicked.
-    // ═══════════════════════════════════════════════════════════════════
-    async function onLetterClick(letter, lang) {
-      document.querySelectorAll('.box').forEach(b => b.classList.remove('active'));
-      document.querySelector(`.box[data-letter="${letter}"]`)?.classList.add('active');
+    async function initEnglish() {
+      if (langInited.english) return;
+      langInited.english = true;
 
-      const st = LANGS[lang];
-      const idx = lang === 'telugu' ? LANGS.telugu.index : LANGS.english.index;
+      renderLetterBoxes(englishLetters, 'english');
+      showSongListLoader(englishLetters[0]);
 
-      // If already has songs, render immediately
-      if ((idx[letter] || []).length) {
-        titleEl.textContent = `"${letter}"`;
-        renderSongItems(idx[letter], lang);
-        if (currentQuery) filterSongs(currentQuery);
-        scrollToSongs();
-        return;
+      const chunks = await discoverChunks('english');
+      if (chunks.length) {
+        const raw = await fetchChunk('english', chunks[0]);
+        ingestEnglish(raw);
+        fetched.english.add(chunks[0]);
       }
 
-      // No songs yet — show loader and fetch remaining chunks
-      // until this letter gets songs OR all chunks are exhausted
-      titleEl.textContent = `"${letter}"`;
-      songList.innerHTML = spinnerHTML('Loading…');
+      titleEl.textContent = `"${englishLetters[0]}"`;
+      renderSongItems(songIndex.english[englishLetters[0]] || [], 'english');
 
-      const chunks = st.chunks || [];
-      const missing = chunks.filter(c => !st.loaded.has(c));
+      if (chunks.length > 1) loadRemaining('english', chunks.slice(1));
+    }
 
-      for (const ceiling of missing) {
-        const raw = await fetchChunk(st.key, ceiling);
-        if (lang === 'telugu') ingestTelugu(raw);
-        else if (lang === 'english') ingestEnglish(raw);
-        st.loaded.add(ceiling);
+    async function initHindi() {
+      if (langInited.hindi) return;
+      langInited.hindi = true;
 
-        // If this letter now has songs, render and stop fetching
-        if ((idx[letter] || []).length) {
-          titleEl.textContent = `"${letter}"`;
-          renderSongItems(idx[letter], lang);
-          if (currentQuery) filterSongs(currentQuery);
-          scrollToSongs();
-          return;
-        }
+      titleEl.textContent = '"Hindi"';
+      showSongListLoader();
+
+      const chunks = await discoverChunks('hindi');
+      // Hindi has no letter index so load all chunks up-front
+      for (const ceiling of chunks) {
+        const raw = await fetchChunk('hindi', ceiling);
+        ingestHindi(raw);
+        fetched.hindi.add(ceiling);
       }
-
-      // All chunks fetched, still no songs for this letter
-      titleEl.textContent = `"${letter}"`;
-      renderSongItems([], lang);
-      scrollToSongs();
+      renderSongItems(songIndex.hindi, 'hindi');
     }
 
     // ═══════════════════════════════════════════════════════════════════
@@ -738,15 +681,45 @@
     // ═══════════════════════════════════════════════════════════════════
     function renderLetterBoxes(letters, lang) {
       letterDiv.innerHTML = '';
+      songList.innerHTML = '';
+      titleEl.textContent = '';
       selLis.textContent = lang.charAt(0).toUpperCase() + lang.slice(1);
 
-      letters.forEach((letter, i) => {
+      letters.forEach((letter, index) => {
         const box = document.createElement('div');
-        box.className = 'box' + (i === 0 ? ' active' : '');
+        box.className = 'box' + (index === 0 ? ' active' : '');
         box.textContent = letter;
-        box.dataset.letter = letter;  // used by onLetterClick selector above
 
-        box.onclick = () => onLetterClick(letter, lang);
+        box.onclick = async () => {
+          document.querySelectorAll('.box').forEach(b => b.classList.remove('active'));
+          box.classList.add('active');
+
+          const idx = lang === 'telugu' ? songIndex.telugu : songIndex.english;
+
+          // Only show loader + wait for background fetch if letter genuinely has no data yet
+          // AND background loading is still in progress (not all chunks fetched)
+          const songsReady = (idx[letter] || []).length > 0;
+          const allFetched = knownChunks[lang] &&
+            knownChunks[lang].every(c => fetched[lang].has(c));
+
+          if (!songsReady && !allFetched) {
+            // Fetch only remaining chunks (background loader may already be running;
+            // use Promise.all so we don't double-fetch — fetchChunk is cache-safe)
+            showSongListLoader(letter);
+            const missing = (knownChunks[lang] || []).filter(c => !fetched[lang].has(c));
+            await Promise.all(missing.map(async c => {
+              const raw = await fetchChunk(lang, c);
+              lang === 'telugu' ? ingestTelugu(raw) : ingestEnglish(raw);
+              fetched[lang].add(c);
+            }));
+          }
+
+          titleEl.textContent = `"${letter}"`;
+          renderSongItems(idx[letter] || [], lang);
+          if (currentQuery) filterSongs(currentQuery);
+          scrollToSongs();
+        };
+
         letterDiv.appendChild(box);
       });
     }
@@ -774,78 +747,10 @@
 
     function renderSearchSongs(lang) {
       let all = [];
-      if (lang === 'telugu') all = Object.values(LANGS.telugu.index).flat();
-      else if (lang === 'english') all = Object.values(LANGS.english.index).flat();
-      else all = LANGS.hindi.index;
+      if (lang === 'telugu') all = Object.values(songIndex.telugu).flat();
+      else if (lang === 'english') all = Object.values(songIndex.english).flat();
+      else all = songIndex.hindi;
       renderSongItems(all, lang);
-    }
-
-    // ═══════════════════════════════════════════════════════════════════
-    // SWITCH LANGUAGE
-    // ═══════════════════════════════════════════════════════════════════
-    async function switchLanguage(lang, event) {
-      currentLanguage = lang;
-      selLis.textContent = lang.charAt(0).toUpperCase() + lang.slice(1);
-
-      if (event && event.target) {
-        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-        event.target.classList.add('active');
-      }
-
-      if (lang === 'telugu') {
-        history.replaceState(null, '', location.pathname);
-        letterDiv.classList.remove('hidden');
-        ssl.style.display = 'block';
-
-        const st = LANGS.telugu;
-        if (!st.ready) {
-          // First time: render letter boxes immediately (no songs yet)
-          renderLetterBoxes(teluguLetters, 'telugu');
-          // Show loader in song list only
-          titleEl.textContent = `"${teluguLetters[0]}"`;
-          songList.innerHTML = spinnerHTML('Loading…');
-          // Init (discovers chunks + fetches first chunk)
-          await initLang('telugu');
-        }
-        // (Re-)render letter boxes and first letter's songs
-        renderLetterBoxes(teluguLetters, 'telugu');
-        const first = teluguLetters[0];
-        titleEl.textContent = `"${first}"`;
-        renderSongItems(st.index[first] || [], 'telugu');
-
-      } else if (lang === 'english') {
-        history.replaceState(null, '', '#English');
-        letterDiv.classList.remove('hidden');
-        ssl.style.display = 'block';
-
-        const st = LANGS.english;
-        if (!st.ready) {
-          renderLetterBoxes(englishLetters, 'english');
-          titleEl.textContent = `"${englishLetters[0]}"`;
-          songList.innerHTML = spinnerHTML('Loading…');
-          await initLang('english');
-        }
-        renderLetterBoxes(englishLetters, 'english');
-        const first = englishLetters[0];
-        titleEl.textContent = `"${first}"`;
-        renderSongItems(st.index[first] || [], 'english');
-
-      } else if (lang === 'hindi') {
-        history.replaceState(null, '', '#Hindi');
-        letterDiv.innerHTML = '';
-        letterDiv.classList.add('hidden');
-        ssl.style.display = 'block';
-
-        const st = LANGS.hindi;
-        titleEl.textContent = '"Hindi"';
-        if (!st.ready) {
-          songList.innerHTML = spinnerHTML('Loading…');
-          await initLang('hindi');
-        }
-        renderSongItems(LANGS.hindi.index, 'hindi');
-      }
-
-      if (currentQuery) filterSongs(currentQuery);
     }
 
     // ═══════════════════════════════════════════════════════════════════
@@ -861,6 +766,55 @@
         if (show) count++;
       });
       noSongsMessage.classList.toggle('hidden', !(count === 0 && query.length > 0));
+    }
+
+    // ═══════════════════════════════════════════════════════════════════
+    // LANGUAGE SWITCH
+    // ═══════════════════════════════════════════════════════════════════
+    async function switchLanguage(lang, event) {
+      currentLanguage = lang;
+      selLis.textContent = lang.charAt(0).toUpperCase() + lang.slice(1);
+
+      if (lang === 'telugu') {
+        history.replaceState(null, '', location.pathname);
+        letterDiv.classList.remove('hidden');
+        ssl.style.display = 'block';
+        if (!langInited.telugu) {
+          await initTelugu();
+        } else {
+          renderLetterBoxes(teluguLetters, 'telugu');
+          titleEl.textContent = `"${teluguLetters[0]}"`;
+          renderSongItems(songIndex.telugu[teluguLetters[0]] || [], 'telugu');
+        }
+      } else if (lang === 'english') {
+        history.replaceState(null, '', '#English');
+        letterDiv.classList.remove('hidden');
+        ssl.style.display = 'block';
+        if (!langInited.english) {
+          await initEnglish();
+        } else {
+          renderLetterBoxes(englishLetters, 'english');
+          titleEl.textContent = `"${englishLetters[0]}"`;
+          renderSongItems(songIndex.english[englishLetters[0]] || [], 'english');
+        }
+      } else if (lang === 'hindi') {
+        history.replaceState(null, '', '#Hindi');
+        letterDiv.innerHTML = '';
+        letterDiv.classList.add('hidden');
+        ssl.style.display = 'block';
+        if (!langInited.hindi) {
+          await initHindi();
+        } else {
+          titleEl.textContent = '"Hindi"';
+          renderSongItems(songIndex.hindi, 'hindi');
+        }
+        if (currentQuery) filterSongs(currentQuery);
+      }
+
+      if (event && event.target) {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        event.target.classList.add('active');
+      }
     }
 
     // ═══════════════════════════════════════════════════════════════════
@@ -894,20 +848,17 @@
         document.querySelector('#songs-grid').style.display = 'block';
         searchIcon.classList.remove('hide-icon');
         closeIcon.classList.add('hide-icon');
-        // Restore current language view
         if (currentLanguage === 'telugu') {
           renderLetterBoxes(teluguLetters, 'telugu');
-          const first = teluguLetters[0];
-          titleEl.textContent = `"${first}"`;
-          renderSongItems(LANGS.telugu.index[first] || [], 'telugu');
+          titleEl.textContent = `"${teluguLetters[0]}"`;
+          renderSongItems(songIndex.telugu[teluguLetters[0]] || [], 'telugu');
         } else if (currentLanguage === 'english') {
           renderLetterBoxes(englishLetters, 'english');
-          const first = englishLetters[0];
-          titleEl.textContent = `"${first}"`;
-          renderSongItems(LANGS.english.index[first] || [], 'english');
+          titleEl.textContent = `"${englishLetters[0]}"`;
+          renderSongItems(songIndex.english[englishLetters[0]] || [], 'english');
         } else {
           titleEl.textContent = '"Hindi"';
-          renderSongItems(LANGS.hindi.index, 'hindi');
+          renderSongItems(songIndex.hindi, 'hindi');
         }
       }
     });
@@ -1021,7 +972,7 @@
     // INIT
     // ═══════════════════════════════════════════════════════════════════
     document.getElementById('current-yr').textContent = new Date().getFullYear();
-    purgeStaleSC();
+    purgeStaleCacheEntries();
 
     const _tabs = {
       telugu: document.querySelector('.tab-btn:nth-child(1)'),
