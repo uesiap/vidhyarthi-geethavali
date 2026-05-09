@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <h2>Storage Info</h2>
+  <pre id="output"></pre>
+
+  <script>
+    async function getStorageInfo() {
+      if (navigator.storage && navigator.storage.estimate) {
+        const estimate = await navigator.storage.estimate();
+
+        const output = {
+          usageBytes: estimate.usage,
+          quotaBytes: estimate.quota,
+          usageDetails: estimate.usageDetails || "Not supported"
+        };
+
+        document.getElementById("output").textContent =
+          JSON.stringify(output, null, 2);
+      } else {
+        document.getElementById("output").textContent =
+          "Storage API not supported.";
+      }
+    }
+
+    getStorageInfo();
+  </script>
+</body>
+</html>
