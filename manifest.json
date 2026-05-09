@@ -2,29 +2,30 @@
   "name": "Vidhyarthi Geethavali",
   "short_name": "UESI AP",
   "start_url": "/vidhyardhi-geethavali/",
+  "scope": "/vidhyardhi-geethavali/",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#fff",
+  "background_color": "#ffffff",
   "theme_color": "#128C7E",
   "icons": [
     {
       "src": "/vidhyardhi-geethavali/Icon192.png",
       "sizes": "192x192",
-      "type": "image/jpeg"
+      "type": "image/png"
     },
     {
       "src": "/vidhyardhi-geethavali/Icon512.png",
       "sizes": "512x512",
-      "type": "image/jpeg"
+      "type": "image/png"
     }
   ],
-  "splash_pages": null,
-  "screens": [
+
+  "screenshots": [
     {
       "src": "/vidhyardhi-geethavali/uesisongsmain.jpg",
       "sizes": "640x1136",
       "type": "image/jpeg",
-      "orientation": "portrait"
+      "form_factor": "narrow"
     }
   ]
 }
