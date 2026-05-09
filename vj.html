@@ -1412,14 +1412,15 @@
       onclick="window.location.href='https://melamrahul.github.io/'">M.Rahul</button>
   </footer>
   <script>
-    // ─── CONFIG ────────────────────────────────────────────────────────────────
-    // Add more chunk endpoints here as you create them
-    const BASE = '/vidhyardhi-geethavali/data';
+    // ═══════════════════════════════════════════════════════════════════
+    // CONFIG — add new chunk numbers here as you create them
+    // ═══════════════════════════════════════════════════════════════════
+    const BASE = 'https://uesiap.github.io/vidhyardhi-geethavali/data';
     const TSONG_CHUNKS = [50, 100, 150, 200, 250, 300, 350];
     const ESONG_CHUNKS = [50, 100];
     const HSONG_CHUNKS = [50];
+    const CACHE_VERSION = 'vg-v1'; // ← bump this string whenever you want to force-refresh all users' caches
 
-    // Telugu vowels/consonants for first-letter grouping
     const teluguLetters = [
       "అ", "ఆ", "ఇ", "ఈ", "ఉ", "ఊ", "ఋ", "ఎ", "ఏ", "ఐ", "ఒ", "ఓ", "ఔ",
       "క", "ఖ", "గ", "ఘ", "ఙ", "చ", "ఛ", "జ", "ఝ", "ఞ", "ట", "ఠ", "డ", "ఢ", "ణ",
@@ -1427,22 +1428,71 @@
     ];
     const englishLetters = Array.from({ length: 26 }, (_, i) => String.fromCharCode(65 + i));
 
-    // ─── STATE ──────────────────────────────────────────────────────────────────
-    let teluguSongs = {};   // { "అ": [{id,name}, …], … }
-    let englishSongs = {};   // { "A":  [{id,name}, …], … }
-    let hindiSongs = [];   // [{id,name}, …]  sorted by number
+    // ═══════════════════════════════════════════════════════════════════
+    // STATE
+    // ═══════════════════════════════════════════════════════════════════
+    let teluguSongs = {};  // { "అ": [{id,name}, …] }
+    let englishSongs = {};  // { "A":  [{id,name}, …] }
+    let hindiSongs = [];  // [{id,name}, …] sorted by number
     let currentLanguage = 'telugu';
     let currentQuery = '';
-    let dataReady = { telugu: false, english: false, hindi: false };
 
-    // ─── FETCH HELPERS ──────────────────────────────────────────────────────────
+    // ═══════════════════════════════════════════════════════════════════
+    // SMART CACHE  (sessionStorage — lives only for this browser tab session)
+    // Strategy:
+    //   • On first load: fetch from network, store in sessionStorage with CACHE_VERSION key
+    //   • On tab refresh within same session: read from sessionStorage instantly (no network)
+    //   • On new session OR after you bump CACHE_VERSION: fetch fresh from network
+    //   • sessionStorage is automatically cleared when the tab/browser closes
+    //   • Never grows unboundedly — each key is simply overwritten, not appended
+    // ═══════════════════════════════════════════════════════════════════
+    function cacheKey(url) {
+      return CACHE_VERSION + '|' + url;
+    }
+
+    async function fetchWithCache(url) {
+      const key = cacheKey(url);
+      try {
+        const cached = sessionStorage.getItem(key);
+        if (cached) return JSON.parse(cached);
+      } catch (e) { /* sessionStorage full or parse error — fall through to network */ }
+
+      const res = await fetch(url);
+      if (!res.ok) return {};
+      const data = await res.json();
+
+      try {
+        sessionStorage.setItem(key, JSON.stringify(data));
+      } catch (e) {
+        // sessionStorage quota exceeded — clear old CACHE_VERSION entries and retry once
+        clearOldCacheEntries();
+        try { sessionStorage.setItem(key, JSON.stringify(data)); } catch (e2) { /* give up silently */ }
+      }
+      return data;
+    }
+
+    function clearOldCacheEntries() {
+      // Remove any entries that don't match current CACHE_VERSION
+      const toDelete = [];
+      for (let i = 0; i < sessionStorage.length; i++) {
+        const k = sessionStorage.key(i);
+        if (k && !k.startsWith(CACHE_VERSION + '|')) toDelete.push(k);
+      }
+      toDelete.forEach(k => sessionStorage.removeItem(k));
+    }
+
     async function fetchChunks(lang, chunks) {
       const urls = chunks.map(n => `${BASE}/${lang}/${n}/list.json`);
-      const results = await Promise.allSettled(urls.map(u => fetch(u).then(r => r.ok ? r.json() : {})));
+      const results = await Promise.allSettled(urls.map(u => fetchWithCache(u)));
       const merged = {};
       results.forEach(r => { if (r.status === 'fulfilled') Object.assign(merged, r.value); });
       return merged;
     }
+
+    // ═══════════════════════════════════════════════════════════════════
+    // INDEX BUILDERS
+    // ═══════════════════════════════════════════════════════════════════
+    function numOf(id) { return parseInt((id || '').replace('song', ''), 10) || 0; }
 
     function buildTeluguIndex(raw) {
       const index = {};
@@ -1450,11 +1500,9 @@
       Object.entries(raw).forEach(([num, song]) => {
         if (!song.title) return;
         const first = song.title.charAt(0);
-        // Match first char to a Telugu vowel sign base or consonant
-        const letter = teluguLetters.find(l => first === l) || null;
+        const letter = teluguLetters.find(l => l === first) || null;
         if (letter) index[letter].push({ id: `song${num}`, name: `${song.title} (${num})` });
       });
-      // Sort each bucket by song number
       teluguLetters.forEach(l => index[l].sort((a, b) => numOf(a.id) - numOf(b.id)));
       return index;
     }
@@ -1478,22 +1526,62 @@
         .sort((a, b) => numOf(a.id) - numOf(b.id));
     }
 
-    function numOf(id) { return parseInt(id.replace('song', ''), 10) || 0; }
-
-    // ─── LOAD ALL DATA ──────────────────────────────────────────────────────────
+    // ═══════════════════════════════════════════════════════════════════
+    // LOAD ALL DATA
+    // ═══════════════════════════════════════════════════════════════════
     async function loadAll() {
+      showLoader();
+      clearOldCacheEntries(); // purge any stale CACHE_VERSION entries from previous app versions
+
       const [tRaw, eRaw, hRaw] = await Promise.all([
         fetchChunks('tsongs', TSONG_CHUNKS),
         fetchChunks('esongs', ESONG_CHUNKS),
         fetchChunks('hsongs', HSONG_CHUNKS)
       ]);
+
       teluguSongs = buildTeluguIndex(tRaw);
       englishSongs = buildEnglishIndex(eRaw);
       hindiSongs = buildHindiList(hRaw);
-      dataReady.telugu = dataReady.english = dataReady.hindi = true;
+
+      hideLoader();
     }
 
-    // ─── DOM REFS ───────────────────────────────────────────────────────────────
+    // ═══════════════════════════════════════════════════════════════════
+    // LOADER  (shown inside #letters while JSON loads)
+    // ═══════════════════════════════════════════════════════════════════
+    function showLoader() {
+      letterDiv.innerHTML = `
+    <div style="
+      grid-column: 1/-1;
+      display:flex; justify-content:center; align-items:center;
+      padding: 2.5rem 0; width:100%;
+    ">
+      <div style="
+        width:44px; height:44px;
+        border: 4px solid rgba(0,0,0,0.1);
+        border-top-color: var(--primary-color, #5b4fcf);
+        border-radius: 50%;
+        animation: vg-spin 0.75s linear infinite;
+      "></div>
+    </div>`;
+
+      // inject keyframes once
+      if (!document.getElementById('vg-spin-style')) {
+        const s = document.createElement('style');
+        s.id = 'vg-spin-style';
+        s.textContent = '@keyframes vg-spin { to { transform: rotate(360deg); } }';
+        document.head.appendChild(s);
+      }
+
+      songList.innerHTML = '';
+      titleEl.textContent = '';
+    }
+
+    function hideLoader() { letterDiv.innerHTML = ''; }
+
+    // ═══════════════════════════════════════════════════════════════════
+    // DOM REFS
+    // ═══════════════════════════════════════════════════════════════════
     const letterDiv = document.getElementById('letters');
     const songList = document.getElementById('songs');
     const titleEl = document.getElementById('title');
@@ -1501,7 +1589,9 @@
     const selLis = document.getElementById('sel-lis');
     const noSongsMessage = document.getElementById('noSongsMessage');
 
-    // ─── RENDER HELPERS ─────────────────────────────────────────────────────────
+    // ═══════════════════════════════════════════════════════════════════
+    // RENDER
+    // ═══════════════════════════════════════════════════════════════════
     function renderSongItems(songs, lang) {
       songList.innerHTML = '';
       if (!songs.length) {
@@ -1528,6 +1618,7 @@
       renderSongItems(list, lang);
     }
 
+    // scroll=true only when user explicitly clicks a letter or song box — never on tab switch or page load
     function renderLetters(letters, lang, scroll = false) {
       letterDiv.innerHTML = '';
       songList.innerHTML = '';
@@ -1538,13 +1629,15 @@
         const box = document.createElement('div');
         box.className = 'box';
         box.textContent = letter;
+
         box.onclick = () => {
           document.querySelectorAll('.box').forEach(b => b.classList.remove('active'));
           box.classList.add('active');
           showSongsTab(letter, lang);
           if (currentQuery) filterSongs(currentQuery);
-          scrollToSongs();
+          scrollToSongs(); // scroll ONLY on explicit letter click
         };
+
         if (index === 0) box.classList.add('active');
         letterDiv.appendChild(box);
       });
@@ -1553,7 +1646,8 @@
         showSongsTab(letters[0], lang);
         if (currentQuery) filterSongs(currentQuery);
       }
-      if (scroll) scrollToSongs();
+
+      // ← NO scrollToSongs() here — fixes issue #2 and #4
     }
 
     function renderSearchSongs(lang) {
@@ -1565,21 +1659,24 @@
       renderSongItems(all, lang);
     }
 
-    // ─── FILTER ─────────────────────────────────────────────────────────────────
+    // ═══════════════════════════════════════════════════════════════════
+    // FILTER
+    // ═══════════════════════════════════════════════════════════════════
     function filterSongs(query) {
       const links = document.querySelectorAll('#songs .song-link');
       let count = 0;
       links.forEach(link => {
-        const text = link.innerText.toLowerCase();
         const li = link.closest('li') || link.parentElement;
-        const show = text.includes(query);
+        const show = link.innerText.toLowerCase().includes(query);
         li.style.display = show ? '' : 'none';
         if (show) count++;
       });
       noSongsMessage.classList.toggle('hidden', !(count === 0 && query.length > 0));
     }
 
-    // ─── LANGUAGE SWITCH ────────────────────────────────────────────────────────
+    // ═══════════════════════════════════════════════════════════════════
+    // LANGUAGE SWITCH  (never auto-scrolls — fixes issue #4)
+    // ═══════════════════════════════════════════════════════════════════
     function switchLanguage(lang, event) {
       currentLanguage = lang;
       selLis.textContent = lang.charAt(0).toUpperCase() + lang.slice(1);
@@ -1588,12 +1685,12 @@
         history.replaceState(null, '', location.pathname);
         letterDiv.classList.remove('hidden');
         ssl.style.display = 'block';
-        renderLetters(teluguLetters, 'telugu', true);
+        renderLetters(teluguLetters, 'telugu'); // no scroll
       } else if (lang === 'english') {
         history.replaceState(null, '', '#English');
         letterDiv.classList.remove('hidden');
         ssl.style.display = 'block';
-        renderLetters(englishLetters, 'english', true);
+        renderLetters(englishLetters, 'english'); // no scroll
       } else if (lang === 'hindi') {
         history.replaceState(null, '', '#Hindi');
         letterDiv.innerHTML = '';
@@ -1610,7 +1707,9 @@
       }
     }
 
-    // ─── SEARCH TOGGLE ──────────────────────────────────────────────────────────
+    // ═══════════════════════════════════════════════════════════════════
+    // SEARCH
+    // ═══════════════════════════════════════════════════════════════════
     const searchToggle = document.getElementById('searchToggle');
     const searchBox = document.getElementById('searchBox');
     const searchInput = document.getElementById('songSearchInput');
@@ -1659,7 +1758,9 @@
       searchInput.focus();
     });
 
-    // ─── SCROLL ─────────────────────────────────────────────────────────────────
+    // ═══════════════════════════════════════════════════════════════════
+    // SCROLL
+    // ═══════════════════════════════════════════════════════════════════
     function scrollToSongs() {
       const offset = window.innerWidth <= 768 ? 85 : 100;
       window.scrollTo({ top: ssl.getBoundingClientRect().top + window.scrollY - offset, behavior: 'smooth' });
@@ -1669,7 +1770,9 @@
     window.addEventListener('scroll', () => { scrollBtn.style.display = window.scrollY > 300 ? 'flex' : 'none'; });
     scrollBtn.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
 
-    // ─── DRAWER ─────────────────────────────────────────────────────────────────
+    // ═══════════════════════════════════════════════════════════════════
+    // DRAWER
+    // ═══════════════════════════════════════════════════════════════════
     const menuBtn = document.getElementById('menuBtn');
     const drawer = document.getElementById('drawer');
     const overlay = document.getElementById('overlay');
@@ -1681,8 +1784,8 @@
       menuBtn.setAttribute('aria-expanded', isOpen);
       menuBtn.querySelector('.menu-toggle').classList.toggle('open', isOpen);
     };
-
     menuBtn.addEventListener('click', toggleDrawer);
+
     overlay.addEventListener('click', () => {
       drawer.classList.remove('open');
       overlay.classList.remove('show');
@@ -1705,11 +1808,15 @@
     submenuItems.forEach(item => {
       item.addEventListener('click', e => {
         e.stopPropagation();
-        submenuItems.forEach(o => { if (o !== item) { o.classList.remove('open'); o.nextElementSibling?.classList.remove('open'); } });
+        submenuItems.forEach(o => {
+          if (o !== item) { o.classList.remove('open'); o.nextElementSibling?.classList.remove('open'); }
+        });
         item.classList.toggle('open');
         item.nextElementSibling?.classList.toggle('open');
       });
-      item.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); item.click(); } });
+      item.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); item.click(); }
+      });
     });
 
     document.addEventListener('keydown', e => {
@@ -1721,7 +1828,6 @@
       if (e.ctrlKey && e.key === 'm') { e.preventDefault(); toggleDrawer(); }
     });
 
-    // Touch swipe to close drawer
     let startX = 0, currentX = 0;
     drawer.addEventListener('touchstart', e => { startX = currentX = e.touches[0].clientX; }, { passive: true });
     drawer.addEventListener('touchmove', e => { currentX = e.touches[0].clientX; }, { passive: true });
@@ -1732,17 +1838,21 @@
       }
     }, { passive: true });
 
-    // ─── INIT ───────────────────────────────────────────────────────────────────
-    document.getElementById('current-yr').textContent = new Date().getFullYear();
-
-    // Service Worker
+    // ═══════════════════════════════════════════════════════════════════
+    // SERVICE WORKER
+    // ═══════════════════════════════════════════════════════════════════
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('/vidhyardhi-geethavali/service-worker.js')
-        .then(r => console.log('SW registered:', r.scope))
+        .then(r => console.log('SW:', r.scope))
         .catch(e => console.log('SW failed:', e));
     }
 
-    // Load songs, then render based on URL hash
+    // ═══════════════════════════════════════════════════════════════════
+    // INIT
+    // ═══════════════════════════════════════════════════════════════════
+    document.getElementById('current-yr').textContent = new Date().getFullYear();
+
+    // On page load: show spinner, fetch all JSON, then render correct language
     loadAll().then(() => {
       const hash = location.hash.replace('#', '').toLowerCase();
       const tabs = {
@@ -1753,15 +1863,13 @@
       if (hash === 'english') switchLanguage('english', { target: tabs.english });
       else if (hash === 'hindi') switchLanguage('hindi', { target: tabs.hindi });
       else { tabs.telugu.classList.add('active'); switchLanguage('telugu', { target: tabs.telugu }); }
+      // ↑ switchLanguage → renderLetters → NO scroll. Page stays at top. Fixes issue #2.
     });
 
-    // LocalStorage / cache cleanup (keep bbsRole, bbsName)
+    // Clean up localStorage (keep only bbsRole, bbsName)
     (function () {
       const keep = new Set(['bbsRole', 'bbsName'].filter(k => localStorage.getItem(k) !== null));
       Object.keys(localStorage).forEach(k => { if (!keep.has(k)) localStorage.removeItem(k); });
-      sessionStorage.clear();
-      if (window.indexedDB) indexedDB.databases?.().then(dbs => dbs.forEach(db => indexedDB.deleteDatabase(db.name)));
-      if ('caches' in window) caches.keys().then(names => names.forEach(n => caches.delete(n)));
     })();
   </script>
   <script>
