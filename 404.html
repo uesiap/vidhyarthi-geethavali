@@ -279,8 +279,8 @@
 
       if (!jsonPath || !songNumber) {
         renderError(
-          "Song/sub page not added yet",
-          `We will add this song/sub page soon.<br><code>UESI AP - Audio & Visuals Dept</code>`
+          "This sub page not added yet",
+          `We will add this sub page soon.<br><code>UESI AP - Audio & Visuals Dept</code>`
         );
         return;
       }
@@ -296,8 +296,8 @@
         json = await res.json();
       } catch (err) {
         renderError(
-          "Song/ sub page not added yet",
-          `We will add this song/ sub page soon.<br><code>UESI AP - Audio & Visuals Dept</code>`
+          "This sub page not added yet",
+          `We will add this sub page soon.<br><code>UESI AP - Audio & Visuals Dept</code>`
         );
         return;
       }
@@ -305,8 +305,8 @@
       const song = json[songNumber];
       if (!song) {
         renderError(
-          "Song/ sub page not added yet",
-          `We will add this song/ sub page soon.<br><code>UESI AP - Audio & Visuals Dept</code>`
+          "This sub page not added yet",
+          `We will add this sub page soon.<br><code>UESI AP - Audio & Visuals Dept</code>`
         );
         return;
       }
