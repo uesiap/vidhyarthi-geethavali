@@ -825,7 +825,6 @@ label[for="langSelect"] {
 .go-home-btn:hover {
     background-color: var(--primary-dark);
     transform: translateY(-2px);
-    box-shadow: 0 6px 18px rgba(7, 94, 84, 0.4);
 }
 
 .go-home-btn i {
