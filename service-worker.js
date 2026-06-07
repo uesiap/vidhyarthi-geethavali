@@ -2,11 +2,11 @@ const CACHE_NAME = 'vg-shell-v1';
 
 // Only your static app shell — nothing else
 const SHELL_ASSETS = [
-  '/vidhyardhi-geethavali/',
-  '/vidhyardhi-geethavali/index.html',
-  '/vidhyardhi-geethavali/Icon192.png',
-  '/vidhyardhi-geethavali/Icon512.png',
-  '/vidhyardhi-geethavali/uesisongsmain.jpg'
+  '/vidhyarthi-geethavali/',
+  '/vidhyarthi-geethavali/index.html',
+  '/vidhyarthi-geethavali/Icon192.png',
+  '/vidhyarthi-geethavali/Icon512.png',
+  '/vidhyarthi-geethavali/uesisongsmain.jpg'
 ];
 
 // ── Install: pre-cache shell only ───────────────────────────────────
