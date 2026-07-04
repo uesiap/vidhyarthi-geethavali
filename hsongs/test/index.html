@@ -109,10 +109,6 @@
     <link rel="stylesheet" href="https://uesiap.github.io/vidhyarthi-geethavali/assets/styles/pages.css?v=1.0.0">
 
     <script src="/vidhyarthi-geethavali/boom.js" defer></script>
-    <!-- Load Components -->
-    <script src="include.js?v={{ site.github.build_revision }}"></script>
-    <!-- Service Worker Registration -->
-    <script src="sw.js?v={{ site.github.build_revision }}" defer></script>
 </head>
 
 <body>
@@ -186,6 +182,11 @@
         </div>
     </main>
     <div id="footer"></div>
+
+    <!-- Load Components -->
+    <script src="include.js?v={{ site.github.build_revision }}"></script>
+    <!-- Service Worker Registration -->
+    <script src="sw.js?v={{ site.github.build_revision }}" defer></script>
 
     <!-- Website Scripts -->
     <script src="script.js" defer></script>
