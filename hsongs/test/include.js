@@ -1,18 +1,14 @@
 async function loadComponent(id, file) {
-    const res = await fetch(file);
-    document.getElementById(id).innerHTML = await res.text();
+    const el = document.getElementById(id);
+    if (!el) return;
 
-    // Footer year
-    if (id === "footer") {
-        document.getElementById("current-yr").textContent =
-            new Date().getFullYear();
-    }
-
-    // Navbar initialization
-    if (id === "navbar") {
-        initNavbar();
-    }
+    el.innerHTML = await (await fetch(file)).text();
 }
 
-loadComponent("navbar", "navbar.html");
-loadComponent("footer", "footer.html");
+Promise.all([
+    loadComponent("navbar", "navbar.html"),
+    loadComponent("footer", "footer.html")
+]).then(() => {
+    document.getElementById("current-yr").textContent = new Date().getFullYear();
+    initNavbar();
+});
