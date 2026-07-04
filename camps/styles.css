@@ -715,7 +715,6 @@ body {
 
 .hidden {
     display: none !important;
-    /* Use !important to override other display properties */
     visibility: hidden;
     opacity: 0;
     height: 0;
