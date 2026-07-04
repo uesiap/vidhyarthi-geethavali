@@ -10,7 +10,7 @@
 
   "icons": [
     {
-      "src": "/vidhyarthi-geethavali/Icon192.png",
+      "src": "/vidhyarthi-geethavali/assets/Icons/Icon192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
@@ -23,42 +23,42 @@
 
   "screenshots": [
     {
-      "src": "/vidhyarthi-geethavali/images/screenshorts/home.jpg",
+      "src": "/vidhyarthi-geethavali/assets/pwa/home.jpg",
       "sizes": "640x1136",
       "type": "image/jpeg",
       "form_factor": "narrow",
       "label": "Home Screen"
     },
     {
-      "src": "/vidhyarthi-geethavali/images/screenshorts/drawer.jpg",
+      "src": "/vidhyarthi-geethavali/assets/pwa/drawer.jpg",
       "sizes": "640x1136",
       "type": "image/jpeg",
       "form_factor": "narrow",
       "label": "Navigation Drawer"
     },
     {
-      "src": "/vidhyarthi-geethavali/images/screenshorts/render.jpg",
+      "src": "/vidhyarthi-geethavali/assets/pwa/render.jpg",
       "sizes": "640x1136",
       "type": "image/jpeg",
       "form_factor": "narrow",
       "label": "Song Rendering"
     },
     {
-      "src": "/vidhyarthi-geethavali/images/screenshorts/options.jpg",
+      "src": "/vidhyarthi-geethavali/assets/pwa/options.jpg",
       "sizes": "640x1136",
       "type": "image/jpeg",
       "form_factor": "narrow",
       "label": "Options Menu"
     },
     {
-      "src": "/vidhyarthi-geethavali/images/screenshorts/subpage.jpg",
+      "src": "/vidhyarthi-geethavali/assets/pwa/subpage.jpg",
       "sizes": "640x1136",
       "type": "image/jpeg",
       "form_factor": "narrow",
       "label": "Subpage View"
     },
     {
-      "src": "/vidhyarthi-geethavali/images/screenshorts/player.jpg",
+      "src": "/vidhyarthi-geethavali/assets/pwa/player.jpg",
       "sizes": "640x1136",
       "type": "image/jpeg",
       "form_factor": "narrow",
