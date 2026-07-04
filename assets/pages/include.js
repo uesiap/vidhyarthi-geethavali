@@ -12,8 +12,8 @@ async function loadComponent(id, file) {
     }
 }
 Promise.all([
-    loadComponent("navbar", "navbar"),
-    loadComponent("footer", "footer")
+    loadComponent("navbar", "/vidhyarthi-geethavali/assets/pages/navbar"),
+    loadComponent("footer", "/vidhyarthi-geethavali/assets/pages/footer")
 ]).then(() => {
     // Set footer year
     const year = document.getElementById("current-yr");
