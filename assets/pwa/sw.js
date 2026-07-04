@@ -7,3 +7,4 @@ if ('serviceWorker' in navigator) {
             console.error('SW registration failed:', err);
         });
 }
+//Service-Worker Helper
