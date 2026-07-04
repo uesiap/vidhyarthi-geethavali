@@ -1,5 +1,5 @@
 if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/vidhyarthi-geethavali/assets/pwa/service-worker.js?v={{ site.github.build_revision }}')
+    navigator.serviceWorker.register('/vidhyarthi-geethavali/assets/pwa/service-worker.js')
         .then(reg => {
             console.log('SW registered:', reg.scope);
         })
