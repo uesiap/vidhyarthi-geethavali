@@ -564,16 +564,17 @@ label[for="langSelect"] {
 }
 
 .audio-player {
-    bottom: 70px;
-    margin-bottom: -7px;
-    height: 52px;
-    padding: 1rem 0 0.8rem 6px;
+    bottom: 64px;
+    margin-bottom: -3px;
+    height: 60px;
+    padding: 1rem 0 1.04rem 6px;
 }
 
 .track-player {
-    bottom: 10px;
+    bottom: 2px;
     height: 45px;
-    padding: 2rem 0 1.05rem 6px;
+    padding: 2rem 0 1.6rem 6px;
+    border-bottom: 3px solid #888
 }
 
 @media (min-width: 768px) {
