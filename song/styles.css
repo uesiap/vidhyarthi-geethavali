@@ -571,7 +571,7 @@ label[for="langSelect"] {
 }
 
 .track-player {
-    bottom: 2px;
+    bottom: 0px;
     height: 45px;
     padding: 2rem 0 1.6rem 6px;
     border-bottom: 3px solid #888
