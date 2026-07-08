@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Search Insights — Vidhyarthi Geethavali</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
+
+<style>
+  :root{
+    --ink:#182233;
+    --ink-soft:#4a5568;
+    --paper:#f4f2ec;
+    --paper-raised:#ffffff;
+    --line:#dcd8cc;
+    --teal:#0f6f63;
+    --teal-soft:#e4f0ed;
+    --amber:#c8862a;
+    --amber-soft:#f7ecda;
+    --plum:#6b4a7a;
+    --plum-soft:#efe6f2;
+    --danger:#a8402f;
+    --radius:10px;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px 80px;}
+
+  /* ── Header ─────────────────────────────────────────── */
+  header.top{
+    padding:40px 0 28px;
+    border-bottom:1px solid var(--line);
+    margin-bottom:28px;
+  }
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--teal);
+    font-weight:700;
+    margin-bottom:10px;
+  }
+  h1{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:clamp(28px,4vw,42px);
+    margin:0 0 6px;
+    letter-spacing:-0.01em;
+  }
+  .sub{color:var(--ink-soft);font-size:15px;margin:0;}
+
+  /* ── Controls ───────────────────────────────────────── */
+  .controls{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:10px;
+    margin-top:24px;
+  }
+  .preset-group{display:flex;gap:6px;flex-wrap:wrap;}
+  .preset-btn{
+    font-family:'Inter',sans-serif;
+    font-size:13px;
+    font-weight:600;
+    padding:8px 14px;
+    border-radius:20px;
+    border:1px solid var(--line);
+    background:var(--paper-raised);
+    color:var(--ink-soft);
+    cursor:pointer;
+    transition:.15s;
+  }
+  .preset-btn:hover{border-color:var(--teal);color:var(--teal);}
+  .preset-btn.active{background:var(--ink);border-color:var(--ink);color:#fff;}
+
+  .date-range{display:flex;align-items:center;gap:8px;margin-left:auto;}
+  .date-range input[type=date]{
+    font-family:'JetBrains Mono',monospace;
+    font-size:13px;
+    padding:7px 10px;
+    border:1px solid var(--line);
+    border-radius:6px;
+    background:var(--paper-raised);
+    color:var(--ink);
+  }
+  .date-range span{color:var(--ink-soft);font-size:13px;}
+  .refresh-btn{
+    font-family:'Inter',sans-serif;
+    font-size:13px;font-weight:600;
+    padding:8px 16px;border-radius:6px;
+    border:1px solid var(--ink);background:var(--ink);color:#fff;cursor:pointer;
+  }
+  .refresh-btn:hover{opacity:.85;}
+  .refresh-btn:disabled{opacity:.5;cursor:default;}
+
+  /* ── Status ─────────────────────────────────────────── */
+  #status{
+    font-family:'JetBrains Mono',monospace;
+    font-size:13px;color:var(--ink-soft);
+    padding:14px 0;
+  }
+  #status.error{color:var(--danger);}
+
+  /* ── Stat cards ─────────────────────────────────────── */
+  .stats{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+    gap:14px;
+    margin:28px 0;
+  }
+  .stat-card{
+    background:var(--paper-raised);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:20px 20px 18px;
+  }
+  .stat-card .label{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;text-transform:uppercase;letter-spacing:.08em;
+    color:var(--ink-soft);margin-bottom:8px;
+  }
+  .stat-card .value{
+    font-family:'Fraunces',serif;
+    font-size:32px;font-weight:600;
+    line-height:1;
+  }
+  .stat-card .foot{font-size:12px;color:var(--ink-soft);margin-top:6px;}
+  .stat-card.teal .value{color:var(--teal);}
+  .stat-card.amber .value{color:var(--amber);}
+  .stat-card.plum .value{color:var(--plum);}
+
+  /* ── Panels ─────────────────────────────────────────── */
+  .panel-grid{
+    display:grid;
+    grid-template-columns:1.4fr 1fr;
+    gap:16px;
+    margin-bottom:16px;
+  }
+  @media(max-width:820px){.panel-grid{grid-template-columns:1fr;}}
+
+  .panel{
+    background:var(--paper-raised);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:22px 22px 18px;
+  }
+  .panel h2{
+    font-family:'Fraunces',serif;
+    font-size:17px;font-weight:600;margin:0 0 4px;
+  }
+  .panel .panel-sub{font-size:12.5px;color:var(--ink-soft);margin:0 0 16px;}
+  .chart-box{position:relative;height:260px;}
+  .chart-box.small{height:220px;}
+
+  /* ── Top queries list ───────────────────────────────── */
+  .rank-list{list-style:none;margin:0;padding:0;}
+  .rank-list li{
+    display:flex;align-items:center;gap:12px;
+    padding:9px 0;border-bottom:1px solid var(--line);
+    font-size:13.5px;
+  }
+  .rank-list li:last-child{border-bottom:none;}
+  .rank-num{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;color:var(--ink-soft);
+    width:20px;flex-shrink:0;
+  }
+  .rank-term{flex:1;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .rank-bar-wrap{width:80px;height:6px;background:var(--teal-soft);border-radius:3px;overflow:hidden;flex-shrink:0;}
+  .rank-bar{height:100%;background:var(--teal);border-radius:3px;}
+  .rank-count{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;color:var(--ink-soft);width:28px;text-align:right;flex-shrink:0;
+  }
+
+  /* ── Table ──────────────────────────────────────────── */
+  .table-panel{margin-top:16px;}
+  .table-toolbar{
+    display:flex;align-items:center;gap:12px;margin-bottom:14px;flex-wrap:wrap;
+  }
+  .table-toolbar input[type=text]{
+    flex:1;min-width:180px;
+    font-family:'Inter',sans-serif;font-size:13px;
+    padding:9px 12px;border:1px solid var(--line);border-radius:6px;
+    background:var(--paper);
+  }
+  table{width:100%;border-collapse:collapse;font-size:13.5px;}
+  thead th{
+    text-align:left;
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;text-transform:uppercase;letter-spacing:.06em;
+    color:var(--ink-soft);
+    padding:8px 10px;border-bottom:2px solid var(--ink);
+    cursor:pointer;user-select:none;
+  }
+  thead th:hover{color:var(--teal);}
+  tbody td{padding:9px 10px;border-bottom:1px solid var(--line);}
+  tbody tr:hover{background:var(--paper);}
+  .lang-tag{
+    font-family:'JetBrains Mono',monospace;font-size:11px;
+    padding:2px 8px;border-radius:20px;
+    background:var(--plum-soft);color:var(--plum);
+    text-transform:uppercase;letter-spacing:.03em;
+  }
+  .lang-tag.telugu{background:var(--teal-soft);color:var(--teal);}
+  .lang-tag.english{background:var(--amber-soft);color:var(--amber);}
+  .lang-tag.hindi{background:var(--plum-soft);color:var(--plum);}
+  .lang-tag.unknown{background:#ececec;color:#777;}
+
+  .pager{display:flex;align-items:center;gap:10px;justify-content:flex-end;margin-top:14px;}
+  .pager button{
+    font-family:'JetBrains Mono',monospace;font-size:12px;
+    padding:6px 10px;border:1px solid var(--line);border-radius:6px;
+    background:var(--paper-raised);cursor:pointer;
+  }
+  .pager button:disabled{opacity:.4;cursor:default;}
+  .pager span{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--ink-soft);}
+
+  .empty{
+    text-align:center;padding:40px 20px;color:var(--ink-soft);font-size:13.5px;
+  }
+  footer.credit{
+    text-align:center;font-size:12px;color:var(--ink-soft);
+    padding-top:30px;font-family:'JetBrains Mono',monospace;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="eyebrow">UESI-AP · Audio &amp; Visuals Dept</div>
+    <h1>Search Insights</h1>
+    <p class="sub">What people are actually looking for on Vidhyarthi Geethavali.</p>
+
+    <div class="controls">
+      <div class="preset-group" id="presetGroup">
+        <button class="preset-btn" data-range="today">Today</button>
+        <button class="preset-btn" data-range="7">Last 7 days</button>
+        <button class="preset-btn active" data-range="30">Last 30 days</button>
+        <button class="preset-btn" data-range="all">All time</button>
+      </div>
+      <div class="date-range">
+        <input type="date" id="fromDate">
+        <span>to</span>
+        <input type="date" id="toDate">
+      </div>
+      <button class="refresh-btn" id="refreshBtn">Refresh</button>
+    </div>
+  </header>
+
+  <div id="status">Connecting to Firebase…</div>
+
+  <section class="stats" id="statsRow" style="display:none;">
+    <div class="stat-card teal">
+      <div class="label">Total Searches</div>
+      <div class="value" id="statTotal">0</div>
+      <div class="foot" id="statTotalFoot">in selected range</div>
+    </div>
+    <div class="stat-card amber">
+      <div class="label">Unique Queries</div>
+      <div class="value" id="statUnique">0</div>
+      <div class="foot">distinct search terms</div>
+    </div>
+    <div class="stat-card plum">
+      <div class="label">Busiest Day</div>
+      <div class="value" id="statBusiest">—</div>
+      <div class="foot" id="statBusiestFoot">&nbsp;</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">Top Language</div>
+      <div class="value" id="statLang">—</div>
+      <div class="foot" id="statLangFoot">&nbsp;</div>
+    </div>
+  </section>
+
+  <section class="panel-grid" id="panelGrid" style="display:none;">
+    <div class="panel">
+      <h2>Searches over time</h2>
+      <p class="panel-sub">Daily volume across the selected range</p>
+      <div class="chart-box"><canvas id="timelineChart"></canvas></div>
+    </div>
+    <div class="panel">
+      <h2>Top search terms</h2>
+      <p class="panel-sub">Ranked by frequency</p>
+      <ol class="rank-list" id="rankList"></ol>
+    </div>
+  </section>
+
+  <section class="panel-grid" id="panelGrid2" style="display:none;">
+    <div class="panel">
+      <h2>Language breakdown</h2>
+      <p class="panel-sub">Which tab people were searching from</p>
+      <div class="chart-box small"><canvas id="langChart"></canvas></div>
+    </div>
+    <div class="panel">
+      <h2>Hour-of-day pattern</h2>
+      <p class="panel-sub">When searches tend to happen (IST)</p>
+      <div class="chart-box small"><canvas id="hourChart"></canvas></div>
+    </div>
+  </section>
+
+  <section class="panel table-panel" id="tablePanel" style="display:none;">
+    <h2>Raw search log</h2>
+    <p class="panel-sub">Every logged query in the selected range</p>
+    <div class="table-toolbar">
+      <input type="text" id="tableFilter" placeholder="Filter by query text…">
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th data-sort="query">Query</th>
+          <th data-sort="lang">Language</th>
+          <th data-sort="timestamp">Time</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody"></tbody>
+    </table>
+    <div class="empty" id="tableEmpty" style="display:none;">No queries match this range or filter.</div>
+    <div class="pager">
+      <span id="pagerInfo">–</span>
+      <button id="pagerPrev">← Prev</button>
+      <button id="pagerNext">Next →</button>
+    </div>
+  </section>
+
+  <footer class="credit">searchLogs · uesi-ap-default-rtdb · read-only view</footer>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════════
+// FIREBASE INIT
+// ═══════════════════════════════════════════════════════════════════
+const firebaseConfig = {
+  apiKey: "0AzyPiDT3wSi6WAuNX7YzbyJcvUgV0nyoxMwahn0",
+  authDomain: "uesi-ap-default-rtdb.firebaseio.com",
+  databaseURL: "https://uesi-ap-default-rtdb.firebaseio.com",
+  projectId: "uesi-ap"
+};
+
+let allLogs = [];   // full raw dataset from Firebase
+let filtered = [];  // after date-range + text filter
+let currentRange = '30';
+let sortKey = 'timestamp', sortDir = 'desc';
+let page = 0;
+const PAGE_SIZE = 25;
+
+const statusEl = document.getElementById('status');
+
+function loadScript(src){
+  return new Promise((resolve, reject) => {
+    const s = document.createElement('script');
+    s.src = src; s.onload = resolve; s.onerror = reject;
+    document.head.appendChild(s);
+  });
+}
+
+async function boot(){
+  try{
+    await loadScript('https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js');
+    await loadScript('https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js');
+    firebase.initializeApp(firebaseConfig);
+    await fetchLogs();
+  }catch(err){
+    statusEl.textContent = 'Could not connect to Firebase: ' + err.message;
+    statusEl.classList.add('error');
+  }
+}
+
+async function fetchLogs(){
+  statusEl.textContent = 'Loading search logs…';
+  statusEl.classList.remove('error');
+  document.getElementById('refreshBtn').disabled = true;
+
+  try{
+    const snap = await firebase.database().ref('searchLogs').once('value');
+    const val = snap.val() || {};
+    allLogs = Object.entries(val).map(([id, entry]) => ({
+      id,
+      query: entry.query || '',
+      lang: (entry.lang || 'unknown').toLowerCase(),
+      timestamp: typeof entry.timestamp === 'number' ? entry.timestamp : Date.parse(entry.date || '') || 0
+    })).filter(e => e.query && e.timestamp);
+
+    if (!allLogs.length){
+      statusEl.textContent = 'Connected — no search logs recorded yet.';
+    } else {
+      statusEl.textContent = `Loaded ${allLogs.length} search log entr${allLogs.length === 1 ? 'y' : 'ies'}.`;
+      revealPanels();
+    }
+    applyRange(currentRange);
+  }catch(err){
+    statusEl.textContent = 'Error reading searchLogs: ' + err.message;
+    statusEl.classList.add('error');
+  }finally{
+    document.getElementById('refreshBtn').disabled = false;
+  }
+}
+
+function revealPanels(){
+  ['statsRow','panelGrid','panelGrid2','tablePanel'].forEach(id => {
+    document.getElementById(id).style.display = '';
+  });
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// DATE RANGE HANDLING
+// ═══════════════════════════════════════════════════════════════════
+function startOfDay(d){ const x = new Date(d); x.setHours(0,0,0,0); return x.getTime(); }
+function endOfDay(d){ const x = new Date(d); x.setHours(23,59,59,999); return x.getTime(); }
+
+function applyRange(range){
+  currentRange = range;
+  document.querySelectorAll('.preset-btn').forEach(b => b.classList.toggle('active', b.dataset.range === range));
+
+  const now = new Date();
+  let from, to;
+
+  if (range === 'today'){
+    from = startOfDay(now); to = endOfDay(now);
+  } else if (range === '7'){
+    from = startOfDay(new Date(now.getTime() - 6*86400000)); to = endOfDay(now);
+  } else if (range === '30'){
+    from = startOfDay(new Date(now.getTime() - 29*86400000)); to = endOfDay(now);
+  } else if (range === 'all'){
+    from = 0; to = endOfDay(now);
+  } else if (range === 'custom'){
+    const fEl = document.getElementById('fromDate').value;
+    const tEl = document.getElementById('toDate').value;
+    from = fEl ? startOfDay(new Date(fEl)) : 0;
+    to = tEl ? endOfDay(new Date(tEl)) : endOfDay(now);
+  }
+
+  if (range !== 'custom'){
+    document.getElementById('fromDate').value = from ? new Date(from).toISOString().slice(0,10) : '';
+    document.getElementById('toDate').value = new Date(to).toISOString().slice(0,10);
+  }
+
+  filtered = allLogs.filter(e => e.timestamp >= from && e.timestamp <= to);
+  page = 0;
+  render();
+}
+
+document.getElementById('presetGroup').addEventListener('click', e => {
+  const btn = e.target.closest('.preset-btn');
+  if (!btn) return;
+  applyRange(btn.dataset.range);
+});
+
+['fromDate','toDate'].forEach(id => {
+  document.getElementById(id).addEventListener('change', () => applyRange('custom'));
+});
+
+document.getElementById('refreshBtn').addEventListener('click', fetchLogs);
+
+// ═══════════════════════════════════════════════════════════════════
+// RENDER — STATS
+// ═══════════════════════════════════════════════════════════════════
+let timelineChartInst, langChartInst, hourChartInst;
+
+function render(){
+  renderStats();
+  renderRankList();
+  renderTimeline();
+  renderLangChart();
+  renderHourChart();
+  renderTable();
+}
+
+function renderStats(){
+  document.getElementById('statTotal').textContent = filtered.length;
+
+  const uniqueSet = new Set(filtered.map(e => e.query.toLowerCase()));
+  document.getElementById('statUnique').textContent = uniqueSet.size;
+
+  const byDay = {};
+  filtered.forEach(e => {
+    const day = new Date(e.timestamp).toISOString().slice(0,10);
+    byDay[day] = (byDay[day] || 0) + 1;
+  });
+  let busiestDay = '—', busiestCount = 0;
+  Object.entries(byDay).forEach(([day, count]) => {
+    if (count > busiestCount){ busiestDay = day; busiestCount = count; }
+  });
+  document.getElementById('statBusiest').textContent = busiestDay === '—' ? '—' : formatShortDate(busiestDay);
+  document.getElementById('statBusiestFoot').textContent = busiestCount ? `${busiestCount} searches that day` : '\u00A0';
+
+  const byLang = {};
+  filtered.forEach(e => { byLang[e.lang] = (byLang[e.lang] || 0) + 1; });
+  let topLang = '—', topLangCount = 0;
+  Object.entries(byLang).forEach(([lang, count]) => {
+    if (count > topLangCount){ topLang = lang; topLangCount = count; }
+  });
+  document.getElementById('statLang').textContent = topLang === '—' ? '—' : capitalize(topLang);
+  document.getElementById('statLangFoot').textContent = topLangCount ? `${Math.round(topLangCount/filtered.length*100)}% of searches` : '\u00A0';
+}
+
+function formatShortDate(isoDay){
+  const d = new Date(isoDay + 'T00:00:00');
+  return d.toLocaleDateString('en-IN', { day:'numeric', month:'short' });
+}
+function capitalize(s){ return s.charAt(0).toUpperCase() + s.slice(1); }
+
+// ═══════════════════════════════════════════════════════════════════
+// RENDER — TOP QUERIES RANK LIST
+// ═══════════════════════════════════════════════════════════════════
+function renderRankList(){
+  const counts = {};
+  filtered.forEach(e => {
+    const key = e.query.toLowerCase();
+    counts[key] = (counts[key] || 0) + 1;
+  });
+  const ranked = Object.entries(counts).sort((a,b) => b[1]-a[1]).slice(0, 10);
+  const max = ranked.length ? ranked[0][1] : 1;
+
+  const list = document.getElementById('rankList');
+  if (!ranked.length){
+    list.innerHTML = '<div class="empty">No queries in this range.</div>';
+    return;
+  }
+  list.innerHTML = ranked.map(([term, count], i) => `
+    <li>
+      <span class="rank-num">${String(i+1).padStart(2,'0')}</span>
+      <span class="rank-term">${escapeHtml(term)}</span>
+      <span class="rank-bar-wrap"><span class="rank-bar" style="width:${(count/max*100).toFixed(0)}%"></span></span>
+      <span class="rank-count">${count}</span>
+    </li>
+  `).join('');
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// RENDER — CHARTS
+// ═══════════════════════════════════════════════════════════════════
+const CHART_FONT = { family:"'Inter',sans-serif", size:11 };
+
+function renderTimeline(){
+  const byDay = {};
+  filtered.forEach(e => {
+    const day = new Date(e.timestamp).toISOString().slice(0,10);
+    byDay[day] = (byDay[day] || 0) + 1;
+  });
+  const days = Object.keys(byDay).sort();
+  const labels = days.map(formatShortDate);
+  const data = days.map(d => byDay[d]);
+
+  const ctx = document.getElementById('timelineChart');
+  if (timelineChartInst) timelineChartInst.destroy();
+  timelineChartInst = new Chart(ctx, {
+    type: 'line',
+    data: { labels, datasets: [{
+      data,
+      borderColor: '#0f6f63',
+      backgroundColor: 'rgba(15,111,99,0.10)',
+      fill: true,
+      tension: 0.35,
+      pointRadius: days.length > 20 ? 0 : 3,
+      pointBackgroundColor: '#0f6f63',
+      borderWidth: 2
+    }]},
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display:false } },
+      scales: {
+        x: { ticks: { font: CHART_FONT, maxRotation:0, autoSkip:true }, grid:{ display:false } },
+        y: { beginAtZero:true, ticks:{ font: CHART_FONT, precision:0 }, grid:{ color:'#e8e5db' } }
+      }
+    }
+  });
+}
+
+function renderLangChart(){
+  const byLang = {};
+  filtered.forEach(e => { byLang[e.lang] = (byLang[e.lang] || 0) + 1; });
+  const labels = Object.keys(byLang).map(capitalize);
+  const data = Object.values(byLang);
+  const colorMap = { Telugu:'#0f6f63', English:'#c8862a', Hindi:'#6b4a7a', Unknown:'#a3a3a3', Albums:'#4a5568' };
+  const colors = Object.keys(byLang).map(k => colorMap[capitalize(k)] || '#888');
+
+  const ctx = document.getElementById('langChart');
+  if (langChartInst) langChartInst.destroy();
+  langChartInst = new Chart(ctx, {
+    type: 'doughnut',
+    data: { labels, datasets: [{ data, backgroundColor: colors, borderWidth: 2, borderColor: '#fff' }] },
+    options: {
+      responsive:true, maintainAspectRatio:false,
+      cutout:'62%',
+      plugins: { legend: { position:'bottom', labels:{ font: CHART_FONT, boxWidth:10, padding:14 } } }
+    }
+  });
+}
+
+function renderHourChart(){
+  const byHour = new Array(24).fill(0);
+  filtered.forEach(e => {
+    const h = new Date(e.timestamp).getHours();
+    byHour[h]++;
+  });
+  const labels = byHour.map((_,h) => h % 3 === 0 ? h+':00' : '');
+
+  const ctx = document.getElementById('hourChart');
+  if (hourChartInst) hourChartInst.destroy();
+  hourChartInst = new Chart(ctx, {
+    type: 'bar',
+    data: { labels, datasets: [{ data: byHour, backgroundColor:'#c8862a', borderRadius:3, maxBarThickness:14 }] },
+    options: {
+      responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{ display:false } },
+      scales:{
+        x:{ ticks:{ font: CHART_FONT }, grid:{ display:false } },
+        y:{ beginAtZero:true, ticks:{ font: CHART_FONT, precision:0 }, grid:{ color:'#e8e5db' } }
+      }
+    }
+  });
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// RENDER — TABLE
+// ═══════════════════════════════════════════════════════════════════
+function renderTable(){
+  const filterText = document.getElementById('tableFilter').value.toLowerCase().trim();
+  let rows = filtered.filter(e => !filterText || e.query.toLowerCase().includes(filterText));
+
+  rows = rows.slice().sort((a,b) => {
+    let av = a[sortKey], bv = b[sortKey];
+    if (sortKey === 'query' || sortKey === 'lang'){ av = av.toLowerCase(); bv = bv.toLowerCase(); }
+    if (av < bv) return sortDir === 'asc' ? -1 : 1;
+    if (av > bv) return sortDir === 'asc' ? 1 : -1;
+    return 0;
+  });
+
+  const totalPages = Math.max(1, Math.ceil(rows.length / PAGE_SIZE));
+  page = Math.min(page, totalPages - 1);
+  const pageRows = rows.slice(page * PAGE_SIZE, page * PAGE_SIZE + PAGE_SIZE);
+
+  const tbody = document.getElementById('tableBody');
+  const emptyEl = document.getElementById('tableEmpty');
+
+  if (!pageRows.length){
+    tbody.innerHTML = '';
+    emptyEl.style.display = 'block';
+  } else {
+    emptyEl.style.display = 'none';
+    tbody.innerHTML = pageRows.map(e => `
+      <tr>
+        <td>${escapeHtml(e.query)}</td>
+        <td><span class="lang-tag ${escapeHtml(e.lang)}">${escapeHtml(e.lang)}</span></td>
+        <td>${new Date(e.timestamp).toLocaleString('en-IN', { day:'numeric', month:'short', hour:'2-digit', minute:'2-digit' })}</td>
+      </tr>
+    `).join('');
+  }
+
+  document.getElementById('pagerInfo').textContent = rows.length
+    ? `${page*PAGE_SIZE+1}–${Math.min(rows.length,(page+1)*PAGE_SIZE)} of ${rows.length}`
+    : '0 of 0';
+  document.getElementById('pagerPrev').disabled = page === 0;
+  document.getElementById('pagerNext').disabled = page >= totalPages - 1;
+}
+
+document.getElementById('tableFilter').addEventListener('input', () => { page = 0; renderTable(); });
+document.getElementById('pagerPrev').addEventListener('click', () => { page--; renderTable(); });
+document.getElementById('pagerNext').addEventListener('click', () => { page++; renderTable(); });
+
+document.querySelectorAll('th[data-sort]').forEach(th => {
+  th.addEventListener('click', () => {
+    const key = th.dataset.sort;
+    if (sortKey === key){ sortDir = sortDir === 'asc' ? 'desc' : 'asc'; }
+    else { sortKey = key; sortDir = key === 'timestamp' ? 'desc' : 'asc'; }
+    renderTable();
+  });
+});
+
+function escapeHtml(str){
+  return String(str).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+}
+
+boot();
+</script>
+</body>
+</html>
