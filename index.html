@@ -435,6 +435,7 @@
         const LANG_FOLDER = { telugu: 'tsongs', english: 'esongs', hindi: 'hsongs' };
 
         let currentLanguage = 'telugu';
+        window.currentLanguage = currentLanguage;
         let currentQuery = '';
 
         // ═══════════════════════════════════════════════════════════════════
@@ -922,6 +923,7 @@
         // ═══════════════════════════════════════════════════════════════════
         async function switchLanguage(lang, event) {
             currentLanguage = lang;
+            window.currentLanguage = lang;
             selLis.textContent = lang.charAt(0).toUpperCase() + lang.slice(1);
 
             if (lang === 'telugu') {
