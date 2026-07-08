@@ -383,10 +383,12 @@
 
         <h6 class="page-title" style="color: rgb(52, 42, 165); font-weight: 500; font-size: 1.1rem">
             This main
-            page is under update, We're adding songs gradually.. <br>Thank you for your patience, and may God bless you!</h6>
+            page is under update, We're adding songs gradually.. <br>Thank you for your patience, and may God bless you!
+        </h6>
 
     </main><br><br><br>
-    <p style="font-size: 1px; opacity: 0.01;"> Last updated: <time datetime="2026-07-08T05:10">July 08, 2026 – 05:10</time></p>
+    <p style="font-size: 1px; opacity: 0.01;"> Last updated: <time datetime="2026-07-08T05:10">July 08, 2026 –
+            05:10</time></p>
     <button id="scrollTopBtn" title="Go to top">
         ↑
     </button>
@@ -807,6 +809,18 @@
             });
         }
 
+        let _searchLogLoading = false;
+        function loadSearchLogger() {
+            if (_searchLogLoading || window._searchLogReady) return;
+            _searchLogLoading = true;
+
+            const s = document.createElement('script');
+            s.src = '/vidhyarthi-geethavali/assets/search-log.js';
+            s.onload = () => { if (window.initSearchLog) window.initSearchLog(); };
+            s.onerror = () => console.warn('[search-log] failed to load script');
+            document.head.appendChild(s);
+        }
+
         function renderSongItems(songs, lang, tpOverride) {
             songList.innerHTML = '';
             noSongsMessage.classList.add('hidden');
@@ -987,6 +1001,7 @@
                 closeIcon.classList.remove('hide-icon');
                 searchInput.innerText = '';
                 currentQuery = '';
+                loadSearchLogger();
 
                 await ensureAllChunksLoaded(currentLanguage);
                 renderSearchSongs(currentLanguage);
@@ -1021,13 +1036,14 @@
         });
 
         async function ensureAllChunksLoaded(lang) {
+            showSongListLoader();
+
             if (lang === 'albums') {
                 const albums = await discoverAlbums();
                 for (const album of albums) {
                     if (!fetched.albums[album.id]) fetched.albums[album.id] = new Set();
                     for (const c of (album.chunks || [])) {
                         if (fetched.albums[album.id].has(c)) continue;
-                        showSongListLoader();
                         const raw = await fetchAlbumChunk(album.folder, c);
                         ingestAlbum(album.id, raw, album.folder);
                         fetched.albums[album.id].add(c);
@@ -1041,7 +1057,6 @@
                     : ingestHindi;
             for (const ceiling of chunks) {
                 if (fetched[lang].has(ceiling)) continue;
-                showSongListLoader();
                 const raw = await fetchChunk(lang, ceiling);
                 ingest(raw);
                 fetched[lang].add(ceiling);
