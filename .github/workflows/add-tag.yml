@@ -1,0 +1,35 @@
+name: Bulk Update Modified Date
+on:
+  workflow_dispatch:
+
+jobs:
+  update-modified-date:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Bulk Update Modified Date and Last Updated Tag
+        run: |
+          # Update article:modified_time meta tag
+          find . -type f -not -path '*/.*' -exec sed -Ei \
+          's|(property="article:modified_time" content=")[^"]*(")|\12026-07-08T05:10:00+00:00\2|g' {} +
+
+          # Remove any existing hidden Last updated tag
+          find . -type f -not -path '*/.*' -exec sed -Ei \
+          '/<p style="font-size: 1px; opacity: 0.01;"> Last updated: <time datetime=/d' {} +
+
+          # Insert the new hidden Last updated tag after </main>
+          find . -type f -not -path '*/.*' -exec sed -Ei \
+          '/<\/main>/a\
+              <p style="font-size: 1px; opacity: 0.01;"> Last updated: <time datetime="2026-07-08T05:10">July 08, 2026 – 05:10</time></p>' {} +
+
+      - name: Commit and Push Changes back to Repo
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git diff-index --quiet HEAD || git commit -m "Automated bulk update of modified dates"
+          git push
