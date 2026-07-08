@@ -498,7 +498,7 @@ body {
     color: var(--primary-color);
     padding: 10px 13px;
     cursor: pointer;
-    margin: 0 5px;
+    margin: 0;
     font-size: 1rem;
     transition: background-color 0.3s ease, color 0.3s ease, border 0.3s ease;
 }
@@ -554,6 +554,32 @@ body {
     background-color: var(--primary-color);
     color: white;
     border-color: var(--primary-dark);
+}
+
+/* Album grid — wider boxes than the letter grid */
+.album-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+}
+
+.album-box {
+    font-size: 1rem;
+    line-height: 1.3;
+    padding: 10px 8px;
+    white-space: normal;
+    word-break: keep-all;
+    overflow-wrap: normal;
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+    .album-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+    }
+}
+
+@media (min-width: 769px) {
+    .album-grid {
+        grid-template-columns: repeat(4, 1fr) !important;
+    }
 }
 
 /* Songs List - Fully Optimized */
