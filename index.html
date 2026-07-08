@@ -118,7 +118,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <link rel="stylesheet" href="/vidhyarthi-geethavali/styles.css?v=1.0.3">
+    <link rel="stylesheet" href="/vidhyarthi-geethavali/styles.css?v=1.0.4">
 
     <!-- Added 'defer' so the script doesn't block page rendering -->
     <script src="/vidhyarthi-geethavali/boom.js" defer></script>
@@ -354,7 +354,7 @@
                         style="margin-right: -5px;">Telugu</span>Songs</h2>
 
                 <!-- Language Selector -->
-                <div style="text-align:center; margin-bottom:1rem;">
+                <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin-bottom:1rem;">
                     <button class="tab-btn active" onclick="switchLanguage('telugu', event)">Telugu</button>
                     <button class="tab-btn" onclick="switchLanguage('english', event)">English</button>
                     <button class="tab-btn" onclick="switchLanguage('hindi', event)">Hindi</button>
@@ -774,6 +774,7 @@
         // RENDER HELPERS
         // ═══════════════════════════════════════════════════════════════════
         function renderLetterBoxes(letters, lang) {
+            letterDiv.classList.remove('album-grid');
             letterDiv.innerHTML = '';
             songList.innerHTML = '';
             titleEl.textContent = '';
@@ -830,13 +831,14 @@
 
         function renderAlbumBoxes(albums) {
             letterDiv.innerHTML = '';
+            letterDiv.classList.add('album-grid');
             songList.innerHTML = '';
             titleEl.textContent = '';
             selLis.textContent = 'New';
 
             albums.forEach((album, index) => {
                 const box = document.createElement('div');
-                box.className = 'box' + (index === 0 ? ' active' : '');
+                box.className = 'box album-box' + (index === 0 ? ' active' : '');
                 box.textContent = album.name;
 
                 box.onclick = async () => {
