@@ -1,6 +1,5 @@
 {
   "albums": [
-    { "id": "alb1", "name": "నూతన జీవం", "folder": "alb1songs", "chunks": [50] },
-    { "id": "alb2", "name": "Unofficial", "folder": "alb2songs", "chunks": [50] }
+    { "id": "alb1", "name": "నూతన జీవం", "folder": "alb1songs", "chunks": [50] }
   ]
 }
