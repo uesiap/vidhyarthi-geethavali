@@ -96,7 +96,7 @@ body {
 }
 
 .menu-btn:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.3);
     transform: scale(1.05);
 }
 
@@ -161,10 +161,11 @@ body {
     background: none;
     border: none;
     cursor: pointer;
-    padding: 8px;
+    padding: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 50%;
     transition: transform 0.2s ease;
 }
 
@@ -176,6 +177,7 @@ body {
 .search-toggle:hover {
     transform: scale(1.1);
     border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.3);
 }
 
 .custom-search-icon {
@@ -471,7 +473,7 @@ body {
 .card {
     background: var(--bg-white);
     border: 1.5px double var(--primary-color);
-    border-radius: 0px;
+    border-radius: 30px;
     padding: 25px;
     margin-bottom: 20px;
     width: 100%;
@@ -500,6 +502,7 @@ body {
     cursor: pointer;
     margin: 0;
     font-size: 1rem;
+    border-radius: 15px;
     transition: background-color 0.3s ease, color 0.3s ease, border 0.3s ease;
 }
 
@@ -530,7 +533,7 @@ body {
 
 .box {
     background-color: white;
-    border-radius: 0px;
+    border-radius: 20px;
     border: 1.5px solid var(--primary-color);
     padding: 12px 8px;
     text-align: center;
@@ -613,6 +616,7 @@ body {
     transition: var(--transition);
     line-height: 1.4;
     box-sizing: border-box;
+    border-radius: 20px
 }
 
 .song-link:hover,
@@ -632,11 +636,11 @@ body {
     right: 25px;
     width: 48px;
     height: 48px;
-    border-radius: 0px;
+    border-radius: 20px;
     border: 2px solid var(--primary-color);
     background: var(--bg-white);
     color: var(--primary-color);
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     font-weight: bold;
     cursor: pointer;
     display: none;
@@ -956,7 +960,7 @@ body {
         margin-left: auto;
         margin-right: auto;
         padding: 32px 35px;
-        border-radius: 0px;
+        border-radius: 30px;
         border: 1.5px double var(--primary-color);
         transition: transform 0.2s ease, box-shadow 0.2s ease;
         margin-bottom: 30px;
