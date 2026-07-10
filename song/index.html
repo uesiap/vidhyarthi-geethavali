@@ -420,6 +420,8 @@
                     </div></div>
                 </div>`;
 
+            //Related to announcement.
+            if (window.loadAnnouncement) window.loadAnnouncement();
             // Set audio sources & show players
             document.getElementById("audioPlayer").src = song.audioLink + "?v=" + Date.now();
             document.getElementById("trackPlayer").src = song.trackLink + "?v=" + Date.now();
