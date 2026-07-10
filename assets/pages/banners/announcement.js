@@ -5,7 +5,7 @@ window.loadAnnouncement = function () {
         return;
     }
 
-    fetch("/vidhyarthi-geethavali/assets/pages/banners/announcement.html")
+    fetch("/vidhyarthi-geethavali/assets/pages/banners/announcement.html?v=1.0.3")
         .then(res => res.text())
         .then(html => {
             placeholder.innerHTML = html;
