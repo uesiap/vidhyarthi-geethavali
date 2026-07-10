@@ -1,0 +1,47 @@
+<style>
+.announcement { width: 100%; max-width: 760px; margin: 0 auto 20px; background: #fff; border: 1.5px solid #009688; border-radius: 30px; overflow: hidden; box-shadow: 0 2px 10px rgba(0, 0, 0, .08); transition: .3s; }
+.announcement-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 16px; background: #fff; color: #009688; cursor: pointer; user-select: none; transition: border-bottom .25s ease; }
+.announcement.open .announcement-header { border-bottom: 1px solid #009688; }
+.announcement-title { display: flex; align-items: center; gap: 10px; flex: 1; min-width: 0; font-size: 1.2rem; font-weight: 600; line-height: 1.4; }
+.announcement-title span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.announcement-icon { width: 22px; height: 22px; flex-shrink: 0; }
+.announcement-arrow { display: flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 50%; font-size: 28px; cursor: pointer; transition: .25s; }
+.announcement-arrow:hover { background: #eeeeee; }
+.announcement-content { max-height: 0; overflow: hidden; transition: max-height .45s ease; text-align: center; background: #fff; }
+.announcement.open .announcement-content { max-height: 700px; }
+.announcement-content img { width: 100%; max-width: 430px; display: block; margin: 10px auto; height: auto; border-radius: 8px; }
+@media (max-width:992px) { .announcement { max-width: 700px; } }
+@media (max-width:768px) {
+  .announcement { width: 95%; max-width: 600px; }
+  .announcement-header { padding: 11px 14px; }
+  .announcement-title { font-size: 1rem; }
+  .announcement-icon { width: 20px; height: 20px; }
+  .announcement-arrow { width: 32px; height: 32px; font-size: 26px; }
+  .announcement-content img { max-width: 400px; }
+}
+@media (max-width:480px) {
+  .announcement { width: 100%; border-radius: 30px; margin-bottom: 16px; }
+  .announcement-header { padding: 10px 12px; }
+  .announcement-title { font-size: 1rem; gap: 8px; }
+  .announcement-icon { width: 18px; height: 18px; }
+  .announcement-arrow { width: 30px; height: 30px; font-size: 24px; }
+  .announcement-content img { max-width: 400px; }
+}
+@media (max-width:360px) {
+  .announcement-header { padding: 8px 10px; }
+  .announcement-title { font-size: 12px; }
+  .announcement-content img { max-width: 300px; }
+}
+</style>
+<div class="announcement" id="announcement">
+  <div class="announcement-header" onclick="toggleAnnouncement()">
+    <div class="announcement-title">
+      <img src="https://cdn-icons-png.flaticon.com/512/300/300221.png" class="announcement-icon" alt="Announcement">
+      <span>Just search "uesi songs" in Google</span>
+    </div>
+    <span class="material-symbols-outlined announcement-arrow" id="announcementArrow">expand_less</span>
+  </div>
+  <div class="announcement-content" id="announcementContent">
+    <img src="https://uesiap.github.io/vidhyarthi-geethavali/assets/Images/banners/announce.png" alt="Announcement">
+  </div>
+</div>
