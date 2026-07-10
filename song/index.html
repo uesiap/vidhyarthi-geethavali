@@ -605,7 +605,7 @@
         function setupPlayer(player, btn, otherPlayer, otherBtn, slider, curEl, durEl) {
             player._ended = false;
             btn.disabled = true;
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>'; // ring loader
+            btn.innerHTML = '<span class="ring-loader"></span>';
 
             const showPlay = () => { if (!player._ended) btn.innerHTML = '<i class="fas fa-play"></i>'; };
             const showPause = () => { btn.innerHTML = '<i class="fas fa-pause"></i>'; };
@@ -639,7 +639,14 @@
                 showReplay();
             });
 
-            player.addEventListener("play", () => { player._ended = false; });
+            player.addEventListener("play", () => {
+                player._ended = false;
+                showPause();
+            });
+
+            player.addEventListener("pause", () => {
+                if (!player._ended) showPlay();
+            });
 
             btn.addEventListener("click", () => {
                 if (btn.disabled) return;
@@ -647,20 +654,15 @@
                 if (player._ended) {
                     player.currentTime = 0;
                     player.play();
-                    showPause();
                     otherPlayer.pause();
-                    if (!otherPlayer._ended) otherBtn.innerHTML = '<i class="fas fa-play"></i>';
                     return;
                 }
 
                 if (player.paused) {
                     player.play();
-                    showPause();
                     otherPlayer.pause();
-                    if (!otherPlayer._ended) otherBtn.innerHTML = '<i class="fas fa-play"></i>';
                 } else {
                     player.pause();
-                    showPlay();
                 }
             });
         }
