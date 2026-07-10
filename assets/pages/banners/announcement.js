@@ -1,4 +1,4 @@
-fetch("announcement.html")
+fetch("/vidhyarthi-geethavali/assets/pages/banners/announcement")
     .then(res => res.text())
     .then(html => {
         document.getElementById("announcement-placeholder").innerHTML = html;
