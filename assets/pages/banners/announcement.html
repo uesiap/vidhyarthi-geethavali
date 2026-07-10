@@ -20,7 +20,7 @@
   .announcement-content img { max-width: 400px; }
 }
 @media (max-width:480px) {
-  .announcement { width: 100%; border-radius: 30px; margin-bottom: 16px; }
+  .announcement { width: calc(100% - 20px); border-radius: 30px; margin-bottom: 16px; }
   .announcement-header { padding: 10px 12px; }
   .announcement-title { font-size: 1rem; gap: 8px; }
   .announcement-icon { width: 18px; height: 18px; }
@@ -28,6 +28,7 @@
   .announcement-content img { max-width: 400px; }
 }
 @media (max-width:360px) {
+  .announcement { width: calc(100% - 16px);}
   .announcement-header { padding: 8px 10px; }
   .announcement-title { font-size: 12px; }
   .announcement-content img { max-width: 300px; }
