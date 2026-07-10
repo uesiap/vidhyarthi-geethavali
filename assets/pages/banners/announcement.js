@@ -21,10 +21,12 @@ function initAnnouncement() {
     function updateAnnouncementArrow() {
         announcementArrow.textContent = announcement.classList.contains("open") ? "expand_less" : "expand_more";
     }
+
     function openAnnouncement() {
         announcement.classList.add("open");
         updateAnnouncementArrow();
     }
+
     function closeAnnouncement() {
         announcement.classList.remove("open");
         updateAnnouncementArrow();
@@ -35,6 +37,9 @@ function initAnnouncement() {
         updateAnnouncementArrow();
     };
 
-    openAnnouncement();
-    setTimeout(closeAnnouncement, 1500);
+    // Stay closed for 2s, open, stay open for 2s, then close
+    setTimeout(() => {
+        openAnnouncement();
+        setTimeout(closeAnnouncement, 2000);
+    }, 2000);
 }
