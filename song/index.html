@@ -421,6 +421,13 @@
             document.getElementById("trackPlayer").src = song.trackLink + "?v=" + Date.now();
             document.getElementById("audioPlayerBar").style.display = "flex";
             document.getElementById("trackPlayerBar").style.display = "flex";
+            if ("mediaSession" in navigator) {
+                navigator.mediaSession.metadata = new MediaMetadata({
+                    title: titleWithNumber,
+                    artist: "UESI AP",
+                    artwork: [{ src: "/vidhyarthi-geethavali/assets/Icons/apple-icon.png", sizes: "192x192", type: "image/png" }]
+                });
+            }
 
             // JSON-LD for this page
             const ld = document.createElement("script");
