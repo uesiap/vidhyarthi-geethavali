@@ -1,10 +1,18 @@
-fetch("/vidhyarthi-geethavali/assets/pages/banners/announcement.html")
-    .then(res => res.text())
-    .then(html => {
-        document.getElementById("announcement-placeholder").innerHTML = html;
-        initAnnouncement();
-    })
-    .catch(err => console.error("Failed to load announcement:", err));
+window.loadAnnouncement = function () {
+    const placeholder = document.getElementById("announcement-placeholder");
+    if (!placeholder) {
+        console.warn("announcement-placeholder not found on this page — skipping announcement banner.");
+        return;
+    }
+
+    fetch("/vidhyarthi-geethavali/assets/pages/banners/announcement.html")
+        .then(res => res.text())
+        .then(html => {
+            placeholder.innerHTML = html;
+            initAnnouncement();
+        })
+        .catch(err => console.error("Failed to load announcement:", err));
+};
 
 function initAnnouncement() {
     const announcement = document.getElementById("announcement");
@@ -22,7 +30,6 @@ function initAnnouncement() {
         updateAnnouncementArrow();
     }
 
-    // Expose toggle globally since it's called via inline onclick in the fetched HTML
     window.toggleAnnouncement = function () {
         announcement.classList.toggle("open");
         updateAnnouncementArrow();
