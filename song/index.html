@@ -388,20 +388,28 @@
             // Inject lyrics HTML
             document.getElementById("songContainer").innerHTML = `
                 <div class="lyrics">
-                    <span style="display:flex;">
-                        <div class="lyricsHead" style="position:relative; width:100%; display:flex; align-items:center;">
-                            <a class="back-button" onclick="history.back(); return false;" style="position:absolute; left:10px;">
-                                <span class="arrow" style="margin-top:5px;"><i class="fas fa-arrow-left"></i></span>
-                            </a>
-                            <p class="head-text" style="margin:0 auto; text-align:center;">${escHtml(titleWithNumber)}</p>
-                        </div>
-                        &emsp;&emsp;
-                        <a class="menu-button" href="javascript:void(0)" onclick="toggleContextMenu()"
-                            style="position:absolute; right:10px; border:2px dotted var(--primary-color); color: var(--primary-color); border-radius:30%; margin-top:0.1.5rem; padding-top: 0.3rem; padding-left: 0.1rem; padding-right: 0.1rem">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.59 13.51L15.42 17.49"></path><path d="M15.41 6.51L8.59 10.49"></path></svg>
+                    <div style="display:flex; align-items:center; width:100%; max-width:800px; margin:0 auto;">
+                    <div class="lyricsHead" style="position:relative; flex:1; display:flex; align-items:center;">
+                        <a class="back-button" onclick="history.back(); return false;" style="position:absolute; left:10px;">
+                            <span class="arrow" style="margin-top:5px;">
+                                <i class="fas fa-arrow-left"></i>
+                            </span>
                         </a>
-                    </span>
- 
+                        <p class="head-text" style="margin:0 auto; text-align:center;">
+                            ${escHtml(titleWithNumber)}
+                        </p>
+                    </div>
+                    <a style="margin-left:12px;margin-top:-10px;position:relative;top:-13px;border:2px dotted var(--primary-color);color:var(--primary-color);border-radius:30%;padding:.4rem .2rem;display:flex;align-items:center;justify-content:center;text-decoration:none;width:36px;height:36px;" onclick="toggleContextMenu()" href="javascript:void(0)" class="menu-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="18" cy="5" r="3"></circle>
+                            <circle cx="6" cy="12" r="3"></circle>
+                            <circle cx="18" cy="19" r="3"></circle>
+                            <path d="M8.59 13.51L15.42 17.49"></path>
+                            <path d="M15.41 6.51L8.59 10.49"></path>
+                        </svg>
+                    </a>
+                    </div>
+                    
                     <div class="lyrics-text" style="text-align:center; margin-bottom:120px;">
                     <div style="display: inline-block; text-align: left;">
                         <span>${song.lyrics}</span>
@@ -570,11 +578,11 @@
 
         function downloadAudio() {
             if (!songData) return;
-            downloadFile(songData.audioLink, `${songData.title}_Audio.mp3`, "audioText", "audioLoader");
+            downloadFile(songData.audioLink, `${songData.title} ${songNumber}_Audio.mp3`, "audioText", "audioLoader");
         }
         function downloadTrack() {
             if (!songData) return;
-            downloadFile(songData.trackLink, `${songData.title}_Track.mp3`, "trackText", "trackLoader");
+            downloadFile(songData.trackLink, `${songData.title} ${songNumber}_Track.mp3`, "trackText", "trackLoader");
         }
 
         // ─── Players ─────────────────────────────────────
@@ -590,24 +598,76 @@
             const adt = document.getElementById("audioDurationTime");
             const tdt = document.getElementById("trackDurationTime");
 
-            apb.addEventListener("click", () => {
-                if (ap.paused) { ap.play(); apb.innerHTML = '<i class="fas fa-pause"></i>'; tp.pause(); tpb.innerHTML = '<i class="fas fa-play"></i>'; }
-                else { ap.pause(); apb.innerHTML = '<i class="fas fa-play"></i>'; }
-            });
-            tpb.addEventListener("click", () => {
-                if (tp.paused) { tp.play(); tpb.innerHTML = '<i class="fas fa-pause"></i>'; ap.pause(); apb.innerHTML = '<i class="fas fa-play"></i>'; }
-                else { tp.pause(); tpb.innerHTML = '<i class="fas fa-play"></i>'; }
-            });
+            setupPlayer(ap, apb, tp, tpb, as_, act, adt);
+            setupPlayer(tp, tpb, ap, apb, ts_, tct, tdt);
+        }
 
-            function bind(player, slider, curEl, durEl) {
-                player.addEventListener("loadedmetadata", () => { slider.max = player.duration; durEl.textContent = fmt(player.duration); });
-                player.addEventListener("timeupdate", () => { slider.value = player.currentTime; curEl.textContent = fmt(player.currentTime); });
-                slider.addEventListener("input", () => { player.currentTime = slider.value; });
+        function setupPlayer(player, btn, otherPlayer, otherBtn, slider, curEl, durEl) {
+            player._ended = false;
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>'; // ring loader
+
+            const showPlay = () => { if (!player._ended) btn.innerHTML = '<i class="fas fa-play"></i>'; };
+            const showPause = () => { btn.innerHTML = '<i class="fas fa-pause"></i>'; };
+            const showReplay = () => { btn.innerHTML = '<i class="fas fa-redo-alt"></i>'; };
+
+            if (player.readyState >= 3) {
+                btn.disabled = false;
+                showPlay();
+            } else {
+                player.addEventListener("canplay", function onCanPlay() {
+                    btn.disabled = false;
+                    if (player.paused) showPlay();
+                    player.removeEventListener("canplay", onCanPlay);
+                });
             }
-            function fmt(t) { const m = Math.floor(t / 60), s = Math.floor(t % 60); return `${m}:${s < 10 ? "0" : ""}${s}`; }
 
-            bind(ap, as_, act, adt);
-            bind(tp, ts_, tct, tdt);
+            player.addEventListener("loadedmetadata", () => {
+                slider.max = player.duration;
+                durEl.textContent = fmtTime(player.duration);
+            });
+
+            player.addEventListener("timeupdate", () => {
+                slider.value = player.currentTime;
+                curEl.textContent = fmtTime(player.currentTime);
+            });
+
+            slider.addEventListener("input", () => { player.currentTime = slider.value; });
+
+            player.addEventListener("ended", () => {
+                player._ended = true;
+                showReplay();
+            });
+
+            player.addEventListener("play", () => { player._ended = false; });
+
+            btn.addEventListener("click", () => {
+                if (btn.disabled) return;
+
+                if (player._ended) {
+                    player.currentTime = 0;
+                    player.play();
+                    showPause();
+                    otherPlayer.pause();
+                    if (!otherPlayer._ended) otherBtn.innerHTML = '<i class="fas fa-play"></i>';
+                    return;
+                }
+
+                if (player.paused) {
+                    player.play();
+                    showPause();
+                    otherPlayer.pause();
+                    if (!otherPlayer._ended) otherBtn.innerHTML = '<i class="fas fa-play"></i>';
+                } else {
+                    player.pause();
+                    showPlay();
+                }
+            });
+        }
+
+        function fmtTime(t) {
+            const m = Math.floor(t / 60), s = Math.floor(t % 60);
+            return `${m}:${s < 10 ? "0" : ""}${s}`;
         }
 
         // ─── Drawer ──────────────────────────────────────
