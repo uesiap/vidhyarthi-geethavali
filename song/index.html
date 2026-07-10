@@ -387,6 +387,7 @@
 
             // Inject lyrics HTML
             document.getElementById("songContainer").innerHTML = `
+               <div id="announcement-placeholder"></div>
                 <div class="lyrics">
                     <div style="display:flex; align-items:center; width:100%; max-width:800px; margin:0 auto;">
                     <div class="lyricsHead" style="position:relative; flex:1; display:flex; align-items:center;">
@@ -767,7 +768,8 @@
                 });
         }
     </script>
-    <script src="/vidhyarthi-geethavali/boom.js"></script>
+    <script src="/vidhyarthi-geethavali/boom.js?v={{ site.github.build_revision }}"></script>
+    <script src="/vidhyarthi-geethavali/assets/pages/banners/announcement.js?v={{ site.github.build_revision }}"></script>
 </body>
 
 </html>
