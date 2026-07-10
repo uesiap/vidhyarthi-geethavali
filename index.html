@@ -822,6 +822,17 @@
             document.head.appendChild(s);
         }
 
+        let _phoneticSearchLoading = false;
+        function loadPhoneticSearch() {
+            if (_phoneticSearchLoading || window._phoneticSearchReady) return;
+            _phoneticSearchLoading = true;
+
+            const s = document.createElement('script');
+            s.src = '/vidhyarthi-geethavali/assets/phonetic-search.js';
+            s.onerror = () => console.warn('[phonetic-search] failed to load script');
+            document.head.appendChild(s);
+        }
+
         function renderSongItems(songs, lang, tpOverride) {
             songList.innerHTML = '';
             noSongsMessage.classList.add('hidden');
@@ -1004,6 +1015,7 @@
                 searchInput.innerText = '';
                 currentQuery = '';
                 loadSearchLogger();
+                loadPhoneticSearch();
 
                 await ensureAllChunksLoaded(currentLanguage);
                 renderSearchSongs(currentLanguage);
