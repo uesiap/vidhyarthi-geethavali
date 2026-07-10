@@ -531,10 +531,22 @@
             const shareText = `*${titleWithNumber}*\n\n${formatted.trim()}\n\n`;
 
             if (navigator.share) {
-                navigator.share({ title: titleWithNumber, text: shareText, url: canonicalUrl() }).catch(() => { });
+                navigator.share({
+                    title: titleWithNumber,
+                    text: shareText,
+                    url: canonicalUrl()
+                }).then(() => {
+                    if (window._paq) {
+                        window._paq.push([
+                            'trackEvent',
+                            'Song',
+                            'Share Success',
+                            `${songNumber} - ${songData.title}`
+                        ]);
+                    }
+                }).catch(() => { });
             }
         }
-
         // ─── Download ────────────────────────────────────
         async function downloadFile(url, filename, textId, loaderId) {
             if (!url) { alert("Link not available."); return; }
