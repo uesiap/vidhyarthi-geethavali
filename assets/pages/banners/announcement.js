@@ -40,6 +40,6 @@ function initAnnouncement() {
     // Stay closed for 2s, open, stay open for 2s, then close
     setTimeout(() => {
         openAnnouncement();
-        setTimeout(closeAnnouncement, 2000);
+        setTimeout(closeAnnouncement, 1000);
     }, 2000);
 }
