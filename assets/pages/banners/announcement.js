@@ -36,5 +36,5 @@ function initAnnouncement() {
     };
 
     openAnnouncement();
-    setTimeout(closeAnnouncement, 2000);
+    setTimeout(closeAnnouncement, 1500);
 }
