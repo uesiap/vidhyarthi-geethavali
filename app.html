@@ -1,783 +1,1224 @@
+---
+---
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-     <!-- Basic Meta Tags -->
+    <!-- 1. ESSENTIAL META TAGS -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- Verification Tag -->
-    <meta name="google-site-verification" content="eZcr6WyistE7nCSaUoUkf9tpK_SmeG5caEM-x3nEWb4" />
-    <meta name="msvalidate.01" content="28F3BC7AAD0F4B06B4517F2211A7D366" />
-    <!-- Meta Tags for Web Application-->
-  <meta name="theme-color" content="#0c1319"> 
-     <!-- Your theme color -->
-  <link rel="manifest" href="/vidhyarthi-geethavali/manifest.json" crossorigin="use-credentials">
-  <link rel="apple-touch-icon" href="/vidhyarthi-geethavali/Icon192.jpg"> <!-- iOS splash icon -->
-    <!-- Title and Meta Description -->
-    <title>Vidhyarthi Geethavali Songs</title>
-    <meta name="description" content="Listen to Vidhyarthi Geethavali Audio Songs and Track Songs online anytime. UESI AP.">
-    <meta name="keywords" content="vidhyarthi, geethavali,UESI AP, uesi ap number, uesi songs, uesi ap songs, vidhyarthi geethavali songs, ap Vidhyarthi Geethavali Uesi songs, uesi songs, VJ Songs, Uesi Vj songs, Telugu Vidhyarthi Gethavali songs, english songs, telugu songs, audio songs, Vidhyarthi Geethavali Track songs, Vidhyarthi Geethavali Audio songs, Uesi ap songs, audio, track, Search songs">
-    
-    <!-- Author and Robots -->
+
+    <!-- 2. PRIMARY SEO (Title, Description, Keywords) -->
+    <title>Vidhyarthi Geethavali | UESI AP</title>
+    <meta name="description"
+        content="Explore Vidhyarthi Geethavali by UESI AP. Listen to and download Telugu and English Christian camp songs, lyrics, and audio tracks for student worship and fellowship.">
+    <meta name="keywords"
+        content="Vidhyarthi Geethavali, UESI AP, UESI AP songs, camp songs, Telugu Christian songs, student worship, UESI songs, lyrics, audio tracks, VJ songs">
     <meta name="author" content="M.Rahul">
-    <meta name="robots" content="index, follow">
-    
-    <!-- Canonical Link -->
-    <link rel="canonical" href="https://UESIAP">
-    
-    <!-- Favicon Links -->
-    <link rel="shortcut icon" type="image/x-icon" href="https://www.uesitn.org/wp-content/uploads/2020/08/uesi-favicon.png">
-    <link rel="apple-touch-icon" href="https://www.uesitn.org/wp-content/uploads/2020/08/uesi-favicon.png"/>
-    <link rel="icon" sizes="192x192" href="https://www.uesitn.org/wp-content/uploads/2020/08/uesi-favicon.png">
-    
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="Vidhyarthi Geethavali Songs" />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://UESIAP" />
-    <meta property="og:image" content="https://www.uesitn.org/wp-content/uploads/2020/08/uesi-favicon.png" />
-    <meta property="og:description" content="Listen to Vidhyarthi Geethavali Audio Songs and Track Songs online anytime. UESI AP." />
-    <meta property="og:site_name" content="UESI AP" />
-    
-    <!-- Twitter Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Vidhyarthi Geethavali Songs" />
-    <meta name="twitter:description" content="Listen to Vidhyarthi Geethavali Audio Songs and Track Songs online anytime. UESI AP." />
-    <meta name="twitter:image" content="https://www.uesitn.org/wp-content/uploads/2020/08/uesi-favicon.png" />
-    <meta name="twitter:url" content="https://UESIAP" />
+    <meta name="robots" content="index, follow, max-image-preview:large">
 
-    <!-- Article Modification Date -->
-    <meta property="article:modified_time" content="2026-07-08T05:10:00+00:00" />
+    <!-- 3. CACHE & SECURITY -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
 
-    <!-- Structured Data (JSON-LD) -->
+    <!-- 4. VERIFICATION & CANONICAL -->
+    <meta name="google-site-verification" content="eZcr6WyistE7nCSaUoUkf9tpK_SmeG5caEM-x3nEWb4">
+    <meta name="msvalidate.01" content="22EBFE63B9E666F7080D48067489EAB6">
+    <link rel="canonical" href="https://uesiap.github.io/vidhyarthi-geethavali/">
+
+    <!-- 5. PWA & APP META -->
+    <link rel="manifest" href="/vidhyarthi-geethavali/manifest.json">
+    <meta name="theme-color" content="#128C7E">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Vidhyarthi Geethavali">
+
+    <!-- 6. FAVICONS & ICONS  -->
+    <link rel="icon" href="/vidhyarthi-geethavali/assets/Icons/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="96x96" href="/vidhyarthi-geethavali/assets/Icons/Icon96.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/vidhyarthi-geethavali/assets/Icons/Icon192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/vidhyarthi-geethavali/assets/Icons/Icon512.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/vidhyarthi-geethavali/assets/Icons/apple-icon.png">
+
+    <!-- 7. OPEN GRAPH (Facebook, WhatsApp, LinkedIn)
+       *(Fixed: Social platforms require absolute URLs for images)* -->
+    <meta property="og:title" content="Vidhyarthi Geethavali | UESI AP">
+    <meta property="og:description"
+        content="A curated collection of Telugu and English Christian camp songs by UESI AP. Listen, learn, and worship through music that reflects spiritual depth.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://uesiap.github.io/vidhyarthi-geethavali/">
+    <meta property="og:image" content="https://uesiap.github.io/vidhyarthi-geethavali/assets/Icons/Icon512.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta property="og:image:alt" content="Vidhyarthi Geethavali - UESI AP">
+    <meta property="og:site_name" content="Vidhyarthi Geethavali">
+    <meta property="og:locale" content="te_IN">
+
+    <!-- 8. TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Vidhyarthi Geethavali | UESI AP">
+    <meta name="twitter:description"
+        content="A curated collection of Telugu and English Christian camp songs by UESI AP. Listen, learn, and worship through music.">
+    <meta name="twitter:url" content="https://uesiap.github.io/vidhyarthi-geethavali/">
+    <meta name="twitter:image" content="https://uesiap.github.io/vidhyarthi-geethavali/assets/Icons/Icon512.png">
+    <meta name="twitter:image:alt" content="Vidhyarthi Geethavali - UESI AP">
+    <meta name="twitter:site" content="@uesiap">
+    <meta name="twitter:creator" content="@uesiap">
+
+    <!-- 9. STRUCTURED DATA (JSON-LD)
+       *(Optimized: Removed keyword stuffing, added CollectionPage schema)* -->
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebPage",
-      "name": "UESI AP | Vidhyarthi Geethavali | Audio Songs | Track Songs | Lyrics",
-      "description": "Listen to Vidhyarthi Geethavali Audio Songs and Track Songs online anytime. UESI AP.",
-      "keywords": [
-    "uesi ap",
-    "UESI AP Nambur",
-    "vidhyarthi",
-    "geethavali",
-    "uesi songs",
-    "uesi ap songs",
-    "vidhyarthi geethavali songs",
-    "ap Vidhyarthi Geethavali Uesi songs",
-    "VJ Songs",
-    "Uesi VJ songs",
-    "Telugu Vidhyarthi Geethavali songs",
-    "english songs",
-    "telugu songs",
-    "audio songs",
-    "Vidhyarthi Geethavali Track songs",
-    "Vidhyarthi Geethavali Audio songs",
-    "uesi ap songs",
-    "audio",
-    "track",
-    "search songs"
-      ],
-      "author": {
-        "@type": "Person",
-        "name": "M.Rahul"
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Vidhyarthi Geethavali",
+    "alternateName": ["UESI AP Songs", "VJ Songs", "Vidhyarthi Geethavali Songs"],
+    "url": "https://uesiap.github.io/vidhyarthi-geethavali/",
+    "description": "A thoughtfully curated collection of Telugu and English Christian camp songs by UESI AP.",
+    "inLanguage": ["te-IN", "en-IN"],
+    "publisher": {
+      "@type": "Organization",
+      "name": "Union of Evangelical Students of India (UESI) AP",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://uesiap.github.io/vidhyarthi-geethavali/assets/Icons/Icon512.png"
       },
-      "url": "https://uesiap.github.io/vidhyarthi-geethavali",
-      "image": "https://www.uesitn.org/wp-content/uploads/2020/08/uesi-favicon.png",
       "sameAs": [
         "https://www.youtube.com/@UESIOfficial"
-      ],
-      "publisher": {
-        "@type": "Organization",
-        "name": "UESI AP",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https://www.uesitn.org/wp-content/uploads/2020/08/uesi-favicon.png"
-        }
-      }
+      ]
+    },
+    "author": {
+      "@type": "Person",
+      "name": "M.Rahul"
     }
-    </script>
-
-    <!-- Site Name Markup -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "UESI AP",
-      "url": "https://uesiap.github.io/"
-    }
-    </script>
-
-    <!-- Font Awesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
-</script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500&display=swap');
-
-        body {
-            font-family: 'Google Sans', sans-serif;
-            background-color: #0c1319;
-            margin: 0;
-            padding: 0;
-            -webkit-tap-highlight-color: transparent;
-            tap-highlight-color: transparent;
-            -webkit-touch-callout: none;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }
-
-        .container {
-            max-width: 700px;
-            margin: 0 auto;
-            color: #fff;
-            background-color: #0c1319;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            
-            position: relative;
-        }
-
-        .header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background-color: #0c1319;
-            padding: 10px;
-            z-index: 100;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        /* Search container styles */
-.search-container {
-    text-align: left;
-    background-color: #0c1319;
-    border: 1px solid #fff;
-    display: flex;
-    border-radius: 20px;
-    margin-bottom: 20px;
-    width: 90%;
-    margin-right: 25px;
-    max-width: 500px;
-    position: relative; /* For positioning ripple effect */
-    overflow: hidden; /* Ensure ripple effect stays within the container */
-    cursor: pointer; /* Pointer cursor to indicate it's interactive */
-}
-
-/* Input field styles */
-.search-container input {
-    padding: 10px;
-    width: 73%;
-    max-width: 500px;
-    color: #fff;
-    background-color: #0c1319;
-    border: 1px solid #0c1319;
-    border-radius: 5px;
-}
-
-/* Ripple effect styling */
-.search-container::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.3); /* Light ripple color */
-    border-radius: 50%;
-    transform: scale(0);
-    pointer-events: none;
-    transition: transform 0.4s, opacity 0.4s;
-    opacity: 0;
-    z-index: 1; /* Ensure ripple is above other content */
-    transform-origin: right; /* Ensures ripple scales from center */
-}
-
-/* Activate ripple effect on mouse events */
-.search-container:active::before {
-    transform: scale(4); /* Adjust scale as needed */
-    opacity: 1;
-}
-
-
-        .search-container input:focus {
-            outline: none;
-        }
-        
-
-        .tab-container {
-            display: flex;
-            justify-content: center;
-        }
-
-        .tab {
-            background-color: #0c1319;
-            border: none;
-            padding: 15px 65px;
-            cursor: pointer;
-            color: #fff;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            margin: 0 5px;
-            height: 40px;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-
-        .tab.active {
-            color: #197afe;
-            //border-bottom: 2px solid #197EFA;
-            
-        }
-
-        .section {
-            display: none;
-            margin-top: 50px;
-            margin-bottom: 50px;
-            transition: opacity 0.5s ease; /* Smooth transition for opacity */
-        }
-
-        .section.active {
-            display: block;
-        }
-
-        h1 {
-            text-align: center;
-            color: #fff;
-            margin-bottom: 20px;
-        }
-
-        ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        li {
-            padding: 10px 0;
-            border-bottom: 1px solid #2a2a2a;
-        }
-
-        .song-details {
-            display: flex;
-            align-items: center;
-        }
-
-        .song-name {
-            display: flex;
-            align-items: center;
-            margin-right: 15px;
-            flex-grow: 1;
-            color: #ccc;
-        }
-
-        .song-name img {
-            margin-right: 10px;
-        }
-
-        .controls {
-            display: flex;
-            align-items: center;
-        }
-
-        button {
-            background-color: transparent;
-            border: none;
-            cursor: pointer;
-            font-size: 1em;
-            padding: 5px 10px;
-            border-radius: 5px;
-            color: #007bff;
-            transition: color 0.3s ease;
-        }
-
-        button:hover {
-            color: #0056b3;
-        }
-
-        button.playing {
-            color: #dc3545;
-        }
-
-        button.playing:hover {
-            color: #c82333;
-        }
-
-        button.play {
-            background-color: #007bff;
-            width: 40px;
-            height: 40px;
-            color: #fff;
-        }
-
-        button.pause {
-            background-color: #dc3545;
-            color: #fff;
-        }
-
-        .slider-container {
-            display: none;
-            align-items: center;
-            margin-top: 10px;
-        }
-
-        .slider-container.active {
-            display: flex;
-        }
-
-        input[type="range"] {
-            width: 100%;
-        }
-        
-        #search-icon .ripple {
-        position: absolute;
-        border-radius: 50%;
-        background: #666;
-        transform: scale(0);
-        pointer-events: none;
-    }
-    
-    @keyframes ripple-animation {
-        to {
-            transform: scale(4);
-            opacity: 0;
-        }
-    }
-    .tab {
-    position: relative;
-    overflow: hidden; 
-}
-
-.tab::after {
-    content: ''; 
-    position: absolute; 
-    border-radius: 50%; 
-    background: rgba(255, 255, 255, 0.3); 
-    width: 100%; /* Adjust the size */
-    height: 100%; /* Adjust the size */
-    transform: scale(0); 
-    opacity: 0; 
-    pointer-events: none; 
-    transition: transform 0.5s, opacity 0.5s; 
-    z-index: 0;
-}
-
-.tab:active::after {
-    transform: scale(4); 
-    opacity: 1; 
-    transition: 0s;
-}
-
-.tab.active::after {
-    /* Optional: Style for the active tab if needed */
-}
-
-button i {
-    font-size: 20px; /* Adjust as needed */
-    vertical-align: middle; /* vertically */
-    align-items: center;
-    justify-content: center;
-    }
-    
-     #preloader {
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 9999;
-    background-color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-#preloader img {
-    width: 90%; /* Adjust the size as needed */
-    height: auto;
-}
-
-    </style>
-</head>
-<body>
-    <!-- Preloader -->
-    <div id="preloader">
-    <img src="https://uesiap.github.io/vidhyarthi-geethavali/uesisongsmain.jpg" alt="Loading...">
-</div>
-    <div class="header">
-        <div style="display: flex; flex-direction: row; margin-left: -30px; margin-bottom: 20px;">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcSxSNUXpJ8n2YkTuBEeO84gb1dH6NRhvQNg&s" width="50px" height="50px" style="margin-top: 12px; margin-left: -20px; border-radius: 50%"> &emsp;<h2 style="color: white; font-weight: 500;">UESI AP Audio Songs</h2>&ensp;&ensp;<div style="position: relative; border-radius: 50px; border: 1px solid #fff; height: 50px; width: 50px; margin-top: 14px; margin-right: -20px; overflow: hidden; cursor: pointer;" id="search-icon">
-    <i class="fas fa-search" style="margin-top: 18px; color: #197afe; margin-left: 17px;"></i>
-    <span class="ripple"></span>
-</div></div>
-        
-     <div class="search-container" id="search-box" style="display: none">
-    <i class="fas fa-search" style="margin-top: 10px; color: #ccc; margin-left: 15px"></i>
-    <input type="text" id="searchInput" placeholder="Search for a song...">
-</div>
-
-        
-        
-        <div class="tab-container" style="margin-left: -25px; border: 1px solid #fff;border-radius: 20px">
-            <button class="tab active" onclick="showSection('songs-section')" style="border-right: 1px solid #fff; margin-right: -0.5px; margin-bottom: 0px; display: inline-flex; border-radius: 50px 0 0 50px;">Songs</button>            
-            <button class="tab" onclick="showSection('tracks-section')" style="border-left: 1px solid #fff; margin-left: -0.5px;margin-bottom: 0px; display: inline-flex; border-radius: 0 50px 50px 0;">Tracks</button>
-        </div>
-    </div>
-    <br>
-    <div class="container" style="margin-top: 70px;" id="sections">
-        <div class="section active" id="songs-section">         
-            <ul id="songsList"></ul>
-        </div>
-        <div class="section" id="tracks-section">
-            <ul id="tracksList"></ul>
-        </div>
-    </div>
-    <script>
-        // Define separate queues for tracks and songs
-        const songsQueue = [
-            { name: 'Ascharyamaina Prema', url: 'https://archive.org/download/uesiap/15vgSongs1-09Ascharyamaina.mp3' },
-            { name: 'Nee Jeevitham', url: 'https://archive.org/download/uesiap/15vgSongs4-04NeeJeevitham.mp3' },
-            { name: 'Santhoshame Santhoshame', url: 'https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/songs%2FSanthoshame%20Santhoshame.mp3?alt=media&token=6bc345d9-4355-42cc-8626-5d4dbdf69c6b' },
-            { name: 'Santhoshame neeku kavalaa', url: 'https://archive.org/download/uesiap/11neeve-018Santoshame.mp3' },
-            { name: 'Swetcha Needhe', url: 'https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/songs%2FSwetcha%20Nedhe.mp3?alt=media&token=30ca0b2c-8819-4c2c-a368-01fb528f603b' },
-            // Add more songs here
-        ];
-        
-        const tracksQueue = [
-        { name: 'Advithiya Satyadhevudu', url: 'https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/tracks%2FAdvithiya%20Satya%20Dhevudu.mp3?alt=media&token=376d65f8-422a-46e9-88fd-bc27d45e8718' },
-            { name: 'Ascharyamaina Prema', url: 'https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/tracks%2FAscharyamaina%20Prema%20Track.mp3?alt=media&token=aad881d0-4772-4f8a-a231-e91eddc3c33f' },
-            { name: 'College Lo Cheranu', url: 'https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/tracks%2FCollege%20Track.mp3?alt=media&token=76db3350-a7b6-4c69-9199-c60845cb93a4' },
-            { name: 'Nee Jeevitham', url: 'https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/tracks%2FNee%20Jeevitham%20Track.mp3?alt=media&token=fd5806b4-1a5d-4c03-8b50-5a9722c71318' },
-            { name: 'Oranna Oranna', url: 'https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/tracks%2FOranna%20Oranna%20Track.mp3?alt=media&token=045cb72a-023a-4515-8c94-3cec6ae7258c' },
-            { name: 'Santhi Santhi Santhi Ra', url: 'https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/tracks%2FSanthi%20Santhi%20Santhi%20Raa%20Track.mp3?alt=media&token=4b078fc6-614e-41d0-bb9a-dc93f013c313' },
-            { name: 'Santhoshame Santhoshame', url: 'https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/tracks%2FSanthoshame%20Santhoshame%20Track.mp3?alt=media&token=e4a8e255-0f57-4f46-a1c9-765377bbdc43' },
-            { name: 'Swetcha Needhe', url: 'https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/tracks%2FSwetcha%20Needhe%20Track.mp3?alt=media&token=0fabea4e-2d30-4da6-a3b7-97f37070c127' },
-            { name: 'Yerugudhuva Neevu', url: 'https://firebasestorage.googleapis.com/v0/b/uesi-ap.appspot.com/o/tracks%2FYerugudhuva%20Neevu%20Sodhara%20T.mp3?alt=media&token=3de12434-9857-4fe2-b5ba-bec56e6b3d57' },
-            // Add more tracks here
-        ];
-
-
-        const tracksList = document.getElementById('tracksList');
-        const songsList = document.getElementById('songsList');
-        const audio = new Audio();
-        let currentPlayingIndex = null;
-        let currentQueue = null; // Track which queue is currently playing
-        let currentProgressBar = null;
-
-        function displaySongs() {
-            // Clear previous lists
-            songsList.innerHTML = '';
-            tracksList.innerHTML = '';
-
-            // Display songs
-            songsQueue.forEach((song, index) => {
-                const li = document.createElement('li');
-                li.innerHTML = `
-                    <div class="song-details">
-                        <div class="song-name">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcSxSNUXpJ8n2YkTuBEeO84gb1dH6NRhvQNg&s" width="50px" height="50px" style="border-radius: 10px" alt="UESI Vidhyarthi Geethavali">
-
-                            ${song.name}
-                        </div>
-                        <div class="controls">
-                            <button class="play" onclick="togglePlayPause(${index}, this, 'songs')"><i class="fa fa-play"></i></button>
-                        </div>
-                    </div>
-                    <div class="slider-container">
-                        <input type="range" min="0" value="0" oninput="seekSong(this)">
-                    </div>
-                `;
-                songsList.appendChild(li);
-            });
-
-            // Display tracks
-            tracksQueue.forEach((song, index) => {
-                const li = document.createElement('li');
-                li.innerHTML = `
-                    <div class="song-details">
-                        <div class="song-name">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcSxSNUXpJ8n2YkTuBEeO84gb1dH6NRhvQNg&s" width="50px" height="50px" style="border-radius: 10px" alt="UESI Vidhyarthi Geethavali">
-                            ${song.name}
-                        </div>
-                        <div class="controls">
-                            <button class="play" onclick="togglePlayPause(${index}, this, 'tracks')"><i class="fa fa-play"></i></button>
-                        </div>
-                    </div>
-                    <div class="slider-container">
-                        <input type="range" min="0" value="0" oninput="seekSong(this)">
-                    </div>
-                `;
-                tracksList.appendChild(li);
-            });
-        }
-
-        function showSection(sectionId) {
-            document.querySelectorAll('.section').forEach(section => {
-                section.classList.remove('active');
-            });
-
-            document.querySelectorAll('.tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-
-            document.getElementById(sectionId).classList.add('active');
-            document.querySelector(`.tab[onclick="showSection('${sectionId}')"]`).classList.add('active');
-        }
-
-        function togglePlayPause(index, button, type) {
-            const queue = type === 'tracks' ? tracksQueue : songsQueue;
-            const isCurrentlyPlaying = currentPlayingIndex === index && currentQueue === type;
-
-            if (isCurrentlyPlaying) {
-    if (audio.paused) {
-        audio.play();
-        button.innerHTML = '<i class="fa fa-pause"></i>'; // Font Awesome pause icon
-        button.classList.remove('play');
-        button.classList.add('pause');
-    } else {
-        audio.pause();
-        button.innerHTML = '<i class="fa fa-play"></i>'; // Font Awesome play icon
-        button.classList.remove('pause');
-        button.classList.add('play');
-    }
-} else {
-    if (currentPlayingIndex !== null && currentQueue) {
-        const prevButton = document.querySelector(`ul#${currentQueue}List li:nth-child(${currentPlayingIndex + 1}) .controls button`);
-        if (prevButton) {
-            prevButton.innerHTML = '<i class="fa fa-play"></i>'; // Font Awesome play icon
-            prevButton.classList.remove('pause');
-            prevButton.classList.add('play');
-        }
-    }
-
-    currentQueue = type;
-    currentPlayingIndex = index;
-    audio.src = queue[index].url;
-    audio.play();
-    button.innerHTML = '<i class="fa fa-pause"></i>'; // Font Awesome pause icon
-    button.classList.remove('play');
-    button.classList.add('pause');
-
-
-
-                const prevSlider = document.querySelector('.slider-container.active');
-                if (prevSlider) prevSlider.classList.remove('active');
-
-                const listItem = button.closest('li');
-                const sliderContainer = listItem.querySelector('.slider-container');
-                sliderContainer.classList.add('active');
-
-                currentProgressBar = sliderContainer.querySelector('input[type="range"]');
-            }
-        }
-
-        function seekSong(range) {
-            audio.currentTime = range.value;
-        }
-
-        audio.addEventListener('timeupdate', () => {
-            if (currentProgressBar) {
-                currentProgressBar.max = audio.duration;
-                currentProgressBar.value = audio.currentTime;
-            }
-        });
-
-        audio.addEventListener('ended', () => {
-            const queue = currentQueue === 'tracks' ? tracksQueue : songsQueue;
-            const nextIndex = currentPlayingIndex + 1;
-            if (nextIndex < queue.length) {
-                togglePlayPause(nextIndex, document.querySelector(`ul#${currentQueue}List li:nth-child(${nextIndex + 1}) .controls button`), currentQueue);
-            } else {
-                currentPlayingIndex = null;
-                currentQueue = null;
-            }
-        });
-
-
-
-
-// Search Box JavaScript 
-document.getElementById('searchInput').addEventListener('input', function (e) {
-           const filter = e.target.value.toLowerCase();
-            const lists = [songsList, tracksList];
-
-            lists.forEach(list => {
-                Array.from(list.getElementsByTagName('li')).forEach(item => {
-                    const text = item.textContent || item.innerText;
-                    item.style.display = text.toLowerCase().indexOf(filter) > -1 ? "" : "none";
-                });
-            });
-        }); 
-        
-        
-        
-        
- 
-        // Initialize the song list display
-        displaySongs();
-
-        // Swipe functionality
-        
-let touchStartX = 0;
-let touchEndX = 0;
-const swipeThreshold = 70; // Minimum distance in pixels for a valid swipe
-
-function handleGesture() {
-    if (touchEndX < touchStartX - swipeThreshold) {
-        showSection('tracks-section');
-    } else if (touchEndX > touchStartX + swipeThreshold) {
-        showSection('songs-section');
-    }
-}
-
-document.addEventListener('touchstart', e => {
-    touchStartX = e.changedTouches[0].screenX;
-});
-
-document.addEventListener('touchend', e => {
-    touchEndX = e.changedTouches[0].screenX;
-    handleGesture();
-});
-
-
-
-
-
-
-
-
-    // Variables for tracking the search box state
-    let isSearchBoxOpen = false;
-
-    // Event listener for the search icon
-    document.getElementById('search-icon').addEventListener('click', function () {
-        const searchBox = document.getElementById('search-box');
-        const sectionsContainer = document.getElementById('sections');
-
-        if (!isSearchBoxOpen) {
-            // Open the search box
-            searchBox.style.display = 'flex';
-            sectionsContainer.style.marginTop = '120px';
-        } else {
-            // Close the search box
-            searchBox.style.display = 'none';
-            sectionsContainer.style.marginTop = '70px';
-        }
-
-        // Toggle the state
-        isSearchBoxOpen = !isSearchBoxOpen;
-    });
-
-    // Adjust the search box outline when input field is focused
-    document.querySelector('.search-container input').addEventListener('focus', function() {
-        document.querySelector('.search-container').style.border = '1px solid #197afe';
-    });
-
-    document.querySelector('.search-container input').addEventListener('blur', function() {
-        document.querySelector('.search-container').style.border = '1px solid #fff';
-    });
-
-
-        //Search Box Outline when Input field is Focused
-       
-       document.querySelector('.search-container input').addEventListener('focus', function() {
-    document.querySelector('.search-container').style.border = '1px solid #197afe';
-    document.querySelector('.search-container').style.boxShadow = '0 0 4px #197afe';
-});
-
-document.querySelector('.search-container input').addEventListener('blur', function() {
-    document.querySelector('.search-container').style.border = '1px solid #fff';
-});
-
-document.getElementById('search-icon').addEventListener('click', function(e) {
-    var ripple = this.querySelector('.ripple');
-    
-    // Remove existing ripple effect
-    ripple.style.animation = 'none';
-    
-    // Calculate the position and size of the ripple
-    var rect = this.getBoundingClientRect();
-    var size = Math.max(rect.width, rect.height);
-    var x = e.clientX - rect.left - size / 2;
-    var y = e.clientY - rect.top - size / 2;
-    
-    ripple.style.width = ripple.style.height = size + 'px';
-    ripple.style.left = x + 'px';
-    ripple.style.top = y + 'px';
-    
-    // Trigger the animation
-    ripple.style.animation = 'ripple-animation 0.6s linear';
-});
-
-// Preloader 
-
-window.addEventListener('load', function() {
-    // Set a timeout to remove the preloader after 2 seconds
-    setTimeout(function() {
-        var preloader = document.getElementById('preloader');
-        if (preloader) {
-            preloader.style.opacity = '0';
-            preloader.style.transition = 'opacity 1s ease';
-
-            // Wait for the transition to complete before removing the element
-            setTimeout(function() {
-                var preloaderImage = preloader.querySelector('img');
-                if (preloaderImage) {
-                    preloaderImage.remove(); // This removes the image from the preloader
-                }
-                preloader.parentNode.removeChild(preloader); // This removes the preloader itself
-            }, 500); // 500ms matches the CSS transition duration
-        }
-    }, 1000); // 2 seconds delay
-});
-
-    </script>
-    
-    
-  <script>
-    // Disable right-click context menu
-    document.oncontextmenu = function() {
-        return false;
-    };
-
-    // Disable certain key combinations
-    document.onkeydown = function(e) {
-        if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
-            return false;
-        }
-        if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
-            return false;
-        }
-        if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
-            return false;
-        }
-    };
+  }
   </script>
-    <script src="https://cdn.jsdelivr.net/npm/disable-devtool"></script>
+
+    <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Vidhyarthi Geethavali Songs",
+    "description": "Listen to Telugu and English UESI AP camp songs, lyrics, and audio tracks.",
+    "url": "https://uesiap.github.io/vidhyarthi-geethavali/",
+    "isPartOf": {
+      "@type": "WebSite",
+      "url": "https://uesiap.github.io/vidhyarthi-geethavali/",
+      "name": "Vidhyarthi Geethavali"
+    },
+    "inLanguage": ["te-IN", "en-IN"]
+  }
+  </script>
+
+    <!-- 10. PRECONNECT & ASSETS (Performance)  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="/vidhyarthi-geethavali/styles.css?v={{ site.github.build_revision }}">
+
+    <!-- Added 'defer' so the script doesn't block page rendering -->
+    <script src="/vidhyarthi-geethavali/boom.js?v={{ site.github.build_revision }}" defer></script>
+</head>
+
+<body>
+    <h1 class="main-head-title" style="display: none;">Welcome to Vidhyarthi Geethavali. A thoughtfully curated
+        collection
+        of songs rooted in
+        the vision of the Union of Evangelical Students of India (UESI). This platform is designed to help students and
+        fellow believers listen, learn, and worship through music that reflects spiritual depth and biblical truth.</h1>
+
+    <nav class="navbar" aria-label="Main navigation">
+        <div class="logo-title">
+            <img src="https://uesiap.github.io/vidhyarthi-geethavali/assets/Icons/uesi192.jpg" alt="App Logo"
+                class="logo">
+            <span class="title">UESI-AP Audio & Visuals Dept</span>
+        </div>
+        <div class="nav-actions">
+            <button id="searchToggle" class="search-toggle" aria-label="Toggle Search">
+                <span id="searchIcon" class="custom-search-icon"></span>
+                <span id="closeIcon" class="custom-close-icon hide-icon">✕</span>
+            </button>
+            <button class=" menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">
+                <span>
+                    <div class="menu-toggle">
+                        <div class="menu-bars"></div>
+                    </div>
+                </span>
+            </button>
+        </div>
+    </nav>
+
+    <div id="searchBox" class="search-box hidden">
+        <div id="songSearchInput" class="go-to-too-search placeholder" contenteditable="true"
+            data-placeholder="Type the song number or name..." role="textbox" aria-label="Search songs"
+            spellcheck="false">
+        </div>
+        <button id="clearSearch" class="clear-search" aria-label="Clear search">✕</button>
+    </div>
+
+    <div class="drawer" id="drawer" role="navigation" aria-label="Side menu">
+        <div class="drawer-content">
+
+            <a href="/vidhyarthi-geethavali/" class="drawer-item" tabindex="0">
+                <div class="item-content">
+                    <span class="icon"><span class="material-symbols-outlined">
+                            home
+                        </span></span>
+                    <span class="mnu-tit">Home</span>
+                </div>
+            </a>
+
+            <!-- Camp Songs -->
+            <div class="drawer-item has-submenu" id="chatsItem" tabindex="0">
+                <div class="item-content">
+                    <span class="icon"><span class="material-symbols-outlined">
+                            camping
+                        </span></span>
+                    <span class="mnu-tit">Camp Songs</span>
+                </div>
+            </div>
+            <div class="submenu" id="chatsSubmenu">
+                <a href="/vidhyarthi-geethavali/camps/ecamp" class="submenu-item" tabindex="0">
+                    <span class="icon"><i class="fas fa-users"></i></span>
+                    <span class="mnu-tit">E Camp Songs</span>
+                </a>
+                <a href="/vidhyarthi-geethavali/camps/dtcamp" class="submenu-item" tabindex="0">
+                    <span class="icon"><i class="fas fa-users"></i></span>
+                    <span class="mnu-tit">DT Camp Songs</span>
+                </a>
+                <a href="/vidhyarthi-geethavali/camps/ltcamp" class="submenu-item" tabindex="0">
+                    <span class="icon"><i class="fas fa-users"></i></span>
+                    <span class="mnu-tit">LT Camp Songs</span>
+                </a>
+                <a href="/vidhyarthi-geethavali/camps/cmtc" class="submenu-item" tabindex="0">
+                    <span class="icon"><i class="fas fa-users"></i></span>
+                    <span class="mnu-tit">CMTC Songs</span>
+                </a>
+                <a href="/vidhyarthi-geethavali/camps/smtc" class="submenu-item" tabindex="0">
+                    <span class="icon"><i class="fas fa-users"></i></span>
+                    <span class="mnu-tit">SMTC Songs</span>
+                </a>
+            </div>
+
+            <!-- Special Songs -->
+            <div class="drawer-item has-submenu" id="callsItem" tabindex="0">
+                <div class="item-content">
+                    <span class="icon"><span class="material-symbols-outlined">
+                            stars_2
+                        </span></span>
+                    <span class="mnu-tit">Special Songs</span>
+                </div>
+            </div>
+            <div class="submenu" id="callsSubmenu">
+                <a href="/vidhyarthi-geethavali/special/praise" class="submenu-item" tabindex="0">
+                    <span class="icon"><span class="material-symbols-outlined">
+                            cheer
+                        </span></span>
+                    <span class="mnu-tit">Praise & Worship</span>
+                </a>
+                <a href="/vidhyarthi-geethavali/special/prayer" class="submenu-item" tabindex="0">
+                    <span class="icon"><span class="material-symbols-outlined">
+                            folded_hands
+                        </span></span>
+                    <span class="mnu-tit">Prayer</span>
+                </a>
+                <a href="/vidhyarthi-geethavali/special/thanks" class="submenu-item" tabindex="0">
+                    <span class="icon"><span class="material-symbols-outlined">
+                            handshake
+                        </span></span>
+                    <span class="mnu-tit">Thanks Giving</span>
+                </a>
+                <a href="/vidhyarthi-geethavali/special/christmas" class="submenu-item" tabindex="0">
+                    <span class="icon"><span class="material-symbols-outlined">
+                            Forest
+                        </span></span>
+                    <span class="mnu-tit">Christmas</span>
+                </a>
+            </div>
+
+            <!-- Aims Songs -->
+            <div class="drawer-item has-submenu" id="aimsItem" tabindex="0">
+                <div class="item-content">
+                    <span class="icon"><span class="material-symbols-outlined">
+                            my_location
+                        </span></span>
+                    <span class="mnu-tit">Aims Songs</span>
+                </div>
+            </div>
+            <div class="submenu" id="aimsSubmenu">
+                <a href="/vidhyarthi-geethavali/aims/evangelism" class="submenu-item" tabindex="0">
+                    <span class="icon"><i class="fa-solid fa-arrow-right-long"></i></span>
+                    <span class="mnu-tit">Evangelism</span>
+                </a>
+                <a href="/vidhyarthi-geethavali/aims/fellowship" class="submenu-item" tabindex="0">
+                    <span class="icon"><i class="fa-solid fa-arrow-right-long"></i></span>
+                    <span class="mnu-tit">Fellowship</span>
+                </a>
+                <a href="/vidhyarthi-geethavali/aims/testimony" class="submenu-item" tabindex="0">
+                    <span class="icon"><i class="fa-solid fa-arrow-right-long"></i></span>
+                    <span class="mnu-tit">Testimony</span>
+                </a>
+                <a href="/vidhyarthi-geethavali/aims/missions" class="submenu-item" tabindex="0">
+                    <span class="icon"><i class="fa-solid fa-arrow-right-long"></i></span>
+                    <span class="mnu-tit">Missions</span>
+                </a>
+            </div>
+
+            <!-- Audio Songs -->
+            <div class="drawer-item has-submenu" id="audioItem" tabindex="0">
+                <div class="item-content">
+                    <span class="icon"><span class="material-symbols-outlined">
+                            graphic_eq
+                        </span></span>
+                    <span class="mnu-tit">Audio Songs</span>
+                </div>
+            </div>
+            <div class="submenu" id="audioSubmenu">
+                <a href="/vidhyarthi-geethavali/audios/telugu" class="submenu-item" tabindex="0">
+                    <span class="icon"><i class="fa-solid fa-music"></i></span>
+                    <span class="mnu-tit">Telugu Songs</span>
+                </a>
+                <a href="/vidhyarthi-geethavali/audios/english" class="submenu-item" tabindex="0">
+                    <span class="icon"><i class="fa-solid fa-music"></i></span>
+                    <span class="mnu-tit">English Songs</span>
+                </a>
+                <a href="/vidhyarthi-geethavali/audios/hindi" class="submenu-item" tabindex="0">
+                    <span class="icon"><i class="fa-solid fa-music"></i></span>
+                    <span class="mnu-tit">Hindi Songs</span>
+                </a>
+            </div>
+            <div class="drawer-item has-submenu" id="albumItem" tabindex="0">
+                <div class="item-content">
+                    <span class="icon">
+                        <span class="material-symbols-outlined">library_books</span>
+                    </span>
+                    <span class="mnu-tit">New Albums</span>
+                </div>
+            </div>
+
+            <div class="submenu" id="albumSubmenu">
+                <a href="/vidhyarthi-geethavali/new/nuthana-jeevam/" class="submenu-item" tabindex="0">
+                    <span class="icon"><i class="fa-solid fa-compact-disc" style="font-size: 1.3rem;"></i></span>
+                    <span class="mnu-tit">నూతన జీవం</span>
+                </a>
+            </div>
+            <br>
+            <hr style="border: 1.5px dotted var(--primary-color);">
+            <br>
+            <div class="drawer-item has-submenu" id="thoughtsSubmenu" tabindex="0"
+                style="border-top: 1.5px solid #ddd;">
+                <div class="item-content">
+                    <span class="icon"><span class="material-symbols-outlined">
+                            forum
+                        </span></span>
+                    <span class="mnu-tit">Share Thoughts</span>
+                </div>
+            </div>
+            <div class="submenu" id="audioSubmenu">
+                <a href="/vidhyarthi-geethavali/write-review" class="submenu-item" tabindex="0">
+                    <span class="icon"><span class="material-symbols-outlined">
+                            edit_square
+                        </span></span>
+                    <span class="mnu-tit">Write a Review</span>
+                </a>
+                <a href="/vidhyarthi-geethavali/give-correction" class="submenu-item" tabindex="0">
+                    <span class="icon"><span class="material-symbols-outlined">
+                            lyrics
+                        </span></span>
+                    <span class="mnu-tit">Give Correction</span>
+                </a>
+                <a href="/vidhyarthi-geethavali/user-feedback" class="submenu-item" tabindex="0">
+                    <span class="icon"><span class="material-symbols-outlined">
+                            thumbs_up_down
+                        </span></span>
+                    <span class="mnu-tit">Feedback</span>
+                </a>
+            </div>
+            <br><br>
+
+        </div>
+    </div>
+
+    <div class="overlay" id="overlay"></div>
+    <main class="main-content">
+        <!--<marquee class="marquee" behavior="scroll" direction="left" scrollamount="6" style="margin-bottom: 1rem; margin-top: -0.5rem; padding-bottom: 10px; border-bottom: 1px solid var(--primary-color)"><span style="color: var(--primary-color);">Temporary Info:</span>This Online <span style="color: #043b75;">Vidhyarthi Geethavali</span> Resource is available in Google & Bing Browsers, So you can directly access this via searching the "Camps names/ Retreat names/ uesi ap songs! for example: <a href="https://www.google.com/search?q=uesi+ap+songs" target="_blank" rel="noopener noreferrer">Click here</a>. Remaining songs will be added soon. -last updated on 11/05/2026 1:00 PM IST</marquee>-->
+        <span id="songs-grid">
+            <h1 class="page-title">Vidhyarthi Geethavali Songs</h1>
+             
+            <div class="card">
+                <h2><i class="fa-solid fa-music" style="margin-right: 5px;"></i><span id="sel-lis"
+                        style="margin-right: -5px;">Telugu</span>Songs</h2>
+
+                <!-- Language Selector -->
+                <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin-bottom:1rem;">
+                    <button class="tab-btn active" onclick="switchLanguage('telugu', event)">Telugu</button>
+                    <button class="tab-btn" onclick="switchLanguage('english', event)">English</button>
+                    <button class="tab-btn" onclick="switchLanguage('hindi', event)">Hindi</button>
+                    <button class="tab-btn" onclick="switchLanguage('albums', event)">New</button>
+                </div>
+                <hr>
+                <!-- Letter Grid (for Telugu & English) -->
+                <div class="grid" id="letters"></div>
+            </div>
+        </span>
+
+        <!-- Song Display Section -->
+        <section class="card" id="ssl">
+            <span id="all-songs">
+                <h2><i class="fa-solid fa-music" style="margin-right: 10px;"></i>All Songs of <span
+                        id="title">"అ"</span>
+                </h2>
+                <hr>
+            </span>
+            <ul id="songs">
+            </ul>
+            <div id="noSongsMessage" class="no-songs-message hidden">Song not yet added/No songs matched your search.</div>
+        </section>
+
+        <h6 class="page-title" style="color: rgb(52, 42, 165); font-weight: 500; font-size: 1.1rem">
+            This main
+            page is under update, We're adding songs gradually.. <br>Thank you for your patience, and may God bless you!
+        </h6>
+
+    </main><br><br><br>
+    <p style="font-size: 1px; opacity: 0.01;"> Last updated: <time datetime="2026-07-08T05:10">July 08, 2026 –
+            05:10</time></p>
+    <button id="scrollTopBtn" title="Go to top">
+        ↑
+    </button>
+    <footer>©<span id="current-yr" style="font-weight: 300"></span> Designed &amp; Maintained by <button class="my_name"
+            onclick="window.location.href='https://melamrahul.github.io/'">M.Rahul</button>
+    </footer>
     <script>
-        DisableDevtool({
-            ondevtoolopen: (type) => {
-                window.location.href = "https://www.google.com/";
-            },
+        // ═══════════════════════════════════════════════════════════════════
+        // CONFIG
+        // ═══════════════════════════════════════════════════════════════════
+        const BASE = '/vidhyarthi-geethavali/data';
+        const CHUNK_SIZE = 50;
+        const CACHE_VER = 'vg-v1';
+
+        const teluguLetters = [
+            "అ", "ఆ", "ఇ", "ఈ", "ఉ", "ఊ", "ఋ", "ఎ", "ఏ", "ఐ", "ఒ", "ఓ", "ఔ",
+            "క", "ఖ", "గ", "ఘ", "ఙ", "చ", "ఛ", "జ", "ఝ", "ఞ", "ట", "ఠ", "డ", "ఢ", "ణ",
+            "త", "థ", "ద", "ధ", "న", "ప", "ఫ", "బ", "భ", "మ", "య", "ర", "ల", "వ", "శ", "ష", "స", "హ"
+        ];
+        const englishLetters = Array.from({ length: 26 }, (_, i) => String.fromCharCode(65 + i));
+
+        // ═══════════════════════════════════════════════════════════════════
+        // DOM REFS
+        // ═══════════════════════════════════════════════════════════════════
+        const letterDiv = document.getElementById('letters');
+        const songList = document.getElementById('songs');
+        const titleEl = document.getElementById('title');
+        const ssl = document.getElementById('ssl');
+        const selLis = document.getElementById('sel-lis');
+        const noSongsMessage = document.getElementById('noSongsMessage');
+
+        // ═══════════════════════════════════════════════════════════════════
+        // STATE
+        // ═══════════════════════════════════════════════════════════════════
+        const songIndex = { telugu: {}, english: {}, hindi: [], albums: {} };
+        const fetched = { telugu: new Set(), english: new Set(), hindi: new Set(), albums: {} };
+        const knownChunks = { telugu: null, english: null, hindi: null };
+        const letterMap = { telugu: {}, english: {} };  // letter → [chunk ceilings]
+        const langInited = { telugu: false, english: false, hindi: false, albums: false };
+        const inFlight = { telugu: {}, english: {}, hindi: {} };
+        let albumList = [];
+        const inFlightAlbums = {};
+
+        const LANG_FOLDER = { telugu: 'tsongs', english: 'esongs', hindi: 'hsongs' };
+
+        let currentLanguage = 'telugu';
+        window.currentLanguage = currentLanguage;
+        let currentQuery = '';
+
+        // ═══════════════════════════════════════════════════════════════════
+        // SPINNER CSS
+        // ═══════════════════════════════════════════════════════════════════
+        (function injectSpinCSS() {
+            if (document.getElementById('vg-spin-css')) return;
+            const s = document.createElement('style');
+            s.id = 'vg-spin-css';
+            s.textContent = '@keyframes vg-spin{to{transform:rotate(360deg)}}';
+            document.head.appendChild(s);
+        })();
+
+        function showSongListLoader(label) {
+            if (label) titleEl.textContent = `"${label}"`;
+            songList.innerHTML = `
+        <li style="list-style:none;display:flex;align-items:center;gap:10px;
+                  padding:.9rem 0;color:var(--text-color,#555)">
+          <div style="width:20px;height:20px;border:3px solid rgba(0,0,0,.12);
+                      border-top-color:var(--primary-color,#128C7E);border-radius:50%;
+                      flex-shrink:0;animation:vg-spin .7s linear infinite"></div>
+          <span style="font-size:13px;font-weight:500">Loading songs…</span>
+        </li>`;
+        }
+
+        // ═══════════════════════════════════════════════════════════════════
+        // SESSION-STORAGE CACHE
+        // ═══════════════════════════════════════════════════════════════════
+        function ck(url) { return CACHE_VER + '|' + url; }
+        function ckChunks(lang) { return CACHE_VER + '|chunks|' + lang; }
+
+        function cacheGet(url) {
+            try { const v = sessionStorage.getItem(ck(url)); return v ? JSON.parse(v) : null; }
+            catch (e) { return null; }
+        }
+        function cacheSet(url, data) {
+            try { sessionStorage.setItem(ck(url), JSON.stringify(data)); }
+            catch (e) { purgeStaleCacheEntries(); try { sessionStorage.setItem(ck(url), JSON.stringify(data)); } catch (e2) { } }
+        }
+        function purgeStaleCacheEntries() {
+            const prefix = CACHE_VER + '|';
+            const drop = [];
+            for (let i = 0; i < sessionStorage.length; i++) {
+                const k = sessionStorage.key(i);
+                if (k && !k.startsWith(prefix)) drop.push(k);
+            }
+            drop.forEach(k => sessionStorage.removeItem(k));
+        }
+
+        // ═══════════════════════════════════════════════════════════════════
+        // CHUNK DISCOVERY — reads letterMap from manifest, caches both
+        // ═══════════════════════════════════════════════════════════════════
+        const MAX_PROBE = 20;
+        const BATCH = 5;
+
+        async function discoverChunks(lang) {
+            if (knownChunks[lang]) return knownChunks[lang];
+
+            // sessionStorage hit — restore both chunks and letterMap
+            try {
+                const cached = sessionStorage.getItem(ckChunks(lang));
+                if (cached) {
+                    const parsed = JSON.parse(cached);
+                    knownChunks[lang] = parsed.chunks;
+                    if (parsed.letterMap) letterMap[lang] = parsed.letterMap;
+                    return knownChunks[lang];
+                }
+            } catch (e) { }
+
+            const folder = LANG_FOLDER[lang];
+
+            // Manifest fast-path
+            try {
+                const mres = await fetch(`${BASE}/${folder}/manifest.json?v=${Date.now()}`, { cache: 'no-store' });
+                if (mres.ok) {
+                    const md = await mres.json();
+                    if (Array.isArray(md.chunks) && md.chunks.length) {
+                        knownChunks[lang] = md.chunks;
+                        if (md.letterMap) letterMap[lang] = md.letterMap;
+                        try {
+                            sessionStorage.setItem(ckChunks(lang), JSON.stringify({
+                                chunks: md.chunks,
+                                letterMap: md.letterMap || {}
+                            }));
+                        } catch (e) { }
+                        return knownChunks[lang];
+                    }
+                }
+            } catch (e) { }
+
+            // Auto-probe fallback
+            const url = n => `${BASE}/${folder}/${n}/list.json?v=${Date.now()}`;
+            const ceil = (start, count) => Array.from({ length: count }, (_, i) => (start + i + 1) * CHUNK_SIZE);
+            const probe = async n => { try { const r = await fetch(url(n), { method: 'HEAD' }); return r.ok ? n : null; } catch (e) { return null; } };
+
+            let found = (await Promise.all(ceil(0, MAX_PROBE).map(probe))).filter(Boolean);
+            if (found.length === MAX_PROBE) {
+                let next = MAX_PROBE;
+                while (true) {
+                    const hits = (await Promise.all(ceil(next, BATCH).map(probe))).filter(Boolean);
+                    found = found.concat(hits);
+                    if (hits.length < BATCH) break;
+                    next += BATCH;
+                }
+            }
+            found.sort((a, b) => a - b);
+            knownChunks[lang] = found;
+            try { sessionStorage.setItem(ckChunks(lang), JSON.stringify({ chunks: found, letterMap: {} })); } catch (e) { }
+            return found;
+        }
+
+        async function discoverAlbums() {
+            if (albumList.length) return albumList;
+            try {
+                const cached = sessionStorage.getItem(ckAlbumsManifest());
+                if (cached) { albumList = JSON.parse(cached); return albumList; }
+            } catch (e) { }
+
+            try {
+                const res = await fetch(`${BASE}/albums/manifest.json?v=${Date.now()}`, { cache: 'no-store' });
+                if (res.ok) {
+                    const md = await res.json();
+                    if (Array.isArray(md.albums)) {
+                        albumList = md.albums;
+                        try { sessionStorage.setItem(ckAlbumsManifest(), JSON.stringify(albumList)); } catch (e) { }
+                    }
+                }
+            } catch (e) { }
+            return albumList;
+        }
+
+        async function fetchAlbumChunk(folder, ceiling) {
+            const url = `${BASE}/${folder}/${ceiling}/list.json`;
+            if (inFlightAlbums[url]) return inFlightAlbums[url];
+
+            const hit = cacheGet(url);
+            if (hit) return hit;
+
+            inFlightAlbums[url] = (async () => {
+                try {
+                    const res = await fetch(`${url}?v=${Date.now()}`);
+                    if (!res.ok) return {};
+                    const data = await res.json();
+                    cacheSet(url, data);
+                    return data;
+                } finally {
+                    delete inFlightAlbums[url];
+                }
+            })();
+            return inFlightAlbums[url];
+        }
+
+        function ingestAlbum(albumId, raw, folder) {
+            if (!songIndex.albums[albumId]) songIndex.albums[albumId] = [];
+            Object.entries(raw).forEach(([num, song]) => {
+                if (!song.title) return;
+                const id = `song${num}`;
+                if (!songIndex.albums[albumId].find(s => s.id === id))
+                    songIndex.albums[albumId].push({ id, name: `${song.title} (${num})`, tp: folder });
+            });
+            songIndex.albums[albumId].sort((a, b) => numOf(a.id) - numOf(b.id));
+        }
+
+        async function ensureAlbumHasSongs(albumId) {
+            if ((songIndex.albums[albumId] || []).length > 0) return;
+            const album = albumList.find(a => a.id === albumId);
+            if (!album) return;
+
+            if (!fetched.albums[albumId]) fetched.albums[albumId] = new Set();
+            const missing = (album.chunks || []).filter(c => !fetched.albums[albumId].has(c));
+            for (const c of missing) {
+                const raw = await fetchAlbumChunk(album.folder, c);
+                ingestAlbum(albumId, raw, album.folder);
+                fetched.albums[albumId].add(c);
+            }
+        }
+
+        // ═══════════════════════════════════════════════════════════════════
+        // FETCH ONE CHUNK — sessionStorage cache + deduplication
+        // ═══════════════════════════════════════════════════════════════════
+        async function fetchChunk(lang, ceiling) {
+            const folder = LANG_FOLDER[lang];
+            const url = `${BASE}/${folder}/${ceiling}/list.json`;
+
+            // Deduplicate concurrent fetches
+            if (inFlight[lang][ceiling]) return inFlight[lang][ceiling];
+
+            // sessionStorage hit
+            const hit = cacheGet(url);
+            if (hit) return hit;
+
+            inFlight[lang][ceiling] = (async () => {
+                try {
+                    const res = await fetch(`${url}?v=${Date.now()}`);
+                    if (!res.ok) return {};
+                    const data = await res.json();
+                    cacheSet(url, data);
+                    return data;
+                } finally {
+                    delete inFlight[lang][ceiling];
+                }
+            })();
+
+            return inFlight[lang][ceiling];
+        }
+
+        // ═══════════════════════════════════════════════════════════════════
+        // INDEX INGESTION
+        // ═══════════════════════════════════════════════════════════════════
+        function numOf(id) { return parseInt((id || '').replace('song', ''), 10) || 0; }
+
+        function ingestTelugu(raw) {
+            teluguLetters.forEach(l => { if (!songIndex.telugu[l]) songIndex.telugu[l] = []; });
+            Object.entries(raw).forEach(([num, song]) => {
+                if (!song.title) return;
+                const letter = teluguLetters.find(l => l === song.title.charAt(0));
+                if (!letter) return;
+                const id = `song${num}`;
+                if (!songIndex.telugu[letter].find(s => s.id === id))
+                    songIndex.telugu[letter].push({ id, name: `${song.title} (${num})` });
+            });
+            teluguLetters.forEach(l => songIndex.telugu[l].sort((a, b) => numOf(a.id) - numOf(b.id)));
+        }
+
+        function ingestEnglish(raw) {
+            englishLetters.forEach(l => { if (!songIndex.english[l]) songIndex.english[l] = []; });
+            Object.entries(raw).forEach(([num, song]) => {
+                if (!song.title) return;
+                const letter = song.title.charAt(0).toUpperCase();
+                if (!songIndex.english[letter]) return;
+                const id = `song${num}`;
+                if (!songIndex.english[letter].find(s => s.id === id))
+                    songIndex.english[letter].push({ id, name: `${song.title} (${num})` });
+            });
+            englishLetters.forEach(l => songIndex.english[l].sort((a, b) => numOf(a.id) - numOf(b.id)));
+        }
+
+        function ingestHindi(raw) {
+            Object.entries(raw).forEach(([num, song]) => {
+                if (!song.title) return;
+                const id = `song${num}`;
+                if (!songIndex.hindi.find(s => s.id === id))
+                    songIndex.hindi.push({ id, name: `${song.title} (${num})` });
+            });
+            songIndex.hindi.sort((a, b) => numOf(a.id) - numOf(b.id));
+        }
+
+        // ═══════════════════════════════════════════════════════════════════
+        // ENSURE LETTER HAS SONGS
+        // Uses letterMap to fetch ONLY the exact chunks needed for this letter.
+        // Falls back to sequential scan if no letterMap available.
+        // ═══════════════════════════════════════════════════════════════════
+        async function ensureLetterHasSongs(lang, letter) {
+            const idx = lang === 'telugu' ? songIndex.telugu : songIndex.english;
+            const ingest = lang === 'telugu' ? ingestTelugu : ingestEnglish;
+
+            // Already have songs
+            if ((idx[letter] || []).length > 0) return;
+
+            const ceilings = letterMap[lang][letter];
+
+            if (ceilings && ceilings.length) {
+                // Fetch only the chunks this letter is known to span
+                const missing = ceilings.filter(c => !fetched[lang].has(c));
+                await Promise.all(missing.map(async c => {
+                    const raw = await fetchChunk(lang, c);
+                    ingest(raw);
+                    fetched[lang].add(c);
+                }));
+            } else {
+                // No letterMap — sequential fallback until letter found
+                const chunks = knownChunks[lang] || [];
+                for (const c of chunks) {
+                    if ((idx[letter] || []).length > 0) break;
+                    if (fetched[lang].has(c)) continue;
+                    const raw = await fetchChunk(lang, c);
+                    ingest(raw);
+                    fetched[lang].add(c);
+                }
+            }
+        }
+
+        // ═══════════════════════════════════════════════════════════════════
+        // INIT PER LANGUAGE
+        // ═══════════════════════════════════════════════════════════════════
+        async function initTelugu() {
+            if (langInited.telugu) return;
+            langInited.telugu = true;
+
+            renderLetterBoxes(teluguLetters, 'telugu');
+            showSongListLoader(teluguLetters[0]);
+
+            const chunks = await discoverChunks('telugu');
+            if (chunks.length) {
+                const raw = await fetchChunk('telugu', chunks[0]);
+                ingestTelugu(raw);
+                fetched.telugu.add(chunks[0]);
+            }
+
+            titleEl.textContent = `"${teluguLetters[0]}"`;
+            renderSongItems(songIndex.telugu[teluguLetters[0]] || [], 'telugu');
+        }
+
+        async function initEnglish() {
+            if (langInited.english) return;
+            langInited.english = true;
+
+            renderLetterBoxes(englishLetters, 'english');
+            showSongListLoader(englishLetters[0]);
+
+            const chunks = await discoverChunks('english');
+            if (chunks.length) {
+                const raw = await fetchChunk('english', chunks[0]);
+                ingestEnglish(raw);
+                fetched.english.add(chunks[0]);
+            }
+
+            titleEl.textContent = `"${englishLetters[0]}"`;
+            renderSongItems(songIndex.english[englishLetters[0]] || [], 'english');
+        }
+
+        async function initHindi() {
+            if (langInited.hindi) return;
+            langInited.hindi = true;
+
+            titleEl.textContent = '"Hindi"';
+            showSongListLoader();
+
+            const chunks = await discoverChunks('hindi');
+            for (const ceiling of chunks) {
+                if (fetched.hindi.has(ceiling)) continue;
+                const raw = await fetchChunk('hindi', ceiling);
+                ingestHindi(raw);
+                fetched.hindi.add(ceiling);
+            }
+            renderSongItems(songIndex.hindi, 'hindi');
+        }
+
+        // ═══════════════════════════════════════════════════════════════════
+        // RENDER HELPERS
+        // ═══════════════════════════════════════════════════════════════════
+        function renderLetterBoxes(letters, lang) {
+            letterDiv.classList.remove('album-grid');
+            letterDiv.innerHTML = '';
+            songList.innerHTML = '';
+            titleEl.textContent = '';
+            selLis.textContent = lang.charAt(0).toUpperCase() + lang.slice(1);
+
+            letters.forEach((letter, index) => {
+                const box = document.createElement('div');
+                box.className = 'box' + (index === 0 ? ' active' : '');
+                box.textContent = letter;
+
+                box.onclick = async () => {
+                    document.querySelectorAll('.box').forEach(b => b.classList.remove('active'));
+                    box.classList.add('active');
+
+                    const idx = lang === 'telugu' ? songIndex.telugu : songIndex.english;
+
+                    if (!(idx[letter] || []).length) {
+                        showSongListLoader(letter);
+                        await ensureLetterHasSongs(lang, letter);
+                    }
+
+                    titleEl.textContent = `"${letter}"`;
+                    renderSongItems(idx[letter] || [], lang);
+                    if (currentQuery) filterSongs(currentQuery);
+                    scrollToSongs();
+                };
+
+                letterDiv.appendChild(box);
+            });
+        }
+
+        let _searchLogLoading = false;
+        function loadSearchLogger() {
+            if (_searchLogLoading || window._searchLogReady) return;
+            _searchLogLoading = true;
+
+            const s = document.createElement('script');
+            s.src = '/vidhyarthi-geethavali/assets/search-log.js';
+            s.onload = () => { if (window.initSearchLog) window.initSearchLog(); };
+            s.onerror = () => console.warn('[search-log] failed to load script');
+            document.head.appendChild(s);
+        }
+
+        let _phoneticSearchLoading = false;
+        function loadPhoneticSearch() {
+            if (_phoneticSearchLoading || window._phoneticSearchReady) return;
+            _phoneticSearchLoading = true;
+
+            const s = document.createElement('script');
+            s.src = '/vidhyarthi-geethavali/assets/phonetic-search.js';
+            s.onerror = () => console.warn('[phonetic-search] failed to load script');
+            document.head.appendChild(s);
+        }
+
+        function renderSongItems(songs, lang, tpOverride) {
+            songList.innerHTML = '';
+            noSongsMessage.classList.add('hidden');
+            if (!songs || !songs.length) {
+                const li = document.createElement('li');
+                li.textContent = 'No songs found';
+                songList.appendChild(li);
+                return;
+            }
+            const defaultTp = tpOverride || (lang === 'telugu' ? 'tsongs' : lang === 'english' ? 'esongs' : 'hsongs');
+            songs.forEach(song => {
+                const sn = song.id.replace('song', '');
+                const tp = song.tp || defaultTp;
+                const li = document.createElement('li');
+                const a = document.createElement('a');
+                a.textContent = song.name;
+                a.href = `/vidhyarthi-geethavali/song/?tp=${tp}&sn=${sn}`;
+                a.className = 'song-link';
+                li.appendChild(a);
+                songList.appendChild(li);
+            });
+        }
+
+        function renderAlbumBoxes(albums) {
+            letterDiv.innerHTML = '';
+            letterDiv.classList.add('album-grid');
+            songList.innerHTML = '';
+            titleEl.textContent = '';
+            selLis.textContent = 'New Album';
+
+            albums.forEach((album, index) => {
+                const box = document.createElement('div');
+                box.className = 'box album-box' + (index === 0 ? ' active' : '');
+                box.textContent = album.name;
+
+                box.onclick = async () => {
+                    document.querySelectorAll('.box').forEach(b => b.classList.remove('active'));
+                    box.classList.add('active');
+
+                    if (!(songIndex.albums[album.id] || []).length) {
+                        showSongListLoader(album.name);
+                        await ensureAlbumHasSongs(album.id);
+                    }
+
+                    titleEl.textContent = `"${album.name}"`;
+                    renderSongItems(songIndex.albums[album.id] || [], 'albums', album.folder);
+                    if (currentQuery) filterSongs(currentQuery);
+                    scrollToSongs();
+                };
+
+                letterDiv.appendChild(box);
+            });
+        }
+
+        async function initAlbums() {
+            if (langInited.albums) return;
+            langInited.albums = true;
+
+            const albums = await discoverAlbums();
+            renderAlbumBoxes(albums);
+
+            if (albums.length) {
+                showSongListLoader(albums[0].name);
+                await ensureAlbumHasSongs(albums[0].id);
+                titleEl.textContent = `"${albums[0].name}"`;
+                renderSongItems(songIndex.albums[albums[0].id] || [], 'albums', albums[0].folder);
+            } else {
+                titleEl.textContent = '"New"';
+                songList.innerHTML = '<li>No albums found yet</li>';
+            }
+        }
+
+        function renderSearchSongs(lang) {
+            let all = [];
+            if (lang === 'telugu') all = Object.values(songIndex.telugu).flat();
+            else if (lang === 'english') all = Object.values(songIndex.english).flat();
+            else if (lang === 'albums') all = Object.values(songIndex.albums).flat();
+            else all = songIndex.hindi;
+            renderSongItems(all, lang);
+        }
+
+        // ═══════════════════════════════════════════════════════════════════
+        // FILTER
+        // ═══════════════════════════════════════════════════════════════════
+        function filterSongs(query) {
+            const links = document.querySelectorAll('#songs .song-link');
+            let count = 0;
+            links.forEach(link => {
+                const li = link.closest('li') || link.parentElement;
+                const show = link.innerText.toLowerCase().includes(query);
+                li.style.display = show ? '' : 'none';
+                if (show) count++;
+            });
+            noSongsMessage.classList.toggle('hidden', !(count === 0 && query.length > 0));
+        }
+
+        // ═══════════════════════════════════════════════════════════════════
+        // LANGUAGE SWITCH
+        // ═══════════════════════════════════════════════════════════════════
+        async function switchLanguage(lang, event) {
+            currentLanguage = lang;
+            window.currentLanguage = lang;
+            selLis.textContent = lang.charAt(0).toUpperCase() + lang.slice(1);
+
+            if (lang === 'telugu') {
+                history.replaceState(null, '', location.pathname);
+                letterDiv.classList.remove('hidden');
+                ssl.style.display = 'block';
+                if (!langInited.telugu) {
+                    await initTelugu();
+                } else {
+                    renderLetterBoxes(teluguLetters, 'telugu');
+                    titleEl.textContent = `"${teluguLetters[0]}"`;
+                    renderSongItems(songIndex.telugu[teluguLetters[0]] || [], 'telugu');
+                }
+            } else if (lang === 'english') {
+                history.replaceState(null, '', '#English');
+                letterDiv.classList.remove('hidden');
+                ssl.style.display = 'block';
+                if (!langInited.english) {
+                    await initEnglish();
+                } else {
+                    renderLetterBoxes(englishLetters, 'english');
+                    titleEl.textContent = `"${englishLetters[0]}"`;
+                    renderSongItems(songIndex.english[englishLetters[0]] || [], 'english');
+                }
+            } else if (lang === 'hindi') {
+                history.replaceState(null, '', '#Hindi');
+                letterDiv.innerHTML = '';
+                letterDiv.classList.add('hidden');
+                ssl.style.display = 'block';
+                if (!langInited.hindi) {
+                    await initHindi();
+                } else {
+                    titleEl.textContent = '"Hindi"';
+                    renderSongItems(songIndex.hindi, 'hindi');
+                }
+                if (currentQuery) filterSongs(currentQuery);
+            } else if (lang === 'albums') {
+                history.replaceState(null, '', '#New');
+                letterDiv.classList.remove('hidden');
+                ssl.style.display = 'block';
+                if (!langInited.albums) {
+                    await initAlbums();
+                } else {
+                    renderAlbumBoxes(albumList);
+                    if (albumList.length) {
+                        titleEl.textContent = `"${albumList[0].name}"`;
+                        renderSongItems(songIndex.albums[albumList[0].id] || [], 'albums', albumList[0].folder);
+                    }
+                }
+                if (currentQuery) filterSongs(currentQuery);
+            }
+
+            if (event && event.target) {
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                event.target.classList.add('active');
+            }
+        }
+
+        // ═══════════════════════════════════════════════════════════════════
+        // SEARCH
+        // ═══════════════════════════════════════════════════════════════════
+        const searchToggle = document.getElementById('searchToggle');
+        const searchBox = document.getElementById('searchBox');
+        const searchInput = document.getElementById('songSearchInput');
+        const clearSearch = document.getElementById('clearSearch');
+        const searchIcon = document.getElementById('searchIcon');
+        const closeIcon = document.getElementById('closeIcon');
+
+        searchToggle.addEventListener('click', async () => {
+            const isHidden = searchBox.classList.contains('hidden');
+            if (isHidden) {
+                searchBox.classList.remove('hidden');
+                searchInput.focus();
+                document.querySelector('#all-songs').style.display = 'none';
+                document.querySelector('#songs-grid').style.display = 'none';
+                searchIcon.classList.add('hide-icon');
+                closeIcon.classList.remove('hide-icon');
+                searchInput.innerText = '';
+                currentQuery = '';
+                loadSearchLogger();
+                loadPhoneticSearch();
+
+                await ensureAllChunksLoaded(currentLanguage);
+                renderSearchSongs(currentLanguage);
+                filterSongs('');
+            } else {
+                searchBox.classList.add('hidden');
+                searchInput.innerText = '';
+                currentQuery = '';
+                document.querySelector('#all-songs').style.display = 'block';
+                document.querySelector('#songs-grid').style.display = 'block';
+                searchIcon.classList.remove('hide-icon');
+                closeIcon.classList.add('hide-icon');
+                if (currentLanguage === 'telugu') {
+                    renderLetterBoxes(teluguLetters, 'telugu');
+                    titleEl.textContent = `"${teluguLetters[0]}"`;
+                    renderSongItems(songIndex.telugu[teluguLetters[0]] || [], 'telugu');
+                } else if (currentLanguage === 'english') {
+                    renderLetterBoxes(englishLetters, 'english');
+                    titleEl.textContent = `"${englishLetters[0]}"`;
+                    renderSongItems(songIndex.english[englishLetters[0]] || [], 'english');
+                } else if (currentLanguage === 'albums') {
+                    renderAlbumBoxes(albumList);
+                    if (albumList.length) {
+                        titleEl.textContent = `"${albumList[0].name}"`;
+                        renderSongItems(songIndex.albums[albumList[0].id] || [], 'albums', albumList[0].folder);
+                    }
+                } else {
+                    titleEl.textContent = '"Hindi"';
+                    renderSongItems(songIndex.hindi, 'hindi');
+                }
+            }
         });
+
+        async function ensureAllChunksLoaded(lang) {
+            showSongListLoader();
+
+            if (lang === 'albums') {
+                const albums = await discoverAlbums();
+                for (const album of albums) {
+                    if (!fetched.albums[album.id]) fetched.albums[album.id] = new Set();
+                    for (const c of (album.chunks || [])) {
+                        if (fetched.albums[album.id].has(c)) continue;
+                        const raw = await fetchAlbumChunk(album.folder, c);
+                        ingestAlbum(album.id, raw, album.folder);
+                        fetched.albums[album.id].add(c);
+                    }
+                }
+                return;
+            }
+            const chunks = knownChunks[lang] || await discoverChunks(lang);
+            const ingest = lang === 'telugu' ? ingestTelugu
+                : lang === 'english' ? ingestEnglish
+                    : ingestHindi;
+            for (const ceiling of chunks) {
+                if (fetched[lang].has(ceiling)) continue;
+                const raw = await fetchChunk(lang, ceiling);
+                ingest(raw);
+                fetched[lang].add(ceiling);
+            }
+        }
+
+        searchInput.addEventListener('input', () => {
+            currentQuery = searchInput.innerText.toLowerCase().trim();
+            clearSearch.style.display = currentQuery ? 'block' : 'none';
+            filterSongs(currentQuery);
+        });
+
+        clearSearch.addEventListener('click', () => {
+            searchInput.innerText = '';
+            currentQuery = '';
+            clearSearch.style.display = 'none';
+            filterSongs('');
+            searchInput.focus();
+        });
+
+        // ═══════════════════════════════════════════════════════════════════
+        // SCROLL
+        // ═══════════════════════════════════════════════════════════════════
+        function scrollToSongs() {
+            const offset = window.innerWidth <= 768 ? 85 : 100;
+            window.scrollTo({ top: ssl.getBoundingClientRect().top + window.scrollY - offset, behavior: 'smooth' });
+        }
+
+        const scrollBtn = document.getElementById('scrollTopBtn');
+        window.addEventListener('scroll', () => {
+            scrollBtn.style.display = window.scrollY > 300 ? 'flex' : 'none';
+        });
+        scrollBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+        // ═══════════════════════════════════════════════════════════════════
+        // DRAWER
+        // ═══════════════════════════════════════════════════════════════════
+        const menuBtn = document.getElementById('menuBtn');
+        const drawer = document.getElementById('drawer');
+        const overlay = document.getElementById('overlay');
+        const submenuItems = document.querySelectorAll('.drawer-item.has-submenu');
+
+        const toggleDrawer = () => {
+            const isOpen = drawer.classList.toggle('open');
+            overlay.classList.toggle('show');
+            menuBtn.setAttribute('aria-expanded', isOpen);
+            menuBtn.querySelector('.menu-toggle').classList.toggle('open', isOpen);
+        };
+        menuBtn.addEventListener('click', toggleDrawer);
+
+        overlay.addEventListener('click', () => {
+            drawer.classList.remove('open');
+            overlay.classList.remove('show');
+            menuBtn.setAttribute('aria-expanded', 'false');
+            menuBtn.querySelector('.menu-toggle').classList.remove('open');
+            submenuItems.forEach(i => { i.classList.remove('open'); i.nextElementSibling?.classList.remove('open'); });
+        });
+
+        document.querySelectorAll('.submenu-item').forEach(link => {
+            link.addEventListener('click', () => {
+                drawer.classList.remove('open');
+                overlay.classList.remove('show');
+                menuBtn.setAttribute('aria-expanded', 'false');
+                menuBtn.querySelector('.menu-toggle').classList.remove('open');
+                submenuItems.forEach(i => i.classList.remove('open'));
+                document.querySelectorAll('.submenu').forEach(s => s.classList.remove('open'));
+            });
+        });
+
+        submenuItems.forEach(item => {
+            item.addEventListener('click', e => {
+                e.stopPropagation();
+                submenuItems.forEach(o => {
+                    if (o !== item) { o.classList.remove('open'); o.nextElementSibling?.classList.remove('open'); }
+                });
+                item.classList.toggle('open');
+                item.nextElementSibling?.classList.toggle('open');
+            });
+            item.addEventListener('keydown', e => {
+                if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); item.click(); }
+            });
+        });
+
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape' && drawer.classList.contains('open')) {
+                drawer.classList.remove('open'); overlay.classList.remove('show');
+                menuBtn.setAttribute('aria-expanded', 'false');
+                menuBtn.querySelector('.menu-toggle').classList.remove('open');
+            }
+            if (e.ctrlKey && e.key === 'm') { e.preventDefault(); toggleDrawer(); }
+        });
+
+        let startX = 0, currentX = 0;
+        drawer.addEventListener('touchstart', e => { startX = currentX = e.touches[0].clientX; }, { passive: true });
+        drawer.addEventListener('touchmove', e => { currentX = e.touches[0].clientX; }, { passive: true });
+        drawer.addEventListener('touchend', () => {
+            if (startX - currentX > 50) {
+                drawer.classList.remove('open'); overlay.classList.remove('show');
+                menuBtn.setAttribute('aria-expanded', 'false');
+            }
+        }, { passive: true });
+
+        // ═══════════════════════════════════════════════════════════════════
+        // INIT
+        // ═══════════════════════════════════════════════════════════════════
+        document.getElementById('current-yr').textContent = new Date().getFullYear();
+        purgeStaleCacheEntries();
+
+        const _tabs = {
+            telugu: document.querySelector('.tab-btn:nth-child(1)'),
+            english: document.querySelector('.tab-btn:nth-child(2)'),
+            hindi: document.querySelector('.tab-btn:nth-child(3)'),
+            albums: document.querySelector('.tab-btn:nth-child(4)')
+        };
+        const _hash = location.hash.replace('#', '').toLowerCase();
+
+        if (_hash === 'english') switchLanguage('english', { target: _tabs.english });
+        else if (_hash === 'hindi') switchLanguage('hindi', { target: _tabs.hindi });
+        else if (_hash === 'new') switchLanguage('albums', { target: _tabs.albums });
+        else { _tabs.telugu.classList.add('active'); switchLanguage('telugu', { target: _tabs.telugu }); }
     </script>
     <script>
         if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function() {
-                navigator.serviceWorker.register('/vidhyarthi-geethavali/service-worker.js')
-                .then(function(registration) {
-                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
+            navigator.serviceWorker.register(
+                '/vidhyarthi-geethavali/service-worker.js'
+            )
+                .then(reg => {
+                    console.log('SW registered:', reg.scope);
                 })
-                .catch(function(error) {
-                    console.log('ServiceWorker registration failed: ', error);
+                .catch(err => {
+                    console.error('SW registration failed:', err);
                 });
-            });
         }
-    </script>    
+    </script>
+    <script>
+        var _paq = window._paq = window._paq || [];
+        /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function () {
+            var u = "//a.ruvs.in/_wy5s/";
+            _paq.push(['setTrackerUrl', u + '_e7hw.php']);
+            _paq.push(['setSiteId', '3']);
+            var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
+            g.async = true; g.src = u + '_ue4c.js'; s.parentNode.insertBefore(g, s);
+        })();
+    </script>
 </body>
+
 </html>
