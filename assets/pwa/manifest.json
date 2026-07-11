@@ -1,7 +1,7 @@
 {
   "name": "Vidhyarthi Geethavali",
   "short_name": "UESI AP",
-  "start_url": "/vidhyarthi-geethavali/",
+  "start_url": "/vidhyarthi-geethavali/app",
   "scope": "/vidhyarthi-geethavali/",
   "display": "standalone",
   "orientation": "portrait",
