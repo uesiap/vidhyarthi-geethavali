@@ -662,11 +662,27 @@
             player.addEventListener("ended", () => {
                 player._ended = true;
                 showReplay();
+                if (window._paq) {
+                 _paq.push([
+                  'trackEvent',
+                  'Player',
+                   player.id === 'audioPlayer' ? 'Audio Ended' : 'Track Ended',
+                   `${songNumber} - ${songData.title}`
+                 ]);
+                }
             });
 
             player.addEventListener("play", () => {
                 player._ended = false;
                 showPause();
+                if (window._paq) {
+                 _paq.push([
+                  'trackEvent',
+                  'Player',
+                   player.id === 'audioPlayer' ? 'Audio Play' : 'Track Play',
+                   `${songNumber} - ${songData.title}`
+                 ]);
+                }
             });
 
             player.addEventListener("pause", () => {
