@@ -400,7 +400,8 @@
                             </span>
                         </a>
                         <p class="head-text" style="margin:0 auto; text-align:center;">
-                            ${escHtml(titleWithNumber)}
+                            <span class="head-title">${escHtml(song.title)}</span>
+                            <span class="head-num">(${escHtml(songNumber)})</span>
                         </p>
                     </div>
                     <a style="margin-left:12px;margin-top:-10px;position:relative;top:-13px;border:2px dotted var(--primary-color);color:var(--primary-color);border-radius:30%;padding:.4rem .2rem;display:flex;align-items:center;justify-content:center;text-decoration:none;width:36px;height:36px;" onclick="toggleContextMenu()" href="javascript:void(0)" class="menu-button">
