@@ -409,9 +409,9 @@
         const CACHE_VER = 'vg-v1';
 
         const teluguLetters = [
-            "అ", "ఆ", "ఇ", "ఈ", "ఉ", "ఊ", "ఋ", "ఎ", "ఏ", "ఐ", "ఒ", "ఓ", "ఔ",
-            "క", "ఖ", "గ", "ఘ", "ఙ", "చ", "ఛ", "జ", "ఝ", "ఞ", "ట", "ఠ", "డ", "ఢ", "ణ",
-            "త", "థ", "ద", "ధ", "న", "ప", "ఫ", "బ", "భ", "మ", "య", "ర", "ల", "వ", "శ", "ష", "స", "హ"
+            "అ", "ఆ", "ఇ", "ఈ", "ఉ", "ఊ", "ఎ", "ఏ", "ఒ", "ఓ",
+            "క", "గ", "ఘ", "చ", "జ", "త", "ద", "న", "ప",
+            "భ", "మ", "య", "ర", "ల", "వ", "శ", "ష", "స", "హ"
         ];
         const englishLetters = Array.from({ length: 26 }, (_, i) => String.fromCharCode(65 + i));
 
@@ -473,6 +473,7 @@
         // ═══════════════════════════════════════════════════════════════════
         function ck(url) { return CACHE_VER + '|' + url; }
         function ckChunks(lang) { return CACHE_VER + '|chunks|' + lang; }
+        function ckAlbumsManifest() { return CACHE_VER + '|albums-manifest'; }
 
         function cacheGet(url) {
             try { const v = sessionStorage.getItem(ck(url)); return v ? JSON.parse(v) : null; }
@@ -595,13 +596,14 @@
             return inFlightAlbums[url];
         }
 
-        function ingestAlbum(albumId, raw, folder) {
+        function ingestAlbum(albumId, raw, folder, tag) {
             if (!songIndex.albums[albumId]) songIndex.albums[albumId] = [];
             Object.entries(raw).forEach(([num, song]) => {
                 if (!song.title) return;
+                if (tag && song.remarks !== tag) return;
                 const id = `song${num}`;
                 if (!songIndex.albums[albumId].find(s => s.id === id))
-                    songIndex.albums[albumId].push({ id, name: `${song.title} (${num})`, tp: folder });
+                    songIndex.albums[albumId].push({ id, name: `${song.title} (${num})`, tp: folder, lang: 'albums' });
             });
             songIndex.albums[albumId].sort((a, b) => numOf(a.id) - numOf(b.id));
         }
@@ -615,7 +617,7 @@
             const missing = (album.chunks || []).filter(c => !fetched.albums[albumId].has(c));
             for (const c of missing) {
                 const raw = await fetchAlbumChunk(album.folder, c);
-                ingestAlbum(albumId, raw, album.folder);
+                ingestAlbum(albumId, raw, album.folder, album.tag);
                 fetched.albums[albumId].add(c);
             }
         }
@@ -662,7 +664,7 @@
                 if (!letter) return;
                 const id = `song${num}`;
                 if (!songIndex.telugu[letter].find(s => s.id === id))
-                    songIndex.telugu[letter].push({ id, name: `${song.title} (${num})` });
+                    songIndex.telugu[letter].push({ id, name: `${song.title} (${num})`, tp: 'tsongs', lang: 'telugu' });
             });
             teluguLetters.forEach(l => songIndex.telugu[l].sort((a, b) => numOf(a.id) - numOf(b.id)));
         }
@@ -675,7 +677,7 @@
                 if (!songIndex.english[letter]) return;
                 const id = `song${num}`;
                 if (!songIndex.english[letter].find(s => s.id === id))
-                    songIndex.english[letter].push({ id, name: `${song.title} (${num})` });
+                    songIndex.english[letter].push({ id, name: `${song.title} (${num})`, tp: 'esongs', lang: 'english' });
             });
             englishLetters.forEach(l => songIndex.english[l].sort((a, b) => numOf(a.id) - numOf(b.id)));
         }
@@ -685,7 +687,7 @@
                 if (!song.title) return;
                 const id = `song${num}`;
                 if (!songIndex.hindi.find(s => s.id === id))
-                    songIndex.hindi.push({ id, name: `${song.title} (${num})` });
+                    songIndex.hindi.push({ id, name: `${song.title} (${num})`, tp: 'hsongs', lang: 'hindi' });
             });
             songIndex.hindi.sort((a, b) => numOf(a.id) - numOf(b.id));
         }
@@ -850,10 +852,16 @@
                 return;
             }
             const defaultTp = tpOverride || (lang === 'telugu' ? 'tsongs' : lang === 'english' ? 'esongs' : 'hsongs');
+            const labels = { telugu: 'తెలుగు', english: 'English', hindi: 'Hindi', albums: 'New' };
+
             songs.forEach(song => {
                 const sn = song.id.replace('song', '');
                 const tp = song.tp || defaultTp;
+                const songLang = song.lang || lang;
+
                 const li = document.createElement('li');
+                li.dataset.lang = songLang;
+
                 const a = document.createElement('a');
                 a.href = `/vidhyarthi-geethavali/song/?tp=${tp}&sn=${sn}`;
                 a.className = 'song-link';
@@ -869,6 +877,14 @@
                     numSpan.className = 'song-num';
                     numSpan.textContent = numText;
                     a.appendChild(numSpan);
+                }
+                if (lang === '__search__' && songLang !== window.currentLanguage) {
+                    const tag = document.createElement('span');
+                    tag.className = 'song-lang-tag';
+                    tag.textContent = labels[songLang] || songLang;
+                    tag.style.cssText = 'margin-left:8px;padding:1px 8px;border-radius:10px;font-size:11px;' +
+                        'background:rgba(18,140,126,.12);color:var(--primary-color,#128C7E);flex-shrink:0';
+                    a.appendChild(tag);
                 }
                 li.appendChild(a);
                 songList.appendChild(li);
@@ -924,29 +940,59 @@
             }
         }
 
-        function renderSearchSongs(lang) {
-            let all = [];
-            if (lang === 'telugu') all = Object.values(songIndex.telugu).flat();
-            else if (lang === 'english') all = Object.values(songIndex.english).flat();
-            else if (lang === 'albums') all = Object.values(songIndex.albums).flat();
-            else all = songIndex.hindi;
-            renderSongItems(all, lang);
+        function renderSearchSongs() {
+            const all = [].concat(
+                Object.values(songIndex.telugu).flat(),
+                Object.values(songIndex.english).flat(),
+                songIndex.hindi,
+                Object.values(songIndex.albums).flat()
+            );
+            renderSongItems(all, '__search__');
         }
 
         // ═══════════════════════════════════════════════════════════════════
         // FILTER
         // ═══════════════════════════════════════════════════════════════════
         function filterSongs(query) {
+            const q = (query || '').trim();
+            const qLower = q.toLowerCase();
             const links = document.querySelectorAll('#songs .song-link');
-            let count = 0;
+            let currentTabCount = 0, totalCount = 0;
+
             links.forEach(link => {
                 const li = link.closest('li') || link.parentElement;
-                const show = link.innerText.toLowerCase().includes(query);
-                li.style.display = show ? '' : 'none';
-                if (show) count++;
+                const isMatch = !q || link.innerText.toLowerCase().includes(qLower);
+                li.dataset.matched = isMatch ? '1' : '0';
+                if (isMatch) {
+                    totalCount++;
+                    if (li.dataset.lang === window.currentLanguage) currentTabCount++;
+                }
             });
-            noSongsMessage.classList.toggle('hidden', !(count === 0 && query.length > 0));
+
+            const showUniversal = q.length > 0 && currentTabCount === 0;
+            links.forEach(link => {
+                const li = link.closest('li') || link.parentElement;
+                const isMatch = li.dataset.matched === '1';
+                const isCurrentTab = li.dataset.lang === window.currentLanguage;
+                li.style.display = (!q ? isCurrentTab : (showUniversal ? isMatch : (isMatch && isCurrentTab))) ? '' : 'none';
+            });
+
+            noSongsMessage.classList.toggle('hidden', !(q.length > 0 && totalCount === 0));
+
+            if (q && currentTabCount === 0 && window.ensureAllOtherTabsLoaded) {
+                window.ensureAllOtherTabsLoaded();
+            }
         }
+
+        let _loadingOtherTabs = false;
+        window.ensureAllOtherTabsLoaded = function () {
+            if (_loadingOtherTabs) return;
+            _loadingOtherTabs = true;
+            const others = ['telugu', 'english', 'hindi', 'albums'].filter(l => l !== window.currentLanguage);
+            Promise.all(others.map(lang => ensureAllChunksLoaded(lang))).finally(() => {
+                _loadingOtherTabs = false;
+            });
+        };
 
         // ═══════════════════════════════════════════════════════════════════
         // LANGUAGE SWITCH
@@ -1037,7 +1083,7 @@
                 loadSearchLogger();
                 loadPhoneticSearch();
 
-                renderSearchSongs(currentLanguage);
+                renderSearchSongs();
                 filterSongs('');
                 ensureAllChunksLoaded(currentLanguage);
             } else {
@@ -1075,16 +1121,16 @@
             if (lang === 'albums') {
                 const albums = await discoverAlbums();
                 for (const album of albums) {
-                    if (!isSearchOpen) return; // search closed — stop fetching
+                    if (!isSearchOpen) return;
                     if (!fetched.albums[album.id]) fetched.albums[album.id] = new Set();
                     for (const c of (album.chunks || [])) {
                         if (!isSearchOpen) return;
                         if (fetched.albums[album.id].has(c)) continue;
                         const raw = await fetchAlbumChunk(album.folder, c);
-                        ingestAlbum(album.id, raw, album.folder);
+                        ingestAlbum(album.id, raw, album.folder, album.tag);
                         fetched.albums[album.id].add(c);
-                        if (isSearchOpen && window.currentLanguage === 'albums') {
-                            renderSearchSongs('albums');
+                        if (isSearchOpen) {
+                            renderSearchSongs();
                             filterSongs(currentQuery);
                         }
                     }
@@ -1096,13 +1142,13 @@
                 : lang === 'english' ? ingestEnglish
                     : ingestHindi;
             for (const ceiling of chunks) {
-                if (!isSearchOpen) return; // search closed — stop fetching
+                if (!isSearchOpen) return;
                 if (fetched[lang].has(ceiling)) continue;
                 const raw = await fetchChunk(lang, ceiling);
                 ingest(raw);
                 fetched[lang].add(ceiling);
-                if (isSearchOpen && window.currentLanguage === lang) {
-                    renderSearchSongs(lang);
+                if (isSearchOpen) {
+                    renderSearchSongs();
                     filterSongs(currentQuery);
                 }
             }
@@ -1236,7 +1282,7 @@
                         const firstChunk = (first.chunks || [])[0];
                         if (firstChunk !== undefined && !fetched.albums[first.id].has(firstChunk)) {
                             const raw = await fetchAlbumChunk(first.folder, firstChunk);
-                            ingestAlbum(first.id, raw, first.folder);
+                            ingestAlbum(first.id, raw, first.folder, first.tag);
                             fetched.albums[first.id].add(firstChunk);
                         }
                     }
