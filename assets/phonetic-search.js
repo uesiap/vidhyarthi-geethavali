@@ -126,31 +126,23 @@
             return words.length ? phraseFuzzyMatch(q, words) : false;
         }
 
-        let currentTabCount = 0, totalCount = 0;
+        let totalCount = 0;
         links.forEach(link => {
             const li = link.closest('li') || link.parentElement;
             const m = isMatch(link);
-            li.dataset.matched = m ? '1' : '0';
-            if (m) {
-                totalCount++;
-                if (li.dataset.lang === window.currentLanguage) currentTabCount++;
-            }
+            li.style.display = m ? '' : 'none';
+            if (m) totalCount++;
         });
 
-        const showUniversal = q.length > 0 && currentTabCount === 0;
-        links.forEach(link => {
-            const li = link.closest('li') || link.parentElement;
-            const m = li.dataset.matched === '1';
-            const isCurrentTab = li.dataset.lang === window.currentLanguage;
-            li.style.display = (!q ? isCurrentTab : (showUniversal ? m : (m && isCurrentTab))) ? '' : 'none';
-        });
+        const songList = document.getElementById('songs');
+        if (songList) {
+            Array.from(songList.children)
+                .sort((a, b) => (b.dataset.lang === window.currentLanguage) - (a.dataset.lang === window.currentLanguage))
+                .forEach(li => songList.appendChild(li));
+        }
 
         if (typeof noSongsMessage !== 'undefined' && noSongsMessage) {
             noSongsMessage.classList.toggle('hidden', !(q.length > 0 && totalCount === 0));
-        }
-
-        if (q && currentTabCount === 0 && window.fullyLoaded && window.fullyLoaded[window.currentLanguage] && window.ensureAllOtherTabsLoaded) {
-            window.ensureAllOtherTabsLoaded();
         }
     };
 
