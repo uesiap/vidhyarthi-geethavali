@@ -855,9 +855,21 @@
                 const tp = song.tp || defaultTp;
                 const li = document.createElement('li');
                 const a = document.createElement('a');
-                a.textContent = song.name;
                 a.href = `/vidhyarthi-geethavali/song/?tp=${tp}&sn=${sn}`;
                 a.className = 'song-link';
+                const match = song.name.match(/^(.*?)(\s*\(\d+\))$/);
+                const titleText = match ? match[1] : song.name;
+                const numText = match ? match[2].trim() : '';
+                const titleSpan = document.createElement('span');
+                titleSpan.className = 'song-title';
+                titleSpan.textContent = titleText;
+                a.appendChild(titleSpan);
+                if (numText) {
+                    const numSpan = document.createElement('span');
+                    numSpan.className = 'song-num';
+                    numSpan.textContent = numText;
+                    a.appendChild(numSpan);
+                }
                 li.appendChild(a);
                 songList.appendChild(li);
             });
