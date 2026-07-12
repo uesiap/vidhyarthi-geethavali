@@ -121,7 +121,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <link rel="stylesheet" href="/vidhyarthi-geethavali/styles.css?v=1.0.6">
+    <link rel="stylesheet" href="/vidhyarthi-geethavali/styles.css?v=1.0.7">
 
     <!-- Added 'defer' so the script doesn't block page rendering -->
     <script src="/vidhyarthi-geethavali/boom.js?v={{ site.github.build_revision }}" defer></script>
@@ -959,33 +959,23 @@
             const q = (query || '').trim();
             const qLower = q.toLowerCase();
             const links = document.querySelectorAll('#songs .song-link');
-            let currentTabCount = 0, totalCount = 0;
+            let totalCount = 0;
 
+            const items = [];
             links.forEach(link => {
                 const li = link.closest('li') || link.parentElement;
                 const isMatch = !q || link.innerText.toLowerCase().includes(qLower);
-                li.dataset.matched = isMatch ? '1' : '0';
-                if (isMatch) {
-                    totalCount++;
-                    if (li.dataset.lang === window.currentLanguage) currentTabCount++;
-                }
+                li.style.display = isMatch ? '' : 'none';
+                if (isMatch) totalCount++;
+                items.push({ li, isCurrentTab: li.dataset.lang === window.currentLanguage });
             });
 
-            const showUniversal = q.length > 0 && currentTabCount === 0;
-            links.forEach(link => {
-                const li = link.closest('li') || link.parentElement;
-                const isMatch = li.dataset.matched === '1';
-                const isCurrentTab = li.dataset.lang === window.currentLanguage;
-                li.style.display = (!q ? isCurrentTab : (showUniversal ? isMatch : (isMatch && isCurrentTab))) ? '' : 'none';
-            });
+            // current-tab matches float to the top
+            songList && Array.from(songList.children)
+                .sort((a, b) => (b.dataset.lang === window.currentLanguage) - (a.dataset.lang === window.currentLanguage))
+                .forEach(li => songList.appendChild(li));
 
             noSongsMessage.classList.toggle('hidden', !(q.length > 0 && totalCount === 0));
-
-            if (q && currentTabCount === 0
-                && window.fullyLoaded && window.fullyLoaded[window.currentLanguage]
-                && window.ensureAllOtherTabsLoaded) {
-                window.ensureAllOtherTabsLoaded();
-            }
         }
 
         let _loadingOtherTabs = false;
@@ -1089,7 +1079,7 @@
 
                 renderSearchSongs();
                 filterSongs('');
-                ensureAllChunksLoaded(currentLanguage);
+                ['telugu', 'english', 'hindi', 'albums'].forEach(lang => ensureAllChunksLoaded(lang));
             } else {
                 searchBox.classList.add('hidden');
                 searchInput.innerText = '';
@@ -1165,9 +1155,6 @@
         searchInput.addEventListener('input', () => {
             currentQuery = searchInput.innerText.toLowerCase().trim();
             clearSearch.style.display = currentQuery ? 'block' : 'none';
-            if (currentQuery && !fullyLoaded[currentLanguage]) {
-                showSongListLoader(currentQuery);
-            }
             filterSongs(currentQuery);
         });
 
