@@ -1210,10 +1210,62 @@
         else if (_hash === 'hindi') switchLanguage('hindi', { target: _tabs.hindi });
         else if (_hash === 'new') switchLanguage('albums', { target: _tabs.albums });
         else { _tabs.telugu.classList.add('active'); switchLanguage('telugu', { target: _tabs.telugu }); }
-    </script>
+        setTimeout(async () => {
+            const landed = _hash === 'english' ? 'english' : _hash === 'hindi' ? 'hindi' : _hash === 'new' ? 'albums' : 'telugu';
+            const others = ['telugu', 'english', 'hindi', 'albums'].filter(l => l !== landed);
 
-    <script src="/vidhyarthi-geethavali/assets/a.js?v={{ site.github.build_revision }}" defer></script>
-    <script src="/vidhyarthi-geethavali/assets/pwa/sw.js?v={{ site.github.build_revision }}" defer></script>
+            for (const lang of others) {
+                if (lang === 'albums') {
+                    if (Object.keys(fetched.albums).length) continue; // user already opened it meanwhile
+                    const albums = await discoverAlbums();
+                    if (albums.length) {
+                        const first = albums[0];
+                        if (!fetched.albums[first.id]) fetched.albums[first.id] = new Set();
+                        const firstChunk = (first.chunks || [])[0];
+                        if (firstChunk !== undefined && !fetched.albums[first.id].has(firstChunk)) {
+                            const raw = await fetchAlbumChunk(first.folder, firstChunk);
+                            ingestAlbum(first.id, raw, first.folder);
+                            fetched.albums[first.id].add(firstChunk);
+                        }
+                    }
+                } else {
+                    if (fetched[lang].size) continue; // user already opened it meanwhile
+                    const chunks = await discoverChunks(lang);
+                    if (chunks.length) {
+                        const raw = await fetchChunk(lang, chunks[0]);
+                        const ingest = lang === 'telugu' ? ingestTelugu : lang === 'english' ? ingestEnglish : ingestHindi;
+                        ingest(raw);
+                        fetched[lang].add(chunks[0]);
+                    }
+                }
+            }
+        }, 2000);
+    </script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register(
+                '/vidhyarthi-geethavali/service-worker.js'
+            )
+                .then(reg => {
+                    console.log('SW registered:', reg.scope);
+                })
+                .catch(err => {
+                    console.error('SW registration failed:', err);
+                });
+        }
+    </script>
+    <script>
+        var _paq = window._paq = window._paq || [];
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function () {
+            var u = "//a.ruvs.in/_wy5s/";
+            _paq.push(['setTrackerUrl', u + '_e7hw.php']);
+            _paq.push(['setSiteId', '3']);
+            var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
+            g.async = true; g.src = u + '_ue4c.js'; s.parentNode.insertBefore(g, s);
+        })();
+    </script>
 </body>
 
 </html>
