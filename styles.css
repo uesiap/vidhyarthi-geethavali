@@ -618,7 +618,7 @@ body {
     border-right: 3px solid var(--primary-color);
     background-color: #fff;
     transition: var(--transition);
-    line-height: 1.4;
+    line-height: 1.8;
     box-sizing: border-box;
     border-radius: 20px;
     word-break: break-word;        
