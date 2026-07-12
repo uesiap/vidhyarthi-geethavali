@@ -121,7 +121,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <link rel="stylesheet" href="/vidhyarthi-geethavali/styles.css?v=1.0.5">
+    <link rel="stylesheet" href="/vidhyarthi-geethavali/styles.css?v=1.0.6">
 
     <!-- Added 'defer' so the script doesn't block page rendering -->
     <script src="/vidhyarthi-geethavali/boom.js?v={{ site.github.build_revision }}" defer></script>
@@ -392,7 +392,7 @@
         </h6>
 
     </main><br><br><br>
-    <p style="font-size: 1px; opacity: 0.01;"> Last updated: <time datetime="2026-07-08T05:10">July 08, 2026 –
+    <p style="font-size: 1px; opacity: 0.01;"> Last updated: <time datetime="2026-07-12T05:10">July 12, 2026 –
             05:10</time></p>
     <button id="scrollTopBtn" title="Go to top">
         ↑
@@ -406,7 +406,7 @@
         // ═══════════════════════════════════════════════════════════════════
         const BASE = '/vidhyarthi-geethavali/data';
         const CHUNK_SIZE = 50;
-        const CACHE_VER = 'vg-v1';
+        const CACHE_VER = 'vg-v2';
 
         const teluguLetters = [
             "అ", "ఆ", "ఇ", "ఈ", "ఉ", "ఊ", "ఎ", "ఏ", "ఒ", "ఓ",
@@ -438,6 +438,8 @@
         const inFlightAlbums = {};
 
         const LANG_FOLDER = { telugu: 'tsongs', english: 'esongs', hindi: 'hsongs' };
+        const fullyLoaded = { telugu: false, english: false, hindi: false, albums: false };
+        window.fullyLoaded = fullyLoaded;
 
         let currentLanguage = 'telugu';
         window.currentLanguage = currentLanguage;
@@ -979,7 +981,9 @@
 
             noSongsMessage.classList.toggle('hidden', !(q.length > 0 && totalCount === 0));
 
-            if (q && currentTabCount === 0 && window.ensureAllOtherTabsLoaded) {
+            if (q && currentTabCount === 0
+                && window.fullyLoaded && window.fullyLoaded[window.currentLanguage]
+                && window.ensureAllOtherTabsLoaded) {
                 window.ensureAllOtherTabsLoaded();
             }
         }
@@ -1135,6 +1139,8 @@
                         }
                     }
                 }
+                fullyLoaded.albums = true;
+                if (isSearchOpen) { renderSearchSongs(); filterSongs(currentQuery); }
                 return;
             }
             const chunks = knownChunks[lang] || await discoverChunks(lang);
@@ -1152,11 +1158,16 @@
                     filterSongs(currentQuery);
                 }
             }
+            fullyLoaded[lang] = true;
+            if (isSearchOpen) { renderSearchSongs(); filterSongs(currentQuery); }
         }
 
         searchInput.addEventListener('input', () => {
             currentQuery = searchInput.innerText.toLowerCase().trim();
             clearSearch.style.display = currentQuery ? 'block' : 'none';
+            if (currentQuery && !fullyLoaded[currentLanguage]) {
+                showSongListLoader(currentQuery);
+            }
             filterSongs(currentQuery);
         });
 
