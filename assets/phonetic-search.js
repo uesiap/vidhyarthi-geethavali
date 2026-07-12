@@ -149,7 +149,7 @@
             noSongsMessage.classList.toggle('hidden', !(q.length > 0 && totalCount === 0));
         }
 
-        if (q && currentTabCount === 0 && window.ensureAllOtherTabsLoaded) {
+        if (q && currentTabCount === 0 && window.fullyLoaded && window.fullyLoaded[window.currentLanguage] && window.ensureAllOtherTabsLoaded) {
             window.ensureAllOtherTabsLoaded();
         }
     };
