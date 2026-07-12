@@ -224,7 +224,8 @@ body {
 }
 
 .go-to-too-search {
-    width: 100%;
+    width: 80%;
+    margin: 0 auto;
     padding: 12px 40px 12px 14px;
     font-size: 1rem;
     border-left: 5px solid var(--primary-color);
