@@ -260,7 +260,7 @@ body {
 .clear-search {
     position: absolute;
     top: 50%;
-    right: 12px;
+    right: 50px;
     transform: translateY(-50%);
     background: none;
     border: none;
@@ -727,7 +727,7 @@ body {
     }
 
     .clear-search {
-        right: 10px;
+        right: 40px;
         font-size: 1rem;
     }
 
@@ -844,6 +844,7 @@ body {
 
     .song-link {
         padding: 13px 12px;
+        gap: 6px;
     }
 }
 
@@ -918,6 +919,7 @@ body {
     .song-link {
         padding: 16px 13px;
         font-size: 1rem;
+        gap: 6px;
     }
 }
 
@@ -1028,6 +1030,7 @@ body {
     .song-link {
         display: block;
         width: 100%;
+        gap: 6px;
         padding: 17px 14px;
         font-size: 1.02rem;
         line-height: 1.35;
