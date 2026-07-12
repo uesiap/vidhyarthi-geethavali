@@ -1,5 +1,10 @@
 {
   "albums": [
-    { "id": "alb1", "name": "నూతన జీవం", "folder": "alb1songs", "chunks": [50] }
+    { "id": "alb1", "name": "నూతన జీవం", "folder": "alb1songs", "chunks": [50] },
+    { "id": "n1", "name": "నీతో Album",   "folder": "nsongs", "chunks": [50], "tag": "నీతో Album" },
+    { "id": "n2", "name": "New Release",  "folder": "nsongs", "chunks": [50], "tag": "New Release" },
+    { "id": "n3", "name": "Spicon Songs", "folder": "nsongs", "chunks": [50], "tag": "Spicon-2022" },
+    { "id": "n4", "name": "Out of VG",    "folder": "nsongs", "chunks": [50], "tag": "Out of VG" },
+    { "id": "n5", "name": "Special Songs","folder": "nsongs", "chunks": [50], "tag": "Special song" }
   ]
 }
