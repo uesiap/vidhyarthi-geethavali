@@ -1,4 +1,3 @@
-
 (function () {
     if (window._phoneticSearchReady) return;
 
@@ -61,7 +60,6 @@
         s = s.replace(/w/g, 'v');
         s = s.replace(/([bcdgjkpt])h/g, '$1');
         s = s.replace(/z/g, 'j');
-        s = s.replace(/ee/g, 'i').replace(/oo/g, 'u');
         s = s.replace(/aa/g, 'a');
         s = s.replace(/(.)\1+/g, '$1');
         return s;
@@ -99,10 +97,7 @@
         if (!qWords.length) return true;
         return qWords.every(q => targetPhoneticWords.some(t => wordsMatch(q, t)));
     }
-
-    // ── LAZY, CACHED PHONETIC DATA PER SONG LINK ────────────────────────
-    // Computed on first filter pass (not at render time), so this works
-    // no matter when the script finishes loading relative to song rendering.
+    
     function ensurePhoneticData(link) {
         if (link.dataset.phonetic !== undefined) return;
         const raw = link.textContent || '';
@@ -112,7 +107,6 @@
         link.dataset.phonetic = words.join('|');
     }
 
-    // ── OVERWRITE THE GLOBAL filterSongs WITH THE FUZZY VERSION ─────────
     window.filterSongs = function filterSongs(query) {
         const q = (query || '').trim();
         const qLower = q.toLowerCase();
