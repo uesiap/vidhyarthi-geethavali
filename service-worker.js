@@ -1,4 +1,4 @@
-const CACHE_NAME = 'vg-shell-v1';
+const CACHE_NAME = 'vg-shell-v2';
 
 // Only your static app shell — nothing else
 const SHELL_ASSETS = [
