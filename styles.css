@@ -224,7 +224,7 @@ body {
 }
 
 .go-to-too-search {
-    width: 80%;
+    width: 90%;
     margin: 0 auto;
     padding: 12px 40px 12px 14px;
     font-size: 1rem;
@@ -603,9 +603,12 @@ body {
 }
 
 .song-link {
-    display: block;
+    display: flex;                 
+    align-items: center;           
+    justify-content: center;       
+    text-align: center;            
     width: 100%;
-    padding: 14px 12px;
+    padding: 14px 20px;            
     text-decoration: none;
     color: var(--text-dark);
     font-weight: 500;
@@ -617,7 +620,21 @@ body {
     transition: var(--transition);
     line-height: 1.4;
     box-sizing: border-box;
-    border-radius: 20px
+    border-radius: 20px;
+    word-break: break-word;        
+}
+
+.song-title {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    min-width: 0; 
+    flex: 0 1 auto;    
+}
+
+.song-num {
+    white-space: nowrap;
+    flex-shrink: 0;     
 }
 
 .song-link:hover,
