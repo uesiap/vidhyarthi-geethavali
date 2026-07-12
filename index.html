@@ -353,7 +353,8 @@
             <h1 class="page-title">Vidhyarthi Geethavali Songs</h1>
 
             <div id="announcement-placeholder"></div>
-            <script src="/vidhyarthi-geethavali/assets/pages/banners/announcement.js?v={{ site.github.build_revision }}"></script>
+            <script
+                src="/vidhyarthi-geethavali/assets/pages/banners/announcement.js?v={{ site.github.build_revision }}"></script>
             <div class="card">
                 <h2><i class="fa-solid fa-music" style="margin-right: 5px;"></i><span id="sel-lis"
                         style="margin-right: -5px;">Telugu</span>Songs</h2>
@@ -381,7 +382,8 @@
             </span>
             <ul id="songs">
             </ul>
-            <div id="noSongsMessage" class="no-songs-message hidden">Song not yet added/No songs matched your search.</div>
+            <div id="noSongsMessage" class="no-songs-message hidden">Song not yet added/No songs matched your search.
+            </div>
         </section>
 
         <h6 class="page-title" style="color: rgb(52, 42, 165); font-weight: 500; font-size: 1.1rem">
@@ -463,7 +465,7 @@
           <span style="font-size:13px;font-weight:500">Loading songs…</span>
         </li>`;
         }
-       //related to announcement
+        //related to announcement
         if (window.loadAnnouncement) window.loadAnnouncement();
 
         // ═══════════════════════════════════════════════════════════════════
@@ -1019,12 +1021,13 @@
                 closeIcon.classList.remove('hide-icon');
                 searchInput.innerText = '';
                 currentQuery = '';
+                isSearchOpen = true;
                 loadSearchLogger();
                 loadPhoneticSearch();
 
-                await ensureAllChunksLoaded(currentLanguage);
                 renderSearchSongs(currentLanguage);
                 filterSongs('');
+                ensureAllChunksLoaded(currentLanguage);
             } else {
                 searchBox.classList.add('hidden');
                 searchInput.innerText = '';
@@ -1054,18 +1057,24 @@
             }
         });
 
-        async function ensureAllChunksLoaded(lang) {
-            showSongListLoader();
+        let isSearchOpen = false;
 
+        async function ensureAllChunksLoaded(lang) {
             if (lang === 'albums') {
                 const albums = await discoverAlbums();
                 for (const album of albums) {
+                    if (!isSearchOpen) return; // search closed — stop fetching
                     if (!fetched.albums[album.id]) fetched.albums[album.id] = new Set();
                     for (const c of (album.chunks || [])) {
+                        if (!isSearchOpen) return;
                         if (fetched.albums[album.id].has(c)) continue;
                         const raw = await fetchAlbumChunk(album.folder, c);
                         ingestAlbum(album.id, raw, album.folder);
                         fetched.albums[album.id].add(c);
+                        if (isSearchOpen && window.currentLanguage === 'albums') {
+                            renderSearchSongs('albums');
+                            filterSongs(currentQuery);
+                        }
                     }
                 }
                 return;
@@ -1075,10 +1084,15 @@
                 : lang === 'english' ? ingestEnglish
                     : ingestHindi;
             for (const ceiling of chunks) {
+                if (!isSearchOpen) return; // search closed — stop fetching
                 if (fetched[lang].has(ceiling)) continue;
                 const raw = await fetchChunk(lang, ceiling);
                 ingest(raw);
                 fetched[lang].add(ceiling);
+                if (isSearchOpen && window.currentLanguage === lang) {
+                    renderSearchSongs(lang);
+                    filterSongs(currentQuery);
+                }
             }
         }
 
@@ -1197,32 +1211,9 @@
         else if (_hash === 'new') switchLanguage('albums', { target: _tabs.albums });
         else { _tabs.telugu.classList.add('active'); switchLanguage('telugu', { target: _tabs.telugu }); }
     </script>
-    <script>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register(
-                '/vidhyarthi-geethavali/service-worker.js'
-            )
-                .then(reg => {
-                    console.log('SW registered:', reg.scope);
-                })
-                .catch(err => {
-                    console.error('SW registration failed:', err);
-                });
-        }
-    </script>
-    <script>
-        var _paq = window._paq = window._paq || [];
-        /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
-        _paq.push(['trackPageView']);
-        _paq.push(['enableLinkTracking']);
-        (function () {
-            var u = "//a.ruvs.in/_wy5s/";
-            _paq.push(['setTrackerUrl', u + '_e7hw.php']);
-            _paq.push(['setSiteId', '3']);
-            var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
-            g.async = true; g.src = u + '_ue4c.js'; s.parentNode.insertBefore(g, s);
-        })();
-    </script>
+
+    <script src="/vidhyarthi-geethavali/assets/a.js?v={{ site.github.build_revision }}" defer></script>
+    <script src="/vidhyarthi-geethavali/assets/pwa/sw.js?v={{ site.github.build_revision }}" defer></script>
 </body>
 
 </html>
