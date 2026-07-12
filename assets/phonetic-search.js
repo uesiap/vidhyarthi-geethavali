@@ -1,6 +1,6 @@
 
 (function () {
-    if (window._phoneticSearchReady) return; 
+    if (window._phoneticSearchReady) return;
 
     const TG_VOWELS = {
         'అ': 'a', 'ఆ': 'aa', 'ఇ': 'i', 'ఈ': 'ii', 'ఉ': 'u', 'ఊ': 'uu',
@@ -117,28 +117,40 @@
         const q = (query || '').trim();
         const qLower = q.toLowerCase();
         const links = document.querySelectorAll('#songs .song-link');
-        let count = 0;
 
+        function isMatch(link) {
+            if (!q) return true;
+            if (link.innerText.toLowerCase().includes(qLower)) return true;
+            ensurePhoneticData(link);
+            const words = (link.dataset.phonetic || '').split('|').filter(Boolean);
+            return words.length ? phraseFuzzyMatch(q, words) : false;
+        }
+
+        let currentTabCount = 0, totalCount = 0;
         links.forEach(link => {
             const li = link.closest('li') || link.parentElement;
-            let show = false;
-
-            if (!q) {
-                show = true;
-            } else if (link.innerText.toLowerCase().includes(qLower)) {
-                show = true;
-            } else {
-                ensurePhoneticData(link);
-                const words = (link.dataset.phonetic || '').split('|').filter(Boolean);
-                if (words.length) show = phraseFuzzyMatch(q, words);
+            const m = isMatch(link);
+            li.dataset.matched = m ? '1' : '0';
+            if (m) {
+                totalCount++;
+                if (li.dataset.lang === window.currentLanguage) currentTabCount++;
             }
+        });
 
-            li.style.display = show ? '' : 'none';
-            if (show) count++;
+        const showUniversal = q.length > 0 && currentTabCount === 0;
+        links.forEach(link => {
+            const li = link.closest('li') || link.parentElement;
+            const m = li.dataset.matched === '1';
+            const isCurrentTab = li.dataset.lang === window.currentLanguage;
+            li.style.display = (!q ? isCurrentTab : (showUniversal ? m : (m && isCurrentTab))) ? '' : 'none';
         });
 
         if (typeof noSongsMessage !== 'undefined' && noSongsMessage) {
-            noSongsMessage.classList.toggle('hidden', !(count === 0 && q.length > 0));
+            noSongsMessage.classList.toggle('hidden', !(q.length > 0 && totalCount === 0));
+        }
+
+        if (q && currentTabCount === 0 && window.ensureAllOtherTabsLoaded) {
+            window.ensureAllOtherTabsLoaded();
         }
     };
 
