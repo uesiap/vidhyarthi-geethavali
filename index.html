@@ -121,7 +121,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <link rel="stylesheet" href="/vidhyarthi-geethavali/styles.css?v=1.0.7">
+    <link rel="stylesheet" href="/vidhyarthi-geethavali/styles.css?v=1.0.8">
 
     <!-- Added 'defer' so the script doesn't block page rendering -->
     <script src="/vidhyarthi-geethavali/boom.js?v={{ site.github.build_revision }}" defer></script>
@@ -827,7 +827,7 @@
             _searchLogLoading = true;
 
             const s = document.createElement('script');
-            s.src = '/vidhyarthi-geethavali/assets/search-log.js';
+            s.src = `/vidhyarthi-geethavali/assets/search-log.js?v=${Date.now()}`;
             s.onload = () => { if (window.initSearchLog) window.initSearchLog(); };
             s.onerror = () => console.warn('[search-log] failed to load script');
             document.head.appendChild(s);
@@ -839,7 +839,7 @@
             _phoneticSearchLoading = true;
 
             const s = document.createElement('script');
-            s.src = '/vidhyarthi-geethavali/assets/phonetic-search.js';
+            s.src = `/vidhyarthi-geethavali/assets/phonetic-search.js?v=${Date.now()}`;
             s.onerror = () => console.warn('[phonetic-search] failed to load script');
             document.head.appendChild(s);
         }
@@ -1114,42 +1114,31 @@
         async function ensureAllChunksLoaded(lang) {
             if (lang === 'albums') {
                 const albums = await discoverAlbums();
-                for (const album of albums) {
-                    if (!isSearchOpen) return;
+                await Promise.all(albums.map(async album => {
                     if (!fetched.albums[album.id]) fetched.albums[album.id] = new Set();
-                    for (const c of (album.chunks || [])) {
+                    const missing = (album.chunks || []).filter(c => !fetched.albums[album.id].has(c));
+                    await Promise.all(missing.map(async c => {
                         if (!isSearchOpen) return;
-                        if (fetched.albums[album.id].has(c)) continue;
                         const raw = await fetchAlbumChunk(album.folder, c);
                         ingestAlbum(album.id, raw, album.folder, album.tag);
                         fetched.albums[album.id].add(c);
-                        if (isSearchOpen) {
-                            renderSearchSongs();
-                            filterSongs(currentQuery);
-                        }
-                    }
-                }
-                fullyLoaded.albums = true;
-                if (isSearchOpen) { renderSearchSongs(); filterSongs(currentQuery); }
+                        if (isSearchOpen) { renderSearchSongs(); filterSongs(currentQuery); }
+                    }));
+                }));
                 return;
             }
             const chunks = knownChunks[lang] || await discoverChunks(lang);
             const ingest = lang === 'telugu' ? ingestTelugu
                 : lang === 'english' ? ingestEnglish
                     : ingestHindi;
-            for (const ceiling of chunks) {
+            const missing = chunks.filter(c => !fetched[lang].has(c));
+            await Promise.all(missing.map(async ceiling => {
                 if (!isSearchOpen) return;
-                if (fetched[lang].has(ceiling)) continue;
                 const raw = await fetchChunk(lang, ceiling);
                 ingest(raw);
                 fetched[lang].add(ceiling);
-                if (isSearchOpen) {
-                    renderSearchSongs();
-                    filterSongs(currentQuery);
-                }
-            }
-            fullyLoaded[lang] = true;
-            if (isSearchOpen) { renderSearchSongs(); filterSongs(currentQuery); }
+                if (isSearchOpen) { renderSearchSongs(); filterSongs(currentQuery); }
+            }));
         }
 
         searchInput.addEventListener('input', () => {
