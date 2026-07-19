@@ -1,523 +1,229 @@
+---
+---
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+    <!-- 1. ESSENTIAL META TAGS -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script>
-        (function () {
-            // Clear all localStorage
-            localStorage.clear();
-            console.log("LocalStorage cleared.");
 
-            // Clear all sessionStorage
-            sessionStorage.clear();
-            console.log("SessionStorage cleared.");
-
-            // Clear all IndexedDB databases
-            const clearIndexedDB = () => {
-                if (!window.indexedDB) {
-                    console.warn("IndexedDB is not supported by this browser.");
-                    return;
-                }
-                indexedDB.databases().then((databases) => {
-                    databases.forEach((db) => {
-                        indexedDB.deleteDatabase(db.name);
-                        console.log(`Deleted IndexedDB: ${db.name}`);
-                    });
-                }).catch((error) => {
-                    console.error("Error clearing IndexedDB:", error);
-                });
-            };
-
-            // Clear all caches
-            const clearCache = () => {
-                if ("caches" in window) {
-                    caches.keys().then((cacheNames) => {
-                        cacheNames.forEach((cacheName) => {
-                            caches.delete(cacheName);
-                            console.log(`Deleted Cache: ${cacheName}`);
-                        });
-                    }).catch((error) => {
-                        console.error("Error clearing cache:", error);
-                    });
-                } else {
-                    console.warn("Cache API is not supported by this browser.");
-                }
-            };
-
-            // Execute cleanup
-            clearIndexedDB();
-            clearCache();
-
-            console.log("All data cleared from browser storage.");
-        })();
-    </script>
+    <!-- 2. PRIMARY SEO -->
     <title>Give Correction | Vidhyarthi Geethavali | UESI AP</title>
-    <!-- Your theme color -->
+    <meta name="description"
+        content="Spotted an error in a song's lyrics? Let us know the song number and the correct lyrics so we can fix Vidhyarthi Geethavali by UESI AP.">
+    <meta name="keywords"
+        content="Give correction, Vidhyarthi Geethavali lyrics correction, UESI AP correction, Christian song lyrics fix, song number correction, UESI AP Nambur">
+    <meta name="author" content="M.Rahul">
+    <meta name="robots" content="noindex, nofollow, max-image-preview:large">
+
+    <!-- 3. VERIFICATION -->
+    <meta name="google-site-verification" content="eZcr6WyistE7nCSaUoUkf9tpK_SmeG5caEM-x3nEWb4">
+    <meta name="msvalidate.01" content="28F3BC7AAD0F4B06B4517F2211A7D366">
+
+    <!-- 4. CACHE & SECURITY -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
+    <!-- 5. CANONICAL -->
+    <link rel="canonical" href="https://uesiap.github.io/vidhyarthi-geethavali/give-correction/">
+
+    <!-- 6. PWA & APP META -->
+    <link rel="manifest" href="/vidhyarthi-geethavali/manifest.json" crossorigin="use-credentials">
     <meta name="theme-color" content="#128C7E">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Give Correction">
+
+    <!-- 7. FAVICONS & ICONS -->
+    <link rel="icon" href="/vidhyarthi-geethavali/assets/Icons/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="96x96" href="/vidhyarthi-geethavali/assets/Icons/Icon96.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/vidhyarthi-geethavali/assets/Icons/Icon192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/vidhyarthi-geethavali/assets/Icons/Icon512.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/vidhyarthi-geethavali/assets/Icons/apple-icon.png">
+
+    <!-- 8. OPEN GRAPH (FACEBOOK/WHATSAPP) -->
+    <meta property="og:title" content="Give Correction | Vidhyarthi Geethavali | UESI AP">
+    <meta property="og:description"
+        content="Spotted an error in a song's lyrics? Let us know the song number and the correct lyrics so we can fix Vidhyarthi Geethavali by UESI AP.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://uesiap.github.io/vidhyarthi-geethavali/give-correction/">
+    <meta property="og:image" content="https://uesiap.github.io/vidhyarthi-geethavali/assets/Icons/Icon512.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta property="og:image:alt" content="Give Correction - Vidhyarthi Geethavali">
+    <meta property="og:site_name" content="Vidhyarthi Geethavali">
+    <meta property="og:locale" content="te_IN">
+    <meta property="article:modified_time" content="2026-07-19T00:00:00+00:00">
+
+    <!-- 9. TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Give Correction | Vidhyarthi Geethavali | UESI AP">
+    <meta name="twitter:description"
+        content="Spotted an error in a song's lyrics? Let us know the song number and the correct lyrics so we can fix Vidhyarthi Geethavali by UESI AP.">
+    <meta name="twitter:url" content="https://uesiap.github.io/vidhyarthi-geethavali/give-correction/">
+    <meta name="twitter:image" content="https://uesiap.github.io/vidhyarthi-geethavali/assets/Icons/Icon512.png">
+    <meta name="twitter:image:alt" content="Give Correction - Vidhyarthi Geethavali">
+    <meta name="twitter:site" content="@uesiap">
+    <meta name="twitter:creator" content="@uesiap">
+
+    <!-- 10. STRUCTURED DATA (JSON-LD) -->
+    <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Give Correction | Vidhyarthi Geethavali | UESI AP",
+    "description": "Spotted an error in a song's lyrics? Let us know the song number and the correct lyrics so we can fix Vidhyarthi Geethavali by UESI AP.",
+    "url": "https://uesiap.github.io/vidhyarthi-geethavali/give-correction/",
+    "inLanguage": ["te-IN", "en-IN"],
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "Vidhyarthi Geethavali",
+      "url": "https://uesiap.github.io/vidhyarthi-geethavali/"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "M.Rahul"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "UESI AP",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://uesiap.github.io/vidhyarthi-geethavali/assets/Icons/Icon512.png"
+      },
+      "sameAs": [
+        "https://www.youtube.com/@UESIOfficial"
+      ]
+    }
+  }
+  </script>
+
+    <!-- 11. PRECONNECT & ASSETS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+    <link rel="stylesheet" href="/vidhyarthi-geethavali/styles.css?v={{ site.github.build_revision }}">
+
+    <script src="/vidhyarthi-geethavali/boom.js" defer></script>
     <style>
-        :root {
-            --primary-color: #128C7E;
-            --primary-dark: #075E54;
-            --text-light: #ffffff;
-            --text-dark: #333333;
-            --text-gray: #666666;
-            --bg-light: #f5f5f5;
-            --bg-white: #ffffff;
-            --border-light: #eeeeee;
-            --shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-            --transition: all 0.3s ease;
+        .form-group {
+            margin-bottom: 18px;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-        }
-
-        body {
-            background-color: var(--bg-white);
-            min-height: 100vh;
-            line-height: 1.6;
-            user-select: none;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-        }
-
-        /* Navbar Styles */
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 5%;
-            background-color: var(--primary-color);
-            color: var(--text-light);
-            box-shadow: var(--shadow);
-            position: fixed;
-            border-bottom: 3px dotted rgb(160, 225, 161);
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-        }
-
-        .logo-title {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .logo {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .title {
-            font-size: 1rem;
-            font-weight: 500;
-        }
-
-        .menu-btn {
-            background: none;
-            border: none;
-            color: var(--text-light);
-            font-size: 1.8rem;
-            cursor: pointer;
-            padding: 8px;
-            transition: var(--transition);
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .menu-btn:focus {
-            outline: 2px solid rgba(255, 255, 255, 0.5);
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .menu-btn:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: scale(1.05);
-        }
-
-        /* Drawer Styles */
-        .drawer {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 320px;
-            max-width: 90%;
-            height: 100vh;
-            background-color: var(--bg-white);
-            box-shadow: -2px 0 15px rgba(0, 0, 0, 0.1);
-            transition: var(--transition);
-            z-index: 999;
-            padding-top: 70px;
-            overflow-y: auto;
-            will-change: transform;
-        }
-
-        .drawer.open {
-            right: 0;
-        }
-
-        .drawer-content {
-            padding: 0;
-        }
-
-        /* Main Menu Items */
-        .drawer-item {
-            padding: 16px 25px;
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
             color: var(--text-dark);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            transition: var(--transition);
-            border-left: 4px solid transparent;
             font-weight: 500;
-            border-bottom: 1.5px solid #ddd;
-        }
-
-        .drawer-item:hover,
-        .drawer-item:focus {
-            background-color: rgba(0, 0, 0, 0.03);
-            border-left-color: var(--primary-color);
-            outline: none;
-        }
-
-        .drawer-item .item-content {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .drawer-item .icon {
-            width: 30px;
-            text-align: center;
-            font-size: 1.5rem;
-            color: var(--primary-color);
-        }
-
-        .mnu-tit {
-            font-size: 1.3rem;
-            font-weight: 400;
-        }
-
-        .drawer-item.has-submenu::after {
-            content: "\f078";
-            font-family: "Font Awesome 6 Free";
-            font-weight: 900;
-            font-size: 0.8rem;
-            color: var(--text-gray);
-            transition: var(--transition);
-        }
-
-        .drawer-item.has-submenu.open::after {
-            transform: rotate(180deg);
-            color: var(--primary-color);
-        }
-
-        .drawer a,
-        .drawer a:visited,
-        .drawer a:hover,
-        .drawer a:active {
-            text-decoration: none;
-            color: inherit;
-            /* Optional: keeps the same color as parent */
-        }
-
-
-        /* Submenu Items */
-        .submenu {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease-out;
-            background-color: rgba(0, 0, 0, 0.02);
-        }
-
-        .submenu.open {
-            max-height: 500px;
-            border-bottom: 1.5px solid #ddd;
-        }
-
-        .submenu-item {
-            padding: 14px 25px 14px 60px;
-            color: var(--text-gray);
-            cursor: pointer;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-weight: 400;
             font-size: 0.95rem;
         }
 
-        .submenu-item .icon {
-            font-size: 0.9rem;
-            color: var(--text-gray);
-            width: 20px;
-            text-align: center;
-        }
-
-        .submenu-item:hover,
-        .submenu-item:focus {
-            background-color: rgba(0, 0, 0, 0.05);
-            color: var(--primary-dark);
-            outline: none;
-        }
-
-        .submenu-item:hover .icon,
-        .submenu-item:focus .icon {
-            color: var(--primary-dark);
-        }
-
-        /* Overlay */
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
+        .form-input,
+        .form-textarea {
             width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            opacity: 0;
-            visibility: hidden;
-            transition: var(--transition);
-            z-index: 998;
-        }
-
-        .overlay.show {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .page-title {
-            margin-bottom: 25px;
-            color: var(--text-dark);
-            font-size: 1.8rem;
-            font-weight: 600;
-        }
-
-        .card {
-            background: var(--bg-white);
-            border-radius: 10px;
-            padding: 25px;
-            box-shadow: var(--shadow);
-            margin-bottom: 25px;
-        }
-
-        .card h2 {
-            color: var(--primary-dark);
-            margin-bottom: 15px;
-            font-size: 1.4rem;
-        }
-
-        .card p {
-            color: var(--text-gray);
-            margin-bottom: 10px;
-        }
-
-        /* Responsive Adjustments */
-        @media (max-width: 768px) {
-            .navbar {
-                padding: 12px 20px;
-            }
-
-            .main-content {
-                padding: 85px 20px 25px;
-            }
-
-            .page-title {
-                font-size: 1.5rem;
-            }
-
-            .card {
-                padding: 20px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .title {
-                font-size: 1.1rem;
-            }
-
-            .drawer {
-                width: 85%;
-            }
-
-            .drawer-item {
-                padding: 14px 20px;
-            }
-
-            .submenu-item {
-                padding: 12px 20px 12px 55px;
-            }
-        }
-
-        /* songs grid */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 12px;
-            max-width: 600px;
-            margin: 20px auto;
-        }
-
-        @media (min-width: 1024px) {
-            .grid {
-                grid-template-columns: repeat(7, 1fr);
-                max-width: 900px;
-                /* Optional: adjust max-width for wider grid */
-            }
-        }
-
-        .box {
-            background-color: #e0e0e0;
-            border-radius: 8px;
-            padding: 12px;
-            text-align: center;
-            font-size: 20px;
-            cursor: pointer;
-            transition: background-color 0.2s, color 0.2s;
-        }
-
-        .box:hover {
-            background-color: #e0e0e0;
-        }
-
-        .box.active {
-            background-color: #128C7E;
-            color: white;
-        }
-
-        #songs {
-            max-width: 600px;
-            margin: 20px auto;
-            list-style-type: none;
-            padding: 0;
-        }
-
-        #songs li {
-            background-color: white;
-            margin-bottom: 10px;
-            padding: 12px;
-            border-radius: 6px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-        }
-
-        label[for="langSelect"] {
-            display: inline-block;
-            margin-bottom: 8px;
-            font-size: 16px;
-            color: #333;
-        }
-
-        #langSelect {
-            display: inline-block;
-            padding: 6px 10px;
-            font-size: 16px;
-            border: 1px solid #128C7E;
-            border-radius: 5px;
-            background-color: #f9f9f9;
-            color: #333;
-            margin-left: 10px;
-            margin-bottom: 10px;
-            cursor: pointer;
-            transition: border-color 0.3s, background-color 0.3s;
-        }
-
-        #langSelect:hover {
-            border-color: #128C7E;
-            background-color: #f0f0f0;
-        }
-
-        #langSelect:focus {
-            outline: none;
-            border-color: #128C7E;
-        }
-
-        #songs {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        #songs li {
-            margin-bottom: px;
-            border-radius: 8px;
-            transition: background-color 0.3s, transform 0.2s;
-        }
-
-        .song-link {
-            display: block;
-            padding: 10px 8px;
-            text-decoration: none;
-            color: #333;
-            font-weight: bold;
+            padding: 12px 14px;
             font-size: 1rem;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            background: #fafafa;
-            transition: all 0.3s ease;
+            font-family: inherit;
+            border-left: 5px solid var(--primary-color);
+            border-right: 5px solid var(--primary-color);
+            border-top: 2px solid var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+            border-radius: 12px;
+            color: var(--text-dark);
+            background: var(--bg-white);
+            outline: none;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .song-link:hover {
-            background-color: #f0f8ff;
-            color: #128C7E;
-            transform: scale(1.02);
+        .form-textarea {
+            resize: vertical;
+            line-height: 1.5;
+            min-height: 120px;
         }
 
-        .main-content {
-            position: relative;
-            max-width: 1200px;
-            margin: 0 auto;
-            height: 100vh;
-            padding: 0;
-            background-color: white;
+        .form-textarea#lyrics {
+            min-height: 220px;
         }
 
-        .iframe-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            margin-top: 5rem;
+        .form-input:focus,
+        .form-textarea:focus {
+            border-color: var(--primary-dark);
+            box-shadow: 0 0 0 3px rgba(18, 140, 126, 0.15);
+        }
+
+        .form-input::placeholder,
+        .form-textarea::placeholder {
+            color: #aaa;
+            opacity: 0.8;
+        }
+
+        .submit-btn {
+            background-color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            color: var(--bg-light);
+            padding: 12px 24px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            border-radius: 15px;
+            transition: background-color 0.3s ease, transform 0.15s ease;
             width: 100%;
-            height: 100%;
-            background-color: white;
-            overflow: visible;
-            z-index: 1;
         }
 
-        iframe {
-            position: absolute;
-            inset: 0;
-            background-color: white;
-            width: 100%;
-            height: 100%;
-            border: 0;
+        .submit-btn:hover {
+            background-color: var(--primary-dark);
+            border-color: var(--primary-dark);
         }
 
-        .mask-bottom {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 5rem;
-            background: white;
-            z-index: 10;
+        .submit-btn:active {
+            transform: scale(0.98);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .form-status {
+            margin-top: 16px;
+            padding: 12px 14px;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            display: none;
+        }
+
+        .form-status.success {
+            display: block;
+            background: rgba(18, 140, 126, 0.1);
+            color: var(--primary-dark);
+            border: 1px solid var(--primary-color);
+        }
+
+        .form-status.error {
+            display: block;
+            background: rgba(235, 105, 107, 0.1);
+            color: #c0392b;
+            border: 1px solid #EB696B;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media(max-width:600px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -534,7 +240,7 @@
             </span>
         </button>
     </nav>
-    
+
     <div class="drawer" id="drawer" role="navigation" aria-label="Side menu">
         <div class="drawer-content">
 
@@ -663,7 +369,8 @@
             <br>
             <hr>
             <br>
-            <div class="drawer-item has-submenu" id="audioItem" tabindex="0" style="border-top: 1.5px solid #ddd;">
+            <div class="drawer-item has-submenu" id="shareThoughtsItem" tabindex="0"
+                style="border-top: 1.5px solid #ddd;">
                 <div class="item-content">
                     <span class="icon"><span class="material-symbols-outlined">
                             forum
@@ -671,7 +378,7 @@
                     <span class="mnu-tit">Share Thoughts</span>
                 </div>
             </div>
-            <div class="submenu" id="audioSubmenu">
+            <div class="submenu" id="shareThoughtsSubmenu">
                 <a href="/vidhyarthi-geethavali/write-review" class="submenu-item" tabindex="0">
                     <span class="icon"><span class="material-symbols-outlined">
                             edit_square
@@ -697,12 +404,49 @@
     <div class="overlay" id="overlay"></div>
 
     <main class="main-content">
-        <div class="iframe-container">
-            <iframe src="https://minform.io/f/ZWmddzM" loading="lazy"></iframe>
-            <div class="mask-bottom"></div> <!-- Hides bottom 5rem -->
+        <div style="display:flex;flex-direction:column;align-items:center;text-align:center;">
+            <h1 class="page-title" style="margin:0;">Give Correction</h1><br>
+            <p class="update-notice" style="color:black;">Spotted a mistake in the lyrics? Let us know the song
+                number <br>and the correct lyrics, and we'll get it fixed.</p>
+        </div>
+
+        <div class="form-status" id="formStatus"></div>
+
+        <div class="card" id="EntireForm" style="max-width: 700px;">
+            <h2>Give Correction</h2>
+
+            <form id="contactForm">
+                <input type="hidden" name="access_key" value="5d7d81bc-7419-4405-941d-54767cbd6c3f">
+                <input type="checkbox" name="botcheck" style="display:none;">
+
+                <div class="form-row">
+                    <div class="form-group"><label class="form-label" for="name">Name</label><input class="form-input"
+                            type="text" id="name" name="name" placeholder="Your full name" required></div>
+                    <div class="form-group"><label class="form-label" for="email">Email</label><input class="form-input"
+                            type="email" id="email" name="email" placeholder="example@gmail.com" required></div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="song_number">Song Number</label>
+                    <input class="form-input" type="text" id="song_number" name="song_number"
+                        placeholder="e.g. 145, or the song title/first line" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="lyrics">Correct Lyrics</label>
+                    <textarea class="form-textarea" id="lyrics" name="lyrics" rows="10"
+                        placeholder="Type out the correct lyrics here..." required></textarea>
+                </div>
+
+                <button class="submit-btn" type="submit" id="submitBtn">Send Correction</button>
+
+            </form>
         </div>
     </main>
-    <p style="font-size: 1px; opacity: 0.01;"> Last updated: <time datetime="2026-07-08T05:10">July 08, 2026 – 05:10</time></p>
+
+    <footer>©<span id="current-yr" style="font-weight: 300"></span> Designed &amp; Maintained by <button class="my_name"
+            onclick="window.location.href='https://melamrahul.github.io/'">M.Rahul</button>
+    </footer>
 
     <script>
         const menuBtn = document.getElementById('menuBtn');
@@ -782,29 +526,47 @@
                 toggleDrawer();
             }
         });
+        const form = document.getElementById('contactForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const statusEl = document.getElementById('formStatus');
+        const entireForm = document.getElementById('EntireForm');
 
-        // Improve touch experience on mobile
-        let startX = 0;
-        let currentX = 0;
+        form.addEventListener('submit', async function (e) {
+            e.preventDefault();
 
-        drawer.addEventListener('touchstart', (e) => {
-            startX = e.touches[0].clientX;
-            currentX = startX;
-        }, { passive: true });
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+            statusEl.className = 'form-status';
+            statusEl.textContent = '';
 
-        drawer.addEventListener('touchmove', (e) => {
-            currentX = e.touches[0].clientX;
-        }, { passive: true });
+            const formData = new FormData(form);
+            const json = JSON.stringify(Object.fromEntries(formData));
 
-        drawer.addEventListener('touchend', () => {
-            if (startX - currentX > 50) {
-                drawer.classList.remove('open');
-                overlay.classList.remove('show');
-                menuBtn.setAttribute('aria-expanded', 'false');
-                menuBtn.querySelector('i').className = 'fas fa-bars';
+            try {
+                const response = await fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+                    body: json
+                });
+                const result = await response.json();
+
+                if (result.success) {
+                    statusEl.className = 'form-status success';
+                    statusEl.textContent = "✅ Thanks! Your correction has been sent successfully.";
+                    form.reset();
+                    entireForm.style.display = "none"
+                } else {
+                    statusEl.className = 'form-status error';
+                    statusEl.textContent = result.message || 'Something went wrong. Please try again.';
+                }
+            } catch (error) {
+                statusEl.className = 'form-status error';
+                statusEl.textContent = 'Network error. Please check your connection and try again.';
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Send Correction';
             }
-        }, { passive: true });
-
+        });
     </script>
 </body>
 
