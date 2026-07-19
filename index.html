@@ -121,7 +121,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <link rel="stylesheet" href="https://uesiap.github.io/vidhyarthi-geethavali/styles.css?v=1.0.10">
+    <link rel="stylesheet" href="https://uesiap.github.io/vidhyarthi-geethavali/styles.css?v=1.0.11">
 
     <!-- Added 'defer' so the script doesn't block page rendering -->
     <script src="/vidhyarthi-geethavali/boom.js?v={{ site.github.build_revision }}" defer></script>
@@ -381,10 +381,61 @@
         </ul>
     </div>
 
+    <div id="songRequestDialog"
+        style="display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#fff;border:2px solid var(--primary-color);border-radius:20px;box-shadow:0 4px 12px rgba(0,0,0,0.2);z-index:1000;padding:24px;min-width:280px;max-width:340px;width:90%;">
+        <h3
+            style="margin:0 0 16px;color:var(--primary-dark);font-family:'Segoe UI',sans-serif;font-size:1.2rem;text-align:center;">
+            Request a Song
+        </h3>
+
+        <form id="songRequestForm">
+            <input type="hidden" name="access_key" value="5d7d81bc-7419-4405-941d-54767cbd6c3f">
+            <input type="hidden" name="subject" value="New Song Request - Vidhyarthi Geethavali">
+            <input type="checkbox" name="botcheck" style="display:none;">
+
+            <div style="margin-bottom:14px;">
+                <label for="req_name"
+                    style="display:block;margin-bottom:6px;color:var(--text-dark);font-weight:500;font-size:0.9rem;">Name</label>
+                <input type="text" id="req_name" name="name" placeholder="Your full name" required
+                    style="width:100%;padding:10px 12px;font-size:0.95rem;font-family:inherit;border-left:5px solid var(--primary-color);border-right:5px solid var(--primary-color);border-top:2px solid var(--primary-color);border-bottom:2px solid var(--primary-color);border-radius:10px;color:var(--text-dark);background:var(--bg-white);outline:none;box-sizing:border-box;">
+            </div>
+
+            <div style="margin-bottom:14px;">
+                <label for="req_email"
+                    style="display:block;margin-bottom:6px;color:var(--text-dark);font-weight:500;font-size:0.9rem;">Email</label>
+                <input type="email" id="req_email" name="email" placeholder="example@gmail.com" required
+                    style="width:100%;padding:10px 12px;font-size:0.95rem;font-family:inherit;border-left:5px solid var(--primary-color);border-right:5px solid var(--primary-color);border-top:2px solid var(--primary-color);border-bottom:2px solid var(--primary-color);border-radius:10px;color:var(--text-dark);background:var(--bg-white);outline:none;box-sizing:border-box;">
+            </div>
+
+            <div style="margin-bottom:18px;">
+                <label for="req_song"
+                    style="display:block;margin-bottom:6px;color:var(--text-dark);font-weight:500;font-size:0.9rem;">Song
+                    Name or Number</label>
+                <input type="text" id="req_song" name="song_name_or_number" placeholder="e.g. 145, or the song title"
+                    required
+                    style="width:100%;padding:10px 12px;font-size:0.95rem;font-family:inherit;border-left:5px solid var(--primary-color);border-right:5px solid var(--primary-color);border-top:2px solid var(--primary-color);border-bottom:2px solid var(--primary-color);border-radius:10px;color:var(--text-dark);background:var(--bg-white);outline:none;box-sizing:border-box;">
+            </div>
+
+            <div id="songRequestStatus"
+                style="display:none;margin-bottom:14px;padding:10px 12px;border-radius:10px;font-size:0.88rem;"></div>
+
+            <button type="submit" id="songRequestSubmitBtn"
+                style="background-color:var(--primary-color);border:2px solid var(--primary-color);color:var(--bg-light);padding:11px 20px;cursor:pointer;font-size:0.95rem;font-weight:500;border-radius:12px;transition:background-color 0.3s ease,transform 0.15s ease;width:100%;">
+                Send Request
+            </button>
+        </form>
+    </div>
+
     <div class="overlay" id="overlay"></div>
     <main class="main-content">
         <!--<marquee class="marquee" behavior="scroll" direction="left" scrollamount="6" style="margin-bottom: 1rem; margin-top: -0.5rem; padding-bottom: 10px; border-bottom: 1px solid var(--primary-color)"><span style="color: var(--primary-color);">Temporary Info:</span>This Online <span style="color: #043b75;">Vidhyarthi Geethavali</span> Resource is available in Google & Bing Browsers, So you can directly access this via searching the "Camps names/ Retreat names/ uesi ap songs! for example: <a href="https://www.google.com/search?q=uesi+ap+songs" target="_blank" rel="noopener noreferrer">Click here</a>. Remaining songs will be added soon. -last updated on 11/05/2026 1:00 PM IST</marquee>-->
-        <style>@media (max-width:768px){.menu-text{display:none;}}</style>
+        <style>
+            @media (max-width:768px) {
+                .menu-text {
+                    display: none;
+                }
+            }
+        </style>
         <div style="display:flex;align-items:center;justify-content:space-between;">
             <h1 class="page-title" style="margin:0;">
                 Vidhyarthi Geethavali<span class="menu-text"> Songs</span>
@@ -393,11 +444,9 @@
                       color:var(--primary-color);border-radius:30%;
                       padding:.4rem .2rem;display:flex;align-items:center;
                       justify-content:center;text-decoration:none;
-                      width:36px;height:36px;"
-               onclick="toggleFeedbackMenu()"
-               href="javascript:void(0)"
-               class="menu-button">
-        
+                      width:36px;height:36px;" onclick="toggleFeedbackMenu()" href="javascript:void(0)"
+                class="menu-button">
+
                 <span class="material-symbols-outlined">edit_note</span>
             </a>
         </div><br>
@@ -432,7 +481,12 @@
             </span>
             <ul id="songs">
             </ul>
-            <div id="noSongsMessage" class="no-songs-message hidden">Song not yet added/No songs matched your search.
+            <div id="noSongsMessage" class="no-songs-message hidden" style="text-align:center;">
+                <div>Song not yet added (or) No songs matched your search.</div>
+                <a href="javascript:void(0)" onclick="openSongRequestDialog()"
+                    style="display:flex;background-color:var(--bg-white);border:2px solid var(--primary-color);color:var(--primary-color);padding:12px 24px;cursor:pointer;font-size:1rem;font-weight:500;border-radius:15px;transition:background-color .3s ease,color .3s ease,transform .15s ease;width:100%;margin:14px auto 0;text-decoration:none;align-items:center;justify-content:center;gap:8px;box-sizing:border-box;">
+                    Need to add Song?
+                </a>
             </div>
         </section>
 
@@ -504,12 +558,80 @@
             document.head.appendChild(s);
         })();
 
-        function closeAllMenus() {
-            const feedbackMenu = document.getElementById("feedbackMenu");
+        function openSongRequestDialog() {
+            const dialog = document.getElementById("songRequestDialog");
             const overlay = document.getElementById("menuOverlay");
-            if (feedbackMenu) feedbackMenu.style.display = "none";
+            closeAllMenus(); // close any other open menu first
+            if (dialog) dialog.style.display = "block";
+            if (overlay) overlay.style.display = "block";
+        }
+
+        function closeSongRequestDialog() {
+            const dialog = document.getElementById("songRequestDialog");
+            const overlay = document.getElementById("menuOverlay");
+            if (dialog) dialog.style.display = "none";
             if (overlay) overlay.style.display = "none";
         }
+
+        function closeAllMenus() {
+            const feedbackMenu = document.getElementById("feedbackMenu");
+            const songRequestDialog = document.getElementById("songRequestDialog");
+            const overlay = document.getElementById("menuOverlay");
+            if (feedbackMenu) feedbackMenu.style.display = "none";
+            if (songRequestDialog) songRequestDialog.style.display = "none";
+            if (overlay) overlay.style.display = "none";
+        }
+
+        // ─── Song Request Form submission ───
+        const songRequestForm = document.getElementById("songRequestForm");
+        const songRequestSubmitBtn = document.getElementById("songRequestSubmitBtn");
+        const songRequestStatus = document.getElementById("songRequestStatus");
+
+        songRequestForm.addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            songRequestSubmitBtn.disabled = true;
+            songRequestSubmitBtn.textContent = "Sending...";
+            songRequestStatus.style.display = "none";
+            songRequestStatus.textContent = "";
+
+            const formData = new FormData(songRequestForm);
+            const json = JSON.stringify(Object.fromEntries(formData));
+
+            try {
+                const response = await fetch("https://api.web3forms.com/submit", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json", Accept: "application/json" },
+                    body: json
+                });
+                const result = await response.json();
+
+                if (result.success) {
+                    songRequestStatus.style.display = "block";
+                    songRequestStatus.style.background = "rgba(18, 140, 126, 0.1)";
+                    songRequestStatus.style.color = "var(--primary-dark)";
+                    songRequestStatus.style.border = "1px solid var(--primary-color)";
+                    songRequestStatus.textContent = "✅ Thanks! Your request has been sent.";
+                    songRequestForm.reset();
+                    setTimeout(closeSongRequestDialog, 1800); // auto-close after showing success
+                } else {
+                    songRequestStatus.style.display = "block";
+                    songRequestStatus.style.background = "rgba(235, 105, 107, 0.1)";
+                    songRequestStatus.style.color = "#c0392b";
+                    songRequestStatus.style.border = "1px solid #EB696B";
+                    songRequestStatus.textContent = result.message || "Something went wrong. Please try again.";
+                }
+            } catch (error) {
+                songRequestStatus.style.display = "block";
+                songRequestStatus.style.background = "rgba(235, 105, 107, 0.1)";
+                songRequestStatus.style.color = "#c0392b";
+                songRequestStatus.style.border = "1px solid #EB696B";
+                songRequestStatus.textContent = "Network error. Please check your connection and try again.";
+            } finally {
+                songRequestSubmitBtn.disabled = false;
+                songRequestSubmitBtn.textContent = "Send Request";
+            }
+        });
 
         function toggleFeedbackMenu() {
             const menu = document.getElementById("feedbackMenu");
@@ -1396,4 +1518,5 @@
         })();
     </script>
 </body>
+
 </html>
