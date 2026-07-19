@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- 2. PRIMARY SEO -->
-    <title>User Feedback | Vidhyarthi Geethavali | UESI AP</title>
+    <title>Give Feedback | Vidhyarthi Geethavali | UESI AP</title>
     <meta name="description"
         content="Share your feedback about the Vidhyarthi Geethavali page experience, report mistakes, and tell us about any difficulty accessing songs.">
     <meta name="keywords"
@@ -46,7 +46,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/vidhyarthi-geethavali/assets/Icons/apple-icon.png">
 
     <!-- 8. OPEN GRAPH (FACEBOOK/WHATSAPP) -->
-    <meta property="og:title" content="User Feedback | Vidhyarthi Geethavali | UESI AP">
+    <meta property="og:title" content="Give Feedback | Vidhyarthi Geethavali | UESI AP">
     <meta property="og:description"
         content="Share your feedback about the Vidhyarthi Geethavali page experience, report mistakes, and tell us about any difficulty accessing songs.">
     <meta property="og:type" content="website">
@@ -61,7 +61,7 @@
 
     <!-- 9. TWITTER CARD -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="User Feedback | Vidhyarthi Geethavali | UESI AP">
+    <meta name="twitter:title" content="Give Feedback | Vidhyarthi Geethavali | UESI AP">
     <meta name="twitter:description"
         content="Share your feedback about the Vidhyarthi Geethavali page experience, report mistakes, and tell us about any difficulty accessing songs.">
     <meta name="twitter:url" content="https://uesiap.github.io/vidhyarthi-geethavali/user-feedback/">
@@ -75,7 +75,7 @@
   {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "name": "User Feedback | Vidhyarthi Geethavali | UESI AP",
+    "name": "Give Feedback | Vidhyarthi Geethavali | UESI AP",
     "description": "Share your feedback about the Vidhyarthi Geethavali page experience, report mistakes, and tell us about any difficulty accessing songs.",
     "url": "https://uesiap.github.io/vidhyarthi-geethavali/user-feedback/",
     "inLanguage": ["te-IN", "en-IN"],
@@ -141,6 +141,18 @@
 
         .form-section-title:first-of-type {
             margin-top: 0;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media(max-width:600px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
         }
 
         .form-input,
@@ -275,6 +287,38 @@
         .submit-btn:disabled {
             opacity: 0.6;
             cursor: not-allowed;
+        }
+
+        .home-btn {
+            display: none;
+            background-color: var(--bg-white);
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 12px 24px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            border-radius: 15px;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.15s ease;
+            width: 100%;
+            margin-top: 14px;
+            text-decoration: none;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .home-btn.show {
+            display: flex;
+        }
+
+        .home-btn:hover {
+            background-color: var(--primary-color);
+            color: var(--bg-light);
+        }
+
+        .home-btn:active {
+            transform: scale(0.98);
         }
 
         .form-status {
@@ -484,6 +528,9 @@
         </div>
 
         <div class="form-status" id="formStatus"></div>
+        <a href="/vidhyarthi-geethavali/" class="home-btn" id="goHomeBtn">
+            <span class="material-symbols-outlined">home</span> Go to Home
+        </a>
 
         <div class="card" id="EntireForm" style="max-width: 700px;">
             <h2>Give Feedback</h2>
@@ -491,6 +538,13 @@
             <form id="contactForm">
                 <input type="hidden" name="access_key" value="688a684a-dd1e-4e9a-84be-89eea00e1b85">
                 <input type="checkbox" name="botcheck" style="display:none;">
+
+                <div class="form-row">
+                    <div class="form-group"><label class="form-label" for="name">Name</label><input class="form-input"
+                            type="text" id="name" name="name" placeholder="Your full name" required></div>
+                    <div class="form-group"><label class="form-label" for="email">Email</label><input class="form-input"
+                            type="email" id="email" name="email" placeholder="example@gmail.com" required></div>
+                </div>
 
                 <div class="form-section-title">About Page Experience</div>
 
@@ -690,6 +744,7 @@
         const submitBtn = document.getElementById('submitBtn');
         const statusEl = document.getElementById('formStatus');
         const entireForm = document.getElementById('EntireForm');
+        const goHomeBtn = document.getElementById('goHomeBtn');
 
         form.addEventListener('submit', async function (e) {
             e.preventDefault();
@@ -718,6 +773,7 @@
                     mistakeLocation.required = false;
                     mistakeDescription.required = false;
                     entireForm.style.display = "none"
+                    goHomeBtn.classList.add('show');
                 } else {
                     statusEl.className = 'form-status error';
                     statusEl.textContent = result.message || 'Something went wrong. Please try again.';
