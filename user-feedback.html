@@ -478,7 +478,7 @@
 
     <main class="main-content">
         <div style="display:flex;flex-direction:column;align-items:center;text-align:center;">
-            <h1 class="page-title" style="margin:0;">Your Feedback </h1><br>
+            <h1 class="page-title" style="margin:0;">Give Feedback </h1><br>
             <p class="update-notice" style="color:black;">Tell us how the page experience has been for you, so we can
                 keep improving Vidhyarthi Geethavali.</p>
         </div>
@@ -486,7 +486,7 @@
         <div class="form-status" id="formStatus"></div>
 
         <div class="card" id="EntireForm" style="max-width: 700px;">
-            <h2>User Feedback</h2>
+            <h2>Give Feedback</h2>
 
             <form id="contactForm">
                 <input type="hidden" name="access_key" value="688a684a-dd1e-4e9a-84be-89eea00e1b85">
@@ -580,7 +580,7 @@
 
                 <div class="form-group">
                     <label class="form-label" for="additional_feedback">Any thing else you want to share?</label>
-                    <textarea class="form-textarea" id="additional_feedback" name="additional_feedback" rows="4"
+                    <textarea class="form-textarea" id="additional_feedback" name="additional_feedback" rows="5"
                         placeholder="Share your thoughts here..."></textarea>
                 </div>
 
@@ -712,7 +712,7 @@
 
                 if (result.success) {
                     statusEl.className = 'form-status success';
-                    statusEl.textContent = "✅ Thanks! Your feedback has been sent successfully.";
+                    statusEl.textContent = "✅ Thanks! Your feedback has been sent successfully. Thank you for you time. 🙏";
                     form.reset();
                     mistakeDetails.classList.remove('open');
                     mistakeLocation.required = false;
