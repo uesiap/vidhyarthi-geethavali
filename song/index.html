@@ -241,38 +241,62 @@
             <br><br><br><br>
         </div>
     </div>
+
     <div id="customMenu" class="custom-menu"
         style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #fff; border: 2px solid var(--primary-color); border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); z-index: 1000; padding: 12px; min-width: 160px;">
         <ul style="list-style: none; margin: 0; padding: 0;">
             <li style="padding: 10px 14px; cursor: pointer; color: #333; font-family: 'Segoe UI', sans-serif; font-size: 14px; border: 1px solid var(--primary-dark); transition: background 0.2s; margin-bottom: 8px; border-radius: 8px;"
                 onmouseover="this.style.background='#f5f5f5'" onmouseout="this.style.background='none'"
                 onclick="shareSong()">
-                <span class="material-symbols-outlined">share</span></span>
-                <span class="mnu-tit" style="font-size: 1.3rem; margin-bottom: 10px; margin-bottom: 5px;">Song</span>
+                <span class="material-symbols-outlined">share</span>
+                <span class="mnu-tit" style="font-size: 1.3rem; margin-bottom: 5px;">Song</span>
             </li>
             <li style="padding: 10px 14px; cursor: pointer; color: #333; font-family: 'Segoe UI', sans-serif; font-size: 14px; border: 1px solid var(--primary-dark); transition: background 0.2s; margin-bottom: 8px; border-radius: 8px;"
                 onmouseover="this.style.background='#f5f5f5'" onmouseout="this.style.background='none'"
-                onclick="downloadAudio()"><span class="icon"><span class="material-symbols-outlined">
-                        download
-                    </span></span>
-                <span class="mnu-tit" style="font-size: 1.3rem; margin-bottom: 10px; margin-bottom: 5px;"
-                    id="audioText">Audio</span>
+                onclick="downloadAudio()">
+                <span class="icon"><span class="material-symbols-outlined">download</span></span>
+                <span class="mnu-tit" style="font-size: 1.3rem; margin-bottom: 5px;" id="audioText">Audio</span>
                 <span id="audioLoader" class="loader" style="display: none; margin-left: 10px;"></span>
             </li>
-            <li style="padding: 10px 14px; cursor: pointer; color: #333; font-family: 'Segoe UI', sans-serif; font-size: 14px; border: 1px solid var(--primary-dark); transition: background 0.2s; margin-bottom: px; border-radius: 8px;"
+            <li style="padding: 10px 14px; cursor: pointer; color: #333; font-family: 'Segoe UI', sans-serif; font-size: 14px; border: 1px solid var(--primary-dark); transition: background 0.2s; border-radius: 8px;"
                 onmouseover="this.style.background='#f5f5f5'" onmouseout="this.style.background='none'"
-                onclick="downloadTrack()"><span class="icon"><span class="material-symbols-outlined">
-                        download
-                    </span></span>
-                <span class="mnu-tit" style="font-size: 1.3rem; margin-bottom: 10px; margin-bottom: 5px;"
-                    id="trackText">Track</span>
+                onclick="downloadTrack()">
+                <span class="icon"><span class="material-symbols-outlined">download</span></span>
+                <span class="mnu-tit" style="font-size: 1.3rem; margin-bottom: 5px;" id="trackText">Track</span>
                 <span id="trackLoader" class="loader" style="display: none; margin-left: 10px;"></span>
             </li>
         </ul>
     </div>
+
+    <!-- ─── Feedback Menu (Write Review / Correction / Feedback) ─── -->
+    <div id="feedbackMenu"
+        style="display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#fff;border:2px solid var(--primary-color);border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,0.2);z-index:1000;padding:12px;min-width:220px;">
+        <ul style="list-style:none;margin:0;padding:0;">
+            <li style="padding:10px 14px;cursor:pointer;color:#333;font-family:'Segoe UI',sans-serif;font-size:14px;border:1px solid var(--primary-dark);transition:background 0.2s;margin-bottom:8px;border-radius:8px;display:flex;align-items:center;gap:10px;"
+                onmouseover="this.style.background='#f5f5f5'" onmouseout="this.style.background='none'"
+                onclick="window.location.href='/vidhyarthi-geethavali/write-review'">
+                <span class="material-symbols-outlined">edit_square</span>
+                <span class="mnu-tit" style="font-size:1.1rem;">Write Review</span>
+            </li>
+            <li style="padding:10px 14px;cursor:pointer;color:#333;font-family:'Segoe UI',sans-serif;font-size:14px;border:1px solid var(--primary-dark);transition:background 0.2s;margin-bottom:8px;border-radius:8px;display:flex;align-items:center;gap:10px;"
+                onmouseover="this.style.background='#f5f5f5'" onmouseout="this.style.background='none'"
+                onclick="window.location.href='/vidhyarthi-geethavali/give-correction'">
+                <span class="material-symbols-outlined">lyrics</span>
+                <span class="mnu-tit" style="font-size:1.1rem;">Give Correction</span>
+            </li>
+            <li style="padding:10px 14px;cursor:pointer;color:#333;font-family:'Segoe UI',sans-serif;font-size:14px;border:1px solid var(--primary-dark);transition:background 0.2s;border-radius:8px;display:flex;align-items:center;gap:10px;"
+                onmouseover="this.style.background='#f5f5f5'" onmouseout="this.style.background='none'"
+                onclick="window.location.href='/vidhyarthi-geethavali/user-feedback'">
+                <span class="material-symbols-outlined">thumbs_up_down</span>
+                <span class="mnu-tit" style="font-size:1.1rem;">User Feedback</span>
+            </li>
+        </ul>
+    </div>
+
     <div class="overlay" id="overlay"></div>
     <!--<marquee class="marquee" behavior="scroll" direction="left" scrollamount="6" style="margin-bottom: -1rem; margin-top: -1rem"><span style="color: var(--primary-color);">Temporary Info:</span>This Online <span style="color: #043b75;">Vidhyarthi Geethavali</span> Resource is available in Google & Bing Browsers, So you can directly access this via searching the "Camps names/ Retreat names/ uesi ap songs! for example: <a href="https://www.google.com/search?q=uesi+ap+songs" target="_blank" rel="noopener noreferrer">Click here</a>. Remaining songs will be added soon. -last updated on 11/05/2026 1:00 PM IST</marquee>-->
-    <div id="menuOverlay" onclick="closeContextMenu()"></div>
+    <div id="menuOverlay" onclick="closeAllMenus()"></div>
+
     <div id="songContainer">
         <div id="loadingScreen">
             <div class="loader-ring"></div>
@@ -404,14 +428,13 @@
                             <span class="head-num">(${escHtml(songNumber)})</span>
                         </p>
                     </div>
-                    <a style="margin-left:12px;margin-top:-10px;position:relative;top:-13px;border:2px dotted var(--primary-color);color:var(--primary-color);border-radius:30%;padding:.4rem .2rem;display:flex;align-items:center;justify-content:center;text-decoration:none;width:36px;height:36px;" onclick="toggleContextMenu()" href="javascript:void(0)" class="menu-button">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="18" cy="5" r="3"></circle>
-                            <circle cx="6" cy="12" r="3"></circle>
-                            <circle cx="18" cy="19" r="3"></circle>
-                            <path d="M8.59 13.51L15.42 17.49"></path>
-                            <path d="M15.41 6.51L8.59 10.49"></path>
-                        </svg>
+                    <a style="margin-left:12px;margin-top:-10px;position:relative;top:-13px;border:2px dotted var(--primary-color);color:var(--primary-color);border-radius:30%;padding:.4rem .2rem;display:flex;align-items:center;justify-content:center;text-decoration:none;width:36px;height:36px;"
+                        onclick="toggleContextMenu()" href="javascript:void(0)" class="menu-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.59 13.51L15.42 17.49"></path><path d="M15.41 6.51L8.59 10.49"></path></svg>
+                    </a>
+                    <a style="margin-left:12px;margin-left:-35px;position:relative;top:25px;border:2px dotted var(--primary-color);color:var(--primary-color);border-radius:30%;padding:.4rem .2rem;display:flex;align-items:center;justify-content:center;text-decoration:none;width:36px;height:36px;"
+                        onclick="toggleFeedbackMenu()" href="javascript:void(0)" class="menu-button">
+                        <span class="material-symbols-outlined">edit_note</span>
                     </a>
                     </div>
                     
@@ -488,20 +511,42 @@
 
         function cleanUrl(url) { return url ? url.split("?")[0] : ""; }
 
-        // ─── Context menu ────────────────────────────────
-        function toggleContextMenu() {
-            const menu = document.getElementById("customMenu");
+        // ─── Shared menu logic ────────────────────────────────
+        function closeAllMenus() {
+            const customMenu = document.getElementById("customMenu");
+            const feedbackMenu = document.getElementById("feedbackMenu");
             const overlay = document.getElementById("menuOverlay");
-            const visible = menu && menu.style.display === "block";
-            if (menu) menu.style.display = visible ? "none" : "block";
-            if (overlay) overlay.style.display = visible ? "none" : "block";
+            if (customMenu) customMenu.style.display = "none";
+            if (feedbackMenu) feedbackMenu.style.display = "none";
+            if (overlay) overlay.style.display = "none";
         }
 
-        function closeContextMenu() {
-            const menu = document.getElementById("customMenu");
+        function openMenu(menuId) {
+            const menu = document.getElementById(menuId);
             const overlay = document.getElementById("menuOverlay");
-            if (menu) menu.style.display = "none";
-            if (overlay) overlay.style.display = "none";
+            if (menu) menu.style.display = "block";
+            if (overlay) overlay.style.display = "block";
+        }
+
+        // ─── Context menu (Song/Audio/Track) ─────────────────
+        function toggleContextMenu() {
+            const menu = document.getElementById("customMenu");
+            const isVisible = menu && menu.style.display === "block";
+            closeAllMenus();
+            if (!isVisible) openMenu("customMenu");
+        }
+
+        // ─── Feedback menu (Review/Correction/Feedback) ──────
+        function toggleFeedbackMenu() {
+            const menu = document.getElementById("feedbackMenu");
+            const isVisible = menu && menu.style.display === "block";
+            closeAllMenus();
+            if (!isVisible) openMenu("feedbackMenu");
+        }
+
+        // Kept for backward compatibility if referenced elsewhere
+        function closeContextMenu() {
+            closeAllMenus();
         }
 
         // ─── Share ───────────────────────────────────────
@@ -664,12 +709,12 @@
                 player._ended = true;
                 showReplay();
                 if (window._paq) {
-                 _paq.push([
-                  'trackEvent',
-                  'Player',
-                   player.id === 'audioPlayer' ? 'Audio Ended' : 'Track Ended',
-                   `${songNumber} - ${songData.title}`
-                 ]);
+                    _paq.push([
+                        'trackEvent',
+                        'Player',
+                        player.id === 'audioPlayer' ? 'Audio Ended' : 'Track Ended',
+                        `${songNumber} - ${songData.title}`
+                    ]);
                 }
             });
 
@@ -677,12 +722,12 @@
                 player._ended = false;
                 showPause();
                 if (window._paq) {
-                 _paq.push([
-                  'trackEvent',
-                  'Player',
-                   player.id === 'audioPlayer' ? 'Audio Play' : 'Track Play',
-                   `${songNumber} - ${songData.title}`
-                 ]);
+                    _paq.push([
+                        'trackEvent',
+                        'Player',
+                        player.id === 'audioPlayer' ? 'Audio Play' : 'Track Play',
+                        `${songNumber} - ${songData.title}`
+                    ]);
                 }
             });
 
@@ -803,7 +848,7 @@
         }
     </script>
     <script src="/vidhyarthi-geethavali/boom.js?v={{ site.github.build_revision }}"></script>
-    <script src="/vidhyarthi-geethavali/assets/pages/banners/announcement.js?v={{ site.github.build_revision }}"></script>
+    <script
+        src="/vidhyarthi-geethavali/assets/pages/banners/announcement.js?v={{ site.github.build_revision }}"></script>
 </body>
-
 </html>
