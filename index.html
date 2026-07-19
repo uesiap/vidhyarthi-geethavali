@@ -436,39 +436,37 @@
                 }
             }
         </style>
-        <div style="display:flex;align-items:center;justify-content:space-between;">
-            <h1 class="page-title" style="margin:0;">
-                Vidhyarthi Geethavali<span class="menu-text"> Songs</span>
-            </h1>
-            <a style="margin-right:30px;border:2px dotted var(--primary-color);
-                      color:var(--primary-color);border-radius:30%;
-                      padding:.4rem .2rem;display:flex;align-items:center;
-                      justify-content:center;text-decoration:none;
-                      width:36px;height:36px;" onclick="toggleFeedbackMenu()" href="javascript:void(0)"
-                class="menu-button">
+        <span id="songs-grid">
+            <div style="display:flex;align-items:center;justify-content:space-between;">
+                <h1 class="page-title" style="margin:0;">
+                    Vidhyarthi Geethavali<span class="menu-text"> Songs</span>
+                </h1>
+                <a style="margin-right:30px;border:2px dotted var(--primary-color);
+                  color:var(--primary-color);border-radius:30%;
+                  padding:.4rem .2rem;display:flex;align-items:center;
+                  justify-content:center;text-decoration:none;
+                  width:36px;height:36px;" onclick="toggleFeedbackMenu()" href="javascript:void(0)"
+                    class="menu-button">
+                    <span class="material-symbols-outlined">edit_note</span>
+                </a>
+            </div><br>
 
-                <span class="material-symbols-outlined">edit_note</span>
-            </a>
-        </div><br>
+            <div id="announcement-placeholder"></div>
+            <script
+                src="/vidhyarthi-geethavali/assets/pages/banners/announcement.js?v={{ site.github.build_revision }}"></script>
 
-        <div id="announcement-placeholder"></div>
-        <script
-            src="/vidhyarthi-geethavali/assets/pages/banners/announcement.js?v={{ site.github.build_revision }}"></script>
-        <div class="card">
-            <h2><i class="fa-solid fa-music" style="margin-right: 5px;"></i><span id="sel-lis"
-                    style="margin-right: -5px;">Telugu</span>Songs</h2>
-
-            <!-- Language Selector -->
-            <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin-bottom:1rem;">
-                <button class="tab-btn active" onclick="switchLanguage('telugu', event)">Telugu</button>
-                <button class="tab-btn" onclick="switchLanguage('english', event)">English</button>
-                <button class="tab-btn" onclick="switchLanguage('hindi', event)">Hindi</button>
-                <button class="tab-btn" onclick="switchLanguage('albums', event)">New</button>
+            <div class="card">
+                <h2><i class="fa-solid fa-music" style="margin-right: 5px;"></i><span id="sel-lis"
+                        style="margin-right: -5px;">Telugu</span>Songs</h2>
+                <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin-bottom:1rem;">
+                    <button class="tab-btn active" onclick="switchLanguage('telugu', event)">Telugu</button>
+                    <button class="tab-btn" onclick="switchLanguage('english', event)">English</button>
+                    <button class="tab-btn" onclick="switchLanguage('hindi', event)">Hindi</button>
+                    <button class="tab-btn" onclick="switchLanguage('albums', event)">New</button>
+                </div>
+                <hr>
+                <div class="grid" id="letters"></div>
             </div>
-            <hr>
-            <!-- Letter Grid (for Telugu & English) -->
-            <div class="grid" id="letters"></div>
-        </div>
         </span>
 
         <!-- Song Display Section -->
@@ -1274,7 +1272,7 @@
                 searchBox.classList.remove('hidden');
                 searchInput.focus();
                 document.querySelector('#all-songs').style.display = 'none';
-                document.querySelector('#letters').style.display = 'none';
+                document.querySelector('#songs-grid').style.display = 'none';
                 searchIcon.classList.add('hide-icon');
                 closeIcon.classList.remove('hide-icon');
                 searchInput.innerText = '';
@@ -1291,7 +1289,7 @@
                 searchInput.innerText = '';
                 currentQuery = '';
                 document.querySelector('#all-songs').style.display = 'block';
-                document.querySelector('#letters').style.display = 'block';
+                document.querySelector('#songs-grid').style.display = 'block';
                 searchIcon.classList.remove('hide-icon');
                 closeIcon.classList.add('hide-icon');
                 if (currentLanguage === 'telugu') {
