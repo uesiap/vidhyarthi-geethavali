@@ -121,7 +121,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <link rel="stylesheet" href="/vidhyarthi-geethavali/styles.css?v=1.0.8">
+    <link rel="stylesheet" href="https://uesiap.github.io/vidhyarthi-geethavali/styles.css?v=1.0.9">
 
     <!-- Added 'defer' so the script doesn't block page rendering -->
     <script src="/vidhyarthi-geethavali/boom.js?v={{ site.github.build_revision }}" defer></script>
@@ -346,30 +346,71 @@
         </div>
     </div>
 
+    <div id="menuOverlay" onclick="closeAllMenus()"
+        style="display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,0.2);backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px);">
+    </div>
+
+    <!-- ─── Feedback Menu (Share Link / Write Review / Correction / Feedback) ─── -->
+    <div id="feedbackMenu"
+        style="display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#fff;border:2px solid var(--primary-color);border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,0.2);z-index:1000;padding:12px;min-width:220px;">
+        <ul style="list-style:none;margin:0;padding:0;">
+            <li style="padding:10px 14px;cursor:pointer;color:#333;font-family:'Segoe UI',sans-serif;font-size:14px;border:1px solid var(--primary-dark);transition:background 0.2s;margin-bottom:8px;border-radius:8px;display:flex;align-items:center;gap:10px;"
+                onmouseover="this.style.background='#f5f5f5'" onmouseout="this.style.background='none'"
+                onclick="shareLink()">
+                <span class="material-symbols-outlined">share</span>
+                <span class="mnu-tit" style="font-size:1.1rem;">Share Link</span>
+            </li>
+            <li style="padding:10px 14px;cursor:pointer;color:#333;font-family:'Segoe UI',sans-serif;font-size:14px;border:1px solid var(--primary-dark);transition:background 0.2s;margin-bottom:8px;border-radius:8px;display:flex;align-items:center;gap:10px;"
+                onmouseover="this.style.background='#f5f5f5'" onmouseout="this.style.background='none'"
+                onclick="window.open('/vidhyarthi-geethavali/write-review', '_blank')">
+                <span class="material-symbols-outlined">edit_square</span>
+                <span class="mnu-tit" style="font-size:1.1rem;">Write Review</span>
+            </li>
+            <li style="padding:10px 14px;cursor:pointer;color:#333;font-family:'Segoe UI',sans-serif;font-size:14px;border:1px solid var(--primary-dark);transition:background 0.2s;margin-bottom:8px;border-radius:8px;display:flex;align-items:center;gap:10px;"
+                onmouseover="this.style.background='#f5f5f5'" onmouseout="this.style.background='none'"
+                onclick="window.open('/vidhyarthi-geethavali/give-correction', '_blank')">
+                <span class="material-symbols-outlined">lyrics</span>
+                <span class="mnu-tit" style="font-size:1.1rem;">Give Correction</span>
+            </li>
+            <li style="padding:10px 14px;cursor:pointer;color:#333;font-family:'Segoe UI',sans-serif;font-size:14px;border:1px solid var(--primary-dark);transition:background 0.2s;border-radius:8px;display:flex;align-items:center;gap:10px;"
+                onmouseover="this.style.background='#f5f5f5'" onmouseout="this.style.background='none'"
+                onclick="window.open('/vidhyarthi-geethavali/user-feedback', '_blank')">
+                <span class="material-symbols-outlined">thumbs_up_down</span>
+                <span class="mnu-tit" style="font-size:1.1rem;">User Feedback</span>
+            </li>
+        </ul>
+    </div>
+
     <div class="overlay" id="overlay"></div>
     <main class="main-content">
         <!--<marquee class="marquee" behavior="scroll" direction="left" scrollamount="6" style="margin-bottom: 1rem; margin-top: -0.5rem; padding-bottom: 10px; border-bottom: 1px solid var(--primary-color)"><span style="color: var(--primary-color);">Temporary Info:</span>This Online <span style="color: #043b75;">Vidhyarthi Geethavali</span> Resource is available in Google & Bing Browsers, So you can directly access this via searching the "Camps names/ Retreat names/ uesi ap songs! for example: <a href="https://www.google.com/search?q=uesi+ap+songs" target="_blank" rel="noopener noreferrer">Click here</a>. Remaining songs will be added soon. -last updated on 11/05/2026 1:00 PM IST</marquee>-->
-        <span id="songs-grid">
-            <h1 class="page-title">Vidhyarthi Geethavali Songs</h1>
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+            <h1 class="page-title" style="margin:0;">
+                Vidhyarthi Geethavali Songs
+            </h1>
+            <a style="margin-right:30px;border:2px dotted var(--primary-color);color:var(--primary-color);border-radius:30%;padding:.4rem .2rem;display:flex;align-items:center;justify-content:center;text-decoration:none;width:36px;height:36px;"
+                onclick="toggleFeedbackMenu()" href="javascript:void(0)" class="menu-button"><span
+                    class="material-symbols-outlined">edit_note</span></a>
+        </div><br>
 
-            <div id="announcement-placeholder"></div>
-            <script
-                src="/vidhyarthi-geethavali/assets/pages/banners/announcement.js?v={{ site.github.build_revision }}"></script>
-            <div class="card">
-                <h2><i class="fa-solid fa-music" style="margin-right: 5px;"></i><span id="sel-lis"
-                        style="margin-right: -5px;">Telugu</span>Songs</h2>
+        <div id="announcement-placeholder"></div>
+        <script
+            src="/vidhyarthi-geethavali/assets/pages/banners/announcement.js?v={{ site.github.build_revision }}"></script>
+        <div class="card">
+            <h2><i class="fa-solid fa-music" style="margin-right: 5px;"></i><span id="sel-lis"
+                    style="margin-right: -5px;">Telugu</span>Songs</h2>
 
-                <!-- Language Selector -->
-                <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin-bottom:1rem;">
-                    <button class="tab-btn active" onclick="switchLanguage('telugu', event)">Telugu</button>
-                    <button class="tab-btn" onclick="switchLanguage('english', event)">English</button>
-                    <button class="tab-btn" onclick="switchLanguage('hindi', event)">Hindi</button>
-                    <button class="tab-btn" onclick="switchLanguage('albums', event)">New</button>
-                </div>
-                <hr>
-                <!-- Letter Grid (for Telugu & English) -->
-                <div class="grid" id="letters"></div>
+            <!-- Language Selector -->
+            <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin-bottom:1rem;">
+                <button class="tab-btn active" onclick="switchLanguage('telugu', event)">Telugu</button>
+                <button class="tab-btn" onclick="switchLanguage('english', event)">English</button>
+                <button class="tab-btn" onclick="switchLanguage('hindi', event)">Hindi</button>
+                <button class="tab-btn" onclick="switchLanguage('albums', event)">New</button>
             </div>
+            <hr>
+            <!-- Letter Grid (for Telugu & English) -->
+            <div class="grid" id="letters"></div>
+        </div>
         </span>
 
         <!-- Song Display Section -->
@@ -404,10 +445,6 @@
         // ═══════════════════════════════════════════════════════════════════
         // CONFIG
         // ═══════════════════════════════════════════════════════════════════
-        const BASE = '/vidhyarthi-geethavali/data';
-        const CHUNK_SIZE = 50;
-        const CACHE_VER = 'vg-v2';
-
         const teluguLetters = [
             "అ", "ఆ", "ఇ", "ఈ", "ఉ", "ఊ", "ఎ", "ఏ", "ఒ", "ఓ",
             "క", "గ", "ఘ", "చ", "జ", "త", "ద", "న", "ప",
@@ -423,6 +460,8 @@
         const titleEl = document.getElementById('title');
         const ssl = document.getElementById('ssl');
         const selLis = document.getElementById('sel-lis');
+        const trebo = '/vidhyarthi-geethavali/data';
+        const piece = 50; const buisc = 'vg-v3';
         const noSongsMessage = document.getElementById('noSongsMessage');
 
         // ═══════════════════════════════════════════════════════════════════
@@ -456,6 +495,42 @@
             document.head.appendChild(s);
         })();
 
+        function closeAllMenus() {
+            const feedbackMenu = document.getElementById("feedbackMenu");
+            const overlay = document.getElementById("menuOverlay");
+            if (feedbackMenu) feedbackMenu.style.display = "none";
+            if (overlay) overlay.style.display = "none";
+        }
+
+        function toggleFeedbackMenu() {
+            const menu = document.getElementById("feedbackMenu");
+            const overlay = document.getElementById("menuOverlay");
+            const isVisible = menu && menu.style.display === "block";
+            closeAllMenus();
+            if (!isVisible) {
+                if (menu) menu.style.display = "block";
+                if (overlay) overlay.style.display = "block";
+            }
+        }
+
+        function shareLink() {
+            const shareData = {
+                title: document.title,
+                url: window.location.href
+            };
+            if (navigator.share) {
+                // Native share sheet on mobile/supported browsers
+                navigator.share(shareData).catch(err => {
+                    console.log("Share cancelled or failed:", err);
+                });
+            } else {
+                navigator.clipboard.writeText(window.location.href).then(() => {
+                }).catch(() => {
+                });
+            }
+            closeAllMenus();
+        }
+
         function showSongListLoader(label) {
             if (label) titleEl.textContent = `"${label}"`;
             songList.innerHTML = `
@@ -473,9 +548,9 @@
         // ═══════════════════════════════════════════════════════════════════
         // SESSION-STORAGE CACHE
         // ═══════════════════════════════════════════════════════════════════
-        function ck(url) { return CACHE_VER + '|' + url; }
-        function ckChunks(lang) { return CACHE_VER + '|chunks|' + lang; }
-        function ckAlbumsManifest() { return CACHE_VER + '|albums-manifest'; }
+        function ck(url) { return buisc + '|' + url; }
+        function ckChunks(lang) { return buisc + '|chunks|' + lang; }
+        function ckAlbumsManifest() { return buisc + '|albums-manifest'; }
 
         function cacheGet(url) {
             try { const v = sessionStorage.getItem(ck(url)); return v ? JSON.parse(v) : null; }
@@ -486,7 +561,7 @@
             catch (e) { purgeStaleCacheEntries(); try { sessionStorage.setItem(ck(url), JSON.stringify(data)); } catch (e2) { } }
         }
         function purgeStaleCacheEntries() {
-            const prefix = CACHE_VER + '|';
+            const prefix = buisc + '|';
             const drop = [];
             for (let i = 0; i < sessionStorage.length; i++) {
                 const k = sessionStorage.key(i);
@@ -519,7 +594,7 @@
 
             // Manifest fast-path
             try {
-                const mres = await fetch(`${BASE}/${folder}/manifest.json?v=${Date.now()}`, { cache: 'no-store' });
+                const mres = await fetch(`${trebo}/${folder}/manifest.json?v=${Date.now()}`, { cache: 'no-store' });
                 if (mres.ok) {
                     const md = await mres.json();
                     if (Array.isArray(md.chunks) && md.chunks.length) {
@@ -537,8 +612,8 @@
             } catch (e) { }
 
             // Auto-probe fallback
-            const url = n => `${BASE}/${folder}/${n}/list.json?v=${Date.now()}`;
-            const ceil = (start, count) => Array.from({ length: count }, (_, i) => (start + i + 1) * CHUNK_SIZE);
+            const url = n => `${trebo}/${folder}/${n}/list.json?v=${Date.now()}`;
+            const ceil = (start, count) => Array.from({ length: count }, (_, i) => (start + i + 1) * piece);
             const probe = async n => { try { const r = await fetch(url(n), { method: 'HEAD' }); return r.ok ? n : null; } catch (e) { return null; } };
 
             let found = (await Promise.all(ceil(0, MAX_PROBE).map(probe))).filter(Boolean);
@@ -565,7 +640,7 @@
             } catch (e) { }
 
             try {
-                const res = await fetch(`${BASE}/albums/manifest.json?v=${Date.now()}`, { cache: 'no-store' });
+                const res = await fetch(`${trebo}/albums/manifest.json?v=${Date.now()}`, { cache: 'no-store' });
                 if (res.ok) {
                     const md = await res.json();
                     if (Array.isArray(md.albums)) {
@@ -578,7 +653,7 @@
         }
 
         async function fetchAlbumChunk(folder, ceiling) {
-            const url = `${BASE}/${folder}/${ceiling}/list.json`;
+            const url = `${trebo}/${folder}/${ceiling}/list.json`;
             if (inFlightAlbums[url]) return inFlightAlbums[url];
 
             const hit = cacheGet(url);
@@ -629,7 +704,7 @@
         // ═══════════════════════════════════════════════════════════════════
         async function fetchChunk(lang, ceiling) {
             const folder = LANG_FOLDER[lang];
-            const url = `${BASE}/${folder}/${ceiling}/list.json`;
+            const url = `${trebo}/${folder}/${ceiling}/list.json`;
 
             // Deduplicate concurrent fetches
             if (inFlight[lang][ceiling]) return inFlight[lang][ceiling];
@@ -1312,5 +1387,4 @@
         })();
     </script>
 </body>
-
 </html>
