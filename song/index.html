@@ -245,25 +245,29 @@
     <div id="customMenu" class="custom-menu"
         style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #fff; border: 2px solid var(--primary-color); border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); z-index: 1000; padding: 12px; min-width: 160px;">
         <ul style="list-style: none; margin: 0; padding: 0;">
-            <li style="padding: 10px 14px; cursor: pointer; color: #333; font-family: 'Segoe UI', sans-serif; font-size: 14px; border: 1px solid var(--primary-dark); transition: background 0.2s; margin-bottom: 8px; border-radius: 8px;"
+            <li style="padding: 10px 14px; cursor: pointer; color: #333; font-family: 'Segoe UI', sans-serif; font-size: 14px; border: 1px solid var(--primary-dark); transition: background 0.2s; margin-bottom: 8px; border-radius: 8px; display: flex; align-items: center; gap: 10px;"
                 onmouseover="this.style.background='#f5f5f5'" onmouseout="this.style.background='none'"
                 onclick="shareSong()">
                 <span class="material-symbols-outlined">share</span>
-                <span class="mnu-tit" style="font-size: 1.3rem; margin-bottom: 5px;">Song</span>
+                <span class="mnu-tit" style="font-size: 1.1rem;">Song</span>
             </li>
-            <li style="padding: 10px 14px; cursor: pointer; color: #333; font-family: 'Segoe UI', sans-serif; font-size: 14px; border: 1px solid var(--primary-dark); transition: background 0.2s; margin-bottom: 8px; border-radius: 8px;"
+            <li style="padding: 10px 14px; cursor: pointer; color: #333; font-family: 'Segoe UI', sans-serif; font-size: 14px; border: 1px solid var(--primary-dark); transition: background 0.2s; margin-bottom: 8px; border-radius: 8px; display: flex; align-items: center; gap: 10px;"
                 onmouseover="this.style.background='#f5f5f5'" onmouseout="this.style.background='none'"
                 onclick="downloadAudio()">
-                <span class="icon"><span class="material-symbols-outlined">download</span></span>
-                <span class="mnu-tit" style="font-size: 1.3rem; margin-bottom: 5px;" id="audioText">Audio</span>
-                <span id="audioLoader" class="loader" style="display: none; margin-left: 10px;"></span>
+                <span class="icon" style="display:flex;align-items:center;">
+                    <span class="material-symbols-outlined">download</span>
+                </span>
+                <span class="mnu-tit" style="font-size: 1.1rem;" id="audioText">Audio</span>
+                <span id="audioLoader" class="loader" style="display: none; margin-left: auto;"></span>
             </li>
-            <li style="padding: 10px 14px; cursor: pointer; color: #333; font-family: 'Segoe UI', sans-serif; font-size: 14px; border: 1px solid var(--primary-dark); transition: background 0.2s; border-radius: 8px;"
+            <li style="padding: 10px 14px; cursor: pointer; color: #333; font-family: 'Segoe UI', sans-serif; font-size: 14px; border: 1px solid var(--primary-dark); transition: background 0.2s; border-radius: 8px; display: flex; align-items: center; gap: 10px;"
                 onmouseover="this.style.background='#f5f5f5'" onmouseout="this.style.background='none'"
                 onclick="downloadTrack()">
-                <span class="icon"><span class="material-symbols-outlined">download</span></span>
-                <span class="mnu-tit" style="font-size: 1.3rem; margin-bottom: 5px;" id="trackText">Track</span>
-                <span id="trackLoader" class="loader" style="display: none; margin-left: 10px;"></span>
+                <span class="icon" style="display:flex;align-items:center;">
+                    <span class="material-symbols-outlined">download</span>
+                </span>
+                <span class="mnu-tit" style="font-size: 1.1rem;" id="trackText">Track</span>
+                <span id="trackLoader" class="loader" style="display: none; margin-left: auto;"></span>
             </li>
         </ul>
     </div>
