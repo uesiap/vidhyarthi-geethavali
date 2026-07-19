@@ -439,6 +439,83 @@
     </footer>
 
     <script>
+        const menuBtn = document.getElementById('menuBtn');
+        const drawer = document.getElementById('drawer');
+        const overlay = document.getElementById('overlay');
+
+        // Get all items with submenus
+        const submenuItems = document.querySelectorAll('.drawer-item.has-submenu');
+
+        // Toggle drawer
+        const toggleDrawer = () => {
+            const isOpen = drawer.classList.toggle('open');
+            overlay.classList.toggle('show');
+            menuBtn.setAttribute('aria-expanded', isOpen);
+            menuBtn.querySelector('i').className = isOpen ? 'fas fa-times' : 'fas fa-bars';
+        };
+
+        menuBtn.addEventListener('click', toggleDrawer);
+
+        // Close drawer when clicking overlay
+        overlay.addEventListener('click', () => {
+            drawer.classList.remove('open');
+            overlay.classList.remove('show');
+            menuBtn.setAttribute('aria-expanded', 'false');
+            menuBtn.querySelector('i').className = 'fas fa-bars';
+
+            // Close all submenus when closing drawer
+            submenuItems.forEach(item => {
+                item.classList.remove('open');
+                const submenu = item.nextElementSibling;
+                submenu.classList.remove('open');
+            });
+        });
+
+        // Handle submenu toggle
+        submenuItems.forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.stopPropagation();
+
+                // Close all other submenus
+                submenuItems.forEach(otherItem => {
+                    if (otherItem !== item) {
+                        otherItem.classList.remove('open');
+                        const otherSubmenu = otherItem.nextElementSibling;
+                        if (otherSubmenu) otherSubmenu.classList.remove('open');
+                    }
+                });
+
+                // Toggle clicked submenu
+                item.classList.toggle('open');
+                const submenu = item.nextElementSibling;
+                if (submenu) submenu.classList.toggle('open');
+            });
+
+
+            // Keyboard accessibility
+            item.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    item.click();
+                }
+            });
+        });
+
+        // Close drawer when pressing Escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && drawer.classList.contains('open')) {
+                drawer.classList.remove('open');
+                overlay.classList.remove('show');
+                menuBtn.setAttribute('aria-expanded', 'false');
+                menuBtn.querySelector('i').className = 'fas fa-bars';
+            }
+
+            // Ctrl+M shortcut to toggle menu
+            if (e.ctrlKey && e.key === 'm') {
+                e.preventDefault();
+                toggleDrawer();
+            }
+        });
         const form = document.getElementById('contactForm');
         const submitBtn = document.getElementById('submitBtn');
         const statusEl = document.getElementById('formStatus');
