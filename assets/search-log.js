@@ -38,6 +38,18 @@ window.initSearchLog = async function () {
 
             lastLogged = clean;
 
+            // ============================
+            // Matomo Site Search Tracking
+            // ============================
+            if (window._paq) {
+                _paq.push([
+                    'trackSiteSearch',
+                    clean,
+                    window.currentLanguage || 'unknown'
+                ]);
+            }
+
+            // Firebase Logging
             searchLogsRef.push({
                 query: clean,
                 lang: window.currentLanguage || "unknown",
