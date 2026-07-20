@@ -3,7 +3,7 @@ window.initSearchLog = async function () {
     window._searchLogReady = true;
 
     const MAX_QUERY_LEN = 100;
-    const DEBOUNCE_MS = 1000; // Wait 2 seconds after typing stops
+    const DEBOUNCE_MS = 1000; // Wait 1 seconds after typing stops
 
     try {
         // Load Firebase only if not already loaded
