@@ -522,122 +522,128 @@
 
     <main class="main-content">
 
-        <div class="form-status" id="formStatus"></div>
-        <a href="/vidhyarthi-geethavali/" class="home-btn" id="goHomeBtn">
-            <span class="material-symbols-outlined">home</span> Go to Home
-        </a>
-
         <div class="card" id="EntireForm" style="max-width: 700px;">
-            <h2>User Feedback</h2>
-            <p class="update-notice" style="color:black; padding-bottom: 10px; border-bottom: 1.5px solid #ddd;">Tell us
-                how the page experience has been for you, so we can
-                keep improving Vidhyarthi Geethavali.</p><br>
-            <form id="contactForm">
-                <input type="hidden" name="access_key" value="688a684a-dd1e-4e9a-84be-89eea00e1b85">
-                <input type="checkbox" name="botcheck" style="display:none;">
+            <div id="formWrapper">
+                <h2>User Feedback</h2>
+                <p class="update-notice" style="color:black; padding-bottom: 10px; border-bottom: 1.5px solid #ddd;">
+                    Tell us
+                    how the page experience has been for you, so we can
+                    keep improving Vidhyarthi Geethavali.</p><br>
+                <form id="contactForm">
+                    <input type="hidden" name="access_key" value="688a684a-dd1e-4e9a-84be-89eea00e1b85">
+                    <input type="checkbox" name="botcheck" style="display:none;">
 
-                <div class="form-row">
-                    <div class="form-group"><label class="form-label" for="name">Name</label><input class="form-input"
-                            type="text" id="name" name="name" placeholder="Your full name" required></div>
-                    <div class="form-group"><label class="form-label" for="email">Email</label><input class="form-input"
-                            type="email" id="email" name="email" placeholder="example@gmail.com" required></div>
-                </div>
-
-                <div class="form-section-title">About Page Experience</div>
-
-                <div class="form-group">
-                    <label class="form-label" id="lyricsPageLabel">1. How do you like this lyrics Page?
-                        <span class="required">*</span></label>
-                    <div class="star-rating" role="radiogroup" aria-labelledby="lyricsPageLabel">
-                        <input type="radio" id="lp-star5" name="lyrics_page_rating" value="5" required>
-                        <label for="lp-star5" title="5 stars"><span class="visually-hidden">5 stars</span></label>
-                        <input type="radio" id="lp-star4" name="lyrics_page_rating" value="4" required>
-                        <label for="lp-star4" title="4 stars"><span class="visually-hidden">4 stars</span></label>
-                        <input type="radio" id="lp-star3" name="lyrics_page_rating" value="3" required>
-                        <label for="lp-star3" title="3 stars"><span class="visually-hidden">3 stars</span></label>
-                        <input type="radio" id="lp-star2" name="lyrics_page_rating" value="2" required>
-                        <label for="lp-star2" title="2 stars"><span class="visually-hidden">2 stars</span></label>
-                        <input type="radio" id="lp-star1" name="lyrics_page_rating" value="1" required>
-                        <label for="lp-star1" title="1 star"><span class="visually-hidden">1 star</span></label>
+                    <div class="form-row">
+                        <div class="form-group"><label class="form-label" for="name">Name</label><input
+                                class="form-input" type="text" id="name" name="name" placeholder="Your full name"
+                                required></div>
+                        <div class="form-group"><label class="form-label" for="email">Email</label><input
+                                class="form-input" type="email" id="email" name="email" placeholder="example@gmail.com"
+                                required></div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label class="form-label" id="visibilityLabel">2. Is it Visible properly in your Device?
-                        <span class="required">*</span></label>
-                    <div class="star-rating" role="radiogroup" aria-labelledby="visibilityLabel">
-                        <input type="radio" id="vis-star5" name="visibility_rating" value="5" required>
-                        <label for="vis-star5" title="5 stars"><span class="visually-hidden">5 stars</span></label>
-                        <input type="radio" id="vis-star4" name="visibility_rating" value="4" required>
-                        <label for="vis-star4" title="4 stars"><span class="visually-hidden">4 stars</span></label>
-                        <input type="radio" id="vis-star3" name="visibility_rating" value="3" required>
-                        <label for="vis-star3" title="3 stars"><span class="visually-hidden">3 stars</span></label>
-                        <input type="radio" id="vis-star2" name="visibility_rating" value="2" required>
-                        <label for="vis-star2" title="2 stars"><span class="visually-hidden">2 stars</span></label>
-                        <input type="radio" id="vis-star1" name="visibility_rating" value="1" required>
-                        <label for="vis-star1" title="1 star"><span class="visually-hidden">1 star</span></label>
-                    </div>
-                </div>
+                    <div class="form-section-title">About Page Experience</div>
 
-                <div class="form-group">
-                    <label class="form-label" id="helpfulLabel">3. How this page will helpful for you?
-                        <span class="required">*</span></label>
-                    <div class="star-rating" role="radiogroup" aria-labelledby="helpfulLabel">
-                        <input type="radio" id="help-star5" name="helpful_rating" value="5" required>
-                        <label for="help-star5" title="5 stars"><span class="visually-hidden">5 stars</span></label>
-                        <input type="radio" id="help-star4" name="helpful_rating" value="4" required>
-                        <label for="help-star4" title="4 stars"><span class="visually-hidden">4 stars</span></label>
-                        <input type="radio" id="help-star3" name="helpful_rating" value="3" required>
-                        <label for="help-star3" title="3 stars"><span class="visually-hidden">3 stars</span></label>
-                        <input type="radio" id="help-star2" name="helpful_rating" value="2" required>
-                        <label for="help-star2" title="2 stars"><span class="visually-hidden">2 stars</span></label>
-                        <input type="radio" id="help-star1" name="helpful_rating" value="1" required>
-                        <label for="help-star1" title="1 star"><span class="visually-hidden">1 star</span></label>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label" for="found_mistake">4. Did you find Mistake in any of the Page?</label>
-                    <select class="form-select" id="found_mistake" name="found_mistake" required>
-                        <option value="" disabled selected>Pick an option</option>
-                        <option value="Yes">Yes</option>
-                        <option value="No">No</option>
-                    </select>
-                </div>
-
-                <div class="conditional-field" id="mistakeDetails">
                     <div class="form-group">
-                        <label class="form-label" for="mistake_location">Where did you find the mistake?
+                        <label class="form-label" id="lyricsPageLabel">1. How do you like this lyrics Page?
                             <span class="required">*</span></label>
-                        <input class="form-input" type="text" id="mistake_location" name="mistake_location"
-                            placeholder="e.g. Song 145 lyrics, Camp Songs list...">
+                        <div class="star-rating" role="radiogroup" aria-labelledby="lyricsPageLabel">
+                            <input type="radio" id="lp-star5" name="lyrics_page_rating" value="5" required>
+                            <label for="lp-star5" title="5 stars"><span class="visually-hidden">5 stars</span></label>
+                            <input type="radio" id="lp-star4" name="lyrics_page_rating" value="4" required>
+                            <label for="lp-star4" title="4 stars"><span class="visually-hidden">4 stars</span></label>
+                            <input type="radio" id="lp-star3" name="lyrics_page_rating" value="3" required>
+                            <label for="lp-star3" title="3 stars"><span class="visually-hidden">3 stars</span></label>
+                            <input type="radio" id="lp-star2" name="lyrics_page_rating" value="2" required>
+                            <label for="lp-star2" title="2 stars"><span class="visually-hidden">2 stars</span></label>
+                            <input type="radio" id="lp-star1" name="lyrics_page_rating" value="1" required>
+                            <label for="lp-star1" title="1 star"><span class="visually-hidden">1 star</span></label>
+                        </div>
                     </div>
+
                     <div class="form-group">
-                        <label class="form-label" for="mistake_description">Describe the mistake
+                        <label class="form-label" id="visibilityLabel">2. Is it Visible properly in your Device?
                             <span class="required">*</span></label>
-                        <textarea class="form-textarea" id="mistake_description" name="mistake_description" rows="4"
-                            placeholder="Tell us what's wrong..."></textarea>
+                        <div class="star-rating" role="radiogroup" aria-labelledby="visibilityLabel">
+                            <input type="radio" id="vis-star5" name="visibility_rating" value="5" required>
+                            <label for="vis-star5" title="5 stars"><span class="visually-hidden">5 stars</span></label>
+                            <input type="radio" id="vis-star4" name="visibility_rating" value="4" required>
+                            <label for="vis-star4" title="4 stars"><span class="visually-hidden">4 stars</span></label>
+                            <input type="radio" id="vis-star3" name="visibility_rating" value="3" required>
+                            <label for="vis-star3" title="3 stars"><span class="visually-hidden">3 stars</span></label>
+                            <input type="radio" id="vis-star2" name="visibility_rating" value="2" required>
+                            <label for="vis-star2" title="2 stars"><span class="visually-hidden">2 stars</span></label>
+                            <input type="radio" id="vis-star1" name="visibility_rating" value="1" required>
+                            <label for="vis-star1" title="1 star"><span class="visually-hidden">1 star</span></label>
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label class="form-label" for="access_difficulty">Any Difficulty you have faced for accessing
-                        songs?</label>
-                    <textarea class="form-textarea" id="access_difficulty" name="access_difficulty" rows="4"
-                        placeholder="Let us know if you faced any issue..."></textarea>
-                </div>
+                    <div class="form-group">
+                        <label class="form-label" id="helpfulLabel">3. How this page will helpful for you?
+                            <span class="required">*</span></label>
+                        <div class="star-rating" role="radiogroup" aria-labelledby="helpfulLabel">
+                            <input type="radio" id="help-star5" name="helpful_rating" value="5" required>
+                            <label for="help-star5" title="5 stars"><span class="visually-hidden">5 stars</span></label>
+                            <input type="radio" id="help-star4" name="helpful_rating" value="4" required>
+                            <label for="help-star4" title="4 stars"><span class="visually-hidden">4 stars</span></label>
+                            <input type="radio" id="help-star3" name="helpful_rating" value="3" required>
+                            <label for="help-star3" title="3 stars"><span class="visually-hidden">3 stars</span></label>
+                            <input type="radio" id="help-star2" name="helpful_rating" value="2" required>
+                            <label for="help-star2" title="2 stars"><span class="visually-hidden">2 stars</span></label>
+                            <input type="radio" id="help-star1" name="helpful_rating" value="1" required>
+                            <label for="help-star1" title="1 star"><span class="visually-hidden">1 star</span></label>
+                        </div>
+                    </div>
 
-                <div class="form-section-title">About Your own Feedback</div>
+                    <div class="form-group">
+                        <label class="form-label" for="found_mistake">4. Did you find Mistake in any of the
+                            Page?</label>
+                        <select class="form-select" id="found_mistake" name="found_mistake" required>
+                            <option value="" disabled selected>Pick an option</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
 
-                <div class="form-group">
-                    <label class="form-label" for="additional_feedback">Any thing else you want to share?</label>
-                    <textarea class="form-textarea" id="additional_feedback" name="additional_feedback" rows="5"
-                        placeholder="Share your thoughts here..."></textarea>
-                </div>
+                    <div class="conditional-field" id="mistakeDetails">
+                        <div class="form-group">
+                            <label class="form-label" for="mistake_location">Where did you find the mistake?
+                                <span class="required">*</span></label>
+                            <input class="form-input" type="text" id="mistake_location" name="mistake_location"
+                                placeholder="e.g. Song 145 lyrics, Camp Songs list...">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="mistake_description">Describe the mistake
+                                <span class="required">*</span></label>
+                            <textarea class="form-textarea" id="mistake_description" name="mistake_description" rows="4"
+                                placeholder="Tell us what's wrong..."></textarea>
+                        </div>
+                    </div>
 
-                <button class="submit-btn" type="submit" id="submitBtn">Send Feedback</button>
+                    <div class="form-group">
+                        <label class="form-label" for="access_difficulty">Any Difficulty you have faced for accessing
+                            songs?</label>
+                        <textarea class="form-textarea" id="access_difficulty" name="access_difficulty" rows="4"
+                            placeholder="Let us know if you faced any issue..."></textarea>
+                    </div>
 
-            </form>
+                    <div class="form-section-title">About Your own Feedback</div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="additional_feedback">Any thing else you want to share?</label>
+                        <textarea class="form-textarea" id="additional_feedback" name="additional_feedback" rows="5"
+                            placeholder="Share your thoughts here..."></textarea>
+                    </div>
+
+                    <button class="submit-btn" type="submit" id="submitBtn">Send Feedback</button>
+
+                </form>
+            </div>
+
+            <div class="form-status" id="formStatus"></div>
+            <a href="/vidhyarthi-geethavali/" class="home-btn" id="goHomeBtn">
+                <span class="material-symbols-outlined">home</span> Go to Home
+            </a>
         </div>
     </main><br><br>
 
@@ -740,7 +746,7 @@
         const form = document.getElementById('contactForm');
         const submitBtn = document.getElementById('submitBtn');
         const statusEl = document.getElementById('formStatus');
-        const entireForm = document.getElementById('EntireForm');
+        const entireForm = document.getElementById('formWrapper');
         const goHomeBtn = document.getElementById('goHomeBtn');
 
         form.addEventListener('submit', async function (e) {
