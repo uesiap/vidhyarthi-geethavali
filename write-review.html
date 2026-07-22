@@ -432,38 +432,42 @@
     <div class="overlay" id="overlay"></div>
 
     <main class="main-content">
-        <div class="form-status" id="formStatus"></div>
-
-        <a href="/vidhyarthi-geethavali/" class="home-btn" id="goHomeBtn">
-            <span class="material-symbols-outlined">home</span> Go to Home
-        </a>
-
         <div class="card" id="EntireForm" style="max-width: 700px;">
-            <h2>Write a Review</h2>
-            <p class="update-notice" style="color:black; padding-bottom: 10px; border-bottom: 1.5px solid #ddd;">Tell us how the page experience has been for you, so we can
-                keep improving Vidhyarthi Geethavali.</p><br>
-            <form id="contactForm">
-                <input type="hidden" name="access_key" value="6de6cbe4-c5bd-41c6-8d5a-a5a5f3128e5f">
-                <input type="checkbox" name="botcheck" style="display:none;">
+            <div id="formWrapper">
+                <h2>Write a Review</h2>
+                <p class="update-notice" style="color:black; padding-bottom: 10px; border-bottom: 1.5px solid #ddd;">
+                    Tell us how the page experience has been for you, so we can
+                    keep improving Vidhyarthi Geethavali.</p><br>
+                <form id="contactForm">
+                    <input type="hidden" name="access_key" value="6de6cbe4-c5bd-41c6-8d5a-a5a5f3128e5f">
+                    <input type="checkbox" name="botcheck" style="display:none;">
 
-                <div class="form-row">
-                    <div class="form-group"><label class="form-label" for="name">Name</label><input class="form-input"
-                            type="text" id="name" name="name" placeholder="Your full name" required></div>
-                    <div class="form-group"><label class="form-label" for="email">Email</label><input class="form-input"
-                            type="email" id="email" name="email" placeholder="example@gmail.com" required></div>
-                </div>
+                    <div class="form-row">
+                        <div class="form-group"><label class="form-label" for="name">Name</label><input
+                                class="form-input" type="text" id="name" name="name" placeholder="Your full name"
+                                required></div>
+                        <div class="form-group"><label class="form-label" for="email">Email</label><input
+                                class="form-input" type="email" id="email" name="email" placeholder="example@gmail.com"
+                                required></div>
+                    </div>
 
-                <div class="form-group">
-                    <label class="form-label" for="message">Message</label>
-                    <textarea class="form-textarea" id="message" name="message" rows="6"
-                        placeholder="Write your message here..." required></textarea>
-                </div>
+                    <div class="form-group">
+                        <label class="form-label" for="message">Message</label>
+                        <textarea class="form-textarea" id="message" name="message" rows="6"
+                            placeholder="Write your message here..." required></textarea>
+                    </div>
 
-                <button class="submit-btn" type="submit" id="submitBtn">Send Message</button>
+                    <button class="submit-btn" type="submit" id="submitBtn">Send Message</button>
 
-            </form>
+                </form>
+            </div>
+
+            <div class="form-status" id="formStatus"></div>
+            <a href="/vidhyarthi-geethavali/" class="home-btn" id="goHomeBtn">
+                <span class="material-symbols-outlined">home</span> Go to Home
+            </a>
         </div>
-    </main>
+    </main>4
 
     <footer>©<span id="current-yr" style="font-weight: 300"></span> Designed &amp; Maintained by <button class="my_name"
             onclick="window.location.href='https://melamrahul.github.io/'">M.Rahul</button>
@@ -551,7 +555,7 @@
         const form = document.getElementById('contactForm');
         const submitBtn = document.getElementById('submitBtn');
         const statusEl = document.getElementById('formStatus');
-        const entireForm = document.getElementById('EntireForm');
+        const entireForm = document.getElementById('formWrapper');
         const goHomeBtn = document.getElementById('goHomeBtn');
 
         form.addEventListener('submit', async function (e) {
@@ -593,7 +597,7 @@
         });
     </script>
 
-     <script>
+    <script>
         var _paq = window._paq = window._paq || [];
         /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
         _paq.push(['trackPageView']);
