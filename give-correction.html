@@ -436,42 +436,46 @@
     <div class="overlay" id="overlay"></div>
 
     <main class="main-content">
-        <div class="form-status" id="formStatus"></div>
-        
-        <a href="/vidhyarthi-geethavali/" class="home-btn" id="goHomeBtn">
-            <span class="material-symbols-outlined">home</span> Go to Home
-        </a>
-        
         <div class="card" id="EntireForm" style="max-width: 700px;">
-            <h2>Give Correction</h2>
-            <p class="update-notice" style="color:black; padding-bottom: 10px; border-bottom: 1.5px solid #ddd;">Spotted a mistake in the lyrics? Let us know the song
-                number and the correct lyrics, and we'll get it fixed.</p><br>
-            <form id="contactForm">
-                <input type="hidden" name="access_key" value="5d7d81bc-7419-4405-941d-54767cbd6c3f">
-                <input type="checkbox" name="botcheck" style="display:none;">
+            <div id="formWrapper">
+                <h2>Give Correction</h2>
+                <p class="update-notice" style="color:black; padding-bottom: 10px; border-bottom: 1.5px solid #ddd;">
+                    Spotted a mistake in the lyrics? Let us know the song
+                    number and the correct lyrics, and we'll get it fixed.</p><br>
+                <form id="contactForm">
+                    <input type="hidden" name="access_key" value="5d7d81bc-7419-4405-941d-54767cbd6c3f">
+                    <input type="checkbox" name="botcheck" style="display:none;">
 
-                <div class="form-row">
-                    <div class="form-group"><label class="form-label" for="name">Name</label><input class="form-input"
-                            type="text" id="name" name="name" placeholder="Your full name" required></div>
-                    <div class="form-group"><label class="form-label" for="email">Email</label><input class="form-input"
-                            type="email" id="email" name="email" placeholder="example@gmail.com" required></div>
-                </div>
+                    <div class="form-row">
+                        <div class="form-group"><label class="form-label" for="name">Name</label><input
+                                class="form-input" type="text" id="name" name="name" placeholder="Your full name"
+                                required></div>
+                        <div class="form-group"><label class="form-label" for="email">Email</label><input
+                                class="form-input" type="email" id="email" name="email" placeholder="example@gmail.com"
+                                required></div>
+                    </div>
 
-                <div class="form-group">
-                    <label class="form-label" for="song_number">Song Name or number</label>
-                    <input class="form-input" type="text" id="song_number" name="song_number"
-                        placeholder="e.g. 145, or the song title/first line" required>
-                </div>
+                    <div class="form-group">
+                        <label class="form-label" for="song_number">Song Name or number</label>
+                        <input class="form-input" type="text" id="song_number" name="song_number"
+                            placeholder="e.g. 145, or the song title/first line" required>
+                    </div>
 
-                <div class="form-group">
-                    <label class="form-label" for="lyrics">Full or Portion of Correct Lyrics</label>
-                    <textarea class="form-textarea" id="lyrics" name="lyrics" rows="10"
-                        placeholder="Type out the full or part of the correct lyrics here..." required></textarea>
-                </div>
+                    <div class="form-group">
+                        <label class="form-label" for="lyrics">Full or Portion of Correct Lyrics</label>
+                        <textarea class="form-textarea" id="lyrics" name="lyrics" rows="10"
+                            placeholder="Type out the full or part of the correct lyrics here..." required></textarea>
+                    </div>
 
-                <button class="submit-btn" type="submit" id="submitBtn">Send Correction</button>
+                    <button class="submit-btn" type="submit" id="submitBtn">Send Correction</button>
 
-            </form>
+                </form>
+            </div>
+
+            <div class="form-status" id="formStatus"></div>
+            <a href="/vidhyarthi-geethavali/" class="home-btn" id="goHomeBtn">
+                <span class="material-symbols-outlined">home</span> Go to Home
+            </a>
         </div>
     </main>
 
@@ -561,7 +565,7 @@
         const form = document.getElementById('contactForm');
         const submitBtn = document.getElementById('submitBtn');
         const statusEl = document.getElementById('formStatus');
-        const entireForm = document.getElementById('EntireForm');
+        const entireForm = document.getElementById('formWrapper');
         const goHomeBtn = document.getElementById('goHomeBtn');
 
         form.addEventListener('submit', async function (e) {
@@ -602,7 +606,7 @@
             }
         });
     </script>
-     <script>
+    <script>
         var _paq = window._paq = window._paq || [];
         /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
         _paq.push(['trackPageView']);
