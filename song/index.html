@@ -82,8 +82,27 @@
 
     <link rel="stylesheet" href="/vidhyarthi-geethavali/song/styles.css?v={{ site.github.build_revision }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&icon_names=camping,cheer,download,edit_note,edit_square,expand_less,expand_more,folded_hands,forest,forum,graphic_eq,handshake,home,library_books,lyrics,my_location,phone_android,share,stars_2,sync_arrow_down,thumbs_up_down">
-    <style>.material-symbols-outlined{font-family:'Material Symbols Outlined';font-weight:normal;font-style:normal;font-size:24px;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;-moz-osx-font-smoothing:grayscale;font-feature-settings:'liga';}</style>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&icon_names=camping,cheer,download,edit_note,edit_square,expand_less,expand_more,folded_hands,forest,forum,graphic_eq,handshake,home,library_books,lyrics,my_location,phone_android,share,stars_2,sync_arrow_down,thumbs_up_down">
+    <style>
+        .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+            -moz-osx-font-smoothing: grayscale;
+            font-feature-settings: 'liga';
+        }
+    </style>
 </head>
 
 <body>
@@ -271,7 +290,7 @@
             </li>
         </ul>
     </div>
-    
+
     <div id="feedbackMenu"
         style="display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#fff;border:2px solid var(--primary-color);border-radius:20px;box-shadow:0 4px 12px rgba(0,0,0,0.2);z-index:1000;padding:20px;min-width:260px;">
         <ul style="list-style:none;margin:0;padding:0;">
@@ -314,7 +333,7 @@
             <button id="audioPlayPauseBtn" class="play-pause-btn"><i class="fas fa-play"></i></button>
             <p class="slider-text">Audio</p>
         </div>
-        <audio id="audioPlayer"></audio>
+        <audio id="audioPlayer" preload="none"></audio>
     </div>
 
     <div class="track-player" id="trackPlayerBar" style="display:none;">
@@ -325,12 +344,11 @@
             <button id="trackPlayPauseBtn" class="play-pause-btn"><i class="fas fa-play"></i></button>
             <p class="slider-text">Track</p>
         </div>
-        <audio id="trackPlayer"></audio>
+        <audio id="trackPlayer" preload="none"></audio>
     </div>
     <script>
         // ─── Config ───────────────────────────────────────
         const BATCH = 50;
-
         const params = new URLSearchParams(window.location.search);
         const juice = "/vidhyarthi-geethavali";
         const songType = params.get("tp") || "";
@@ -449,8 +467,6 @@
             //Related to announcement.
             if (window.loadAnnouncement) window.loadAnnouncement();
             // Set audio sources & show players
-            document.getElementById("audioPlayer").src = song.audioLink + "?v=" + Date.now();
-            document.getElementById("trackPlayer").src = song.trackLink + "?v=" + Date.now();
             document.getElementById("audioPlayerBar").style.display = "flex";
             document.getElementById("trackPlayerBar").style.display = "flex";
             if ("mediaSession" in navigator) {
@@ -670,43 +686,28 @@
             const tct = document.getElementById("trackCurrentTime");
             const adt = document.getElementById("audioDurationTime");
             const tdt = document.getElementById("trackDurationTime");
-
-            setupPlayer(ap, apb, tp, tpb, as_, act, adt);
-            setupPlayer(tp, tpb, ap, apb, ts_, tct, tdt);
+            setupPlayer(ap, apb, tp, tpb, as_, act, adt, () => songData && songData.audioLink);
+            setupPlayer(tp, tpb, ap, apb, ts_, tct, tdt, () => songData && songData.trackLink);
         }
 
-        function setupPlayer(player, btn, otherPlayer, otherBtn, slider, curEl, durEl) {
+        function setupPlayer(player, btn, otherPlayer, otherBtn, slider, curEl, durEl, getUrl) {
             player._ended = false;
-            btn.disabled = true;
-            btn.innerHTML = '<span class="ring-loader"></span>';
-
+            player._loaded = false;
             const showPlay = () => { if (!player._ended) btn.innerHTML = '<i class="fas fa-play"></i>'; };
             const showPause = () => { btn.innerHTML = '<i class="fas fa-pause"></i>'; };
             const showReplay = () => { btn.innerHTML = '<i class="fas fa-redo-alt"></i>'; };
-
-            if (player.readyState >= 3) {
-                btn.disabled = false;
-                showPlay();
-            } else {
-                player.addEventListener("canplay", function onCanPlay() {
-                    btn.disabled = false;
-                    if (player.paused) showPlay();
-                    player.removeEventListener("canplay", onCanPlay);
-                });
-            }
-
+            const showLoader = () => { btn.innerHTML = '<span class="ring-loader"></span>'; };
+            // Nothing is loading yet — show play icon by default.
+            showPlay();
             player.addEventListener("loadedmetadata", () => {
                 slider.max = player.duration;
                 durEl.textContent = fmtTime(player.duration);
             });
-
             player.addEventListener("timeupdate", () => {
                 slider.value = player.currentTime;
                 curEl.textContent = fmtTime(player.currentTime);
             });
-
             slider.addEventListener("input", () => { player.currentTime = slider.value; });
-
             player.addEventListener("ended", () => {
                 player._ended = true;
                 showReplay();
@@ -719,7 +720,6 @@
                     ]);
                 }
             });
-
             player.addEventListener("play", () => {
                 player._ended = false;
                 showPause();
@@ -732,21 +732,43 @@
                     ]);
                 }
             });
-
             player.addEventListener("pause", () => {
                 if (!player._ended) showPlay();
             });
-
             btn.addEventListener("click", () => {
                 if (btn.disabled) return;
-
                 if (player._ended) {
                     player.currentTime = 0;
                     player.play();
                     otherPlayer.pause();
                     return;
                 }
-
+                if (!player._loaded) {
+                    const url = getUrl();
+                    if (!url) { alert("Link not available."); return; }
+                    showLoader();
+                    btn.disabled = true;
+                    const onReady = () => {
+                        player.removeEventListener("canplay", onReady);
+                        player.removeEventListener("error", onError);
+                        btn.disabled = false;
+                        player._loaded = true;
+                        player.play();
+                        otherPlayer.pause();
+                    };
+                    const onError = () => {
+                        player.removeEventListener("canplay", onReady);
+                        player.removeEventListener("error", onError);
+                        btn.disabled = false;
+                        showPlay();
+                        alert("Failed to load audio. Please try again.");
+                    };
+                    player.addEventListener("canplay", onReady);
+                    player.addEventListener("error", onError);
+                    player.src = url + "?v=" + Date.now();
+                    player.load();
+                    return;
+                }
                 if (player.paused) {
                     player.play();
                     otherPlayer.pause();
@@ -853,4 +875,5 @@
     <script
         src="/vidhyarthi-geethavali/assets/pages/banners/announcement.js?v={{ site.github.build_revision }}"></script>
 </body>
+
 </html>
