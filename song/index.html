@@ -707,11 +707,11 @@
 
         function downloadAudio() {
             if (!songData) return;
-            downloadFile(songData.audioLink, `${songData.title} ${songNumber}_Audio.mp3`, "audioText", "audioLoader");
+            downloadFile(songData.audioLink, `${songData.title} (${songNumber})_Audio.mp3`, "audioText", "audioLoader");
         }
         function downloadTrack() {
             if (!songData) return;
-            downloadFile(songData.trackLink, `${songData.title} ${songNumber}_Track.mp3`, "trackText", "trackLoader");
+            downloadFile(songData.trackLink, `${songData.title} (${songNumber})_Track.mp3`, "trackText", "trackLoader");
         }
 
         // ─── Players ─────────────────────────────────────
