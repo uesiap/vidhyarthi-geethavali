@@ -316,6 +316,9 @@
     </div>
 
     <div class="overlay" id="overlay"></div>
+    <marquee class="marquee" behavior="scroll" direction="left" scrollamount="6"
+        style="margin-bottom: -1rem; margin-top: -1rem">💡 Turn on Do Not Disturb mode before playing
+        <strong>Tracks</strong>. To avoid Interruptions while singing.</marquee>
     <div id="menuOverlay" onclick="closeAllMenus()"></div>
 
     <div id="songContainer">
@@ -611,9 +614,69 @@
                 }).catch(() => { });
             }
         }
+        function isIOS() {
+            return /iP(ad|hone|od)/.test(navigator.userAgent) ||
+                (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+        }
+
+        function isInAppBrowser() {
+            const ua = navigator.userAgent || "";
+            return /FBAN|FBAV|Instagram|WhatsApp|Line\/|MicroMessenger|Twitter/i.test(ua);
+        }
+
+        function fallbackOpenNewTab(url, blob) {
+            let href = url;
+            let revokeAfter = null;
+
+            if (blob) {
+                href = URL.createObjectURL(blob);
+                revokeAfter = href;
+            }
+
+            const win = window.open(href, "_blank", "noopener");
+
+            if (!win) {
+                const a = document.createElement("a");
+                a.href = href;
+                a.target = "_blank";
+                a.rel = "noopener";
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+            }
+
+            if (revokeAfter) {
+                setTimeout(() => URL.revokeObjectURL(revokeAfter), 60000);
+            }
+        }
+
+        function tryForcedDownload(blob, filename) {
+            try {
+                const blobUrl = URL.createObjectURL(blob);
+                const a = document.createElement("a");
+                a.href = blobUrl;
+                a.download = filename;
+                a.style.display = "none";
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                setTimeout(() => URL.revokeObjectURL(blobUrl), 5000);
+                return true;
+            } catch (err) {
+                console.warn("Forced download threw:", err);
+                return false;
+            }
+        }
+
         // ─── Download ────────────────────────────────────
         async function downloadFile(url, filename, textId, loaderId) {
             if (!url) { alert("Link not available."); return; }
+
+            if (isInAppBrowser()) {
+                alert("Downloads don't work reliably inside this app's browser.\n\nOpening the audio in your browser instead — you can save it from there.");
+                fallbackOpenNewTab(url, null);
+                return;
+            }
 
             const textEl = document.getElementById(textId);
             const loaderEl = document.getElementById(loaderId);
@@ -622,43 +685,20 @@
             const noCacheUrl = url + (url.includes("?") ? "&" : "?") + "t=" + Date.now();
 
             try {
-                const res = await fetch(noCacheUrl, {
-                    mode: "cors",
-                    cache: "no-store"
-                });
-
+                const res = await fetch(noCacheUrl, { mode: "cors", cache: "no-store" });
                 if (!res.ok) throw new Error("HTTP " + res.status);
-
                 const blob = await res.blob();
-                const blobUrl = URL.createObjectURL(blob);
                 closeContextMenu();
+                const downloaded = tryForcedDownload(blob, filename);
 
-                const a = document.createElement("a");
-                a.href = blobUrl;
-                a.download = filename;
-                a.style.display = "none";
-                document.body.appendChild(a);
-                a.click();
-
-                setTimeout(() => {
-                    document.body.removeChild(a);
-                    URL.revokeObjectURL(blobUrl);
-                }, 1000);
+                if (!downloaded) {
+                    fallbackOpenNewTab(url, blob);
+                }
 
             } catch (err) {
-                console.warn("Fetch failed, forcing link download:", err);
+                console.warn("Fetch failed, opening link in new tab:", err);
                 closeContextMenu();
-
-                const a = document.createElement("a");
-                a.href = noCacheUrl;
-                a.download = filename;
-                a.target = "_blank";
-                a.rel = "noopener";
-                a.style.display = "none";
-                document.body.appendChild(a);
-                a.click();
-
-                setTimeout(() => document.body.removeChild(a), 1000);
+                fallbackOpenNewTab(noCacheUrl, null);
             }
 
             if (textEl) textEl.style.display = "inline";
