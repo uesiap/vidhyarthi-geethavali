@@ -888,7 +888,7 @@
     <script>if('serviceWorker'in navigator){navigator.serviceWorker.register('/vidhyarthi-geethavali/service-worker.js').then(reg=>{console.log('SW registered:',reg.scope)}).catch(err=>{console.error('SW registration failed:',err)})}</script>
     <!-- Share script --> <script> async function shareOYuvatha() { const shareData = { title: 'O Yuvatha YouTube Channel', text: 'Please support our new O Yuvatha YouTube Channel!', url: 'https://youtu.be/lNYp6j6QtH8' }; if (navigator.share) { try { await navigator.share(shareData); } catch (error) {} } else { await navigator.clipboard.writeText(shareData.url); alert('Video link copied!'); } } </script>
     <script src="/vidhyarthi-geethavali/boom.js?v={{ site.github.build_revision }}"></script>
-    <script src="/vidhyarthi-geethavali/assets/pages/banners/announcement.js?v={{ site.github.build_revision }}"></script>
+    <!--<script src="/vidhyarthi-geethavali/assets/pages/banners/announcement.js?v={{ site.github.build_revision }}"></script>-->
 </body>
 
 </html>
