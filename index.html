@@ -861,7 +861,7 @@
             teluguLetters.forEach(l => { if (!songIndex.telugu[l]) songIndex.telugu[l] = []; });
             Object.entries(raw).forEach(([num, song]) => {
                 if (!song.title) return;
-                const letter = teluguLetters.find(l => l === song.title.charAt(0));
+                let firstLetter=song.title.charAt(0);if(firstLetter==="ధ")firstLetter="ద";const letter=teluguLetters.find(l=>l===firstLetter);
                 if (!letter) return;
                 const id = `song${num}`;
                 if (!songIndex.telugu[letter].find(s => s.id === id))
