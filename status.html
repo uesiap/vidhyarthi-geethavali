@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Song Status</title>
+
+<script src="https://cdn.jsdelivr.net/npm/appwrite@17.0.0"></script>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        padding: 30px;
+        font-family: Arial, sans-serif;
+        background: #f5f6f8;
+        color: #222;
+    }
+
+    .container {
+        max-width: 1100px;
+        margin: auto;
+    }
+
+    h1 {
+        margin-bottom: 20px;
+    }
+
+    .toolbar {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 15px;
+    }
+
+    button {
+        border: 0;
+        border-radius: 7px;
+        padding: 10px 16px;
+        cursor: pointer;
+        font-size: 14px;
+    }
+
+    .add-btn {
+        background: #111;
+        color: white;
+    }
+
+    .refresh-btn {
+        background: #ddd;
+    }
+
+    .table-container {
+        background: white;
+        border-radius: 10px;
+        overflow-x: auto;
+        box-shadow: 0 2px 12px rgba(0,0,0,.08);
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 750px;
+    }
+
+    th {
+        background: #f0f1f3;
+        padding: 14px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    td {
+        border-bottom: 1px solid #eee;
+        padding: 0;
+    }
+
+    td input,
+    td select {
+        width: 100%;
+        border: 0;
+        outline: none;
+        background: transparent;
+        padding: 13px;
+        font-size: 14px;
+    }
+
+    td input:focus,
+    td select:focus {
+        background: #fff8d8;
+        outline: 2px solid #4d90fe;
+        outline-offset: -2px;
+    }
+
+    .number {
+        width: 50px;
+        padding: 13px;
+        color: #888;
+        text-align: center;
+    }
+
+    .delete-btn {
+        background: transparent;
+        color: #d00;
+        font-size: 18px;
+    }
+
+    .save-btn {
+        background: #e8f1ff;
+        color: #1769aa;
+        margin-right: 5px;
+    }
+
+    .status {
+        margin-top: 15px;
+        color: #666;
+    }
+
+    .error {
+        color: #c00;
+    }
+
+    .loading {
+        opacity: .6;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🎵 Song Status</h1>
+
+    <div class="toolbar">
+
+        <button class="add-btn" onclick="addSong()">
+            + Add Song
+        </button>
+
+        <button class="refresh-btn" onclick="loadSongs()">
+            ↻ Refresh
+        </button>
+
+    </div>
+
+    <div class="table-container">
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Song name</th>
+                    <th>Audio</th>
+                    <th>Track</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody id="songTable"></tbody>
+
+        </table>
+
+    </div>
+
+    <div id="status" class="status">
+        Loading...
+    </div>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   APPWRITE CONFIGURATION
+   ===================================================== */
+
+const PROJECT_ID = "6aba715a003bf7aa6e70";
+
+const DATABASE_ID = "6aba720b00083a66f6e2";
+
+/*
+   IMPORTANT:
+   Replace this with the ACTUAL Table ID from
+   Appwrite → songs status → Settings.
+*/
+const TABLE_ID = "songs-status";
+
+const ENDPOINT = "https://sgp.cloud.appwrite.io/v1";
+
+
+/* =====================================================
+   INITIALIZE APPWRITE
+   ===================================================== */
+
+const client = new Appwrite.Client();
+
+client
+    .setEndpoint(ENDPOINT)
+    .setProject(PROJECT_ID);
+
+const tablesDB = new Appwrite.TablesDB(client);
+
+
+/* =====================================================
+   STATUS OPTIONS
+   ===================================================== */
+
+const STATUS_OPTIONS = [
+    "",
+    "Pending",
+    "In Progress",
+    "Done"
+];
+
+
+/* =====================================================
+   LOAD SONGS
+   ===================================================== */
+
+async function loadSongs() {
+
+    setStatus("Loading...");
+
+    try {
+
+        const response = await tablesDB.listRows({
+            databaseId: DATABASE_ID,
+            tableId: TABLE_ID
+        });
+
+        renderSongs(response.rows);
+
+        setStatus(
+            response.rows.length + " song(s)"
+        );
+
+    } catch (error) {
+
+        console.error(error);
+
+        setStatus(
+            "Error loading songs: " + error.message,
+            true
+        );
+    }
+}
+
+
+/* =====================================================
+   RENDER TABLE
+   ===================================================== */
+
+function renderSongs(songs) {
+
+    const table = document.getElementById("songTable");
+
+    table.innerHTML = "";
+
+    songs.forEach((song, index) => {
+
+        const row = document.createElement("tr");
+
+        /*
+         * Number
+         */
+
+        const numberCell = document.createElement("td");
+
+        numberCell.className = "number";
+
+        numberCell.textContent = index + 1;
+
+        row.appendChild(numberCell);
+
+
+        /*
+         * Song name
+         */
+
+        const nameCell = document.createElement("td");
+
+        const nameInput = document.createElement("input");
+
+        nameInput.type = "text";
+
+        nameInput.value = song["song-name"] || "";
+
+        nameCell.appendChild(nameInput);
+
+        row.appendChild(nameCell);
+
+
+        /*
+         * Audio
+         */
+
+        const audioCell = document.createElement("td");
+
+        const audioSelect =
+            createStatusSelect(song.audio);
+
+        audioCell.appendChild(audioSelect);
+
+        row.appendChild(audioCell);
+
+
+        /*
+         * Track
+         */
+
+        const trackCell = document.createElement("td");
+
+        const trackSelect =
+            createStatusSelect(song.track);
+
+        trackCell.appendChild(trackSelect);
+
+        row.appendChild(trackCell);
+
+
+        /*
+         * Actions
+         */
+
+        const actionCell = document.createElement("td");
+
+        const saveButton =
+            document.createElement("button");
+
+        saveButton.className = "save-btn";
+
+        saveButton.textContent = "Save";
+
+        saveButton.onclick = async function() {
+
+            await updateSong(
+                song.$id,
+                nameInput.value,
+                audioSelect.value,
+                trackSelect.value
+            );
+
+        };
+
+
+        const deleteButton =
+            document.createElement("button");
+
+        deleteButton.className = "delete-btn";
+
+        deleteButton.textContent = "🗑";
+
+        deleteButton.onclick = async function() {
+
+            await deleteSong(song.$id);
+
+        };
+
+
+        actionCell.appendChild(saveButton);
+
+        actionCell.appendChild(deleteButton);
+
+        row.appendChild(actionCell);
+
+
+        table.appendChild(row);
+
+    });
+}
+
+
+/* =====================================================
+   STATUS DROPDOWN
+   ===================================================== */
+
+function createStatusSelect(currentValue) {
+
+    const select =
+        document.createElement("select");
+
+    STATUS_OPTIONS.forEach(status => {
+
+        const option =
+            document.createElement("option");
+
+        option.value = status;
+
+        option.textContent =
+            status || "Select status";
+
+        if (status === currentValue) {
+            option.selected = true;
+        }
+
+        select.appendChild(option);
+
+    });
+
+    return select;
+}
+
+
+/* =====================================================
+   CREATE
+   ===================================================== */
+
+async function addSong() {
+
+    const name =
+        prompt("Enter song name:");
+
+    if (!name || !name.trim()) {
+        return;
+    }
+
+    try {
+
+        setStatus("Adding song...");
+
+        await tablesDB.createRow({
+
+            databaseId: DATABASE_ID,
+
+            tableId: TABLE_ID,
+
+            rowId: Appwrite.ID.unique(),
+
+            data: {
+
+                "song-name": name.trim(),
+
+                "audio": "Pending",
+
+                "track": "Pending"
+
+            }
+
+        });
+
+        await loadSongs();
+
+        setStatus("Song added successfully.");
+
+    } catch (error) {
+
+        console.error(error);
+
+        setStatus(
+            "Error adding song: " + error.message,
+            true
+        );
+    }
+}
+
+
+/* =====================================================
+   UPDATE
+   ===================================================== */
+
+async function updateSong(
+    rowId,
+    songName,
+    audio,
+    track
+) {
+
+    try {
+
+        setStatus("Saving...");
+
+        await tablesDB.updateRow({
+
+            databaseId: DATABASE_ID,
+
+            tableId: TABLE_ID,
+
+            rowId: rowId,
+
+            data: {
+
+                "song-name": songName,
+
+                "audio": audio,
+
+                "track": track
+
+            }
+
+        });
+
+        setStatus("Saved successfully.");
+
+    } catch (error) {
+
+        console.error(error);
+
+        setStatus(
+            "Error saving: " + error.message,
+            true
+        );
+    }
+}
+
+
+/* =====================================================
+   DELETE
+   ===================================================== */
+
+async function deleteSong(rowId) {
+
+    if (!confirm(
+        "Are you sure you want to delete this song?"
+    )) {
+        return;
+    }
+
+    try {
+
+        setStatus("Deleting...");
+
+        await tablesDB.deleteRow({
+
+            databaseId: DATABASE_ID,
+
+            tableId: TABLE_ID,
+
+            rowId: rowId
+
+        });
+
+        await loadSongs();
+
+        setStatus("Song deleted.");
+
+    } catch (error) {
+
+        console.error(error);
+
+        setStatus(
+            "Error deleting: " + error.message,
+            true
+        );
+    }
+}
+
+
+/* =====================================================
+   STATUS MESSAGE
+   ===================================================== */
+
+function setStatus(message, error = false) {
+
+    const status =
+        document.getElementById("status");
+
+    status.textContent = message;
+
+    status.className =
+        error
+            ? "status error"
+            : "status";
+
+}
+
+
+/* =====================================================
+   START
+   ===================================================== */
+
+loadSongs();
+
+</script>
+
+</body>
+  </html>
