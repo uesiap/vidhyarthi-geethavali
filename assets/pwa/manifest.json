@@ -7,7 +7,6 @@
   "orientation": "portrait",
   "background_color": "#ffffff",
   "theme_color": "#128C7E",
-
   "icons": [
     {
       "src": "/vidhyarthi-geethavali/assets/Icons/Icon192.png",
@@ -58,7 +57,14 @@
       "label": "Subpage View"
     },
     {
-      "src": "/vidhyarthi-geethavali/assets/pwa/player.jpg",
+      "src": "/vidhyarthi-geethavali/assets/pwa/subpage-music.jpg",
+      "sizes": "640x1136",
+      "type": "image/jpeg",
+      "form_factor": "narrow",
+      "label": "Music Subpage"
+    },
+    {
+      "src": "/vidhyarthi-geethavali/assets/pwa/audio-player.jpg",
       "sizes": "640x1136",
       "type": "image/jpeg",
       "form_factor": "narrow",
