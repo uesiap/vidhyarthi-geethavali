@@ -212,7 +212,7 @@ h4 { max-width: 800px; margin-left: auto; margin-right: auto; }
 .card:hover { transform: translateY(-2px); box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12); }
 .card h2 { font-size: 1.6rem; margin-bottom: 24px; }
 .card p { font-size: 1.02rem; }
-.grid { grid-template-columns: repeat(8, 1fr); gap: 10px; font-size: 1rem; max-width: 900px; }
+.grid { grid-template-columns: repeat(8, 1fr); gap: 10px; font-size: 1rem; max-width: 1100px; }
 .box { padding: 6px 6px; cursor: pointer !important; font-size: 1rem; min-height: 44px; }
 #songs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: 100%; margin: 24px 0; }
 #songs li { margin-bottom: 0; }
