@@ -55,7 +55,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&icon_names=camping,cheer,download,edit_note,edit_square,expand_less,expand_more,folded_hands,forest,forum,graphic_eq,handshake,home,library_books,lyrics,my_location,phone_android,share,stars_2,sync_arrow_down,thumbs_up_down">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&icon_names=camping,cheer,computer,download,edit_note,edit_square,expand_less,expand_more,folded_hands,forest,forum,graphic_eq,handshake,home,library_books,lyrics,my_location,phone_android,share,stars_2,sync_arrow_down,thumbs_up_down">
     <link rel="stylesheet" href="/vidhyarthi-geethavali/assets/styles/index.css?v={{ site.github.build_revision }}">
 
     <script src="/vidhyarthi-geethavali/assets/scripts/boom.js?v={{ site.github.build_revision }}" defer></script>
@@ -133,7 +133,8 @@
     <main class="main-content">
         <div id="songs-grid">
             <div class="head-announce">Search "<a href="https://www.google.com/search?q=uesi+songs" target="_blank" rel="noopener noreferrer" class="head-announce-link">uesi songs</a>" in <img src="https://cdn-icons-png.flaticon.com/512/300/300221.png" alt="Google" class="head-announce-logo"> <img src="https://cdn-icons-png.flaticon.com/512/5968/5968890.png" alt="Bing" class="head-announce-logo"> for easy access.</div><br>
-            <div class="page-header"><h1 class="page-title page-heading">Vidhyarthi Geethavali<span class="menu-text"> Songs</span></h1><a href="javascript:void(0)" onclick="toggleFeedbackMenu()" class="feedback-btn"><span class="material-symbols-outlined">thumbs_up_down</span></a></div><br>
+            <div class="page-header"><h1 class="page-title" style="margin:0;"> Vidhyarthi Geethavali<span class="menu-text"> Songs</span></h1><div class="header-actions"><button id="installBtn" class="install-btn" aria-label="Install app"><span class="material-symbols-outlined">computer</span></button><a onclick="toggleFeedbackMenu()" class="feedback-btn" role="button" tabindex="0"><span class="material-symbols-outlined">thumbs_up_down</span></a></div>
+            </div><br>
             <div class="card">
                 <h2><i class="fa-solid fa-music heading-icon"></i><span id="sel-lis" class="heading-lang">Telugu</span>Songs</h2>
                 <div class="tab-group"><button class="tab-btn active" onclick="switchLanguage('telugu', event)">Telugu</button><button class="tab-btn" onclick="switchLanguage('english', event)">English</button><button class="tab-btn" onclick="switchLanguage('hindi', event)">Hindi</button><button class="tab-btn" onclick="switchLanguage('albums', event)">New</button></div>
@@ -148,7 +149,7 @@
             <div id="noSongsMessage" class="no-songs-message no-songs-box hidden"><div>Not found the song you want? <br>Request the song below, so we will add it on priority.</div><a href="javascript:void(0)" onclick="openSongRequestDialog()" class="request-cta">Request the song(s) to add.</a></div>
         </section>
 
-        <h6 class="page-title update-note">This main page is under update, We're adding songs gradually.. <br>Thank you for your patience, and may God bless you!</h6>
+        <h6 class="page-title" style="color: rgb(52, 42, 165); font-weight: 500; font-size: 1.1rem"> This main page is under update, We're adding songs gradually.. <br>Thank you for your patience, and may God bless you!</h6>
     </main>
     <button id="scrollTopBtn" title="Go to top">↑</button>
     <footer>©<span id="current-yr" class="year-label"></span> Designed &amp; Maintained by <button class="my_name" onclick="window.location.href='https://melamrahul.github.io/'">M.Rahul</button></footer>
