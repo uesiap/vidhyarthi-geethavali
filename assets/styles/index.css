@@ -97,7 +97,9 @@ body { font-family: 'Google Sans', sans-serif; background: var(--bg-light); marg
 .page-header { display: flex; align-items: center; justify-content: space-between; }
 .page-title { margin-bottom: 20px; margin-top: 0px; color: var(--text-dark); font-size: 1.8rem; font-weight: 500; }
 .page-heading { margin: 0; }
-.feedback-btn { margin-right: 30px; border: 2px dotted var(--primary-color); color: var(--primary-color); border-radius: 30%; padding: .4rem .2rem; display: flex; align-items: center; justify-content: center; text-decoration: none; width: 36px; height: 36px; }
+.header-actions { display: flex; align-items: center; gap: 10px; margin-right: 30px; }
+.feedback-btn, .install-btn { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; padding: .4rem .2rem; border: 2px dotted var(--primary-color); border-radius: 30%; color: var(--primary-color); background: none; text-decoration: none; cursor: pointer; }
+.install-btn { display: none; }
 .head-announce { margin-top: 0.7rem; text-align: center; }
 .head-announce a:hover { text-decoration: underline !important; }
 .head-announce-link { font-weight: bold; text-decoration: none; color: #128C7E; }
