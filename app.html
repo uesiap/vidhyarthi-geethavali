@@ -56,7 +56,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&icon_names=camping,cheer,laptop_mac,download,edit_note,edit_square,expand_less,expand_more,folded_hands,forest,forum,graphic_eq,handshake,home,library_books,lyrics,my_location,phone_android,share,stars_2,sync_arrow_down,thumbs_up_down">
-    <link rel="stylesheet" href="/vidhyarthi-geethavali/assets/styles/index.css?v={{ site.github.build_revision }}">
+    <link rel="stylesheet" href="/vidhyarthi-geethavali/assets/styles/index/styles.css?v={{ site.github.build_revision }}">
 
     <script src="/vidhyarthi-geethavali/assets/scripts/boom.js?v={{ site.github.build_revision }}" defer></script>
     <script src="/vidhyarthi-geethavali/assets/scripts/index/script.js?v={{ site.github.build_revision }}" defer></script>
@@ -66,296 +66,93 @@
 
 <body>
     <h1 class="main-head-title visually-hidden">Welcome to Vidhyarthi Geethavali. A thoughtfully curated collection of songs rooted in the vision of the Union of Evangelical Students of India (UESI). This platform is designed to help students and fellow believers listen, learn, and worship through music that reflects spiritual depth and biblical truth.</h1>
-
-    <nav class="navbar" aria-label="Main navigation">
-        <div class="logo-title">
-            <img src="/vidhyarthi-geethavali/assets/Icons/uesi192.jpg" alt="App Logo" class="logo">
-            <span class="title">UESI-AP Audio & Visuals Dept</span>
+    <nav class="navbar" aria-label="Main navigation"><div class="logo-title"><img src="/vidhyarthi-geethavali/assets/Icons/uesi192.jpg" alt="App Logo" class="logo"><span class="title">UESI-AP Audio & Visuals Dept</span></div><div class="nav-actions"><button id="searchToggle" class="search-toggle" aria-label="Toggle Search"><span id="searchIcon" class="custom-search-icon"></span><span id="closeIcon" class="custom-close-icon hide-icon">✕</span></button><button id="menuBtn" class="menu-btn" aria-label="Open menu" aria-expanded="false"><span><div class="menu-toggle"><div class="menu-bars"></div></div></span></button></div></nav>
+    <div id="searchBox" class="search-box hidden"><div id="songSearchInput" class="go-to-too-search placeholder" contenteditable="true" data-placeholder="Type the song number or name..." role="textbox" aria-label="Search songs" spellcheck="false"></div><button id="clearSearch" class="clear-search" aria-label="Clear search">✕</button></div>
+    <div class="drawer" id="drawer" role="navigation" aria-label="Side menu"><div class="drawer-content">
+        <a href="/vidhyarthi-geethavali/" class="drawer-item" tabindex="0"><div class="item-content"><span class="icon"><span class="material-symbols-outlined">home</span></span><span class="mnu-tit">Home</span></div></a>
+        <div class="drawer-item has-submenu" id="chatsItem" tabindex="0"><div class="item-content"><span class="icon"><span class="material-symbols-outlined">camping</span></span><span class="mnu-tit">Camp Songs</span></div></div>
+        <div class="submenu" id="chatsSubmenu">
+            <a href="/vidhyarthi-geethavali/camps/ecamp/" class="submenu-item" tabindex="0"><span class="icon"><i class="fas fa-users"></i></span><span class="mnu-tit">(E Camp) Gospel Songs</span></a>
+            <a href="/vidhyarthi-geethavali/camps/dtcamp/" class="submenu-item" tabindex="0"><span class="icon"><i class="fas fa-users"></i></span><span class="mnu-tit">DT Camp Songs</span></a>
+            <a href="/vidhyarthi-geethavali/camps/ltcamp/" class="submenu-item" tabindex="0"><span class="icon"><i class="fas fa-users"></i></span><span class="mnu-tit">LT Camp Songs</span></a>
+            <a href="/vidhyarthi-geethavali/camps/cmtc/" class="submenu-item" tabindex="0"><span class="icon"><i class="fas fa-users"></i></span><span class="mnu-tit">CMTC Songs</span></a>
+            <a href="/vidhyarthi-geethavali/camps/smtc/" class="submenu-item" tabindex="0"><span class="icon"><i class="fas fa-users"></i></span><span class="mnu-tit">SMTC Songs</span></a>
         </div>
-        <div class="nav-actions">
-            <button id="searchToggle" class="search-toggle" aria-label="Toggle Search">
-                <span id="searchIcon" class="custom-search-icon"></span>
-                <span id="closeIcon" class="custom-close-icon hide-icon">✕</span>
-            </button>
-            <button id="menuBtn" class="menu-btn" aria-label="Open menu" aria-expanded="false">
-                <span>
-                    <div class="menu-toggle">
-                        <div class="menu-bars"></div>
-                    </div>
-                </span>
-            </button>
+        <div class="drawer-item has-submenu" id="callsItem" tabindex="0"><div class="item-content"><span class="icon"><span class="material-symbols-outlined">stars_2</span></span><span class="mnu-tit">Special Songs</span></div></div>
+        <div class="submenu" id="callsSubmenu">
+            <a href="/vidhyarthi-geethavali/special/praise/" class="submenu-item" tabindex="0"><span class="icon"><span class="material-symbols-outlined">cheer</span></span><span class="mnu-tit">Praise & Worship</span></a>
+            <a href="/vidhyarthi-geethavali/special/prayer/" class="submenu-item" tabindex="0"><span class="icon"><span class="material-symbols-outlined">folded_hands</span></span><span class="mnu-tit">Prayer</span></a>
+            <a href="/vidhyarthi-geethavali/special/thanks/" class="submenu-item" tabindex="0"><span class="icon"><span class="material-symbols-outlined">handshake</span></span><span class="mnu-tit">Thanks Giving</span></a>
+            <a href="/vidhyarthi-geethavali/special/christmas/" class="submenu-item" tabindex="0"><span class="icon"><span class="material-symbols-outlined">forest</span></span><span class="mnu-tit">Christmas</span></a>
         </div>
-    </nav>
-
-    <div id="searchBox" class="search-box hidden">
-        <div id="songSearchInput" class="go-to-too-search placeholder" contenteditable="true"
-            data-placeholder="Type the song number or name..." role="textbox" aria-label="Search songs" spellcheck="false"></div>
-        <button id="clearSearch" class="clear-search" aria-label="Clear search">✕</button>
-    </div>
-
-    <div class="drawer" id="drawer" role="navigation" aria-label="Side menu">
-        <div class="drawer-content">
-
-            <a href="/vidhyarthi-geethavali/" class="drawer-item" tabindex="0">
-                <div class="item-content">
-                    <span class="icon"><span class="material-symbols-outlined">home</span></span>
-                    <span class="mnu-tit">Home</span>
-                </div>
-            </a>
-
-            <div class="drawer-item has-submenu" id="chatsItem" tabindex="0">
-                <div class="item-content">
-                    <span class="icon"><span class="material-symbols-outlined">camping</span></span>
-                    <span class="mnu-tit">Camp Songs</span>
-                </div>
-            </div>
-            <div class="submenu" id="chatsSubmenu">
-                <a href="/vidhyarthi-geethavali/camps/ecamp/" class="submenu-item" tabindex="0">
-                    <span class="icon"><i class="fas fa-users"></i></span>
-                    <span class="mnu-tit">(E Camp) Gospel Songs</span>
-                </a>
-                <a href="/vidhyarthi-geethavali/camps/dtcamp/" class="submenu-item" tabindex="0">
-                    <span class="icon"><i class="fas fa-users"></i></span>
-                    <span class="mnu-tit">DT Camp Songs</span>
-                </a>
-                <a href="/vidhyarthi-geethavali/camps/ltcamp/" class="submenu-item" tabindex="0">
-                    <span class="icon"><i class="fas fa-users"></i></span>
-                    <span class="mnu-tit">LT Camp Songs</span>
-                </a>
-                <a href="/vidhyarthi-geethavali/camps/cmtc/" class="submenu-item" tabindex="0">
-                    <span class="icon"><i class="fas fa-users"></i></span>
-                    <span class="mnu-tit">CMTC Songs</span>
-                </a>
-                <a href="/vidhyarthi-geethavali/camps/smtc/" class="submenu-item" tabindex="0">
-                    <span class="icon"><i class="fas fa-users"></i></span>
-                    <span class="mnu-tit">SMTC Songs</span>
-                </a>
-            </div>
-
-            <div class="drawer-item has-submenu" id="callsItem" tabindex="0">
-                <div class="item-content">
-                    <span class="icon"><span class="material-symbols-outlined">stars_2</span></span>
-                    <span class="mnu-tit">Special Songs</span>
-                </div>
-            </div>
-            <div class="submenu" id="callsSubmenu">
-                <a href="/vidhyarthi-geethavali/special/praise/" class="submenu-item" tabindex="0">
-                    <span class="icon"><span class="material-symbols-outlined">cheer</span></span>
-                    <span class="mnu-tit">Praise & Worship</span>
-                </a>
-                <a href="/vidhyarthi-geethavali/special/prayer/" class="submenu-item" tabindex="0">
-                    <span class="icon"><span class="material-symbols-outlined">folded_hands</span></span>
-                    <span class="mnu-tit">Prayer</span>
-                </a>
-                <a href="/vidhyarthi-geethavali/special/thanks/" class="submenu-item" tabindex="0">
-                    <span class="icon"><span class="material-symbols-outlined">handshake</span></span>
-                    <span class="mnu-tit">Thanks Giving</span>
-                </a>
-                <a href="/vidhyarthi-geethavali/special/christmas/" class="submenu-item" tabindex="0">
-                    <span class="icon"><span class="material-symbols-outlined">forest</span></span>
-                    <span class="mnu-tit">Christmas</span>
-                </a>
-            </div>
-
-            <div class="drawer-item has-submenu" id="aimsItem" tabindex="0">
-                <div class="item-content">
-                    <span class="icon"><span class="material-symbols-outlined">my_location</span></span>
-                    <span class="mnu-tit">Aims Songs</span>
-                </div>
-            </div>
-            <div class="submenu" id="aimsSubmenu">
-                <a href="/vidhyarthi-geethavali/aims/evangelism/" class="submenu-item" tabindex="0">
-                    <span class="icon"><i class="fa-solid fa-arrow-right-long"></i></span>
-                    <span class="mnu-tit">Evangelism</span>
-                </a>
-                <a href="/vidhyarthi-geethavali/aims/fellowship/" class="submenu-item" tabindex="0">
-                    <span class="icon"><i class="fa-solid fa-arrow-right-long"></i></span>
-                    <span class="mnu-tit">Fellowship</span>
-                </a>
-                <a href="/vidhyarthi-geethavali/aims/testimony/" class="submenu-item" tabindex="0">
-                    <span class="icon"><i class="fa-solid fa-arrow-right-long"></i></span>
-                    <span class="mnu-tit">Testimony</span>
-                </a>
-                <a href="/vidhyarthi-geethavali/aims/missions/" class="submenu-item" tabindex="0">
-                    <span class="icon"><i class="fa-solid fa-arrow-right-long"></i></span>
-                    <span class="mnu-tit">Missions</span>
-                </a>
-            </div>
-
-            <div class="drawer-item has-submenu" id="audioItem" tabindex="0">
-                <div class="item-content">
-                    <span class="icon"><span class="material-symbols-outlined">graphic_eq</span></span>
-                    <span class="mnu-tit">Audio Songs</span>
-                </div>
-            </div>
-            <div class="submenu" id="audioSubmenu">
-                <a href="/vidhyarthi-geethavali/audios/telugu/" class="submenu-item" tabindex="0">
-                    <span class="icon"><i class="fa-solid fa-music"></i></span>
-                    <span class="mnu-tit">Telugu Songs</span>
-                </a>
-                <a href="/vidhyarthi-geethavali/audios/english/" class="submenu-item" tabindex="0">
-                    <span class="icon"><i class="fa-solid fa-music"></i></span>
-                    <span class="mnu-tit">English Songs</span>
-                </a>
-                <a href="/vidhyarthi-geethavali/audios/hindi/" class="submenu-item" tabindex="0">
-                    <span class="icon"><i class="fa-solid fa-music"></i></span>
-                    <span class="mnu-tit">Hindi Songs</span>
-                </a>
-            </div>
-
-            <div class="drawer-item has-submenu" id="albumItem" tabindex="0">
-                <div class="item-content">
-                    <span class="icon"><span class="material-symbols-outlined">library_books</span></span>
-                    <span class="mnu-tit">New Albums</span>
-                </div>
-            </div>
-            <div class="submenu" id="albumSubmenu">
-                <a href="/vidhyarthi-geethavali/albums/nuthana-jeevam/" class="submenu-item" tabindex="0">
-                    <span class="icon"><i class="fa-solid fa-compact-disc album-icon"></i></span>
-                    <span class="mnu-tit">నూతన జీవం</span>
-                </a>
-            </div>
-
-            <br>
-            <hr class="drawer-divider">
-            <br>
-
-            <div class="drawer-item has-submenu drawer-item-share" id="thoughtsSubmenu" tabindex="0">
-                <div class="item-content">
-                    <span class="icon"><span class="material-symbols-outlined">forum</span></span>
-                    <span class="mnu-tit">Share Thoughts</span>
-                </div>
-            </div>
-            <div class="submenu" id="shareSubmenu">
-                <a href="/vidhyarthi-geethavali/forms/write-review" class="submenu-item" tabindex="0">
-                    <span class="icon"><span class="material-symbols-outlined">edit_square</span></span>
-                    <span class="mnu-tit">Write a Review</span>
-                </a>
-                <a href="/vidhyarthi-geethavali/forms/give-correction" class="submenu-item" tabindex="0">
-                    <span class="icon"><span class="material-symbols-outlined">lyrics</span></span>
-                    <span class="mnu-tit">Give Correction</span>
-                </a>
-                <a href="/vidhyarthi-geethavali/forms/user-feedback" class="submenu-item" tabindex="0">
-                    <span class="icon"><span class="material-symbols-outlined">thumbs_up_down</span></span>
-                    <span class="mnu-tit">Feedback</span>
-                </a>
-            </div>
-            <br><br>
-
+        <div class="drawer-item has-submenu" id="aimsItem" tabindex="0"><div class="item-content"><span class="icon"><span class="material-symbols-outlined">my_location</span></span><span class="mnu-tit">Aims Songs</span></div></div>
+        <div class="submenu" id="aimsSubmenu">
+            <a href="/vidhyarthi-geethavali/aims/evangelism/" class="submenu-item" tabindex="0"><span class="icon"><i class="fa-solid fa-arrow-right-long"></i></span><span class="mnu-tit">Evangelism</span></a>
+            <a href="/vidhyarthi-geethavali/aims/fellowship/" class="submenu-item" tabindex="0"><span class="icon"><i class="fa-solid fa-arrow-right-long"></i></span><span class="mnu-tit">Fellowship</span></a>
+            <a href="/vidhyarthi-geethavali/aims/testimony/" class="submenu-item" tabindex="0"><span class="icon"><i class="fa-solid fa-arrow-right-long"></i></span><span class="mnu-tit">Testimony</span></a>
+            <a href="/vidhyarthi-geethavali/aims/missions/" class="submenu-item" tabindex="0"><span class="icon"><i class="fa-solid fa-arrow-right-long"></i></span><span class="mnu-tit">Missions</span></a>
         </div>
-    </div>
+        <div class="drawer-item has-submenu" id="audioItem" tabindex="0"><div class="item-content"><span class="icon"><span class="material-symbols-outlined">graphic_eq</span></span><span class="mnu-tit">Audio Songs</span></div></div>
+        <div class="submenu" id="audioSubmenu">
+            <a href="/vidhyarthi-geethavali/audios/telugu/" class="submenu-item" tabindex="0"><span class="icon"><i class="fa-solid fa-music"></i></span><span class="mnu-tit">Telugu Songs</span></a>
+            <a href="/vidhyarthi-geethavali/audios/english/" class="submenu-item" tabindex="0"><span class="icon"><i class="fa-solid fa-music"></i></span><span class="mnu-tit">English Songs</span></a>
+            <a href="/vidhyarthi-geethavali/audios/hindi/" class="submenu-item" tabindex="0"><span class="icon"><i class="fa-solid fa-music"></i></span><span class="mnu-tit">Hindi Songs</span></a>
+        </div>
+        <div class="drawer-item has-submenu" id="albumItem" tabindex="0"><div class="item-content"><span class="icon"><span class="material-symbols-outlined">library_books</span></span><span class="mnu-tit">New Albums</span></div></div>
+        <div class="submenu" id="albumSubmenu">
+            <a href="/vidhyarthi-geethavali/albums/nuthana-jeevam/" class="submenu-item" tabindex="0"><span class="icon"><i class="fa-solid fa-compact-disc album-icon"></i></span><span class="mnu-tit">నూతన జీవం</span></a>
+        </div>
+        <br><hr class="drawer-divider"><br>
+        <div class="drawer-item has-submenu drawer-item-share" id="thoughtsSubmenu" tabindex="0"><div class="item-content"><span class="icon"><span class="material-symbols-outlined">forum</span></span><span class="mnu-tit">Share Thoughts</span></div></div>
+        <div class="submenu" id="shareSubmenu">
+            <a href="/vidhyarthi-geethavali/forms/write-review" class="submenu-item" tabindex="0"><span class="icon"><span class="material-symbols-outlined">edit_square</span></span><span class="mnu-tit">Write a Review</span></a>
+            <a href="/vidhyarthi-geethavali/forms/give-correction" class="submenu-item" tabindex="0"><span class="icon"><span class="material-symbols-outlined">lyrics</span></span><span class="mnu-tit">Give Correction</span></a>
+            <a href="/vidhyarthi-geethavali/forms/user-feedback" class="submenu-item" tabindex="0"><span class="icon"><span class="material-symbols-outlined">thumbs_up_down</span></span><span class="mnu-tit">Feedback</span></a>
+        </div>
+        <br><br>
+    </div></div>
 
     <div class="overlay" id="overlay"></div>
-
     <div id="menuOverlay" class="menu-overlay" onclick="closeAllMenus()"></div>
-
-    <div id="feedbackMenu" class="feedback-menu">
-        <ul class="feedback-list">
-            <li class="feedback-item" onclick="shareLink()">
-                <span class="material-symbols-outlined">share</span>
-                <span class="mnu-tit feedback-text">Share Home Page</span>
-            </li>
-            <li class="feedback-item" onclick="window.open('/vidhyarthi-geethavali/forms/write-review', '_blank')">
-                <span class="material-symbols-outlined">edit_square</span>
-                <span class="mnu-tit feedback-text">Write Review</span>
-            </li>
-            <li class="feedback-item" onclick="window.open('/vidhyarthi-geethavali/forms/give-correction', '_blank')">
-                <span class="material-symbols-outlined">lyrics</span>
-                <span class="mnu-tit feedback-text">Give Correction</span>
-            </li>
-            <li class="feedback-item" onclick="window.open('/vidhyarthi-geethavali/forms/user-feedback', '_blank')">
-                <span class="material-symbols-outlined">thumbs_up_down</span>
-                <span class="mnu-tit feedback-text">Give Feedback</span>
-            </li>
-        </ul>
-    </div>
-
+    <div id="feedbackMenu" class="feedback-menu"><ul class="feedback-list">
+        <li class="feedback-item" onclick="shareLink()"><span class="material-symbols-outlined">share</span><span class="mnu-tit feedback-text">Share Home Page</span></li>
+        <li class="feedback-item" onclick="window.open('/vidhyarthi-geethavali/forms/write-review', '_blank')"><span class="material-symbols-outlined">edit_square</span><span class="mnu-tit feedback-text">Write Review</span></li>
+        <li class="feedback-item" onclick="window.open('/vidhyarthi-geethavali/forms/give-correction', '_blank')"><span class="material-symbols-outlined">lyrics</span><span class="mnu-tit feedback-text">Give Correction</span></li>
+        <li class="feedback-item" onclick="window.open('/vidhyarthi-geethavali/forms/user-feedback', '_blank')"><span class="material-symbols-outlined">thumbs_up_down</span><span class="mnu-tit feedback-text">Give Feedback</span></li>
+    </ul></div>
     <div id="songRequestDialog" class="request-dialog">
         <h3 class="request-title">Request the Song(s)</h3>
-
-        <form id="songRequestForm">
-            <input type="hidden" name="access_key" value="5d7d81bc-7419-4405-941d-54767cbd6c3f">
-            <input type="hidden" name="subject" value="New Song Request - Vidhyarthi Geethavali">
-            <input type="checkbox" name="botcheck" class="hidden">
-
-            <div class="request-field">
-                <label for="req_name" class="request-label">Name</label>
-                <input type="text" id="req_name" name="name" class="request-input" placeholder="Your full name" required>
-            </div>
-
-            <div class="request-field">
-                <label for="req_email" class="request-label">Email</label>
-                <input type="email" id="req_email" name="email" class="request-input" placeholder="example@gmail.com" required>
-            </div>
-
-            <div class="request-field request-field-last">
-                <label for="req_song" class="request-label">Song Name or Number</label>
-                <input type="text" id="req_song" name="song_name_or_number" class="request-input" placeholder="e.g. 145, or the song title" required>
-            </div>
-
-            <div id="songRequestStatus" class="request-status"></div>
-
-            <button type="submit" id="songRequestSubmitBtn" class="request-submit">Send Request</button>
+        <form id="songRequestForm"><input type="hidden" name="access_key" value="5d7d81bc-7419-4405-941d-54767cbd6c3f"><input type="hidden" name="subject" value="New Song Request - Vidhyarthi Geethavali"><input type="checkbox" name="botcheck" class="hidden">
+            <div class="request-field"><label for="req_name" class="request-label">Name</label><input type="text" id="req_name" name="name" class="request-input" placeholder="Your full name" required></div>
+            <div class="request-field"><label for="req_email" class="request-label">Email</label><input type="email" id="req_email" name="email" class="request-input" placeholder="example@gmail.com" required></div>
+            <div class="request-field request-field-last"><label for="req_song" class="request-label">Song Name or Number</label><input type="text" id="req_song" name="song_name_or_number" class="request-input" placeholder="e.g. 145, or the song title" required></div>
+            <div id="songRequestStatus" class="request-status"></div><button type="submit" id="songRequestSubmitBtn" class="request-submit">Send Request</button>
         </form>
     </div>
 
     <main class="main-content">
         <div id="songs-grid">
-            <div class="head-announce">
-                Search "<a href="https://www.google.com/search?q=uesi+songs" target="_blank" rel="noopener noreferrer" class="head-announce-link">uesi songs</a>"
-                in <img src="https://cdn-icons-png.flaticon.com/512/300/300221.png" alt="Google" class="head-announce-logo">
-                <img src="https://cdn-icons-png.flaticon.com/512/5968/5968890.png" alt="Bing" class="head-announce-logo">
-                for easy access.
-            </div>
-            <br>
-
-            <div class="page-header">
-                <h1 class="page-title" style="margin:0;">
-                    Vidhyarthi Geethavali<span class="menu-text"> Songs</span>
-                </h1>
-                <div class="header-actions">
-                    <button id="installBtn" class="install-btn" aria-label="Install app"><span class="material-symbols-outlined">laptop_mac</span></button>
-                    <a onclick="toggleFeedbackMenu()" class="feedback-btn" role="button" tabindex="0"><span class="material-symbols-outlined">thumbs_up_down</span></a>
-                </div>
-            </div>
-            <br>
-
+            <div class="head-announce">Search "<a href="https://www.google.com/search?q=uesi+songs" target="_blank" rel="noopener noreferrer" class="head-announce-link">uesi songs</a>" in <img src="https://cdn-icons-png.flaticon.com/512/300/300221.png" alt="Google" class="head-announce-logo"> <img src="https://cdn-icons-png.flaticon.com/512/5968/5968890.png" alt="Bing" class="head-announce-logo"> for easy access.</div><br>
+            <div class="page-header"><h1 class="page-title" style="margin:0;"> Vidhyarthi Geethavali<span class="menu-text"> Songs</span></h1><div class="header-actions"><button id="installBtn" class="install-btn" aria-label="Install app"><span class="material-symbols-outlined">laptop_mac</span></button><a onclick="toggleFeedbackMenu()" class="feedback-btn" role="button" tabindex="0"><span class="material-symbols-outlined">thumbs_up_down</span></a></div>
+            </div><br>
             <div class="card">
                 <h2><i class="fa-solid fa-music heading-icon"></i><span id="sel-lis" class="heading-lang">Telugu</span>Songs</h2>
-                <div class="tab-group">
-                    <button class="tab-btn active" onclick="switchLanguage('telugu', event)">Telugu</button>
-                    <button class="tab-btn" onclick="switchLanguage('english', event)">English</button>
-                    <button class="tab-btn" onclick="switchLanguage('hindi', event)">Hindi</button>
-                    <button class="tab-btn" onclick="switchLanguage('albums', event)">New</button>
-                </div>
+                <div class="tab-group"><button class="tab-btn active" onclick="switchLanguage('telugu', event)">Telugu</button><button class="tab-btn" onclick="switchLanguage('english', event)">English</button><button class="tab-btn" onclick="switchLanguage('hindi', event)">Hindi</button><button class="tab-btn" onclick="switchLanguage('albums', event)">New</button></div>
                 <hr>
                 <div class="grid" id="letters"></div>
             </div>
         </div>
 
         <section class="card" id="ssl">
-            <div id="all-songs">
-                <h2><i class="fa-solid fa-music heading-icon"></i>All Songs of <span id="title">"అ"</span></h2>
-                <hr>
-            </div>
+            <div id="all-songs"><h2><i class="fa-solid fa-music heading-icon"></i>All Songs of <span id="title">"అ"</span></h2><hr></div>
             <ul id="songs"></ul>
-            <div id="noSongsMessage" class="no-songs-message hidden no-songs-box">
-                <div>Not found the song you want? <br>Request the song below, so we will add it on priority.</div>
-                <a href="javascript:void(0)" onclick="openSongRequestDialog()" class="request-cta">
-                    Request the song(s) to add.
-                </a>
-            </div>
+            <div id="noSongsMessage" class="no-songs-message no-songs-box hidden"><div>Not found the song you want? <br>Request the song below, so we will add it on priority.</div><a href="javascript:void(0)" onclick="openSongRequestDialog()" class="request-cta">Request the song(s) to add.</a></div>
         </section>
 
-       <h6 class="page-title" style="color: rgb(52, 42, 165); font-weight: 500; font-size: 1.1rem"> This main page is under update, We're adding songs gradually.. <br>Thank you for your patience, and may God bless you!</h6>
+        <h6 class="page-title" style="color: rgb(52, 42, 165); font-weight: 500; font-size: 1.1rem"> This main page is under update, We're adding songs gradually.. <br>Thank you for your patience, and may God bless you!</h6>
     </main>
-
     <button id="scrollTopBtn" title="Go to top">↑</button>
-
-    <footer>
-        ©<span id="current-yr" class="year-label"></span> Designed &amp; Maintained by
-        <button class="my_name" onclick="window.location.href='https://melamrahul.github.io/'">M.Rahul</button>
-    </footer>
+    <footer>©<span id="current-yr" class="year-label"></span> Designed &amp; Maintained by <button class="my_name" onclick="window.location.href='https://melamrahul.github.io/'">M.Rahul</button></footer>
 </body>
 
 </html>
