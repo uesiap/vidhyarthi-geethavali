@@ -1020,3 +1020,27 @@ footer {
     border-top: 1px solid #ccc;
     background-color: white;
 }
+
+@font-face {
+  font-family: "Font Awesome 6 Free";
+  font-style: normal;
+  font-weight: 900;
+  font-display: block;
+  src: url("/vidhyarthi-geethavali/assets/styles/fa-solid-900.woff2") format("woff2");
+}
+.fa-solid,
+.fas {
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  font-style: normal;
+  font-variant: normal;
+  line-height: 1;
+  display: inline-block;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+}
+
+.fa-users:before { content: "\f0c0"; }
+.fa-arrow-right-long:before { content: "\f178"; }
+.fa-music:before { content: "\f001"; }
+.fa-compact-disc:before { content: "\f51f"; }
