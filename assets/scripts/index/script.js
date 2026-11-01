@@ -1,4 +1,4 @@
-const teluguLetters = ["అ","ఆ","ఇ","ఈ","ఉ","ఊ","ఎ","ఏ","ఒ","ఓ","క","గ","ఘ","చ","జ","త","ద","న","ప","భ","మ","య","ర","ల","వ","శ","స","హ"];
+const teluguLetters = ["అ","ఆ","ఇ","ఉ","ఊ","ఎ","ఏ","ఒ","ఓ","క","గ","ఘ","చ","జ","త","ద","న","ప","భ","మ","య","ర","ల","వ","శ","ష","స","హ"];
 const englishLetters = Array.from({ length: 26 }, (_, i) => String.fromCharCode(65 + i)).filter(l => l !== 'Q' && l !== 'X');
 
 const letterDiv = document.getElementById('letters');
