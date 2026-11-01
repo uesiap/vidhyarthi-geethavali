@@ -105,7 +105,7 @@ body { font-family: 'Google Sans', sans-serif; background: #fff; margin: 80px 0 
 .player-bar { display: none; position: fixed; left: 0; width: 100%; padding-left: 6px; justify-content: space-between; align-items: center; color: #000; background: #fff; box-shadow: 0 -2px 0 rgba(0, 0, 0, 0.5); }
 .player-bar.show { display: flex; }
 .audio-player { bottom: 64px; margin-bottom: -3px; height: 60px; padding: 1rem 0 1.04rem 6px; }
-.track-player { bottom: 0; height: 45px; padding: 2rem 0 1.6rem 6px; border-bottom: 3px solid #888; }
+.track-player { bottom: 0; height: 45px; padding: 2rem 0 1.6rem 6px; border-bottom: none; }
 .audio-controls { display: flex; align-items: center; width: 100%; }
 .audio-controls p { margin-left: 4px; font-size: 0.85rem; }
 .play-pause-btn { display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; margin-right: 10px; padding: 10px; border: none; border-radius: 50%; background-color: var(--primary-color); color: #fff; font-size: 16px; cursor: pointer; user-select: none; -webkit-user-select: none; }
