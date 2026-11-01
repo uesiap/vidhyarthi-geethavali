@@ -137,8 +137,8 @@ body { font-family: 'Google Sans', sans-serif; background: #fff; margin: 80px 0 
 .back-button { width: 20px; height: 20px; }
 .back-button .arrow { font-size: 14px; }
 }
-.player-bar.unavailable .seek-slider { opacity: 0.35; cursor: not-allowed; }
+/* .player-bar.unavailable .seek-slider { opacity: 0.35; cursor: not-allowed; }
 .player-bar.unavailable .time-indicator { opacity: 0.5; }
 .play-pause-btn:disabled { background-color: #9e9e9e; cursor: not-allowed; }
 .player-bar.unavailable .audio-controls p { color: #757575; font-style: italic; }
-.audio-controls p { margin-left: 4px; font-size: 0.85rem; }
+.audio-controls p { margin-left: 4px; font-size: 0.85rem; } */
