@@ -363,22 +363,25 @@ async function ensureLetterHasSongs(lang, letter) {
     const idx = lang === 'telugu' ? songIndex.telugu : songIndex.english;
     const ingest = lang === 'telugu' ? ingestTelugu : ingestEnglish;
 
-    if ((idx[letter] || []).length > 0) return;
-
     const ceilings = letterMap[lang][letter];
 
     if (ceilings && ceilings.length) {
         const missing = ceilings.filter(c => !fetched[lang].has(c));
+
         await Promise.all(missing.map(async c => {
             const raw = await fetchChunk(lang, c);
             ingest(raw);
             fetched[lang].add(c);
         }));
     } else {
+        if ((idx[letter] || []).length > 0) return;
+
         const chunks = knownChunks[lang] || [];
+
         for (const c of chunks) {
             if ((idx[letter] || []).length > 0) break;
             if (fetched[lang].has(c)) continue;
+
             const raw = await fetchChunk(lang, c);
             ingest(raw);
             fetched[lang].add(c);
