@@ -19,6 +19,14 @@ const inFlight = { telugu: {}, english: {}, hindi: {} };
 let albumList = [];
 const inFlightAlbums = {};
 
+// Letters whose songs are split across several files. The order here is the
+// order the files are requested in. These override manifest.json for the
+// listed letters, so the order is correct even if an old manifest is cached.
+const LETTER_MAP_OVERRIDES = {
+    telugu: { "ఓ": [100, 50] },
+    english: {}
+};
+
 const LANG_FOLDER = { telugu: 'tsongs', english: 'esongs', hindi: 'hsongs' };
 const fullyLoaded = { telugu: false, english: false, hindi: false, albums: false };
 window.fullyLoaded = fullyLoaded;
@@ -228,6 +236,15 @@ async function discoverChunks(lang) {
     return found;
 }
 
+// Returns the chunk ceilings that hold songs for a letter, in the order to load them.
+// Overrides win over the manifest. Returns [] if the letter isn't mapped.
+function getCeilings(lang, letter) {
+    const override = LETTER_MAP_OVERRIDES[lang] && LETTER_MAP_OVERRIDES[lang][letter];
+    if (override && override.length) return override;
+    const mapped = letterMap[lang] && letterMap[lang][letter];
+    return Array.isArray(mapped) ? mapped : [];
+}
+
 async function discoverAlbums() {
     if (albumList.length) return albumList;
     try {
@@ -257,10 +274,10 @@ async function fetchAlbumChunk(folder, ceiling) {
 
     inFlightAlbums[url] = (async () => {
         try {
-            const res = await fetch(`${url}?v=${Date.now()}`);
-            if (!res.ok) return {};
+            const res = await fetch(`${url}?v=${Date.now()}`, { cache: 'no-store' });
+            if (!res.ok) throw new Error(`HTTP ${res.status} for ${url}`);
             const data = await res.json();
-            cacheSet(url, data);
+            if (Object.keys(data).length) cacheSet(url, data);
             return data;
         } finally {
             delete inFlightAlbums[url];
@@ -295,21 +312,27 @@ async function ensureAlbumHasSongs(albumId) {
     }
 }
 
-async function fetchChunk(lang, ceiling) {
+// Fetches one list.json.
+// force = true skips the session cache and always goes to the network.
+// Throws on HTTP errors, so a failed file is never marked as loaded.
+// Empty results are never cached.
+async function fetchChunk(lang, ceiling, force = false) {
     const folder = LANG_FOLDER[lang];
     const url = `${trebo}/${folder}/${ceiling}/list.json`;
 
     if (inFlight[lang][ceiling]) return inFlight[lang][ceiling];
 
-    const hit = cacheGet(url);
-    if (hit) return hit;
+    if (!force) {
+        const hit = cacheGet(url);
+        if (hit) return hit;
+    }
 
     inFlight[lang][ceiling] = (async () => {
         try {
-            const res = await fetch(`${url}?v=${Date.now()}`);
-            if (!res.ok) return {};
+            const res = await fetch(`${url}?v=${Date.now()}`, { cache: 'no-store' });
+            if (!res.ok) throw new Error(`HTTP ${res.status} for ${url}`);
             const data = await res.json();
-            cacheSet(url, data);
+            if (Object.keys(data).length) cacheSet(url, data);
             return data;
         } finally {
             delete inFlight[lang][ceiling];
@@ -321,13 +344,19 @@ async function fetchChunk(lang, ceiling) {
 
 function numOf(id) { return parseInt((id || '').replace('song', ''), 10) || 0; }
 
+// Normalizes the first letter of a title so matching is consistent.
+function letterOf(title) {
+    const t = (title || '').normalize('NFC').replace(/^[\s\uFEFF\u200B"'“‘(\[]+/, '');
+    let first = t.charAt(0);
+    if (first === 'ధ') first = 'ద';
+    return first;
+}
+
 function ingestTelugu(raw) {
     teluguLetters.forEach(l => { if (!songIndex.telugu[l]) songIndex.telugu[l] = []; });
     Object.entries(raw).forEach(([num, song]) => {
         if (!song.title) return;
-        let firstLetter = song.title.charAt(0);
-        if (firstLetter === "ధ") firstLetter = "ద";
-        const letter = teluguLetters.find(l => l === firstLetter);
+        const letter = teluguLetters.find(l => l === letterOf(song.title));
         if (!letter) return;
         const id = `song${num}`;
         if (!songIndex.telugu[letter].find(s => s.id === id))
@@ -363,29 +392,30 @@ async function ensureLetterHasSongs(lang, letter) {
     const idx = lang === 'telugu' ? songIndex.telugu : songIndex.english;
     const ingest = lang === 'telugu' ? ingestTelugu : ingestEnglish;
 
-    const ceilings = letterMap[lang][letter];
+    const ceilings = getCeilings(lang, letter);
 
-    if (ceilings && ceilings.length) {
+    if (ceilings.length) {
         const missing = ceilings.filter(c => !fetched[lang].has(c));
+        if (!missing.length) return;
 
-        await Promise.all(missing.map(async c => {
-            const raw = await fetchChunk(lang, c);
+        const results = await Promise.all(missing.map(c => fetchChunk(lang, c)));
+        results.forEach((raw, i) => {
             ingest(raw);
-            fetched[lang].add(c);
-        }));
-    } else {
-        if ((idx[letter] || []).length > 0) return;
+            fetched[lang].add(missing[i]);
+        });
+        return;
+    }
 
-        const chunks = knownChunks[lang] || [];
+    // Letter has no mapping: scan chunks until songs for this letter appear.
+    if ((idx[letter] || []).length > 0) return;
 
-        for (const c of chunks) {
-            if ((idx[letter] || []).length > 0) break;
-            if (fetched[lang].has(c)) continue;
+    for (const c of knownChunks[lang] || []) {
+        if ((idx[letter] || []).length > 0) break;
+        if (fetched[lang].has(c)) continue;
 
-            const raw = await fetchChunk(lang, c);
-            ingest(raw);
-            fetched[lang].add(c);
-        }
+        const raw = await fetchChunk(lang, c);
+        ingest(raw);
+        fetched[lang].add(c);
     }
 }
 
@@ -457,14 +487,26 @@ function renderLetterBoxes(letters, lang) {
         box.onclick = async () => {
             document.querySelectorAll('.box').forEach(b => b.classList.remove('active'));
             box.classList.add('active');
-
+        
             const idx = lang === 'telugu' ? songIndex.telugu : songIndex.english;
-
-            if (!(idx[letter] || []).length) {
+            const ceilings = getCeilings(lang, letter);
+    
+            const needsLoad = ceilings.length
+                ? ceilings.some(c => !fetched[lang].has(c))
+                : !(idx[letter] || []).length;
+        
+            if (needsLoad) {
                 showSongListLoader(letter);
-                await ensureLetterHasSongs(lang, letter);
+                try {
+                    await ensureLetterHasSongs(lang, letter);
+                } catch (err) {
+                    console.error(`Failed to load songs for ${letter}:`, err);
+                    songList.innerHTML = '<li>Could not load songs. Please tap the letter again.</li>';
+                    titleEl.textContent = `"${letter}"`;
+                    return;
+                }
             }
-
+        
             titleEl.textContent = `"${letter}"`;
             renderSongItems(idx[letter] || [], lang);
             if (currentQuery) filterSongs(currentQuery);
