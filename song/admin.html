@@ -1,0 +1,153 @@
+<!DOCTYPE html><html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Website Admin | Vidhyarthi Geethavali | UESI AP</title>
+
+<meta name="description" content="Website Admin for Vidhyarthi Geethavali by UESI AP. Manage Telugu and English Christian camp songs, lyrics, audio tracks, and student worship resources.">
+<meta name="keywords" content="Website Admin, Vidhyarthi Geethavali, UESI AP, UESI AP songs, camp songs, Telugu Christian songs, student worship, UESI songs, lyrics, audio tracks, VJ songs">
+<meta name="author" content="M.Rahul">
+
+<!-- Prevent search engine indexing -->
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="bingbot" content="noindex, nofollow, noarchive, nosnippet">
+
+<!-- Theme -->
+<meta name="theme-color" content="#128C7E">
+
+<!-- Favicon -->
+<link rel="icon" href="/vidhyarthi-geethavali/assets/Icons/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="96x96" href="/vidhyarthi-geethavali/assets/Icons/Icon96.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/vidhyarthi-geethavali/assets/Icons/Icon192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/vidhyarthi-geethavali/assets/Icons/Icon512.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/vidhyarthi-geethavali/assets/Icons/apple-icon.png">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Website Admin | Vidhyarthi Geethavali | UESI AP">
+<meta property="og:description" content="Website Admin for Vidhyarthi Geethavali by UESI AP. Manage songs, lyrics, and audio tracks.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.ruvs.in/update/">
+<meta property="og:image" content="https://uesiap.github.io/vidhyarthi-geethavali/assets/Icons/Icon512.png">
+<meta property="og:image:width" content="512">
+<meta property="og:image:height" content="512">
+<meta property="og:image:alt" content="Vidhyarthi Geethavali - UESI AP">
+<meta property="og:site_name" content="Vidhyarthi Geethavali">
+<meta property="og:locale" content="te_IN">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Website Admin | Vidhyarthi Geethavali | UESI AP">
+<meta name="twitter:description" content="Website Admin for Vidhyarthi Geethavali by UESI AP.">
+<meta name="twitter:url" content="https://www.ruvs.in/update/">
+<meta name="twitter:image" content="https://uesiap.github.io/vidhyarthi-geethavali/assets/Icons/Icon512.png">
+<meta name="twitter:image:alt" content="Vidhyarthi Geethavali - UESI AP">
+<meta name="twitter:site" content="@uesiap">
+<meta name="twitter:creator" content="@uesiap">
+
+<!-- Full-page iframe and loader styles -->
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    html,
+    body {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: #ffffff;
+    }
+
+    iframe {
+        display: block;
+        width: 100%;
+        height: 100%;
+        border: none;
+    }
+
+    /* Loading screen */
+    #loader {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 18px;
+        background: #ffffff;
+        transition: opacity 0.4s ease, visibility 0.4s ease;
+    }
+
+    #loader.hidden {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+    }
+
+    .loader-spinner {
+        width: 48px;
+        height: 48px;
+        border: 4px solid #e0f2f1;
+        border-top-color: #128C7E;
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+    }
+
+    .loader-title {
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+        font-weight: 600;
+        color: #128C7E;
+        text-align: center;
+    }
+
+    .loader-message {
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+        color: #777777;
+        text-align: center;
+    }
+
+    @keyframes spin {
+        to {
+            transform: rotate(360deg);
+        }
+    }
+</style>
+
+</head><body><!-- Loader -->
+<div id="loader">
+    <div class="loader-spinner"></div>
+    <div class="loader-title">
+        Vidhyarthi Geethavali
+    </div>
+    <div class="loader-message">
+        Loading Website Admin...
+    </div>
+</div>
+
+<!-- Website Admin iframe -->
+<iframe
+    id="adminFrame"
+    src="https://www.ruvs.in/update/"
+    title="Website Admin - Vidhyarthi Geethavali"
+    loading="eager"
+    allow="clipboard-read; clipboard-write"
+    referrerpolicy="strict-origin-when-cross-origin">
+</iframe>
+
+<!-- Hide loader after iframe loads -->
+<script>
+    const adminFrame = document.getElementById("adminFrame");
+    const loader = document.getElementById("loader");
+
+    adminFrame.addEventListener("load", function () {
+        loader.classList.add("hidden");
+    });
+</script>
+
+</body>
+</html>
