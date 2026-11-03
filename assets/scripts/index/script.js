@@ -7,7 +7,7 @@ const titleEl = document.getElementById('title');
 const ssl = document.getElementById('ssl');
 const selLis = document.getElementById('sel-lis');
 const trebo = '/vidhyarthi-geethavali/data';
-const piece = 50; const buisc = 'vg-v4';
+const piece = 50; const buisc = 'vg-v5';
 const noSongsMessage = document.getElementById('noSongsMessage');
 
 const songIndex = { telugu: {}, english: {}, hindi: [], albums: {} };
@@ -392,21 +392,16 @@ async function ensureLetterHasSongs(lang, letter) {
     const idx = lang === 'telugu' ? songIndex.telugu : songIndex.english;
     const ingest = lang === 'telugu' ? ingestTelugu : ingestEnglish;
 
-    const ceilings = getCeilings(lang, letter);
-
-    if (ceilings.length) {
-        const missing = ceilings.filter(c => !fetched[lang].has(c));
-        if (!missing.length) return;
-
+    // 1. Load mapped files that haven't been loaded yet.
+    const missing = getCeilings(lang, letter).filter(c => !fetched[lang].has(c));
+    if (missing.length) {
         const results = await Promise.all(missing.map(c => fetchChunk(lang, c)));
         results.forEach((raw, i) => {
             ingest(raw);
             fetched[lang].add(missing[i]);
         });
-        return;
     }
 
-    // Letter has no mapping: scan chunks until songs for this letter appear.
     if ((idx[letter] || []).length > 0) return;
 
     for (const c of knownChunks[lang] || []) {
@@ -418,7 +413,6 @@ async function ensureLetterHasSongs(lang, letter) {
         fetched[lang].add(c);
     }
 }
-
 async function initTelugu() {
     if (langInited.telugu) return;
     langInited.telugu = true;
@@ -491,9 +485,8 @@ function renderLetterBoxes(letters, lang) {
             const idx = lang === 'telugu' ? songIndex.telugu : songIndex.english;
             const ceilings = getCeilings(lang, letter);
     
-            const needsLoad = ceilings.length
-                ? ceilings.some(c => !fetched[lang].has(c))
-                : !(idx[letter] || []).length;
+            const needsLoad = !(idx[letter] || []).length
+                || ceilings.some(c => !fetched[lang].has(c));
         
             if (needsLoad) {
                 showSongListLoader(letter);
