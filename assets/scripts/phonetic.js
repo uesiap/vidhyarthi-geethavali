@@ -63,6 +63,7 @@
         let s = (str || '').toLowerCase().replace(/[^a-z]/g, '');
         if (!s) return '';
         s = s.replace(/w/g, 'v');
+        s = s.replace(/m/g, 'n');
         s = s.replace(/([bcdgjkpt])h/g, '$1');
         s = s.replace(/z/g, 'j');
         s = s.replace(/aa/g, 'a');
