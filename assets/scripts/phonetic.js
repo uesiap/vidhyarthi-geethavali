@@ -30,7 +30,7 @@
     const TG_CHANDRABINDU = 'ఁ';
 
     // Search logging state
-    const SEARCH_LOG_DELAY_MS = 800;
+    const SEARCH_LOG_DELAY_MS = 1200;
     let searchLogTimer = null;
     let lastLoggedQuery = '';
 
