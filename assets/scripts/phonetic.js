@@ -29,6 +29,11 @@
     const TG_VISARGA = 'ః';
     const TG_CHANDRABINDU = 'ఁ';
 
+    // Search logging state
+    const SEARCH_LOG_DELAY_MS = 800;
+    let searchLogTimer = null;
+    let lastLoggedQuery = '';
+
     function transliterateTelugu(str) {
         if (!str) return '';
         let out = '';
@@ -97,7 +102,7 @@
         if (!qWords.length) return true;
         return qWords.every(q => targetPhoneticWords.some(t => wordsMatch(q, t)));
     }
-    
+
     function ensurePhoneticData(link) {
         if (link.dataset.phonetic !== undefined) return;
         const raw = link.textContent || '';
@@ -107,9 +112,26 @@
         link.dataset.phonetic = words.join('|');
     }
 
-    window.filterSongs = function filterSongs(query) {
+    // Sends the search to Matomo. Debounced so only the final query
+    // the user settles on is logged, not every keystroke.
+    function scheduleSearchLog(query, resultCount) {
+        clearTimeout(searchLogTimer);
+        if (!query) return;
+
+        searchLogTimer = setTimeout(() => {
+            if (!window._paq) return;
+            if (query === lastLoggedQuery) return; // avoid duplicate entries
+            lastLoggedQuery = query;
+            window._paq.push(['trackSiteSearch', query, 'songs', resultCount]);
+        }, SEARCH_LOG_DELAY_MS);
+    }
+
+    // options.log: set to false to filter without recording a search
+    // (used on page load when restoring currentQuery).
+    window.filterSongs = function filterSongs(query, options) {
         const q = (query || '').trim();
         const qLower = q.toLowerCase();
+        const shouldLog = !options || options.log !== false;
         const links = document.querySelectorAll('#songs .song-link');
 
         function isMatch(link) {
@@ -138,10 +160,14 @@
         if (typeof noSongsMessage !== 'undefined' && noSongsMessage) {
             noSongsMessage.classList.toggle('hidden', !(q.length > 0 && totalCount === 0));
         }
+
+        if (shouldLog) {
+            scheduleSearchLog(q, totalCount);
+        }
     };
 
     window._phoneticSearchReady = true;
     if (typeof currentQuery !== 'undefined' && currentQuery) {
-        window.filterSongs(currentQuery);
+        window.filterSongs(currentQuery, { log: false });
     }
 })();
