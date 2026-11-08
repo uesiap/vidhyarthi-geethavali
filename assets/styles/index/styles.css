@@ -191,7 +191,7 @@ body { padding-top: 75px; }
 .card { padding: 28px; margin-bottom: 25px; }
 .card h2 { font-size: 1.5rem; }
 .grid { grid-template-columns: repeat(6, 1fr); gap: 8px; max-width: 600px; margin: 22px auto; }
-.box { font-size: 1rem; padding: 4px; min-height: 44px; }
+.box { font-size: 1rem; padding: 8px 4px; min-height: 44px; }
 #songs { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; max-width: 700px; margin: 22px auto; }
 #songs li { margin-bottom: 0; }
 .song-link { padding: 16px 13px; font-size: 1rem; gap: 6px; }
