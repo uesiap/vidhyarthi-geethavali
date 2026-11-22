@@ -744,7 +744,7 @@ searchToggle.addEventListener('click', async () => {
         document.querySelector('#all-songs').style.display = 'none';
         document.querySelector('#songs-grid').style.display = 'none';
         searchIcon.classList.add('hide-icon');
-        closeIcon.classList.add('hide-icon');
+        closeIcon.classList.remove('hide-icon');
         searchInput.innerText = '';
         currentQuery = '';
         isSearchOpen = true;         
