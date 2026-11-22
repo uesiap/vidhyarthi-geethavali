@@ -831,11 +831,7 @@ searchInput.addEventListener('input', () => {
 });
 
 clearSearch.addEventListener('click', () => {
-    searchInput.innerText = '';
-    currentQuery = '';
-    clearSearch.style.display = 'none';
-    filterSongs('');
-    searchInput.focus();
+    searchToggle.click();
 });
 
 function scrollToSongs() {
