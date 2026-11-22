@@ -722,6 +722,13 @@ async function switchLanguage(lang, event) {
     }
 }
 
+function hashForLanguage(lang) {
+    if (lang === 'english') return '#English';
+    if (lang === 'hindi') return '#Hindi';
+    if (lang === 'albums') return '#New';
+    return location.pathname;
+}
+
 const searchToggle = document.getElementById('searchToggle');
 const searchBox = document.getElementById('searchBox');
 const searchInput = document.getElementById('songSearchInput');
@@ -737,10 +744,12 @@ searchToggle.addEventListener('click', async () => {
         document.querySelector('#all-songs').style.display = 'none';
         document.querySelector('#songs-grid').style.display = 'none';
         searchIcon.classList.add('hide-icon');
-        closeIcon.classList.remove('hide-icon');
+        closeIcon.classList.add('hide-icon');
+        history.replaceState(null, '', hashForLanguage(currentLanguage));
         searchInput.innerText = '';
         currentQuery = '';
-        isSearchOpen = true;
+        isSearchOpen = true;         
+        history.replaceState(null, '', '#search');
         loadPhoneticSearch();
 
         renderSearchSongs();
