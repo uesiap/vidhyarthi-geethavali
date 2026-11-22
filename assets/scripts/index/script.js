@@ -769,7 +769,7 @@ searchToggle.addEventListener('click', async () => {
         document.querySelector('#songs-grid').style.display = 'block';
         searchIcon.classList.remove('hide-icon');
         closeIcon.classList.add('hide-icon');
-        if (songReturn) { location.href = songReturn; return; }
+        if (songReturn) { location.replace(songReturn); return; }
         history.replaceState(null, '', hashForLanguage(currentLanguage));
         if (currentLanguage === 'telugu') {
             renderLetterBoxes(teluguLetters, 'telugu');
@@ -828,6 +828,10 @@ searchInput.addEventListener('input', () => {
     currentQuery = searchInput.innerText.toLowerCase().trim();
     clearSearch.style.display = currentQuery ? 'block' : 'none';
     filterSongs(currentQuery);
+});
+
+clearSearch.addEventListener('click', () => {
+    searchToggle.click();
 });
 
 function scrollToSongs() {
