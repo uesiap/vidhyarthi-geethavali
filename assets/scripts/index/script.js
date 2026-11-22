@@ -769,7 +769,7 @@ searchToggle.addEventListener('click', async () => {
         document.querySelector('#songs-grid').style.display = 'block';
         searchIcon.classList.remove('hide-icon');
         closeIcon.classList.add('hide-icon');
-        if (returnToSong) { returnToSong = false; history.back(); return; }
+        if (songReturn) { location.href = songReturn; return; }
         history.replaceState(null, '', hashForLanguage(currentLanguage));
         if (currentLanguage === 'telugu') {
             renderLetterBoxes(teluguLetters, 'telugu');
@@ -922,8 +922,8 @@ const _tabs = {
     albums: document.querySelector('.tab-btn:nth-child(4)')
 };
 const _hash = location.hash.replace('#', '').toLowerCase();
-let returnToSong = _hash === 'search' && sessionStorage.getItem('fromSong') === '1';
-sessionStorage.removeItem('fromSong');
+const songReturn = _hash === 'search' ? sessionStorage.getItem('songReturn') : null;
+sessionStorage.removeItem('songReturn');
 
 if (_hash === 'english') switchLanguage('english', { target: _tabs.english });
 else if (_hash === 'hindi') switchLanguage('hindi', { target: _tabs.hindi });
