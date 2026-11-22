@@ -222,4 +222,3 @@ h4 { max-width: 800px; margin-left: auto; margin-right: auto; }
 }
 
 @media (max-width: 768px) { .desktop-only-gap { display: none; } }
-.search-box .clear-search { display: block !important; }
