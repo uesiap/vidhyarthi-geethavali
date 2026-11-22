@@ -773,10 +773,10 @@ searchToggle.addEventListener('click', async () => {
         document.querySelector('#songs-grid').style.display = 'block';
         searchIcon.classList.remove('hide-icon');
         closeIcon.classList.add('hide-icon');
+
         if (songReturn) { location.replace(songReturn); return; }
-        if (!songReturn && history.length <= 1) { return; }
-        history.back();
-        return;
+
+        history.replaceState(null, '', hashForLanguage(currentLanguage));
         if (currentLanguage === 'telugu') {
             renderLetterBoxes(teluguLetters, 'telugu');
             titleEl.textContent = `"${teluguLetters[0]}"`;
