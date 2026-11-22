@@ -826,12 +826,7 @@ async function ensureAllChunksLoaded(lang) {
 
 searchInput.addEventListener('input', () => {
     currentQuery = searchInput.innerText.toLowerCase().trim();
-    clearSearch.style.display = currentQuery ? 'block' : 'none';
     filterSongs(currentQuery);
-});
-
-clearSearch.addEventListener('click', () => {
-    searchToggle.click();
 });
 
 function scrollToSongs() {
