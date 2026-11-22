@@ -922,6 +922,7 @@ const _hash = location.hash.replace('#', '').toLowerCase();
 if (_hash === 'english') switchLanguage('english', { target: _tabs.english });
 else if (_hash === 'hindi') switchLanguage('hindi', { target: _tabs.hindi });
 else if (_hash === 'new') switchLanguage('albums', { target: _tabs.albums });
+else if (_hash === 'search') { _tabs.telugu.classList.add('active'); switchLanguage('telugu', { target: _tabs.telugu }); document.getElementById('searchToggle').click(); }
 else { _tabs.telugu.classList.add('active'); switchLanguage('telugu', { target: _tabs.telugu }); }
 
 setTimeout(async () => {
