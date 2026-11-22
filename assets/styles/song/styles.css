@@ -154,3 +154,22 @@ body { font-family: 'Google Sans', sans-serif; background: #fff; margin: 80px 0 
   .back-button .arrow { font-size: 14px; }
   .drawer {width: 85%;}
 }
+
+body { margin: 0; padding-top: 70px; }
+.navbar { height: 70px; padding: 12px 5%; }
+.logo-title { flex: 1; min-width: 0; gap: 12px; }
+.logo { width: 36px; height: 36px; flex-shrink: 0; }
+.title { font-size: 1.1rem; font-weight: 500; }
+.nav-actions { display: flex; align-items: center; gap: 3px; }
+.menu-btn { width: 44px; height: 44px; padding: 8px; flex-shrink: 0; }
+
+.search-toggle { background: none; border: none; cursor: pointer; padding: 10px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: transform 0.2s ease; text-decoration: none; }
+.search-toggle:hover { transform: scale(1.1); background-color: rgba(255, 255, 255, 0.1); }
+.search-toggle:focus-visible { outline: 2px solid rgba(255, 255, 255, 0.2); outline-offset: 2px; }
+.custom-search-icon { display: inline-block; width: 18px; height: 18px; border: 2px solid #fff; border-radius: 50%; position: relative; box-sizing: border-box; }
+.custom-search-icon::after { content: ''; position: absolute; width: 8px; height: 2px; background-color: #fff; bottom: -3px; right: -4px; transform: rotate(45deg); }
+
+@media (max-width: 480px) {
+  body { padding-top: 65px; }
+  .navbar { height: 65px; padding: 10px 4%; }
+}
