@@ -830,10 +830,6 @@ searchInput.addEventListener('input', () => {
     filterSongs(currentQuery);
 });
 
-clearSearch.addEventListener('click', () => {
-    searchToggle.click();
-});
-
 function scrollToSongs() {
     const offset = window.innerWidth <= 768 ? 85 : 100;
     window.scrollTo({ top: ssl.getBoundingClientRect().top + window.scrollY - offset, behavior: 'smooth' });
