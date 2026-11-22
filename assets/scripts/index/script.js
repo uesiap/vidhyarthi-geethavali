@@ -522,6 +522,7 @@ function loadPhoneticSearch() {
 }
 
 function renderSongItems(songs, lang, tpOverride) {
+    if (isSearchOpen && lang !== '__search__') return;
     songList.innerHTML = '';
     noSongsMessage.classList.add('hidden');
     if (!songs || !songs.length) {
@@ -626,6 +627,7 @@ function renderSearchSongs() {
         songIndex.hindi,
         Object.values(songIndex.albums).flat()
     );
+    if (!all.length) { showSongListLoader(); return; }
     renderSongItems(all, '__search__');
 }
 
@@ -753,8 +755,13 @@ searchToggle.addEventListener('click', async () => {
 
         renderSearchSongs();
         filterSongs('');
-        ['telugu', 'english', 'hindi', 'albums'].forEach(lang => ensureAllChunksLoaded(lang));
+        (async () => {
+            for (const lang of ['telugu', 'english', 'hindi', 'albums']) {
+                await ensureAllChunksLoaded(lang);
+            }
+        })().catch(err => console.error('Search: failed to load songs:', err));
     } else {
+        isSearchOpen = false;
         searchBox.classList.add('hidden');
         searchInput.innerText = '';
         currentQuery = '';
@@ -790,31 +797,31 @@ let isSearchOpen = false;
 async function ensureAllChunksLoaded(lang) {
     if (lang === 'albums') {
         const albums = await discoverAlbums();
-        await Promise.all(albums.map(async album => {
+        for (const album of albums) {
             if (!fetched.albums[album.id]) fetched.albums[album.id] = new Set();
-            const missing = (album.chunks || []).filter(c => !fetched.albums[album.id].has(c));
-            await Promise.all(missing.map(async c => {
+            for (const c of (album.chunks || [])) {
                 if (!isSearchOpen) return;
+                if (fetched.albums[album.id].has(c)) continue;
                 const raw = await fetchAlbumChunk(album.folder, c);
                 ingestAlbum(album.id, raw, album.folder, album.tag);
                 fetched.albums[album.id].add(c);
                 if (isSearchOpen) { renderSearchSongs(); filterSongs(currentQuery); }
-            }));
-        }));
+            }
+        }
         return;
     }
     const chunks = knownChunks[lang] || await discoverChunks(lang);
     const ingest = lang === 'telugu' ? ingestTelugu
         : lang === 'english' ? ingestEnglish
         : ingestHindi;
-    const missing = chunks.filter(c => !fetched[lang].has(c));
-    await Promise.all(missing.map(async ceiling => {
+    for (const ceiling of chunks) {
         if (!isSearchOpen) return;
+        if (fetched[lang].has(ceiling)) continue;
         const raw = await fetchChunk(lang, ceiling);
         ingest(raw);
         fetched[lang].add(ceiling);
         if (isSearchOpen) { renderSearchSongs(); filterSongs(currentQuery); }
-    }));
+    }
 }
 
 searchInput.addEventListener('input', () => {
@@ -919,7 +926,8 @@ const _tabs = {
     albums: document.querySelector('.tab-btn:nth-child(4)')
 };
 const _hash = location.hash.replace('#', '').toLowerCase();
-let returnToSong = _hash === 'search' && document.referrer.includes('/vidhyarthi-geethavali/song/');
+let returnToSong = _hash === 'search' && sessionStorage.getItem('fromSong') === '1';
+sessionStorage.removeItem('fromSong');
 
 if (_hash === 'english') switchLanguage('english', { target: _tabs.english });
 else if (_hash === 'hindi') switchLanguage('hindi', { target: _tabs.hindi });
