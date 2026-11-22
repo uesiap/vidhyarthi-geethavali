@@ -220,3 +220,5 @@ h4 { max-width: 800px; margin-left: auto; margin-right: auto; }
 .song-link { display: block; width: 100%; gap: 6px; padding: 22px 14px; font-size: 1.2rem; line-height: 1.35; font-weight: bold; color: black; }
 #scrollTopBtn { width: 50px; height: 50px; bottom: 30px; right: 30px; }
 }
+
+@media (max-width: 768px) { .desktop-only-gap { display: none; } }
