@@ -293,7 +293,7 @@ function ingestAlbum(albumId, raw, folder, tag) {
         if (tag && song.remarks !== tag) return;
         const id = `song${num}`;
         if (!songIndex.albums[albumId].find(s => s.id === id))
-            songIndex.albums[albumId].push({ id, name: `${song.title} (${num})`, tp: folder, lang: 'albums' });
+            songIndex.albums[albumId].push({ id, name: `${song.title} (${num})`, tp: folder, lang: 'albums', lyrics: plainLyrics(song.lyrics) });
     });
     songIndex.albums[albumId].sort((a, b) => numOf(a.id) - numOf(b.id));
 }
@@ -344,6 +344,17 @@ async function fetchChunk(lang, ceiling, force = false) {
 
 function numOf(id) { return parseInt((id || '').replace('song', ''), 10) || 0; }
 
+// Removes zero-width characters so Telugu text matches reliably.
+function plainLyrics(html) {
+    return (html || '')
+        .replace(/<br\s*\/?>/gi, ' ')
+        .replace(/<[^>]+>/g, ' ')
+        .replace(/[\u200B\u200C\u200D\uFEFF]/g, '')
+        .replace(/\s+/g, ' ')
+        .trim()
+        .toLowerCase();
+}
+
 // Normalizes the first letter of a title so matching is consistent.
 function letterOf(title) {
     const t = (title || '').normalize('NFC').replace(/^[\s\uFEFF\u200B"'“‘(\[]+/, '');
@@ -360,7 +371,7 @@ function ingestTelugu(raw) {
         if (!letter) return;
         const id = `song${num}`;
         if (!songIndex.telugu[letter].find(s => s.id === id))
-            songIndex.telugu[letter].push({ id, name: `${song.title} (${num})`, tp: 'tsongs', lang: 'telugu' });
+            songIndex.telugu[letter].push({ id, name: `${song.title} (${num})`, tp: 'tsongs', lang: 'telugu', lyrics: plainLyrics(song.lyrics) });
     });
     teluguLetters.forEach(l => songIndex.telugu[l].sort((a, b) => numOf(a.id) - numOf(b.id)));
 }
@@ -373,7 +384,7 @@ function ingestEnglish(raw) {
         if (!songIndex.english[letter]) return;
         const id = `song${num}`;
         if (!songIndex.english[letter].find(s => s.id === id))
-            songIndex.english[letter].push({ id, name: `${song.title} (${num})`, tp: 'esongs', lang: 'english' });
+            songIndex.english[letter].push({ id, name: `${song.title} (${num})`, tp: 'esongs', lang: 'english', lyrics: plainLyrics(song.lyrics) });
     });
     englishLetters.forEach(l => songIndex.english[l].sort((a, b) => numOf(a.id) - numOf(b.id)));
 }
@@ -383,7 +394,7 @@ function ingestHindi(raw) {
         if (!song.title) return;
         const id = `song${num}`;
         if (!songIndex.hindi.find(s => s.id === id))
-            songIndex.hindi.push({ id, name: `${song.title} (${num})`, tp: 'hsongs', lang: 'hindi' });
+            songIndex.hindi.push({ id, name: `${song.title} (${num})`, tp: 'hsongs', lang: 'hindi', lyrics: plainLyrics(song.lyrics) });
     });
     songIndex.hindi.sort((a, b) => numOf(a.id) - numOf(b.id));
 }
@@ -545,6 +556,7 @@ function renderSongItems(songs, lang, tpOverride) {
         const a = document.createElement('a');
         a.href = `/vidhyarthi-geethavali/song/?tp=${tp}&sn=${sn}`;
         a.className = 'song-link';
+        a.dataset.lyrics = song.lyrics || '';
         const match = song.name.match(/^(.*?)(\s*\(\d+\))$/);
         const titleText = match ? match[1] : song.name;
         const numText = match ? match[2].trim() : '';

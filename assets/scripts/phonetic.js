@@ -127,7 +127,6 @@
         }, SEARCH_LOG_DELAY_MS);
     }
 
-    // options.log: set to false to filter without recording a search
     // (used on page load when restoring currentQuery).
     window.filterSongs = function filterSongs(query, options) {
         const q = (query || '').trim();
@@ -138,6 +137,8 @@
         function isMatch(link) {
             if (!q) return true;
             if (link.innerText.toLowerCase().includes(qLower)) return true;
+            const lyricsQuery = qLower.replace(/[\u200B\u200C\u200D\uFEFF]/g, '');
+            if (lyricsQuery && (link.dataset.lyrics || '').includes(lyricsQuery)) return true;
             ensurePhoneticData(link);
             const words = (link.dataset.phonetic || '').split('|').filter(Boolean);
             return words.length ? phraseFuzzyMatch(q, words) : false;
