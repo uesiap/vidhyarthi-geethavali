@@ -766,6 +766,7 @@ searchToggle.addEventListener('click', async () => {
         })().catch(err => console.error('Search: failed to load songs:', err));
     } else {
         isSearchOpen = false;
+        renderNavMatches('');
         searchBox.classList.add('hidden');
         searchInput.innerText = '';
         currentQuery = '';
@@ -836,11 +837,64 @@ searchInput.addEventListener('input', () => {
     filterSongs(currentQuery);
 });
 
+const navResults = document.getElementById('navResults');
+let siteLinksCache = null;
+
+function collectSiteLinks() {
+    return Array.from(document.querySelectorAll('#drawer a.drawer-item, #drawer a.submenu-item'))
+        .map(a => {
+            const href = a.getAttribute('href');
+            if (!href || href.includes('/admin/')) return null;
+            const title = a.querySelector('.mnu-tit')?.textContent.trim() || '';
+            const section = a.closest('.submenu')?.previousElementSibling
+                ?.querySelector('.mnu-tit')?.textContent.trim() || '';
+            return { title, section, href };
+        })
+        .filter(Boolean);
+}
+
+function renderNavMatches(query) {
+    navResults.innerHTML = '';
+    const q = (query || '').trim().toLowerCase();
+    if (!q || !isSearchOpen) return 0;
+
+    siteLinksCache ??= collectSiteLinks();
+    const words = q.split(/\s+/);
+    const matches = siteLinksCache.filter(l => {
+        const hay = `${l.title} ${l.section}`.toLowerCase();
+        return words.every(w => hay.includes(w));
+    });
+    if (!matches.length) return 0;
+
+    const label = document.createElement('div');
+    label.className = 'nav-results-label';
+    label.textContent = 'Pages';
+    navResults.appendChild(label);
+
+    matches.forEach(m => {
+        const a = document.createElement('a');
+        a.href = m.href;
+        a.className = 'nav-result';
+        a.textContent = m.section ? `${m.section} › ${m.title}` : m.title;
+        navResults.appendChild(a);
+    });
+    return matches.length;
+}
+
+searchInput.addEventListener('input', () => {
+    const q = searchInput.innerText.trim();
+    const navCount = renderNavMatches(q);
+    const songCount = Array.from(songList.querySelectorAll('li'))
+        .filter(li => li.style.display !== 'none' && li.querySelector('.song-link')).length;
+    noSongsMessage.classList.toggle('hidden', !(q && songCount === 0 && navCount === 0));
+});
+
 clearSearch.addEventListener('click', () => {
     searchInput.innerText = '';
     currentQuery = '';
     clearSearch.style.display = 'none';
     filterSongs('');
+    renderNavMatches('');
     searchInput.focus();
 });
 
