@@ -104,6 +104,20 @@
         return qWords.every(q => targetPhoneticWords.some(t => wordsMatch(q, t)));
     }
 
+    // Converts any text to a sound key: Telugu is transliterated to English
+    function phoneticKey(text) {
+        return normalizePhonetic(transliterateTelugu(text || ''));
+    }
+
+    // Builds the sound key for a song's lyrics once, the first time it is searched.
+    function ensureLyricsPhonetic(link) {
+        if (link.dataset.lyricsPhon !== undefined) return;
+        const plain = (link.dataset.lyrics || '')
+            .replace(/<br\s*\/?>/gi, ' ')
+            .replace(/<[^>]+>/g, ' ');
+        link.dataset.lyricsPhon = phoneticKey(plain);
+    }
+
     function ensurePhoneticData(link) {
         if (link.dataset.phonetic !== undefined) return;
         const raw = link.textContent || '';
@@ -131,14 +145,19 @@
     window.filterSongs = function filterSongs(query, options) {
         const q = (query || '').trim();
         const qLower = q.toLowerCase();
+        const qKey = phoneticKey(q);
         const shouldLog = !options || options.log !== false;
         const links = document.querySelectorAll('#songs .song-link');
 
         function isMatch(link) {
             if (!q) return true;
             if (link.innerText.toLowerCase().includes(qLower)) return true;
-            const lyricsQuery = qLower.replace(/[\u200B\u200C\u200D\uFEFF]/g, '');
+            const lyricsQuery = window.normalizeForSearch(q);
             if (lyricsQuery && (link.dataset.lyrics || '').includes(lyricsQuery)) return true;
+            if (qKey.length >= 3) {
+                ensureLyricsPhonetic(link);
+                if (link.dataset.lyricsPhon.includes(qKey)) return true;
+            }
             ensurePhoneticData(link);
             const words = (link.dataset.phonetic || '').split('|').filter(Boolean);
             return words.length ? phraseFuzzyMatch(q, words) : false;

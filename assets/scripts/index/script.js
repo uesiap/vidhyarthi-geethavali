@@ -345,14 +345,21 @@ async function fetchChunk(lang, ceiling, force = false) {
 function numOf(id) { return parseInt((id || '').replace('song', ''), 10) || 0; }
 
 // Removes zero-width characters so Telugu text matches reliably.
-function plainLyrics(html) {
-    return (html || '')
-        .replace(/<br\s*\/?>/gi, ' ')
-        .replace(/<[^>]+>/g, ' ')
+function normalizeForSearch(text) {
+    return (text || '')
+        .normalize('NFC')
+        .toLowerCase()
         .replace(/[\u200B\u200C\u200D\uFEFF]/g, '')
-        .replace(/\s+/g, ' ')
-        .trim()
-        .toLowerCase();
+        .replace(/[^\p{L}\p{M}\p{N}]+/gu, ' ')
+        .trim();
+}
+
+function plainLyrics(html) {
+    return normalizeForSearch(
+        (html || '')
+            .replace(/<br\s*\/?>/gi, ' ')
+            .replace(/<[^>]+>/g, ' ')
+    );
 }
 
 // Normalizes the first letter of a title so matching is consistent.
