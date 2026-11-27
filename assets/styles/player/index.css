@@ -269,7 +269,7 @@ body {
     align-items: center;
     justify-content: center;
     max-width: 900px;
-    margin: 1rem auto;
+    margin: 0rem auto;
     padding: 1rem;
     /* border: 2px solid var(--primary-color); */
     border-radius: 20px;
@@ -1359,4 +1359,49 @@ input[type="range"] {
     border-top-color: var(--primary-color);
     animation: spin 1s ease-in-out infinite;
     margin: 0 auto 10px;
+}
+
+#prevIconExpanded,
+#nextIconExpanded {
+    border-radius: 50%;
+    padding: 4px;
+    font-size: 2rem;
+}
+
+#prevIconExpanded {
+    margin-left: 10px;
+}
+
+#nextIconExpanded {
+    margin-right: -10px;
+}
+
+#prevIconExpanded:hover,
+#nextIconExpanded:hover {
+    background-color: #ddd;
+    border-radius: 50%;
+}
+
+@media (max-width: 768px) {
+    #prevIconExpanded,
+    #nextIconExpanded {
+        font-size: 2rem;
+        margin: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    #prevIconExpanded,
+    #nextIconExpanded {
+        font-size: 1.9rem;
+        padding: 2px;
+        margin: 0;
+    }
+}
+
+@media (min-width: 1024px) {
+    #prevIconExpanded,
+    #nextIconExpanded {
+        font-size: 2.6rem;
+    }
 }
