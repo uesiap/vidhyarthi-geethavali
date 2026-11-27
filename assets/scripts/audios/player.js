@@ -195,6 +195,9 @@
                 .sort((a, b) => Number(a) - Number(b))
                 .forEach((key) => {
                     const song = data[key];
+                    if (song && !song.audioLink) {
+                        console.warn(`[audio-player] Song ${key} ("${song.title}") has no audioLink`);
+                    }
                     if (song && song.title) {
                         songsQueue.push({
                             name: `${song.title} (${key})`,
@@ -276,6 +279,10 @@
     function selectSong(index, autoplay) {
         const song = songsQueue[index];
         if (!song) return;
+        if (!song.url) {
+            console.warn('[audio-player] No audio URL for:', song.name);
+            return;
+        }
 
         if (currentPlayingIndex !== null) getSongEl(currentPlayingIndex)?.classList.remove('playing');
 
@@ -382,6 +389,11 @@
     });
     audio.addEventListener('ended', () => {
         if (repeatState !== 'repeat_one') playNext();
+    });
+
+    audio.addEventListener('error', () => {
+        const song = songsQueue[currentPlayingIndex];
+        console.warn('[audio-player] Could not load:', song?.name, '->', audio.currentSrc || audio.src, '(error code ' + audio.error?.code + ')');
     });
 
     dragToggle?.addEventListener('click', togglePlayer);
