@@ -110,7 +110,7 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
 
-    <link rel="stylesheet" href="/vidhyarthi-geethavali/camps/music-styles.css?v={{ site.github.build_revision }}">
+    <link rel="stylesheet" href="/vidhyarthi-geethavali/assets/styles/player/index.css?v={{ site.github.build_revision }}">
     <script src="/vidhyarthi-geethavali/assets/scripts/boom.js?v={{ site.github.build_revision }}" defer></script>
 </head>
 
@@ -126,7 +126,10 @@
             <span class="title">UESI-AP Audio &amp; Visuals Dept</span>
         </div>
         <div class="nav-actions">
-            <a href="/vidhyarthi-geethavali/#search" class="search-toggle" aria-label="Search songs" onclick="sessionStorage.setItem('songReturn', location.href)"><span class="custom-search-icon"></span></a>
+            <button id="searchToggle" class="search-toggle" aria-label="Toggle Search">
+                <span id="searchIcon" class="custom-search-icon"></span>
+                <span id="closeIcon" class="custom-close-icon hidden">✕</span>
+            </button>
             <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">
                 <span>
                     <div class="menu-toggle">
