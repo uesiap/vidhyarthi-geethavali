@@ -1,3 +1,4 @@
+
 (function () {
     'use strict';
 
@@ -15,6 +16,7 @@
     const RESET_BG = 'linear-gradient(to right, var(--primary-color) 0%, var(--primary-color) 0%, #ccc 0%, #ccc 100%)';
 
     const songsQueue = [];
+    const missingAudio = [];
 
     const songsList = $('songsList');
     const audio = $('audioPlayer');
@@ -124,6 +126,9 @@
         }
     });
 
+    // ==========================================
+    // 3. SEARCH & FILTER (all guarded)
+    // ==========================================
     function updatePlaceholder() {
         if (!searchInput) return;
         const hasText = searchInput.innerText.trim().length > 0;
@@ -195,16 +200,18 @@
                 .sort((a, b) => Number(a) - Number(b))
                 .forEach((key) => {
                     const song = data[key];
-                    if (song && !song.audioLink) {
-                        console.warn(`[audio-player] Song ${key} ("${song.title}") has no audioLink`);
+                    if (!song || !song.title) return;
+
+                    if (!song.audioLink) {
+                        missingAudio.push(key);
+                        return;
                     }
-                    if (song && song.title) {
-                        songsQueue.push({
-                            name: `${song.title} (${key})`,
-                            url: song.audioLink,
-                            lyrics: song.lyrics || ''
-                        });
-                    }
+
+                    songsQueue.push({
+                        name: `${song.title} (${key})`,
+                        url: song.audioLink,
+                        lyrics: song.lyrics || ''
+                    });
                 });
 
             appendSongsToDOM(startIndex);
@@ -239,7 +246,6 @@
         }
         songsList.appendChild(fragment);
 
-        // Keep a new chunk consistent with an active search
         if (currentQuery) filterSongs(currentQuery);
     }
 
@@ -264,6 +270,10 @@
             }
         }
         setLoader(false);
+
+        if (missingAudio.length) {
+            console.info(`[audio-player] ${missingAudio.length} songs hidden (no audioLink): ${missingAudio.join(', ')}`);
+        }
     }
 
     function getSongEl(index) {
@@ -279,10 +289,6 @@
     function selectSong(index, autoplay) {
         const song = songsQueue[index];
         if (!song) return;
-        if (!song.url) {
-            console.warn('[audio-player] No audio URL for:', song.name);
-            return;
-        }
 
         if (currentPlayingIndex !== null) getSongEl(currentPlayingIndex)?.classList.remove('playing');
 
@@ -371,11 +377,15 @@
     });
 
     audio.addEventListener('play', () => {
-      setPlayIcons(true);
-      const song = songsQueue[currentPlayingIndex];
-      if (song) document.title = `${song.name} - Audio | Music Player`;
+        setPlayIcons(true);
+        const song = songsQueue[currentPlayingIndex];
+        if (song) document.title = `${song.name} - Audio | Music Player`;
     });
     audio.addEventListener('pause', () => setPlayIcons(false));
+    audio.addEventListener('error', () => {
+        const song = songsQueue[currentPlayingIndex];
+        console.warn('[audio-player] Could not load:', song?.name, '->', audio.currentSrc || audio.src, '(error code ' + audio.error?.code + ')');
+    });
     audio.addEventListener('timeupdate', () => {
         if (!isFinite(audio.duration)) return;
         seekSlider.max = audio.duration;
@@ -389,11 +399,6 @@
     });
     audio.addEventListener('ended', () => {
         if (repeatState !== 'repeat_one') playNext();
-    });
-
-    audio.addEventListener('error', () => {
-        const song = songsQueue[currentPlayingIndex];
-        console.warn('[audio-player] Could not load:', song?.name, '->', audio.currentSrc || audio.src, '(error code ' + audio.error?.code + ')');
     });
 
     dragToggle?.addEventListener('click', togglePlayer);
@@ -417,6 +422,7 @@
         }
     });
 
+    // Optional preloader
     window.addEventListener('load', () => {
         setTimeout(() => {
             const preloader = $('preloader');
