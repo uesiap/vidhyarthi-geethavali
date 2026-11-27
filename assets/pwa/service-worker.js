@@ -5,7 +5,7 @@ const SHELL_ASSETS = [
     '/vidhyarthi-geethavali/index.html',
     '/vidhyarthi-geethavali/assets/Icons/Icon192.png',
     '/vidhyarthi-geethavali/assets/Icons/Icon512.png',
-    '/vidhyarthi-geethavali/assets/Icons/uesisongsmain.jpg'
+    '/vidhyarthi-geethavali/assets/Icons/splash.jpg'
 ];
 
 self.addEventListener('install', event => {
