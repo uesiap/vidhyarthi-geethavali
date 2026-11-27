@@ -363,7 +363,11 @@
         if (nameEl) togglePlayPause(Number(nameEl.dataset.index));
     });
 
-    audio.addEventListener('play', () => setPlayIcons(true));
+    audio.addEventListener('play', () => {
+      setPlayIcons(true);
+      const song = songsQueue[currentPlayingIndex];
+      if (song) document.title = `${song.name} - Audio | Music Player`;
+    });
     audio.addEventListener('pause', () => setPlayIcons(false));
     audio.addEventListener('timeupdate', () => {
         if (!isFinite(audio.duration)) return;
