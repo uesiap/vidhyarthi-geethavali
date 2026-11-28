@@ -238,3 +238,9 @@ h4 { max-width: 800px; margin-left: auto; margin-right: auto; }
     border-left: 6px solid var(--primary-color); border-right: 6px solid var(--primary-color);
     transform: translateX(2px);
 }
+@media (min-width: 769px) {
+    .drawer-item[href="/vidhyarthi-geethavali/"],
+    .drawer-item[href="/vidhyarthi-geethavali/app/"] {
+        margin-top: 20px;
+    }
+}
